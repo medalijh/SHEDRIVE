@@ -50,73 +50,66 @@ function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-app px-3 sm:px-6 py-8 sm:py-16 md:py-24 text-center flex flex-col items-center justify-center min-h-screen">
-        
-        {/* SUBTITLE SECTION - TOP */}
-        <div className="w-full mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-full animate-fade-in text-[11px] sm:text-sm"
-            style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
-            <Flower2 size={14} color="var(--color-rose-gold-500)" />
-            <span className="font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
-              Service exclusivement féminin au Maroc
-            </span>
-          </div>
+      <div className="relative z-10 container-app py-28 text-center flex flex-col items-center justify-center gap-5 sm:gap-7">
+
+        {/* SUBTITLE — TOP */}
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full animate-fade-in text-[11px] sm:text-sm"
+          style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
+          <Flower2 size={14} color="var(--color-rose-gold-500)" />
+          <span className="font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
+            Service exclusivement féminin au Maroc
+          </span>
         </div>
 
-        {/* MAIN TITLE SECTION - MIDDLE */}
-        <div className="w-full mb-10 sm:mb-14">
-          <h1 className="text-3xl sm:text-5xl md:text-display-2xl text-white mb-4 sm:mb-6 animate-slide-up leading-tight font-bold">
-            Voyagez en{" "}
-            <span className="gradient-text">Toute Sécurité</span>
-            <br />
-            <span className="text-2xl sm:text-3xl md:text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
-              Entre Femmes
-            </span>
-          </h1>
-        </div>
+        {/* TITLE — MIDDLE */}
+        <h1 className="text-3xl sm:text-5xl md:text-display-2xl text-white animate-slide-up leading-tight font-bold">
+          Voyagez en{" "}
+          <span className="gradient-text">Toute Sécurité</span>
+          <br />
+          <span className="text-2xl sm:text-3xl md:text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
+            Entre Femmes
+          </span>
+        </h1>
 
-        {/* DESCRIPTION SECTION - MIDDLE */}
-        <div className="w-full mb-10 sm:mb-14 max-w-2xl">
-          <p className="text-xs sm:text-base mb-3 sm:mb-4 animate-slide-up delay-100 px-2"
-            style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl", lineHeight: "1.6" }}>
+        {/* DESCRIPTION — MIDDLE */}
+        <div className="max-w-2xl flex flex-col gap-3">
+          <p className="text-sm sm:text-base animate-slide-up delay-100"
+            style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl", lineHeight: "1.7" }}>
             خدمة نقل حصرية للمرأة المغربية — أمان، أناقة، تمكين
           </p>
 
-          <p className="text-xs sm:text-sm animate-slide-up delay-200 px-2 leading-relaxed"
+          <p className="text-sm sm:text-base animate-slide-up delay-200 leading-relaxed"
             style={{ color: "rgba(255,255,255,0.55)", lineHeight: "1.7" }}>
             SheDrive Morocco est la première plateforme de covoiturage réservée aux femmes. Conductrices vérifiées, trajets sécurisés, expérience premium dans toutes les villes marocaines.
           </p>
         </div>
 
-        {/* BUTTONS SECTION - BOTTOM */}
-        <div className="w-full mb-10 sm:mb-14 flex flex-col gap-3 sm:gap-4 max-w-md mx-auto animate-slide-up delay-300">
-          <Link href="/auth/register?role=passenger" className="btn btn-primary w-full text-xs sm:text-base py-3 px-4 sm:px-6"
-            style={{ minWidth: "fit-content" }}>
-            <CarFront size={16} />
+        {/* BUTTONS — BOTTOM */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-md sm:max-w-none sm:w-auto justify-center animate-slide-up delay-300">
+          <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg w-full sm:w-auto">
+            <CarFront size={18} />
             <span>Réserver un Trajet</span>
           </Link>
-          <Link href="/auth/register?role=driver" className="btn w-full text-xs sm:text-base py-3 px-4 sm:px-6"
+          <Link href="/auth/register?role=driver" className="btn btn-lg w-full sm:w-auto"
             style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)" }}>
-            <Sparkles size={16} />
+            <Sparkles size={18} />
             <span>Devenir Conductrice</span>
           </Link>
         </div>
 
-        {/* STATS SECTION - BOTTOM */}
-        <div className="w-full animate-slide-up delay-400">
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-md mx-auto px-2">
-            {[
-              { value: "18+", label: "Villes", labelAr: "مدينة" },
-              { value: "100%", label: "Femmes", labelAr: "نساء" },
-              { value: "24/7", label: "Support", labelAr: "دعم" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-2 sm:p-4 rounded-lg sm:rounded-2xl"
-                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
-                <div className="text-sm sm:text-lg gradient-text leading-tight font-bold">{stat.value}</div>
-                <div className="text-[10px] sm:text-xs mt-1 sm:mt-2" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
-              </div>
-            ))}
-          </div>
+        {/* STATS — BOTTOM */}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-md animate-slide-up delay-400">
+          {[
+            { value: "18+", label: "Villes", labelAr: "مدينة" },
+            { value: "100%", label: "Femmes", labelAr: "نساء" },
+            { value: "24/7", label: "Support", labelAr: "دعم" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center p-3 sm:p-4 rounded-xl sm:rounded-2xl"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              <div className="text-base sm:text-xl gradient-text leading-tight font-bold">{stat.value}</div>
+              <div className="text-[10px] sm:text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -616,7 +609,7 @@ function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">
+          <Link href="/auth/login" className="btn btn-sm" style={{ color: "white", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.18)" }}>
             Connexion
           </Link>
           <Link href="/auth/register" className="btn btn-sm btn-primary">
