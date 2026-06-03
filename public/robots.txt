@@ -1,0 +1,18 @@
+<!-- SheDrive Morocco — robots.txt -->
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /safety
+Allow: /how-it-works
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+
+# Disallow private app sections
+Disallow: /passenger/
+Disallow: /driver/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+
+Sitemap: https://shedrive.ma/sitemap.xml

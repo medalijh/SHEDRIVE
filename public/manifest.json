@@ -1,0 +1,135 @@
+{
+  "name": "SheDrive Morocco",
+  "short_name": "SheDrive",
+  "description": "Transport exclusivement féminin au Maroc — Sûr, Élégant, Empowerant 🌹",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "background_color": "#1A150F",
+  "theme_color": "#C8956C",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr-MA",
+  "dir": "ltr",
+  "id": "shedrive-morocco",
+  "categories": ["travel", "transportation", "lifestyle"],
+  "edge_side_panel": { "preferred_width": 480 },
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Réserver un trajet",
+      "short_name": "Réserver",
+      "description": "Réservez un trajet maintenant",
+      "url": "/passenger/book",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Tableau de bord conductrice",
+      "short_name": "Conduire",
+      "description": "Accédez au tableau de bord conductrice",
+      "url": "/driver/dashboard",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mon portefeuille",
+      "short_name": "Wallet",
+      "description": "Consultez votre solde",
+      "url": "/passenger/wallet",
+      "icons": [{ "src": "/icons/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/passenger-dashboard.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tableau de bord passagère"
+    },
+    {
+      "src": "/screenshots/booking.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Réserver un trajet"
+    },
+    {
+      "src": "/screenshots/driver-dashboard.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tableau de bord conductrice"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "protocol_handlers": [
+    { "protocol": "web+shedrive", "url": "/?action=%s" }
+  ],
+  "share_target": {
+    "action": "/passenger/book",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "file_handlers": [],
+  "handle_links": "preferred"
+}

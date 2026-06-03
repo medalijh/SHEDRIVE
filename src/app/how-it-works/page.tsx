@@ -1,0 +1,149 @@
+"use client";
+
+import Link from "next/link";
+
+function Navbar() {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50"
+      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(200,149,108,0.2)" }}>
+      <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
+            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-gold-400)" }}>Morocco</span></span>
+        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
+          <Link href="/auth/register" className="btn btn-sm btn-primary">S'inscrire</Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+export default function HowItWorksPage() {
+  const passengerSteps = [
+    { num: "01", icon: "📱", title: "Créez votre compte", desc: "Inscrivez-vous en quelques minutes. Vérification du téléphone, identité et contact d'urgence." },
+    { num: "02", icon: "📍", title: "Entrez votre destination", desc: "Indiquez votre point de départ et votre destination sur la carte interactive." },
+    { num: "03", icon: "💰", title: "Proposez votre prix", desc: "Définissez le montant que vous souhaitez payer. Les conductrices voient votre offre." },
+    { num: "04", icon: "🌸", title: "Choisissez votre conductrice", desc: "Consultez les profils, notes, et contre-offres des conductrices disponibles proches de vous." },
+    { num: "05", icon: "🚗", title: "Voyagez en sécurité", desc: "Suivez le trajet en temps réel. Partagez votre position. Le bouton SOS est toujours disponible." },
+    { num: "06", icon: "⭐", title: "Évaluez votre expérience", desc: "Notez la conductrice et laissez un commentaire pour améliorer la communauté." },
+  ];
+
+  const driverSteps = [
+    { num: "01", icon: "📝", title: "Inscrivez-vous conductrice", desc: "Remplissez le formulaire d'inscription avec vos informations personnelles." },
+    { num: "02", icon: "🪪", title: "Vérification d'identité", desc: "Soumettez votre CIN, selfie de vérification, permis de conduire et informations du véhicule." },
+    { num: "03", icon: "⏳", title: "Examen du dossier", desc: "Notre équipe examine votre dossier sous 24 à 48 heures et vous notifie par SMS." },
+    { num: "04", icon: "✅", title: "Approbation et formation", desc: "Une fois approuvée, accédez à notre formation en ligne sur la sécurité et les bonnes pratiques." },
+    { num: "05", icon: "🟢", title: "Passez en ligne", desc: "Activez le mode en ligne pour recevoir les demandes de trajet des passagères proches." },
+    { num: "06", icon: "💰", title: "Gagnez en liberté", desc: "Acceptez les demandes qui vous conviennent. Retirez vos gains quand vous le souhaitez." },
+  ];
+
+  const faqs = [
+    { q: "Comment SheDrive garantit-il que les conductrices sont des femmes ?", a: "Chaque conductrice passe par une vérification CIN + selfie comparée par notre équipe et IA. Les documents légaux confirment le genre." },
+    { q: "Que se passe-t-il si je me sens en danger ?", a: "Maintenez le bouton SOS rouge 3 secondes. Une alerte est immédiatement envoyée à vos contacts et à notre équipe 24h/7j." },
+    { q: "Comment fonctionne la négociation de prix ?", a: "Vous proposez un prix. Les conductrices voient votre offre et peuvent l'accepter ou faire une contre-offre. Vous choisissez librement." },
+    { q: "Quels modes de paiement sont acceptés ?", a: "Espèces, carte bancaire marocaine, CMI, PayZone, ou wallet SheDrive rechargeable." },
+    { q: "SheDrive est-il disponible 24h/24 ?", a: "Oui ! SheDrive fonctionne 24h/24 et 7j/7 dans les 18 villes marocaines disponibles." },
+    { q: "Comment devenir conductrice SheDrive ?", a: "Cliquez sur 'Devenir Conductrice', remplissez le formulaire d'inscription, soumettez vos documents et attendez l'approbation sous 48h." },
+  ];
+
+  return (
+    <div style={{ background: "var(--color-sand-50)" }}>
+      <Navbar />
+
+      {/* Hero */}
+      <section className="pt-28 pb-16 px-6 text-center relative overflow-hidden bg-hero-gradient">
+        <div className="zellige-pattern absolute inset-0 opacity-20"/>
+        <div className="container-app mx-auto relative z-10">
+          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(200,149,108,0.15)", color: "var(--color-rose-gold-400)", border: "1px solid rgba(200,149,108,0.3)" }}>COMMENT ÇA MARCHE</span>
+          <h1 className="text-display-xl text-white mb-4">Simple, Rapide,<br/><span className="gradient-text">Sécurisé</span></h1>
+          <p style={{ color: "rgba(255,255,255,0.6)" }}>Tout ce que vous devez savoir pour utiliser SheDrive Morocco</p>
+        </div>
+      </section>
+
+      {/* Passenger Steps */}
+      <section className="py-20 px-6">
+        <div className="container-app mx-auto">
+          <div className="text-center mb-14">
+            <span className="badge badge-primary mb-4 text-xs">POUR LES PASSAGÈRES</span>
+            <h2 className="text-display-lg">Réservez un trajet <span className="gradient-text">en 4 étapes</span></h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {passengerSteps.map((s, i) => (
+              <div key={s.num} className="card-luxury p-6 relative">
+                <div className="absolute top-4 right-4 text-4xl font-bold opacity-5" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-gold-500)" }}>{s.num}</div>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
+                  style={{ background: i % 2 === 0 ? "rgba(200,149,108,0.1)" : "rgba(13,122,74,0.08)" }}>{s.icon}</div>
+                <div className="text-xs font-semibold mb-2" style={{ color: "var(--color-rose-gold-500)", letterSpacing: "0.08em" }}>ÉTAPE {s.num}</div>
+                <h3 className="font-semibold mb-2" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg">🌹 Créer mon compte passagère</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Driver Steps */}
+      <section className="py-20 px-6 relative" style={{ background: "linear-gradient(135deg, #0A1F15 0%, #0D2A1A 100%)" }}>
+        <div className="zellige-pattern absolute inset-0 opacity-8"/>
+        <div className="container-app mx-auto relative z-10">
+          <div className="text-center mb-14">
+            <span className="badge mb-4 text-xs" style={{ background: "rgba(13,122,74,0.2)", color: "#4DBF8A", border: "1px solid rgba(13,122,74,0.3)" }}>POUR LES CONDUCTRICES</span>
+            <h2 className="text-display-lg text-white">Commencez à <span className="gradient-text-emerald">conduire</span></h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {driverSteps.map((s, i) => (
+              <div key={s.num} className="p-6 rounded-2xl relative"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(13,122,74,0.2)" }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
+                  style={{ background: "rgba(13,122,74,0.15)" }}>{s.icon}</div>
+                <div className="text-xs font-semibold mb-2" style={{ color: "var(--color-emerald-400)", letterSpacing: "0.08em" }}>ÉTAPE {s.num}</div>
+                <h3 className="font-semibold mb-2 text-white" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/auth/register?role=driver" className="btn btn-emerald btn-lg">🌸 Devenir conductrice SheDrive</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 px-6">
+        <div className="container-app mx-auto">
+          <div className="text-center mb-14">
+            <span className="badge badge-primary mb-4 text-xs">FAQ</span>
+            <h2 className="text-display-lg">Questions <span className="gradient-text">fréquentes</span></h2>
+          </div>
+          <div className="max-w-2xl mx-auto flex flex-col gap-4">
+            {faqs.map((faq, i) => (
+              <details key={i} className="card-luxury group">
+                <summary className="p-5 font-semibold text-sm cursor-pointer flex items-center justify-between list-none">
+                  {faq.q}
+                  <span className="text-xl flex-shrink-0 ml-3 transition-transform group-open:rotate-45" style={{ color: "var(--color-rose-gold-500)" }}>+</span>
+                </summary>
+                <div className="px-5 pb-5 text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{faq.a}</div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
+        <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+          </div>
+          <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés. 🇲🇦</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
