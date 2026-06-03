@@ -50,7 +50,7 @@ function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-app px-6 py-24 text-center">
+      <div className="relative z-10 container-app px-4 sm:px-6 py-16 md:py-24 text-center">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fade-in"
           style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
@@ -97,15 +97,15 @@ function HeroSection() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 max-w-md mx-auto animate-slide-up delay-400">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-md mx-auto animate-slide-up delay-400">
           {[
             { value: "18+", label: "Villes", labelAr: "مدينة" },
             { value: "100%", label: "Femmes", labelAr: "نساء" },
             { value: "24/7", label: "Support", labelAr: "دعم" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center p-4 rounded-2xl"
+            <div key={stat.label} className="text-center p-3 sm:p-4 rounded-xl sm:rounded-2xl"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
-              <div className="text-display-sm gradient-text">{stat.value}</div>
+              <div className="text-display-sm gradient-text leading-tight">{stat.value}</div>
               <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
             </div>
           ))}
@@ -239,7 +239,7 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden" style={{ background: "#FFFDF9" }}>
+    <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden" style={{ background: "#FFFDF9" }}>
       <div className="zellige-pattern absolute inset-0 opacity-20" />
       <div className="container-app mx-auto relative z-10">
         <div className="text-center mb-16">
@@ -297,7 +297,7 @@ function SafetySection() {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden"
+    <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, var(--color-rose-gold-900) 0%, var(--color-rose-gold-800) 100%)" }}>
       <div className="zellige-pattern absolute inset-0" style={{ opacity: 0.12 }} />
 
@@ -332,13 +332,15 @@ function SafetySection() {
           </div>
 
           {/* Right: Safety Features Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {features.map((f) => (
-              <div key={f.label} className="p-5 rounded-2xl text-center transition-all duration-300 hover:scale-105 cursor-default"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(13,122,74,0.2)" }}>
-                <div className="text-3xl mb-3">{f.icon}</div>
-                <div className="text-xs font-semibold text-white mb-1">{f.label}</div>
-                <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-arabic)" }}>{f.sub}</div>
+              <div key={f.label} className="p-4 sm:p-5 rounded-2xl text-center transition-all duration-300 hover:scale-105 cursor-default flex flex-col justify-center items-center"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(212,160,23,0.3)" }}>
+                <div className="text-gold-400 mb-2 flex justify-center text-rose-gold-200">
+                  {f.icon}
+                </div>
+                <div className="text-[11px] sm:text-xs font-semibold text-white mb-1 leading-tight">{f.label}</div>
+                <div className="text-[10px] sm:text-xs" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-arabic)" }}>{f.sub}</div>
               </div>
             ))}
           </div>
@@ -365,7 +367,7 @@ function CitiesSection() {
   ];
 
   return (
-    <section className="py-24 px-6 relative" style={{ background: "var(--color-emerald-50)" }}>
+    <section className="py-16 md:py-24 px-4 sm:px-6 relative" style={{ background: "var(--color-emerald-50)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-10" />
       <div className="container-app mx-auto relative z-10">
         <div className="text-center mb-16">
@@ -378,10 +380,10 @@ function CitiesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
           {cities.map((city) => (
             <div key={city.name}
-              className="p-4 rounded-2xl text-center cursor-pointer group"
+              className="p-3 sm:p-4 rounded-xl text-center cursor-pointer group"
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-border)",
@@ -449,7 +451,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-24 px-6" style={{ background: "var(--color-sand-50)" }}>
+    <section className="py-16 md:py-24 px-4 sm:px-6" style={{ background: "var(--color-sand-50)" }}>
       <div className="container-app mx-auto">
         <div className="text-center mb-16">
           <span className="badge badge-primary mb-4 text-xs tracking-widest">TÉMOIGNAGES</span>
@@ -494,7 +496,7 @@ function TestimonialsSection() {
 // ============================================================
 function CTASection() {
   return (
-    <section className="py-24 px-6 relative overflow-hidden"
+    <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, var(--color-rose-gold-600) 0%, var(--color-rose-gold-800) 50%, #2C1F12 100%)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-15" />
       <div className="container-app mx-auto relative z-10 text-center">
