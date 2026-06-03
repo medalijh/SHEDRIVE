@@ -513,10 +513,10 @@ body {
   to { stroke-dashoffset: 0; }
 }
 
-.animate-fade-in    { animation: fadeIn 0.5s ease forwards; }
-.animate-slide-up   { animation: slideUp 0.5s ease forwards; }
-.animate-slide-down { animation: slideDown 0.4s ease forwards; }
-.animate-scale-in   { animation: scaleIn 0.4s ease forwards; }
+.animate-fade-in    { animation: fadeIn 0.8s ease-out both; }
+.animate-slide-up   { animation: slideUp 0.8s ease-out both; }
+.animate-slide-down { animation: slideDown 0.8s ease-out both; }
+.animate-scale-in   { animation: scaleIn 0.8s ease-out both; }
 .animate-float      { animation: float 3s ease-in-out infinite; }
 
 /* Stagger animation delays */
@@ -683,7 +683,6 @@ body {
 .container-app {
   max-width: 480px;
   margin: 0 auto;
-  min-height: 100vh;
   position: relative;
 }
 
@@ -739,13 +738,6 @@ details > summary {
   list-style: none;
 }
 details > summary::-webkit-details-marker { display: none; }
-
-/* Animate slide-up for modals */
-@keyframes slide-up {
-  from { transform: translateY(100%); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
-}
-.animate-slide-up { animation: slide-up 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
 
 /* Admin sidebar active left bar */
 .admin-active-bar {
