@@ -82,7 +82,7 @@ function BottomNav({ active }: { active: string }) {
 // Live Map Mock
 function LiveMap() {
   return (
-    <div className="relative w-full h-72 rounded-3xl overflow-hidden"
+    <div className="relative w-full h-56 sm:h-72 rounded-2xl sm:rounded-3xl overflow-hidden"
       style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #d4e8d0 30%, #c8dfc4 60%, #b8d4b4 100%)" }}>
       {/* Map grid lines (mock) */}
       <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 300">
@@ -103,13 +103,13 @@ function LiveMap() {
       </svg>
 
       {/* Map overlay gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-24"
+      <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-24"
         style={{ background: "linear-gradient(to top, rgba(253,248,245,1) 0%, transparent 100%)" }} />
 
       {/* Map controls */}
-      <div className="absolute top-4 right-4 flex flex-col gap-2">
+      <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex flex-col gap-1.5 sm:gap-2">
         {["+", "−", "🎯"].map((ctrl) => (
-          <button key={ctrl} className="w-10 h-10 rounded-xl flex items-center justify-center font-bold shadow-md text-sm"
+          <button key={ctrl} className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center font-bold shadow-md text-xs sm:text-sm"
             style={{ background: "white", color: "var(--color-text)", boxShadow: "var(--shadow-sm)" }}>
             {ctrl}
           </button>
@@ -117,10 +117,10 @@ function LiveMap() {
       </div>
 
       {/* Location badge */}
-      <div className="absolute bottom-6 left-4 flex items-center gap-2 px-4 py-2 rounded-full"
+      <div className="absolute bottom-4 sm:bottom-6 left-3 sm:left-4 flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full"
         style={{ background: "white", boxShadow: "var(--shadow-sm)" }}>
         <span className="online-dot" />
-        <span className="text-xs font-medium">Casablanca · Maarif</span>
+        <span className="text-xs sm:text-sm font-medium">Casablanca · Maarif</span>
       </div>
     </div>
   );
@@ -130,20 +130,20 @@ function LiveMap() {
 function QuickBookWidget() {
   const router = useRouter();
   return (
-    <div className="card-luxury p-5">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-xl">🚗</span>
-        <h3 className="font-semibold text-base" style={{ fontFamily: "var(--font-display)" }}>
+    <div className="card-luxury p-4 sm:p-5">
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
+        <span className="text-lg sm:text-xl">🚗</span>
+        <h3 className="font-semibold text-sm sm:text-base" style={{ fontFamily: "var(--font-display)" }}>
           Où souhaitez-vous aller ?
         </h3>
       </div>
 
-      <div className="flex flex-col gap-3 mb-4">
+      <div className="flex flex-col gap-2 sm:gap-3 mb-3 sm:mb-4">
         {/* Pickup */}
-        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.15)" }}>
-          <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-emerald-500)" }} />
+        <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-lg sm:rounded-xl" style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.15)" }}>
+          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-emerald-500)" }} />
           <input
-            className="flex-1 bg-transparent outline-none text-sm"
+            className="flex-1 bg-transparent outline-none text-xs sm:text-sm"
             placeholder="Votre position actuelle"
             style={{ color: "var(--color-text)" }}
           />
@@ -156,10 +156,10 @@ function QuickBookWidget() {
         </div>
 
         {/* Dropoff */}
-        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(200,149,108,0.06)", border: "1px solid rgba(200,149,108,0.15)" }}>
-          <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-rose-gold-500)" }} />
+        <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-lg sm:rounded-xl" style={{ background: "rgba(200,149,108,0.06)", border: "1px solid rgba(200,149,108,0.15)" }}>
+          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-rose-gold-500)" }} />
           <input
-            className="flex-1 bg-transparent outline-none text-sm"
+            className="flex-1 bg-transparent outline-none text-xs sm:text-sm"
             placeholder="Entrez votre destination"
             style={{ color: "var(--color-text)" }}
           />
@@ -169,7 +169,7 @@ function QuickBookWidget() {
 
       <button
         onClick={() => router.push("/passenger/book")}
-        className="btn btn-primary w-full"
+        className="btn btn-primary w-full text-xs sm:text-sm"
       >
         🌹 Trouver une conductrice
       </button>
@@ -274,24 +274,24 @@ export default function PassengerDashboard() {
   return (
     <div className="container-app mx-auto pb-24">
       {/* Header */}
-      <div className="p-6 pt-12">
+      <div className="p-4 sm:p-6 pt-10 sm:pt-12">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <p className="text-sm" style={{ color: "var(--color-muted)" }}>{greeting} 👋</p>
-            <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
+            <p className="text-xs sm:text-sm" style={{ color: "var(--color-muted)" }}>{greeting} 👋</p>
+            <h1 className="text-xl sm:text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
               Fatima Zahra
             </h1>
           </div>
-          <div className="flex items-center gap-3">
-            <Link href="/passenger/notifications" className="btn btn-icon"
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link href="/passenger/notifications" className="btn btn-icon btn-icon-sm"
               style={{ background: "var(--color-sand-100)" }}>
-              <span className="text-xl relative">
+              <span className="text-lg sm:text-xl relative">
                 🔔
                 <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500" />
               </span>
             </Link>
             <Link href="/passenger/settings">
-              <div className="w-11 h-11 rounded-full flex items-center justify-center text-xl"
+              <div className="w-9 sm:w-11 h-9 sm:h-11 rounded-full flex items-center justify-center text-lg sm:text-xl"
                 style={{ background: "linear-gradient(135deg, var(--color-rose-gold-400), var(--color-rose-gold-600))" }}>
                 👩
               </div>
@@ -301,23 +301,23 @@ export default function PassengerDashboard() {
       </div>
 
       {/* Map */}
-      <div className="px-6 mb-6">
+      <div className="px-4 sm:px-6 mb-4 sm:mb-6">
         <LiveMap />
       </div>
 
       {/* Quick Book */}
-      <div className="px-6 mb-6">
+      <div className="px-4 sm:px-6 mb-4 sm:mb-6">
         <QuickBookWidget />
       </div>
 
       {/* Wallet */}
-      <div className="px-6 mb-6">
+      <div className="px-4 sm:px-6 mb-4 sm:mb-6">
         <WalletCard />
       </div>
 
       {/* Quick Actions */}
-      <div className="px-6 mb-6">
-        <div className="grid grid-cols-4 gap-3">
+      <div className="px-4 sm:px-6 mb-4 sm:mb-6">
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
           {[
             { icon: "📍", label: "Récents", href: "/passenger/history" },
             { icon: "💬", label: "Messages", href: "/passenger/messages" },
@@ -325,9 +325,9 @@ export default function PassengerDashboard() {
             { icon: "⭐", label: "Favoris", href: "/passenger/favorites" },
           ].map((action) => (
             <Link key={action.label} href={action.href}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl text-center transition-all duration-200 hover:scale-105"
+              className="flex flex-col items-center gap-1.5 sm:gap-2 p-2.5 sm:p-4 rounded-lg sm:rounded-2xl text-center transition-all duration-200 hover:scale-105"
               style={{ background: "white", border: "1px solid var(--color-border)", boxShadow: "var(--shadow-xs)" }}>
-              <span className="text-2xl">{action.icon}</span>
+              <span className="text-lg sm:text-2xl">{action.icon}</span>
               <span className="text-xs font-medium" style={{ color: "var(--color-muted)" }}>{action.label}</span>
             </Link>
           ))}
@@ -335,26 +335,26 @@ export default function PassengerDashboard() {
       </div>
 
       {/* Recent Rides */}
-      <div className="px-6 mb-6">
+      <div className="px-4 sm:px-6 mb-4 sm:mb-6">
         <RecentRides />
       </div>
 
       {/* Safety Card */}
-      <div className="px-6 mb-6">
-        <div className="rounded-3xl p-5"
+      <div className="px-4 sm:px-6 mb-6">
+        <div className="rounded-2xl sm:rounded-3xl p-4 sm:p-5"
           style={{ background: "linear-gradient(135deg, rgba(197,48,48,0.08), rgba(197,48,48,0.04))", border: "1px solid rgba(197,48,48,0.2)" }}>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg sm:rounded-2xl flex items-center justify-center text-lg sm:text-2xl flex-shrink-0"
               style={{ background: "rgba(197,48,48,0.12)" }}>
               🛡️
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-sm mb-1">Sécurité & Contacts d'urgence</h3>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-xs sm:text-sm mb-0.5 sm:mb-1">Sécurité & Contacts d'urgence</h3>
               <p className="text-xs" style={{ color: "var(--color-muted)" }}>
                 Ajoutez vos contacts de confiance pour que le bouton SOS fonctionne
               </p>
             </div>
-            <Link href="/passenger/settings#safety" className="btn btn-sm btn-outline"
+            <Link href="/passenger/settings#safety" className="btn btn-sm btn-outline flex-shrink-0 text-xs"
               style={{ borderColor: "rgba(197,48,48,0.3)", color: "#C53030" }}>
               Configurer
             </Link>

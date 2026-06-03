@@ -50,18 +50,18 @@ function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-app px-4 sm:px-6 py-16 md:py-24 text-center">
+      <div className="relative z-10 container-app px-4 sm:px-6 py-12 md:py-24 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fade-in"
+        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full mb-6 animate-fade-in text-xs sm:text-sm"
           style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
-          <Flower2 size={20} color="var(--color-rose-gold-500)" />
-          <span className="text-sm font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
+          <Flower2 size={18} color="var(--color-rose-gold-500)" />
+          <span className="font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
             Service exclusivement féminin au Maroc
           </span>
         </div>
 
         {/* Main Title */}
-        <h1 className="text-display-2xl text-white mb-6 animate-slide-up">
+        <h1 className="text-display-2xl text-white mb-4 animate-slide-up">
           Voyagez en{" "}
           <span className="gradient-text">Toute Sécurité</span>
           <br />
@@ -71,12 +71,12 @@ function HeroSection() {
         </h1>
 
         {/* Arabic subtitle */}
-        <p className="text-lg mb-4 animate-slide-up delay-100"
+        <p className="text-sm sm:text-lg mb-3 animate-slide-up delay-100"
           style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
           خدمة نقل حصرية للمرأة المغربية — أمان، أناقة، تمكين
         </p>
 
-        <p className="text-base mb-10 max-w-lg mx-auto animate-slide-up delay-200"
+        <p className="text-sm sm:text-base mb-8 max-w-lg mx-auto animate-slide-up delay-200"
           style={{ color: "rgba(255,255,255,0.55)" }}>
           SheDrive Morocco est la première plateforme de covoiturage{" "}
           réservée aux femmes. Conductrices vérifiées, trajets sécurisés,{" "}
@@ -84,28 +84,28 @@ function HeroSection() {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-slide-up delay-300">
-          <Link href="/auth/register?role=passenger" className="btn btn-primary btn-xl w-full sm:w-auto">
-            <CarFront size={20} />
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-10 animate-slide-up delay-300">
+          <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg sm:btn-xl w-full sm:w-auto text-sm sm:text-base">
+            <CarFront size={18} />
             <span>Réserver un Trajet</span>
           </Link>
-          <Link href="/auth/register?role=driver" className="btn btn-xl w-full sm:w-auto"
+          <Link href="/auth/register?role=driver" className="btn btn-lg sm:btn-xl w-full sm:w-auto text-sm sm:text-base"
             style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)" }}>
-            <Sparkles size={20} />
+            <Sparkles size={18} />
             <span>Devenir Conductrice</span>
           </Link>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-md mx-auto animate-slide-up delay-400">
+        <div className="grid grid-cols-3 gap-2 max-w-md mx-auto animate-slide-up delay-400">
           {[
             { value: "18+", label: "Villes", labelAr: "مدينة" },
             { value: "100%", label: "Femmes", labelAr: "نساء" },
             { value: "24/7", label: "Support", labelAr: "دعم" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center p-3 sm:p-4 rounded-xl sm:rounded-2xl"
+            <div key={stat.label} className="text-center p-2.5 sm:p-4 rounded-lg sm:rounded-2xl"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
-              <div className="text-display-sm gradient-text leading-tight">{stat.value}</div>
+              <div className="text-display-sm gradient-text leading-tight text-sm sm:text-base">{stat.value}</div>
               <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
             </div>
           ))}
@@ -179,44 +179,44 @@ function FeaturesSection() {
   ];
 
   return (
-    <section className="py-24 px-6" style={{ background: "var(--color-sand-50)" }}>
+    <section className="py-16 sm:py-24 px-4 sm:px-6" style={{ background: "var(--color-sand-50)" }}>
       <div className="container-app mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-block mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-block mb-3 sm:mb-4">
             <span className="badge badge-primary text-xs tracking-widest">POURQUOI SHEDRIVE</span>
           </div>
-          <h2 className="text-display-xl mb-4">
+          <h2 className="text-display-xl mb-3 sm:mb-4">
             Conçu Pour{" "}
             <span className="gradient-text">Vous</span>
           </h2>
-          <p style={{ color: "var(--color-muted)" }} className="max-w-md mx-auto">
+          <p style={{ color: "var(--color-muted)" }} className="max-w-md mx-auto text-sm sm:text-base">
             Chaque fonctionnalité a été pensée avec une seule priorité : votre sécurité et votre confort.
           </p>
         </div>
 
         {/* Divider */}
-        <div className="divider-gold mb-16" />
+        <div className="divider-gold mb-12 sm:mb-16" />
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((f, i) => (
             <div
               key={f.title}
-              className="card-luxury moroccan-arch-card p-6 hover:scale-[1.02] transition-transform duration-300"
+              className="card-luxury moroccan-arch-card p-4 sm:p-6 hover:scale-[1.02] transition-transform duration-300"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+              <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl flex items-center justify-center mb-4 sm:mb-5"
                 style={{ background: f.bg, color: f.color }}>
                 {f.icon}
               </div>
-              <h3 className="text-lg font-semibold mb-1" style={{ fontFamily: "var(--font-display)" }}>
+              <h3 className="text-base sm:text-lg font-semibold mb-1" style={{ fontFamily: "var(--font-display)" }}>
                 {f.title}
               </h3>
-              <p className="text-xs mb-3" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "var(--color-muted)" }}>
+              <p className="text-xs mb-2 sm:mb-3" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "var(--color-muted)" }}>
                 {f.titleAr}
               </p>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
                 {f.desc}
               </p>
             </div>
@@ -239,11 +239,11 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden" style={{ background: "#FFFDF9" }}>
+    <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden" style={{ background: "#FFFDF9" }}>
       <div className="zellige-pattern absolute inset-0 opacity-20" />
       <div className="container-app mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <span className="badge badge-success mb-4 text-xs tracking-widest">COMMENT ÇA MARCHE</span>
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="badge badge-success mb-3 sm:mb-4 text-xs tracking-widest">COMMENT ÇA MARCHE</span>
           <h2 className="text-display-xl">
             Simple Comme <span className="gradient-text">Bonjour</span>
           </h2>
@@ -255,11 +255,11 @@ function HowItWorksSection() {
             style={{ background: "linear-gradient(90deg, transparent, var(--color-rose-gold-300), transparent)" }}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
             {steps.map((step, i) => (
               <div key={step.num} className="flex flex-col items-center text-center group">
-                <div className="relative mb-6">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg relative z-10 transition-transform duration-300 group-hover:scale-110"
+                <div className="relative mb-4 sm:mb-6">
+                  <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-full flex items-center justify-center shadow-lg relative z-10 transition-transform duration-300 group-hover:scale-110"
                     style={{ background: i % 2 === 0 ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600))", boxShadow: i % 2 === 0 ? "var(--shadow-rose)" : "var(--shadow-gold)" }}>
                     {step.icon}
                   </div>
@@ -268,10 +268,10 @@ function HowItWorksSection() {
                     {step.num}
                   </div>
                 </div>
-                <h3 className="font-semibold mb-3 text-base" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base" style={{ fontFamily: "var(--font-display)" }}>
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
+                <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
                   {step.desc}
                 </p>
               </div>
@@ -297,7 +297,7 @@ function SafetySection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden"
+    <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, var(--color-rose-gold-900) 0%, var(--color-rose-gold-800) 100%)" }}>
       <div className="zellige-pattern absolute inset-0" style={{ opacity: 0.12 }} />
 
@@ -307,40 +307,40 @@ function SafetySection() {
       />
 
       <div className="container-app mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-16 items-center">
           {/* Left */}
           <div>
-            <span className="badge mb-6 text-xs tracking-widest"
+            <span className="badge mb-4 sm:mb-6 text-xs tracking-widest"
               style={{ background: "rgba(13,122,74,0.2)", color: "#4DBF8A", border: "1px solid rgba(13,122,74,0.3)" }}>
               VOTRE SÉCURITÉ D'ABORD
             </span>
-            <h2 className="text-display-xl text-white mb-6">
+            <h2 className="text-display-xl text-white mb-4 sm:mb-6">
               Sécurité de{" "}
               <span className="gradient-text-emerald">Niveau</span>
               {" "}Entreprise
             </h2>
-            <p className="mb-8" style={{ color: "rgba(255,255,255,0.6)", lineHeight: "1.8" }}>
+            <p className="mb-6 sm:mb-8 text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.6)", lineHeight: "1.8" }}>
               SheDrive Morocco intègre les technologies de sécurité les plus avancées.
               Chaque trajet est surveillé en temps réel par notre équipe dédiée.
             </p>
-            <p className="text-sm mb-10" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
+            <p className="text-xs sm:text-sm mb-8 sm:mb-10" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
               كل رحلة خاضعة للمراقبة الفورية لضمان سلامتك في كل لحظة
             </p>
-            <Link href="/safety" className="btn btn-emerald btn-lg">
+            <Link href="/safety" className="btn btn-emerald btn-lg text-sm sm:text-base">
               En Savoir Plus sur la Sécurité →
             </Link>
           </div>
 
           {/* Right: Safety Features Grid */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 gap-2 sm:gap-4">
             {features.map((f) => (
-              <div key={f.label} className="p-4 sm:p-5 rounded-2xl text-center transition-all duration-300 hover:scale-105 cursor-default flex flex-col justify-center items-center"
+              <div key={f.label} className="p-3 sm:p-5 rounded-2xl text-center transition-all duration-300 hover:scale-105 cursor-default flex flex-col justify-center items-center"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(212,160,23,0.3)" }}>
-                <div className="text-gold-400 mb-2 flex justify-center text-rose-gold-200">
+                <div className="text-gold-400 mb-1.5 sm:mb-2 flex justify-center text-rose-gold-200">
                   {f.icon}
                 </div>
-                <div className="text-[11px] sm:text-xs font-semibold text-white mb-1 leading-tight">{f.label}</div>
-                <div className="text-[10px] sm:text-xs" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-arabic)" }}>{f.sub}</div>
+                <div className="text-[10px] sm:text-xs font-semibold text-white mb-0.5 sm:mb-1 leading-tight">{f.label}</div>
+                <div className="text-[9px] sm:text-xs" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-arabic)" }}>{f.sub}</div>
               </div>
             ))}
           </div>
@@ -367,23 +367,23 @@ function CitiesSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 relative" style={{ background: "var(--color-emerald-50)" }}>
+    <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 relative" style={{ background: "var(--color-emerald-50)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-10" />
       <div className="container-app mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <span className="badge badge-warning mb-4 text-xs tracking-widest">COUVERTURE NATIONALE</span>
-          <h2 className="text-display-xl mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="badge badge-warning mb-3 sm:mb-4 text-xs tracking-widest">COUVERTURE NATIONALE</span>
+          <h2 className="text-display-xl mb-3 sm:mb-4">
             Disponible dans <span className="gradient-text">18 Villes</span>
           </h2>
-          <p style={{ color: "var(--color-muted)" }}>
+          <p className="text-sm sm:text-base" style={{ color: "var(--color-muted)" }}>
             De Tanger à Agadir, SheDrive couvre tout le Maroc
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-4">
           {cities.map((city) => (
             <div key={city.name}
-              className="p-3 sm:p-4 rounded-xl text-center cursor-pointer group"
+              className="p-2.5 sm:p-4 rounded-lg sm:rounded-xl text-center cursor-pointer group"
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-border)",
@@ -400,21 +400,15 @@ function CitiesSection() {
                 (e.currentTarget as HTMLDivElement).style.transform = "none";
               }}
             >
-              <div className="mb-3 flex justify-center text-rose-gold-500">
-                <MapPin size={28} color="var(--color-gold-500)" />
+              <div className="mb-2 sm:mb-3 flex justify-center text-rose-gold-500">
+                <MapPin size={24} color="var(--color-gold-500)" />
               </div>
-              <div className="text-sm font-semibold">{city.name}</div>
-              <div className="text-xs mt-1" style={{ color: "var(--color-muted)", fontFamily: "var(--font-arabic)" }}>
+              <div className="text-xs sm:text-sm font-semibold">{city.name}</div>
+              <div className="text-xs mt-0.5 sm:mt-1" style={{ color: "var(--color-muted)", fontFamily: "var(--font-arabic)" }}>
                 {city.nameAr}
               </div>
             </div>
           ))}
-          <div className="p-4 rounded-2xl text-center flex flex-col justify-center items-center"
-            style={{ background: "linear-gradient(135deg, rgba(200,149,108,0.1), rgba(13,122,74,0.08))", border: "1.5px dashed rgba(200,149,108,0.3)" }}>
-            <Sparkles size={28} color="var(--color-gold-400)" className="mb-2" />
-            <div className="text-sm font-semibold gradient-text">+9 Villes</div>
-            <div className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>et plus encore</div>
-          </div>
         </div>
       </div>
     </section>

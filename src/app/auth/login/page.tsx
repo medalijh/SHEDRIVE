@@ -10,11 +10,11 @@ type Role = "passenger" | "driver";
 // Step indicator component
 function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
-    <div className="flex items-center gap-2 mb-8">
+    <div className="flex items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8">
       {Array.from({ length: total }).map((_, i) => (
         <React.Fragment key={i}>
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300"
+            className="w-6 sm:w-8 h-6 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300"
             style={{
               background: i < current
                 ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))"
@@ -61,14 +61,14 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
       <div>
         <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>
           Email ou Téléphone
         </label>
         <input
           type="text"
-          className="input-field"
+          className="input-field text-sm"
           placeholder="+212 6XX XXX XXX ou email@exemple.ma"
           required
         />
@@ -81,7 +81,7 @@ function LoginForm() {
         <div className="relative">
           <input
             type={showPass ? "text" : "password"}
-            className="input-field pr-12"
+            className="input-field pr-12 text-sm"
             placeholder="••••••••"
             required
           />
@@ -99,11 +99,11 @@ function LoginForm() {
       <div className="flex items-center justify-between">
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" className="accent-rose-500 w-4 h-4" />
-          <span className="text-sm" style={{ color: "var(--color-muted)" }}>
+          <span className="text-xs sm:text-sm" style={{ color: "var(--color-muted)" }}>
             Se souvenir de moi
           </span>
         </label>
-        <Link href="/auth/forgot-password" className="text-sm font-medium" style={{ color: "var(--color-rose-gold-600)" }}>
+        <Link href="/auth/forgot-password" className="text-xs sm:text-sm font-medium" style={{ color: "var(--color-rose-gold-600)" }}>
           Mot de passe oublié ?
         </Link>
       </div>
@@ -114,7 +114,7 @@ function LoginForm() {
         </div>
       )}
 
-      <button type="submit" className="btn btn-primary btn-lg w-full" disabled={loading}>
+      <button type="submit" className="btn btn-primary btn-lg w-full text-sm" disabled={loading}>
         {loading ? (
           <span className="flex items-center gap-2">
             <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -131,7 +131,7 @@ function LoginForm() {
         <div className="flex-1 divider" />
       </div>
 
-      <button type="button" className="btn btn-outline btn-lg w-full gap-3">
+      <button type="button" className="btn btn-outline btn-lg w-full gap-3 text-sm">
         <span>📱</span>
         <span>Connexion par SMS</span>
       </button>

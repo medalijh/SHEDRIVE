@@ -138,7 +138,7 @@ function RideRequestCard({ onAccept, onDecline }: { onAccept: () => void; onDecl
 // Live Map for Driver
 function DriverMap({ isOnline }: { isOnline: boolean }) {
   return (
-    <div className="relative w-full h-64 overflow-hidden" style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #c8dfc4 100%)" }}>
+    <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-2xl sm:rounded-none" style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #c8dfc4 100%)" }}>
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 260">
         {Array.from({ length: 7 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i*38} x2="400" y2={i*38} stroke="#4a7c59" strokeWidth="0.4" opacity="0.25"/>)}
         {Array.from({ length: 12 }).map((_, i) => <line key={`v${i}`} x1={i*36} y1="0" x2={i*36} y2="260" stroke="#4a7c59" strokeWidth="0.4" opacity="0.25"/>)}
@@ -167,9 +167,9 @@ function DriverMap({ isOnline }: { isOnline: boolean }) {
           </>
         )}
       </svg>
-      <div className="absolute bottom-0 left-0 right-0 h-16" style={{ background: "linear-gradient(to top, rgba(253,248,245,1) 0%, transparent 100%)" }}/>
+      <div className="absolute bottom-0 left-0 right-0 h-12 sm:h-16" style={{ background: "linear-gradient(to top, rgba(253,248,245,1) 0%, transparent 100%)" }}/>
       {isOnline && (
-        <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-medium" style={{ background: "white", boxShadow: "var(--shadow-sm)" }}>
+        <div className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium" style={{ background: "white", boxShadow: "var(--shadow-sm)" }}>
           🔴 {Math.floor(Math.random() * 5) + 2} demandes proches
         </div>
       )}
@@ -202,13 +202,13 @@ export default function DriverDashboard() {
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
       {/* Header */}
-      <div className="px-6 pt-12 pb-4 flex items-center justify-between">
+      <div className="px-4 sm:px-6 pt-10 sm:pt-12 pb-3 sm:pb-4 flex items-center justify-between">
         <div>
-          <p className="text-sm" style={{ color: "var(--color-muted)" }}>Bonjour 👋</p>
-          <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Khadija M.</h1>
+          <p className="text-xs sm:text-sm" style={{ color: "var(--color-muted)" }}>Bonjour 👋</p>
+          <h1 className="text-xl sm:text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Khadija M.</h1>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full"
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full"
             style={{ background: isOnline ? "rgba(13,122,74,0.1)" : "var(--color-sand-100)", border: `1px solid ${isOnline ? "rgba(13,122,74,0.3)" : "var(--color-border)"}` }}>
             <div className="w-2 h-2 rounded-full" style={{ background: isOnline ? "var(--color-emerald-500)" : "var(--color-sand-400)" }}/>
             <span className="text-xs font-semibold" style={{ color: isOnline ? "var(--color-emerald-700)" : "var(--color-muted)" }}>
@@ -216,7 +216,7 @@ export default function DriverDashboard() {
             </span>
           </div>
           <Link href="/driver/settings">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
+            <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-full flex items-center justify-center text-lg sm:text-xl"
               style={{ background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" }}>
               👩
             </div>
@@ -225,10 +225,10 @@ export default function DriverDashboard() {
       </div>
 
       {/* Online Toggle */}
-      <div className="px-6 mb-4">
+      <div className="px-4 sm:px-6 mb-3 sm:mb-4">
         <button
           onClick={() => { setIsOnline(!isOnline); if (isOnline) setShowRequest(false); setRideAccepted(false); }}
-          className="w-full py-4 rounded-2xl font-semibold text-base transition-all duration-300"
+          className="w-full py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-xs sm:text-base transition-all duration-300"
           style={{
             background: isOnline
               ? "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))"
@@ -241,24 +241,26 @@ export default function DriverDashboard() {
       </div>
 
       {/* Map */}
-      <DriverMap isOnline={isOnline}/>
+      <div className="px-0 sm:px-6 mb-3 sm:mb-5">
+        <DriverMap isOnline={isOnline}/>
+      </div>
 
       {/* Today Stats */}
-      <div className="px-6 mt-5 mb-5">
-        <h2 className="font-semibold mb-3" style={{ fontFamily: "var(--font-display)" }}>Aujourd'hui</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-3xl p-5 relative overflow-hidden"
+      <div className="px-4 sm:px-6 mt-3 sm:mt-5 mb-4 sm:mb-5">
+        <h2 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base" style={{ fontFamily: "var(--font-display)" }}>Aujourd'hui</h2>
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          <div className="rounded-2xl sm:rounded-3xl p-4 sm:p-5 relative overflow-hidden"
             style={{ background: "linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-800))", boxShadow: "var(--shadow-emerald)", gridColumn: "span 2" }}>
             <div className="zellige-pattern absolute inset-0 opacity-10"/>
             <div className="relative z-10 flex items-center justify-between">
               <div>
                 <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>Gains du jour</p>
-                <div className="text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-                  {todayStats.earnings} <span className="text-lg">MAD</span>
+                <div className="text-3xl sm:text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+                  {todayStats.earnings} <span className="text-sm sm:text-lg">MAD</span>
                 </div>
                 <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{todayStats.trips} trajets · {todayStats.hours}</p>
               </div>
-              <div className="text-5xl">💰</div>
+              <div className="text-3xl sm:text-5xl">💰</div>
             </div>
           </div>
 
@@ -266,10 +268,10 @@ export default function DriverDashboard() {
             { label: "Note", value: `⭐ ${todayStats.rating}`, sub: "Excellent", color: "var(--color-gold-600)" },
             { label: "Acceptation", value: `${todayStats.acceptance}%`, sub: "Taux", color: "var(--color-emerald-600)" },
           ].map(stat => (
-            <div key={stat.label} className="card p-4 text-center">
-              <div className="text-2xl font-bold mb-1" style={{ color: stat.color, fontFamily: "var(--font-display)" }}>{stat.value}</div>
+            <div key={stat.label} className="card p-3 sm:p-4 text-center">
+              <div className="text-xl sm:text-2xl font-bold mb-1" style={{ color: stat.color, fontFamily: "var(--font-display)" }}>{stat.value}</div>
               <div className="text-xs" style={{ color: "var(--color-muted)" }}>{stat.sub}</div>
-              <div className="text-xs font-medium mt-1">{stat.label}</div>
+              <div className="text-xs font-medium mt-0.5 sm:mt-1">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -277,27 +279,27 @@ export default function DriverDashboard() {
 
       {/* Active Ride Display */}
       {rideAccepted && (
-        <div className="px-6 mb-5">
-          <div className="card-luxury p-5">
-            <div className="flex items-center gap-2 mb-4">
+        <div className="px-4 sm:px-6 mb-4 sm:mb-5">
+          <div className="card-luxury p-4 sm:p-5">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-emerald-500)" }}/>
-              <span className="text-sm font-semibold" style={{ color: "var(--color-emerald-600)" }}>Trajet en cours</span>
+              <span className="text-xs sm:text-sm font-semibold" style={{ color: "var(--color-emerald-600)" }}>Trajet en cours</span>
             </div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
-              <div>
+            <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-lg sm:rounded-2xl flex items-center justify-center text-lg sm:text-2xl flex-shrink-0" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+              <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm">Passagère</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>CIL Anfa → Hay Hassani</div>
               </div>
-              <div className="ml-auto text-right">
-                <div className="text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>35 MAD</div>
+              <div className="ml-auto text-right flex-shrink-0">
+                <div className="text-lg sm:text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>35 MAD</div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <button className="btn btn-sm" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <button className="btn btn-sm text-xs" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
                 💬 Chat
               </button>
-              <Link href="/passenger/tracking" className="btn btn-sm" style={{ background: "rgba(200,149,108,0.08)", color: "var(--color-rose-gold-700)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              <Link href="/passenger/tracking" className="btn btn-sm text-xs" style={{ background: "rgba(200,149,108,0.08)", color: "var(--color-rose-gold-700)", border: "1px solid rgba(200,149,108,0.2)" }}>
                 🗺️ Navigation
               </Link>
             </div>
@@ -306,9 +308,9 @@ export default function DriverDashboard() {
       )}
 
       {/* Recent Trips */}
-      <div className="px-6 mb-5">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Trajets récents</h2>
+      <div className="px-4 sm:px-6 mb-4 sm:mb-5">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <h2 className="font-semibold text-sm sm:text-base" style={{ fontFamily: "var(--font-display)" }}>Trajets récents</h2>
           <Link href="/driver/earnings" className="text-xs font-medium" style={{ color: "var(--color-rose-gold-600)" }}>Voir tout →</Link>
         </div>
         <div className="card">
@@ -317,30 +319,30 @@ export default function DriverDashboard() {
             { from: "Gauthier", to: "Ain Diab", time: "12:15", amount: 40, duration: "28 min" },
             { from: "Ain Sebaa", to: "Maarif", time: "09:45", amount: 45, duration: "35 min" },
           ].map((trip, i) => (
-            <div key={i} className="flex items-center gap-4 p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg" style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
+            <div key={i} className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
+              <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-2xl flex items-center justify-center text-sm sm:text-lg flex-shrink-0" style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate">{trip.from} → {trip.to}</div>
+                <div className="text-xs sm:text-sm font-medium truncate">{trip.from} → {trip.to}</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>{trip.time} · {trip.duration}</div>
               </div>
-              <div className="text-sm font-bold" style={{ color: "var(--color-emerald-600)" }}>+{trip.amount} MAD</div>
+              <div className="text-xs sm:text-sm font-bold flex-shrink-0" style={{ color: "var(--color-emerald-600)" }}>+{trip.amount} MAD</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="px-6 mb-4">
-        <div className="grid grid-cols-3 gap-3">
+      <div className="px-4 sm:px-6 mb-4">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {[
             { icon: "📊", label: "Gains", href: "/driver/earnings" },
             { icon: "⭐", label: "Avis", href: "/driver/reviews" },
             { icon: "🎓", label: "Formation", href: "/driver/training" },
           ].map(a => (
             <Link key={a.label} href={a.href}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl text-center"
+              className="flex flex-col items-center gap-1.5 sm:gap-2 p-3 sm:p-4 rounded-lg sm:rounded-2xl text-center"
               style={{ background: "white", border: "1px solid var(--color-border)" }}>
-              <span className="text-2xl">{a.icon}</span>
+              <span className="text-lg sm:text-2xl">{a.icon}</span>
               <span className="text-xs font-medium" style={{ color: "var(--color-muted)" }}>{a.label}</span>
             </Link>
           ))}
