@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Flower2, CarFront, Sparkles, ShieldCheck, Gem, Handshake, Map, MessageCircle, Wallet, MapPin, Coins, Users, LifeBuoy, Navigation, Lock, UserCheck, Share2, BrainCircuit, Star } from "lucide-react";
 
 // ============================================================
 // HERO SECTION
@@ -53,8 +54,8 @@ function HeroSection() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fade-in"
           style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
-          <span className="text-2xl">🌹</span>
-          <span className="text-sm font-medium" style={{ color: "#C8956C" }}>
+          <Flower2 size={20} color="var(--color-rose-gold-500)" />
+          <span className="text-sm font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
             Service exclusivement féminin au Maroc
           </span>
         </div>
@@ -85,12 +86,12 @@ function HeroSection() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-slide-up delay-300">
           <Link href="/auth/register?role=passenger" className="btn btn-primary btn-xl w-full sm:w-auto">
-            <span>🚗</span>
+            <CarFront size={20} />
             <span>Réserver un Trajet</span>
           </Link>
           <Link href="/auth/register?role=driver" className="btn btn-xl w-full sm:w-auto"
             style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)" }}>
-            <span>🌸</span>
+            <Sparkles size={20} />
             <span>Devenir Conductrice</span>
           </Link>
         </div>
@@ -128,7 +129,7 @@ function HeroSection() {
 function FeaturesSection() {
   const features = [
     {
-      icon: "🛡️",
+      icon: <ShieldCheck size={28} color="currentColor" />,
       title: "Sécurité Maximale",
       titleAr: "أمان قصوى",
       desc: "Conductrices vérifiées, suivi GPS en temps réel, bouton SOS d'urgence, et contacts de confiance.",
@@ -136,7 +137,7 @@ function FeaturesSection() {
       bg: "rgba(13,122,74,0.08)",
     },
     {
-      icon: "💎",
+      icon: <Gem size={28} color="currentColor" />,
       title: "Expérience Premium",
       titleAr: "تجربة راقية",
       desc: "Véhicules élégants, conductrices professionnelles, et une interface luxueuse pensée pour vous.",
@@ -144,7 +145,7 @@ function FeaturesSection() {
       bg: "rgba(200,149,108,0.08)",
     },
     {
-      icon: "🤝",
+      icon: <Handshake size={28} color="currentColor" />,
       title: "Prix Négociables",
       titleAr: "أسعار قابلة للتفاوض",
       desc: "Proposez votre prix. Les conductrices font leurs offres. Vous choisissez la meilleure option.",
@@ -152,7 +153,7 @@ function FeaturesSection() {
       bg: "rgba(212,160,23,0.08)",
     },
     {
-      icon: "🌍",
+      icon: <Map size={28} color="currentColor" />,
       title: "Tout le Maroc",
       titleAr: "كل المغرب",
       desc: "18 villes marocaines couvertes, de Casablanca à Agadir, de Tanger à Oujda.",
@@ -160,7 +161,7 @@ function FeaturesSection() {
       bg: "rgba(13,122,74,0.08)",
     },
     {
-      icon: "💬",
+      icon: <MessageCircle size={28} color="currentColor" />,
       title: "Chat Intégré",
       titleAr: "محادثة مدمجة",
       desc: "Communication chiffrée entre passagères et conductrices, avec messages vocaux.",
@@ -168,7 +169,7 @@ function FeaturesSection() {
       bg: "rgba(200,149,108,0.08)",
     },
     {
-      icon: "💳",
+      icon: <Wallet size={28} color="currentColor" />,
       title: "Paiements Flexibles",
       titleAr: "دفع مرن",
       desc: "Espèces, carte bancaire, CMI, ou portefeuille SheDrive. En dirhams marocains.",
@@ -202,11 +203,11 @@ function FeaturesSection() {
           {features.map((f, i) => (
             <div
               key={f.title}
-              className="card-luxury p-6 hover:scale-[1.02] transition-transform duration-300"
+              className="card-luxury moroccan-arch-card p-6 hover:scale-[1.02] transition-transform duration-300"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5"
-                style={{ background: f.bg }}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+                style={{ background: f.bg, color: f.color }}>
                 {f.icon}
               </div>
               <h3 className="text-lg font-semibold mb-1" style={{ fontFamily: "var(--font-display)" }}>
@@ -231,10 +232,10 @@ function FeaturesSection() {
 // ============================================================
 function HowItWorksSection() {
   const steps = [
-    { num: "01", icon: "📍", title: "Entrez votre destination", desc: "Indiquez où vous êtes et où vous allez. Notre carte interactive vous aide à localiser avec précision." },
-    { num: "02", icon: "💰", title: "Proposez votre prix", desc: "Fixez le prix que vous souhaitez payer. Les conductrices disponibles verront votre demande." },
-    { num: "03", icon: "🌸", title: "Choisissez votre conductrice", desc: "Consultez les profils, notes et offres des conductrices. Sélectionnez celle qui vous convient." },
-    { num: "04", icon: "🚗", title: "Voyagez en sécurité", desc: "Suivez votre trajet en temps réel. Partagez votre position avec vos proches. Arrivez sereine." },
+    { num: "01", icon: <MapPin size={32} color="white" />, title: "Entrez votre destination", desc: "Indiquez où vous êtes et où vous allez. Notre carte interactive vous aide à localiser avec précision." },
+    { num: "02", icon: <Coins size={32} color="white" />, title: "Proposez votre prix", desc: "Fixez le prix que vous souhaitez payer. Les conductrices disponibles verront votre demande." },
+    { num: "03", icon: <Users size={32} color="white" />, title: "Choisissez votre conductrice", desc: "Consultez les profils, notes et offres des conductrices. Sélectionnez celle qui vous convient." },
+    { num: "04", icon: <CarFront size={32} color="white" />, title: "Voyagez en sécurité", desc: "Suivez votre trajet en temps réel. Partagez votre position avec vos proches. Arrivez sereine." },
   ];
 
   return (
@@ -258,8 +259,8 @@ function HowItWorksSection() {
             {steps.map((step, i) => (
               <div key={step.num} className="flex flex-col items-center text-center group">
                 <div className="relative mb-6">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg relative z-10 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: i % 2 === 0 ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))", boxShadow: i % 2 === 0 ? "var(--shadow-rose)" : "var(--shadow-emerald)" }}>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg relative z-10 transition-transform duration-300 group-hover:scale-110"
+                    style={{ background: i % 2 === 0 ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600))", boxShadow: i % 2 === 0 ? "var(--shadow-rose)" : "var(--shadow-gold)" }}>
                     {step.icon}
                   </div>
                   <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
@@ -287,18 +288,18 @@ function HowItWorksSection() {
 // ============================================================
 function SafetySection() {
   const features = [
-    { icon: "🆘", label: "Bouton SOS", sub: "زر الطوارئ" },
-    { icon: "📡", label: "GPS Temps Réel", sub: "تتبع فوري" },
-    { icon: "🔐", label: "Chiffrement E2E", sub: "تشفير كامل" },
-    { icon: "👤", label: "Vérification ID", sub: "التحقق من الهوية" },
-    { icon: "📱", label: "Partage de Trajet", sub: "مشاركة الرحلة" },
-    { icon: "🛡️", label: "Anti-Fraude AI", sub: "ذكاء اصطناعي" },
+    { icon: <LifeBuoy size={28} />, label: "Bouton SOS", sub: "زر الطوارئ" },
+    { icon: <Navigation size={28} />, label: "GPS Temps Réel", sub: "تتبع فوري" },
+    { icon: <Lock size={28} />, label: "Chiffrement E2E", sub: "تشفير كامل" },
+    { icon: <UserCheck size={28} />, label: "Vérification ID", sub: "التحقق من الهوية" },
+    { icon: <Share2 size={28} />, label: "Partage de Trajet", sub: "مشاركة الرحلة" },
+    { icon: <BrainCircuit size={28} />, label: "Anti-Fraude AI", sub: "ذكاء اصطناعي" },
   ];
 
   return (
     <section className="py-24 px-6 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #0A1F15 0%, #0D2A1A 50%, #121A10 100%)" }}>
-      <div className="zellige-pattern absolute inset-0" style={{ opacity: 0.08 }} />
+      style={{ background: "linear-gradient(135deg, var(--color-rose-gold-900) 0%, var(--color-rose-gold-800) 100%)" }}>
+      <div className="zellige-pattern absolute inset-0" style={{ opacity: 0.12 }} />
 
       {/* Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2"
@@ -352,20 +353,21 @@ function SafetySection() {
 // ============================================================
 function CitiesSection() {
   const cities = [
-    { name: "Casablanca", nameAr: "الدار البيضاء", emoji: "🏙️" },
-    { name: "Marrakech", nameAr: "مراكش", emoji: "🌴" },
-    { name: "Rabat", nameAr: "الرباط", emoji: "🏛️" },
-    { name: "Fès", nameAr: "فاس", emoji: "🕌" },
-    { name: "Agadir", nameAr: "أكادير", emoji: "🏖️" },
-    { name: "Tanger", nameAr: "طنجة", emoji: "🌊" },
-    { name: "Meknès", nameAr: "مكناس", emoji: "🏺" },
-    { name: "Oujda", nameAr: "وجدة", emoji: "🌅" },
-    { name: "Tétouan", nameAr: "تطوان", emoji: "⛰️" },
+    { name: "Casablanca", nameAr: "الدار البيضاء" },
+    { name: "Marrakech", nameAr: "مراكش" },
+    { name: "Rabat", nameAr: "الرباط" },
+    { name: "Fès", nameAr: "فاس" },
+    { name: "Agadir", nameAr: "أكادير" },
+    { name: "Tanger", nameAr: "طنجة" },
+    { name: "Meknès", nameAr: "مكناس" },
+    { name: "Oujda", nameAr: "وجدة" },
+    { name: "Tétouan", nameAr: "تطوان" },
   ];
 
   return (
-    <section className="py-24 px-6" style={{ background: "var(--color-ivory-100)" }}>
-      <div className="container-app mx-auto">
+    <section className="py-24 px-6 relative" style={{ background: "var(--color-emerald-50)" }}>
+      <div className="zellige-pattern absolute inset-0 opacity-10" />
+      <div className="container-app mx-auto relative z-10">
         <div className="text-center mb-16">
           <span className="badge badge-warning mb-4 text-xs tracking-widest">COUVERTURE NATIONALE</span>
           <h2 className="text-display-xl mb-4">
@@ -396,16 +398,18 @@ function CitiesSection() {
                 (e.currentTarget as HTMLDivElement).style.transform = "none";
               }}
             >
-              <div className="text-2xl mb-2">{city.emoji}</div>
+              <div className="mb-3 flex justify-center text-rose-gold-500">
+                <MapPin size={28} color="var(--color-gold-500)" />
+              </div>
               <div className="text-sm font-semibold">{city.name}</div>
               <div className="text-xs mt-1" style={{ color: "var(--color-muted)", fontFamily: "var(--font-arabic)" }}>
                 {city.nameAr}
               </div>
             </div>
           ))}
-          <div className="p-4 rounded-2xl text-center"
+          <div className="p-4 rounded-2xl text-center flex flex-col justify-center items-center"
             style={{ background: "linear-gradient(135deg, rgba(200,149,108,0.1), rgba(13,122,74,0.08))", border: "1.5px dashed rgba(200,149,108,0.3)" }}>
-            <div className="text-2xl mb-2">✨</div>
+            <Sparkles size={28} color="var(--color-gold-400)" className="mb-2" />
             <div className="text-sm font-semibold gradient-text">+9 Villes</div>
             <div className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>et plus encore</div>
           </div>
@@ -425,7 +429,7 @@ function TestimonialsSection() {
       city: "Casablanca",
       text: "Enfin un service qui comprend nos besoins ! Je me sens vraiment en sécurité à chaque trajet.",
       rating: 5,
-      avatar: "🌸",
+      initials: "FZ",
     },
     {
       name: "Khadija M.",
@@ -433,14 +437,14 @@ function TestimonialsSection() {
       desc: "Conductrice",
       text: "SheDrive m'a permis de travailler avec flexibilité tout en aidant d'autres femmes. C'est libérateur.",
       rating: 5,
-      avatar: "🌺",
+      initials: "KM",
     },
     {
       name: "Amina B.",
       city: "Rabat",
       text: "L'interface est magnifique et le système de négociation de prix est vraiment pratique.",
       rating: 5,
-      avatar: "🌷",
+      initials: "AB",
     },
   ];
 
@@ -458,9 +462,9 @@ function TestimonialsSection() {
           {testimonials.map((t) => (
             <div key={t.name} className="card-luxury p-6">
               <div className="flex items-center gap-4 mb-5">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl"
-                  style={{ background: "rgba(200,149,108,0.1)" }}>
-                  {t.avatar}
+                <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg"
+                  style={{ background: "rgba(200,149,108,0.1)", color: "var(--color-rose-gold-600)" }}>
+                  {t.initials}
                 </div>
                 <div>
                   <div className="font-semibold">{t.name}</div>
@@ -469,9 +473,9 @@ function TestimonialsSection() {
                   </div>
                 </div>
               </div>
-              <div className="stars mb-4">
+              <div className="stars mb-4 flex gap-1">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <span key={i}>⭐</span>
+                  <Star key={i} size={16} fill="var(--color-gold-400)" color="var(--color-gold-400)" />
                 ))}
               </div>
               <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
@@ -505,13 +509,15 @@ function CTASection() {
           Rejoignez des milliers de femmes qui voyagent en toute sécurité avec SheDrive Morocco.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/auth/register?role=passenger" className="btn btn-xl"
+          <Link href="/auth/register?role=passenger" className="btn btn-xl gap-3"
             style={{ background: "white", color: "var(--color-rose-gold-700)" }}>
-            🌹 Je suis passagère
+            <CarFront size={20} />
+            Je suis passagère
           </Link>
-          <Link href="/auth/register?role=driver" className="btn btn-xl"
+          <Link href="/auth/register?role=driver" className="btn btn-xl gap-3"
             style={{ background: "rgba(255,255,255,0.15)", color: "white", border: "1.5px solid rgba(255,255,255,0.3)", backdropFilter: "blur(10px)" }}>
-            🌸 Je suis conductrice
+            <Sparkles size={20} />
+            Je suis conductrice
           </Link>
         </div>
       </div>
@@ -544,7 +550,7 @@ function Navbar() {
         <Link href="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
             style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>
-            🌹
+            <Flower2 size={20} color="white" />
           </div>
           <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
             SheDrive
@@ -634,7 +640,7 @@ function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
                 style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>
-                🌹
+                <Flower2 size={20} color="white" />
               </div>
               <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
             </div>
@@ -698,9 +704,9 @@ function Footer() {
             © 2025 SheDrive Morocco. Tous droits réservés.
           </p>
           <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
-            <span>🇲🇦</span>
+            <MapPin size={12} />
             <span>Fièrement Marocain · صنع في المغرب</span>
-            <span>🌹</span>
+            <Flower2 size={12} />
           </div>
         </div>
       </div>
