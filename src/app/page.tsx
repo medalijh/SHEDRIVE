@@ -50,63 +50,62 @@ function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container-app px-4 sm:px-6 py-12 md:py-24 text-center">
+      <div className="relative z-10 container-app px-3 sm:px-6 py-6 sm:py-12 md:py-24 text-center flex flex-col items-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full mb-6 animate-fade-in text-xs sm:text-sm"
+        <div className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-full mb-4 sm:mb-6 animate-fade-in text-[11px] sm:text-sm"
           style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
-          <Flower2 size={18} color="var(--color-rose-gold-500)" />
+          <Flower2 size={14} color="var(--color-rose-gold-500)" />
           <span className="font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
             Service exclusivement féminin au Maroc
           </span>
         </div>
 
         {/* Main Title */}
-        <h1 className="text-display-2xl text-white mb-4 animate-slide-up">
+        <h1 className="text-2xl sm:text-4xl md:text-display-2xl text-white mb-2 sm:mb-4 animate-slide-up leading-tight">
           Voyagez en{" "}
           <span className="gradient-text">Toute Sécurité</span>
           <br />
-          <span className="text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
+          <span className="text-xl sm:text-2xl md:text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
             Entre Femmes
           </span>
         </h1>
 
         {/* Arabic subtitle */}
-        <p className="text-sm sm:text-lg mb-3 animate-slide-up delay-100"
+        <p className="text-xs sm:text-base mb-2 sm:mb-3 animate-slide-up delay-100 px-1"
           style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
           خدمة نقل حصرية للمرأة المغربية — أمان، أناقة، تمكين
         </p>
 
-        <p className="text-sm sm:text-base mb-8 max-w-lg mx-auto animate-slide-up delay-200"
+        <p className="text-xs sm:text-sm mb-6 sm:mb-8 max-w-lg mx-auto animate-slide-up delay-200 px-1 leading-relaxed"
           style={{ color: "rgba(255,255,255,0.55)" }}>
-          SheDrive Morocco est la première plateforme de covoiturage{" "}
-          réservée aux femmes. Conductrices vérifiées, trajets sécurisés,{" "}
-          expérience premium dans toutes les villes marocaines.
+          SheDrive Morocco est la première plateforme de covoiturage réservée aux femmes. Conductrices vérifiées, trajets sécurisés, expérience premium.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-10 animate-slide-up delay-300">
-          <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg sm:btn-xl w-full sm:w-auto text-sm sm:text-base">
-            <CarFront size={18} />
+        <div className="flex flex-col gap-2 sm:gap-3 justify-center items-center w-full mb-8 sm:mb-10 animate-slide-up delay-300">
+          <Link href="/auth/register?role=passenger" className="btn btn-primary w-full sm:w-auto text-xs sm:text-base py-2.5 px-4 sm:px-6"
+            style={{ minWidth: "fit-content" }}>
+            <CarFront size={16} />
             <span>Réserver un Trajet</span>
           </Link>
-          <Link href="/auth/register?role=driver" className="btn btn-lg sm:btn-xl w-full sm:w-auto text-sm sm:text-base"
-            style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)" }}>
-            <Sparkles size={18} />
+          <Link href="/auth/register?role=driver" className="btn w-full sm:w-auto text-xs sm:text-base py-2.5 px-4 sm:px-6"
+            style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)", minWidth: "fit-content" }}>
+            <Sparkles size={16} />
             <span>Devenir Conductrice</span>
           </Link>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-2 max-w-md mx-auto animate-slide-up delay-400">
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-3 max-w-sm mx-auto animate-slide-up delay-400 w-full px-2">
           {[
             { value: "18+", label: "Villes", labelAr: "مدينة" },
             { value: "100%", label: "Femmes", labelAr: "نساء" },
             { value: "24/7", label: "Support", labelAr: "دعم" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center p-2.5 sm:p-4 rounded-lg sm:rounded-2xl"
+            <div key={stat.label} className="text-center p-1.5 sm:p-4 rounded-lg sm:rounded-2xl"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
-              <div className="text-display-sm gradient-text leading-tight text-sm sm:text-base">{stat.value}</div>
-              <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
+              <div className="text-sm sm:text-display-sm gradient-text leading-tight">{stat.value}</div>
+              <div className="text-[10px] sm:text-xs mt-0.5 sm:mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
             </div>
           ))}
         </div>
