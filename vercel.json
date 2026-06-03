@@ -6,10 +6,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm ci",
-  "env": {
-    "NEXT_PUBLIC_APP_URL": "@shedrive_app_url",
-    "NODE_ENV": "production"
-  },
+
   "headers": [
     {
       "source": "/sw.js",
