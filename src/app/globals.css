@@ -661,14 +661,14 @@ label {
    UTILITY CLASSES
    ============================================================ */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-rose-gold-500), var(--color-gold-400));
+  background: linear-gradient(135deg, #D97AB8, #8A5FBF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-emerald {
-  background: linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-300));
+  background: linear-gradient(135deg, #8A5FBF, #FF88C8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -676,12 +676,12 @@ label {
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  background: linear-gradient(90deg, transparent, #E5E7EB, transparent);
 }
 
 .divider-gold {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold-300), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #D97AB8, transparent);
 }
 
 /* Safe area support */

@@ -53,20 +53,25 @@ function HeroSection() {
         </svg>
       </div>
 
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 z-5"
+        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%)" }} />
+
       {/* Content */}
       <div className="relative z-10 container-app py-28 text-center flex flex-col items-center justify-center gap-5 sm:gap-7">
 
         {/* SUBTITLE — TOP */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full animate-fade-in text-[11px] sm:text-sm"
-          style={{ background: "rgba(217, 122, 184, 0.15)", border: "1px solid rgba(217, 122, 184, 0.3)" }}>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full animate-fade-in text-[11px] sm:text-sm font-semibold"
+          style={{ background: "#1F2937", border: "2px solid #D97AB8", color: "white" }}>
           <Flower2 size={14} color="#D97AB8" />
-          <span className="font-medium" style={{ color: "#D97AB8" }}>
+          <span>
             Service exclusivement féminin au Maroc
           </span>
         </div>
 
         {/* TITLE — MIDDLE */}
-        <h1 className="text-3xl sm:text-5xl md:text-display-2xl text-white animate-slide-up leading-tight font-bold">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl animate-slide-up leading-tight font-bold max-w-4xl"
+          style={{ color: "#1F2937", textShadow: "0 2px 10px rgba(0,0,0,0.1)" }}>
           Voyagez en{" "}
           <span style={{
             background: "linear-gradient(90deg, #D97AB8 0%, #8A5FBF 50%, #FF88C8 100%)",
@@ -75,20 +80,20 @@ function HeroSection() {
             backgroundClip: "text"
           }}>Toute Sécurité</span>
           <br />
-          <span className="text-2xl sm:text-3xl md:text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
+          <span className="text-3xl sm:text-5xl md:text-6xl" style={{ color: "#1F2937" }}>
             Entre Femmes
           </span>
         </h1>
 
         {/* DESCRIPTION — MIDDLE */}
-        <div className="max-w-2xl flex flex-col gap-3">
-          <p className="text-sm sm:text-base animate-slide-up delay-100"
-            style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl", lineHeight: "1.7" }}>
+        <div className="max-w-3xl flex flex-col gap-4">
+          <p className="text-base sm:text-lg animate-slide-up delay-100 font-semibold"
+            style={{ color: "#1F2937", fontFamily: "var(--font-arabic)", direction: "rtl", lineHeight: "1.7" }}>
             خدمة نقل حصرية للمرأة المغربية — أمان، أناقة، تمكين
           </p>
 
-          <p className="text-sm sm:text-base animate-slide-up delay-200 leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.55)", lineHeight: "1.7" }}>
+          <p className="text-base sm:text-lg animate-slide-up delay-200 leading-relaxed font-medium"
+            style={{ color: "#374151", lineHeight: "1.8" }}>
             SheDrive Morocco est la première plateforme de covoiturage réservée aux femmes. Conductrices vérifiées, trajets sécurisés, expérience premium dans toutes les villes marocaines.
           </p>
         </div>
@@ -114,9 +119,9 @@ function HeroSection() {
             { value: "24/7", label: "Support", labelAr: "دعم" },
           ].map((stat) => (
             <div key={stat.label} className="text-center p-3 sm:p-4 rounded-xl sm:rounded-2xl"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(217, 122, 184, 0.2)" }}>
-              <div className="text-base sm:text-xl gradient-text leading-tight font-bold">{stat.value}</div>
-              <div className="text-[10px] sm:text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
+              style={{ background: "rgba(217, 122, 184, 0.15)", border: "2px solid #D97AB8" }}>
+              <div className="text-base sm:text-xl leading-tight font-bold" style={{ color: "#D97AB8" }}>{stat.value}</div>
+              <div className="text-[10px] sm:text-xs mt-1" style={{ color: "#6B7280", fontWeight: "600" }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -143,48 +148,48 @@ function FeaturesSection() {
       title: "Sécurité Maximale",
       titleAr: "أمان قصوى",
       desc: "Conductrices vérifiées, suivi GPS en temps réel, bouton SOS d'urgence, et contacts de confiance.",
-      color: "var(--color-emerald-500)",
-      bg: "rgba(13,122,74,0.08)",
+      color: "#8A5FBF",
+      bg: "rgba(138, 95, 191, 0.12)",
     },
     {
       icon: <Gem size={28} color="currentColor" />,
       title: "Expérience Premium",
       titleAr: "تجربة راقية",
       desc: "Véhicules élégants, conductrices professionnelles, et une interface luxueuse pensée pour vous.",
-      color: "var(--color-rose-gold-500)",
-      bg: "rgba(200,149,108,0.08)",
+      color: "#D97AB8",
+      bg: "rgba(217, 122, 184, 0.12)",
     },
     {
       icon: <Handshake size={28} color="currentColor" />,
       title: "Prix Négociables",
       titleAr: "أسعار قابلة للتفاوض",
       desc: "Proposez votre prix. Les conductrices font leurs offres. Vous choisissez la meilleure option.",
-      color: "var(--color-gold-500)",
-      bg: "rgba(212,160,23,0.08)",
+      color: "#FF88C8",
+      bg: "rgba(255, 136, 200, 0.12)",
     },
     {
       icon: <Map size={28} color="currentColor" />,
       title: "Tout le Maroc",
       titleAr: "كل المغرب",
       desc: "18 villes marocaines couvertes, de Casablanca à Agadir, de Tanger à Oujda.",
-      color: "var(--color-emerald-500)",
-      bg: "rgba(13,122,74,0.08)",
+      color: "#8A5FBF",
+      bg: "rgba(138, 95, 191, 0.12)",
     },
     {
       icon: <MessageCircle size={28} color="currentColor" />,
       title: "Chat Intégré",
       titleAr: "محادثة مدمجة",
       desc: "Communication chiffrée entre passagères et conductrices, avec messages vocaux.",
-      color: "var(--color-rose-gold-500)",
-      bg: "rgba(200,149,108,0.08)",
+      color: "#D97AB8",
+      bg: "rgba(217, 122, 184, 0.12)",
     },
     {
       icon: <Wallet size={28} color="currentColor" />,
       title: "Paiements Flexibles",
       titleAr: "دفع مرن",
       desc: "Espèces, carte bancaire, CMI, ou portefeuille SheDrive. En dirhams marocains.",
-      color: "var(--color-gold-500)",
-      bg: "rgba(212,160,23,0.08)",
+      color: "#FF88C8",
+      bg: "rgba(255, 136, 200, 0.12)",
     },
   ];
 
@@ -317,7 +322,7 @@ function SafetySection() {
     { icon: <LifeBuoy size={28} />, label: "Bouton SOS", sub: "زر الطوارئ" },
     { icon: <Navigation size={28} />, label: "GPS Temps Réel", sub: "تتبع فوري" },
     { icon: <Lock size={28} />, label: "Chiffrement E2E", sub: "تشفير كامل" },
-    { icon: <UserCheck size={28} />, label: "Vérification ID", sub: "التحقق من الهوية" },
+    { icon: <UserCheck size={28} />, label: "Vérification ID", sub: "التح��ق من الهوية" },
     { icon: <Share2 size={28} />, label: "Partage de Trajet", sub: "مشاركة الرحلة" },
     { icon: <BrainCircuit size={28} />, label: "Anti-Fraude AI", sub: "ذكاء اصطناعي" },
   ];
