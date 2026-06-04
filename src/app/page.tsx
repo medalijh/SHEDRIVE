@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Flower2, CarFront, Sparkles, ShieldCheck, Gem, Handshake, Map, MessageCircle, Wallet, MapPin, Coins, Users, LifeBuoy, Navigation, Lock, UserCheck, Share2, BrainCircuit, Star } from "lucide-react";
+import { FloralDecorationsHero } from "@/components/FloralDecorations";
 
 // ============================================================
 // HERO SECTION
@@ -28,24 +29,27 @@ function HeroSection() {
       {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(200,149,108,0.15) 0%, rgba(13,122,74,0.08) 50%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(217, 122, 184, 0.1) 0%, rgba(138, 95, 191, 0.05) 50%, transparent 70%)",
         }}
       />
+
+      {/* Floral Decorations */}
+      <FloralDecorationsHero />
 
       {/* Decorative Arcs */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <svg className="absolute -top-20 -right-20 w-96 h-96 opacity-10" viewBox="0 0 400 400" fill="none">
-          <circle cx="200" cy="200" r="180" stroke="#C8956C" strokeWidth="1" strokeDasharray="8 4"/>
-          <circle cx="200" cy="200" r="140" stroke="#D4A017" strokeWidth="0.5" strokeDasharray="4 8"/>
-          <circle cx="200" cy="200" r="100" stroke="#C8956C" strokeWidth="1"/>
-          {/* Moroccan star pattern */}
-          <path d="M200 60 L215 140 L290 100 L230 160 L290 220 L215 180 L200 260 L185 180 L110 220 L170 160 L110 100 L185 140 Z" stroke="#D4A017" strokeWidth="0.8" fill="none"/>
+          <circle cx="200" cy="200" r="180" stroke="#D97AB8" strokeWidth="1" strokeDasharray="8 4"/>
+          <circle cx="200" cy="200" r="140" stroke="#8A5FBF" strokeWidth="0.5" strokeDasharray="4 8"/>
+          <circle cx="200" cy="200" r="100" stroke="#D97AB8" strokeWidth="1"/>
+          {/* Moroccan geometric pattern with tulips */}
+          <path d="M200 60 L215 140 L290 100 L230 160 L290 220 L215 180 L200 260 L185 180 L110 220 L170 160 L110 100 L185 140 Z" stroke="#FF88C8" strokeWidth="0.8" fill="none"/>
         </svg>
 
         <svg className="absolute -bottom-20 -left-20 w-80 h-80 opacity-10" viewBox="0 0 320 320" fill="none">
-          <circle cx="160" cy="160" r="140" stroke="#0D7A4A" strokeWidth="1" strokeDasharray="6 4"/>
-          <circle cx="160" cy="160" r="100" stroke="#C8956C" strokeWidth="0.6"/>
-          <path d="M160 40 L173 120 L240 80 L190 140 L240 200 L173 160 L160 240 L147 160 L80 200 L130 140 L80 80 L147 120 Z" stroke="#C8956C" strokeWidth="0.7" fill="none"/>
+          <circle cx="160" cy="160" r="140" stroke="#9A9AAD" strokeWidth="1" strokeDasharray="6 4"/>
+          <circle cx="160" cy="160" r="100" stroke="#D97AB8" strokeWidth="0.6"/>
+          <path d="M160 40 L173 120 L240 80 L190 140 L240 200 L173 160 L160 240 L147 160 L80 200 L130 140 L80 80 L147 120 Z" stroke="#8A5FBF" strokeWidth="0.7" fill="none"/>
         </svg>
       </div>
 
@@ -54,9 +58,9 @@ function HeroSection() {
 
         {/* SUBTITLE — TOP */}
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full animate-fade-in text-[11px] sm:text-sm"
-          style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
-          <Flower2 size={14} color="var(--color-rose-gold-500)" />
-          <span className="font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
+          style={{ background: "rgba(217, 122, 184, 0.15)", border: "1px solid rgba(217, 122, 184, 0.3)" }}>
+          <Flower2 size={14} color="#D97AB8" />
+          <span className="font-medium" style={{ color: "#D97AB8" }}>
             Service exclusivement féminin au Maroc
           </span>
         </div>
@@ -64,7 +68,12 @@ function HeroSection() {
         {/* TITLE — MIDDLE */}
         <h1 className="text-3xl sm:text-5xl md:text-display-2xl text-white animate-slide-up leading-tight font-bold">
           Voyagez en{" "}
-          <span className="gradient-text">Toute Sécurité</span>
+          <span style={{
+            background: "linear-gradient(90deg, #D97AB8 0%, #8A5FBF 50%, #FF88C8 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text"
+          }}>Toute Sécurité</span>
           <br />
           <span className="text-2xl sm:text-3xl md:text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
             Entre Femmes
@@ -91,7 +100,7 @@ function HeroSection() {
             <span>Réserver un Trajet</span>
           </Link>
           <Link href="/auth/register?role=driver" className="btn btn-lg w-full sm:w-auto"
-            style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)" }}>
+            style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(217, 122, 184, 0.4)", backdropFilter: "blur(10px)" }}>
             <Sparkles size={18} />
             <span>Devenir Conductrice</span>
           </Link>
