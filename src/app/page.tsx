@@ -114,7 +114,7 @@ function HeroSection() {
             { value: "24/7", label: "Support", labelAr: "دعم" },
           ].map((stat) => (
             <div key={stat.label} className="text-center p-3 sm:p-4 rounded-xl sm:rounded-2xl"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(217, 122, 184, 0.2)" }}>
               <div className="text-base sm:text-xl gradient-text leading-tight font-bold">{stat.value}</div>
               <div className="text-[10px] sm:text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
             </div>
@@ -125,8 +125,8 @@ function HeroSection() {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
         <div className="w-6 h-10 rounded-full border-2 flex items-start justify-center p-1"
-          style={{ borderColor: "rgba(200,149,108,0.4)" }}>
-          <div className="w-1 h-2 rounded-full" style={{ background: "#C8956C", animation: "slideDown 1.5s ease-in-out infinite" }}/>
+          style={{ borderColor: "rgba(217, 122, 184, 0.4)" }}>
+          <div className="w-1 h-2 rounded-full" style={{ background: "#D97AB8", animation: "slideDown 1.5s ease-in-out infinite" }}/>
         </div>
       </div>
     </section>
