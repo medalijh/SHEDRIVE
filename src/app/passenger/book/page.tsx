@@ -521,8 +521,8 @@ export default function BookingPage() {
       </div>
 
       <div className="px-6 pt-5">
-        {step === "location" && <LocationStep onNext={(d) => { setData(prev => ({ ...prev, ...d })); setStep("price"); }}/>}
-        {step === "price" && <PriceStep from={data.from} to={data.to} routeData={data.routeData} onNext={(d) => { setData(prev => ({ ...prev, ...d })); setStep("drivers"); }}/>}
+        {step === "location" && <LocationStep onNext={(d: any) => { setData(prev => ({ ...prev, ...d })); setStep("price"); }}/>}
+        {step === "price" && <PriceStep from={data.from} to={data.to} routeData={data.routeData} onNext={(d: any) => { setData(prev => ({ ...prev, ...d })); setStep("drivers"); }}/>}
         {step === "drivers" && <DriversStep price={data.price} onNext={driver => { setData(prev => ({ ...prev, driver })); setStep("confirm"); }}/>}
         {step === "confirm" && <ConfirmStep driver={data.driver} data={data}/>}
       </div>
