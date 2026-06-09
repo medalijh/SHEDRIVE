@@ -6,16 +6,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm ci",
-  "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@shedrive_supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@shedrive_supabase_anon_key",
-    "SUPABASE_SERVICE_ROLE_KEY": "@shedrive_service_role_key",
-    "NEXT_PUBLIC_APP_URL": "@shedrive_app_url",
-    "NEXT_PUBLIC_VAPID_PUBLIC_KEY": "@shedrive_vapid_public",
-    "VAPID_PRIVATE_KEY": "@shedrive_vapid_private",
-    "VAPID_EMAIL": "@shedrive_vapid_email",
-    "JWT_SECRET": "@shedrive_jwt_secret"
-  },
   "headers": [
     {
       "source": "/sw.js",
