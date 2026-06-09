@@ -274,6 +274,7 @@ function PassengerRegisterForm() {
       title: "Vérification du téléphone",
       titleAr: "التحقق من رقم الهاتف",
       fields: (
+        <div className="flex flex-col gap-6 items-center text-center">
           <div className="w-20 h-20 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(200,149,108,0.1)" }}>
             <Smartphone size={32} />
           </div>
