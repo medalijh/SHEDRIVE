@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/server";
+import { createAdminClient, createClient } from "@/lib/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -65,6 +65,11 @@ export async function POST(req: NextRequest) {
     }
     // Create wallet
     await supabase.from("wallets").insert({ user_id: authData.user.id, balance: 0 });
+
+    // Log the user in immediately
+    const userClient = await createClient();
+    await userClient.auth.signInWithPassword({ email, password });
+
     return NextResponse.json({ user_id: authData.user.id, success: true }, { status: 201 });
   } catch (err) {
     console.error("Registration error:", err);
