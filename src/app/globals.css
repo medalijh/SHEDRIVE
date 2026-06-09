@@ -5,29 +5,29 @@
    DESIGN TOKENS — SheDrive Morocco Luxury Palette
    ============================================================ */
 :root {
-  /* Vibrant Rose Gold / Pink */
-  --color-rose-gold-50:  #FFF5F7;
-  --color-rose-gold-100: #FFE4EA;
-  --color-rose-gold-200: #FFBFCF;
-  --color-rose-gold-300: #FF8FAF;
-  --color-rose-gold-400: #F5608F;
-  --color-rose-gold-500: #E83870; /* Vibrant Rose */
-  --color-rose-gold-600: #C21A51;
-  --color-rose-gold-700: #9E103E;
-  --color-rose-gold-800: #800A30;
-  --color-rose-gold-900: #660524;
+  /* Rose Purple (Renamed internally, keeping variable names for safety) */
+  --color-rose-gold-50:  #FDF8FB;
+  --color-rose-gold-100: #F6E8F3;
+  --color-rose-gold-200: #EACCE2;
+  --color-rose-gold-300: #D8A4CB;
+  --color-rose-gold-400: #C177B0;
+  --color-rose-gold-500: #8E2B6D; /* Royal Rose Purple */
+  --color-rose-gold-600: #731F55;
+  --color-rose-gold-700: #5C1542;
+  --color-rose-gold-800: #491034;
+  --color-rose-gold-900: #380B26;
 
-  /* Vibrant Emerald Green */
-  --color-emerald-50:  #ECFDF5;
-  --color-emerald-100: #D1FAE5;
-  --color-emerald-200: #A7F3D0;
-  --color-emerald-300: #6EE7B7;
-  --color-emerald-400: #34D399;
-  --color-emerald-500: #10B981; /* Vibrant Emerald */
-  --color-emerald-600: #059669;
-  --color-emerald-700: #047857;
-  --color-emerald-800: #065F46;
-  --color-emerald-900: #064E3B;
+  /* Indigo Accent (Replacing Emerald for a better pairing with Purple) */
+  --color-emerald-50:  #F5F5FA;
+  --color-emerald-100: #E6E6F2;
+  --color-emerald-200: #C9C9E2;
+  --color-emerald-300: #A2A2CE;
+  --color-emerald-400: #7B7BB8;
+  --color-emerald-500: #5C5CA1;
+  --color-emerald-600: #464682;
+  --color-emerald-700: #353566;
+  --color-emerald-800: #26264A;
+  --color-emerald-900: #1B1B33;
 
   /* Gold Accent */
   --color-gold-50:  #FEFBF0;
