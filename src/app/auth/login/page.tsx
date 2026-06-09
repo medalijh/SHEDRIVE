@@ -701,7 +701,7 @@ function AuthContent() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>🌹</div>
+            <img src="/logo.png" alt="SheDrive Logo" className="w-12 h-12 object-cover rounded-full border-2 border-rose-gold-500 shadow-sm" />
             <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
           <h2 className="text-display-lg text-white mb-6">Bienvenue dans <br /><span className="gradient-text">votre espace</span></h2>
@@ -722,7 +722,7 @@ function AuthContent() {
       {/* Right Panel */}
       <div className="w-full lg:w-1/2 flex flex-col justify-start overflow-y-auto">
         <div className="lg:hidden p-6 pb-0 flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-base" style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>🌹</div>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border-2 border-rose-gold-500 shadow-sm" />
           <span className="font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-gold-700)" }}>SheDrive Morocco</span>
         </div>
 
@@ -795,7 +795,7 @@ export default function AuthPage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--color-sand-50)" }}>
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl animate-float" style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            <img src="/logo.png" alt="SheDrive Logo" className="w-16 h-16 object-cover rounded-full animate-float border-4 border-rose-gold-500 shadow-sm" />
             <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "var(--color-rose-gold-400)" }}/>
           </div>
         </div>
