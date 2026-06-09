@@ -3,11 +3,11 @@ import Link from "next/link";
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(200,149,108,0.2)" }}>
+      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
           <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
         </Link>
         <Link href="/auth/register" className="btn btn-sm btn-primary">S'inscrire</Link>
@@ -18,20 +18,20 @@ function Navbar() {
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="mb-10">
-    <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-gold-700)" }}>{title}</h2>
+    <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-700)" }}>{title}</h2>
     <div className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{children}</div>
   </div>
 );
 
 export default function PrivacyPage() {
   return (
-    <div style={{ background: "var(--color-sand-50)" }}>
+    <div style={{ background: "var(--color-silver-50)" }}>
       <Navbar />
 
-      <section className="pt-28 pb-16 px-6 text-center bg-hero-gradient relative overflow-hidden">
+      <section className="pt-28 pb-16 px-6 text-center bg-white relative overflow-hidden">
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto relative z-10">
-          <span className="badge mb-6 text-xs" style={{ background: "rgba(200,149,108,0.15)", color: "var(--color-rose-gold-400)", border: "1px solid rgba(200,149,108,0.3)" }}>POLITIQUE DE CONFIDENTIALITÉ</span>
+          <span className="badge mb-6 text-xs" style={{ background: "rgba(225,29,72,0.15)", color: "var(--color-rose-400)", border: "1px solid rgba(225,29,72,0.3)" }}>POLITIQUE DE CONFIDENTIALITÉ</span>
           <h1 className="text-display-lg text-white mb-3">Vos données, <span className="gradient-text">protégées</span></h1>
           <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>Dernière mise à jour : 1er Juin 2025</p>
         </div>
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
               <li><strong>Portabilité :</strong> Recevoir vos données dans un format structuré</li>
               <li><strong>Opposition :</strong> Refuser certains traitements</li>
             </ul>
-            <p className="mt-4">Pour exercer ces droits : <a href="mailto:privacy@shedrive.ma" className="underline" style={{ color: "var(--color-rose-gold-600)" }}>privacy@shedrive.ma</a></p>
+            <p className="mt-4">Pour exercer ces droits : <a href="mailto:privacy@shedrive.ma" className="underline" style={{ color: "var(--color-rose-600)" }}>privacy@shedrive.ma</a></p>
           </Section>
 
           <Section title="7. Conservation des données">
@@ -103,16 +103,16 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="8. Contact DPO">
-            <p>Déléguée à la Protection des Données : <a href="mailto:dpo@shedrive.ma" className="underline" style={{ color: "var(--color-rose-gold-600)" }}>dpo@shedrive.ma</a></p>
+            <p>Déléguée à la Protection des Données : <a href="mailto:dpo@shedrive.ma" className="underline" style={{ color: "var(--color-rose-600)" }}>dpo@shedrive.ma</a></p>
             <p className="mt-2">SheDrive Morocco SAS · Maarif, Casablanca 20100 · Maroc</p>
           </Section>
         </div>
       </section>
 
-      <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
             <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
           <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés. 🇲🇦</p>

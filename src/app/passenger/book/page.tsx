@@ -82,16 +82,16 @@ function LocationStep({ onNext }: { onNext: (data: { from: string; to: string; l
 
       <div className="card-luxury p-5">
         <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Définir votre trajet</h3>
-        <div className="flex items-center gap-3 p-3 rounded-xl mb-2" style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.15)" }}>
-          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-emerald-500)" }}/>
+        <div className="flex items-center gap-3 p-3 rounded-xl mb-2" style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.15)" }}>
+          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-purple-500)" }}/>
           <input value={from} onChange={e => setFrom(e.target.value)} className="flex-1 bg-transparent outline-none text-sm" placeholder="Point de départ"/>
           <button className="text-lg">📍</button>
         </div>
         <div className="ml-[22px] flex flex-col gap-1 my-1">
-          {[1,2,3].map(i => <div key={i} className="w-0.5 h-1 rounded-full" style={{ background: "var(--color-sand-300)", marginLeft: 3 }}/>)}
+          {[1,2,3].map(i => <div key={i} className="w-0.5 h-1 rounded-full" style={{ background: "var(--color-silver-300)", marginLeft: 3 }}/>)}
         </div>
-        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(200,149,108,0.06)", border: "1px solid rgba(200,149,108,0.15)" }}>
-          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-rose-gold-500)" }}/>
+        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(225,29,72,0.06)", border: "1px solid rgba(225,29,72,0.15)" }}>
+          <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-rose-500)" }}/>
           <input value={to} onChange={e => setTo(e.target.value)} className="flex-1 bg-transparent outline-none text-sm" placeholder="Où voulez-vous aller ?"/>
           <button className="text-lg">🔍</button>
         </div>
@@ -104,7 +104,7 @@ function LocationStep({ onNext }: { onNext: (data: { from: string; to: string; l
             <button key={place} onClick={() => setTo(place)}
               className="flex items-center gap-2 p-3 rounded-xl text-left transition-all"
               style={{ background: "white", border: "1px solid var(--color-border)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-rose-gold-300)"; (e.currentTarget as HTMLButtonElement).style.background = "rgba(200,149,108,0.04)"; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-rose-300)"; (e.currentTarget as HTMLButtonElement).style.background = "rgba(225,29,72,0.04)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--color-border)"; (e.currentTarget as HTMLButtonElement).style.background = "white"; }}>
               <span className="text-base">🕐</span>
               <span className="text-sm font-medium">{place}</span>
@@ -144,14 +144,14 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (da
         <div className="flex items-center justify-center gap-4 mb-6">
           <button onClick={() => setPrice(p => Math.max(10, p - 5))}
             className="w-14 h-14 rounded-full text-xl font-bold shadow-md transition-all hover:scale-110"
-            style={{ background: "var(--color-sand-100)", border: "1.5px solid var(--color-border)" }}>−</button>
+            style={{ background: "var(--color-silver-100)", border: "1.5px solid var(--color-border)" }}>−</button>
           <div className="text-center">
             <div className="text-5xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{price}</div>
             <div className="text-sm font-medium mt-1" style={{ color: "var(--color-muted)" }}>MAD</div>
           </div>
           <button onClick={() => setPrice(p => p + 5)}
             className="w-14 h-14 rounded-full text-xl font-bold shadow-md transition-all hover:scale-110"
-            style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))", color: "white", boxShadow: "var(--shadow-rose)" }}>+</button>
+            style={{ background: "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))", color: "white", boxShadow: "var(--shadow-rose)" }}>+</button>
         </div>
 
         <div className="flex gap-2 justify-center mb-6">
@@ -159,7 +159,7 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (da
             <button key={s} onClick={() => setPrice(s)}
               className="px-3 py-1.5 rounded-full text-sm font-semibold transition-all"
               style={{
-                background: price === s ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "var(--color-sand-100)",
+                background: price === s ? "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))" : "var(--color-silver-100)",
                 color: price === s ? "white" : "var(--color-muted)",
                 boxShadow: price === s ? "var(--shadow-rose)" : "none",
               }}>
@@ -168,7 +168,7 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (da
           ))}
         </div>
 
-        <div className="p-3 rounded-xl text-xs" style={{ background: "rgba(212,160,23,0.08)", border: "1px solid rgba(212,160,23,0.2)", color: "var(--color-gold-700)" }}>
+        <div className="p-3 rounded-xl text-xs" style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.2)", color: "var(--color-purple-700)" }}>
           💡 Prix suggéré : <strong>30–40 MAD</strong> pour cette distance
         </div>
       </div>
@@ -184,8 +184,8 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (da
             <button key={m.id} onClick={() => setMethod(m.id)}
               className="p-3 rounded-xl border-2 text-center transition-all"
               style={{
-                borderColor: method === m.id ? "var(--color-rose-gold-400)" : "var(--color-border)",
-                background: method === m.id ? "rgba(200,149,108,0.06)" : "transparent",
+                borderColor: method === m.id ? "var(--color-rose-400)" : "var(--color-border)",
+                background: method === m.id ? "rgba(225,29,72,0.06)" : "transparent",
               }}>
               <div className="text-xl mb-1">{m.icon}</div>
               <div className="text-xs font-medium">{m.label}</div>
@@ -231,10 +231,10 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="p-4 rounded-2xl" style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.15)" }}>
+      <div className="p-4 rounded-2xl" style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.15)" }}>
         <div className="flex items-center gap-2 text-sm">
-          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-emerald-500)" }}/>
-          <span style={{ color: "var(--color-emerald-700)" }} className="font-medium">
+          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-purple-500)" }}/>
+          <span style={{ color: "var(--color-purple-700)" }} className="font-medium">
             {drivers.length} conductrices disponibles près de vous
           </span>
         </div>
@@ -243,11 +243,11 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
       {drivers.map((driver, i) => (
         <div key={i}
           className="card-luxury p-5 cursor-pointer transition-all duration-200"
-          style={{ outline: selected === i ? "2px solid var(--color-rose-gold-400)" : "none", outlineOffset: "2px" }}
+          style={{ outline: selected === i ? "2px solid var(--color-rose-400)" : "none", outlineOffset: "2px" }}
           onClick={() => setSelected(i)}>
           <div className="flex items-start gap-4">
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, rgba(200,149,108,0.15), rgba(200,149,108,0.08))" }}>
+              style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.15), rgba(225,29,72,0.08))" }}>
               👩
             </div>
             <div className="flex-1 min-w-0">
@@ -261,10 +261,10 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
               <div className="text-xs" style={{ color: "var(--color-muted)" }}>🔢 {driver.plate}</div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="text-xl font-bold" style={{ color: "var(--color-rose-gold-700)", fontFamily: "var(--font-display)" }}>
+              <div className="text-xl font-bold" style={{ color: "var(--color-rose-700)", fontFamily: "var(--font-display)" }}>
                 {driver.bid} MAD
               </div>
-              <div className="text-xs mt-1" style={{ color: "var(--color-emerald-600)" }}>⏱ {driver.eta} min</div>
+              <div className="text-xs mt-1" style={{ color: "var(--color-purple-600)" }}>⏱ {driver.eta} min</div>
               {selected === i && (
                 <div className="mt-2">
                   <span className="badge badge-primary" style={{ fontSize: 10 }}>✓ Sélectionnée</span>
@@ -331,14 +331,14 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <div className="w-24 h-24 rounded-full flex items-center justify-center text-5xl mb-6 animate-scale-in"
-          style={{ background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))", boxShadow: "var(--shadow-emerald)" }}>
+          style={{ background: "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))", boxShadow: "var(--shadow-emerald)" }}>
           ✓
         </div>
-        <h2 className="text-display-sm text-white mb-3" style={{ color: "var(--color-emerald-700)" }}>
+        <h2 className="text-display-sm text-white mb-3" style={{ color: "var(--color-purple-700)" }}>
           Trajet confirmé !
         </h2>
         <p style={{ color: "var(--color-muted)" }}>Demande envoyée...</p>
-        <div className="mt-4 flex items-center gap-2 text-sm" style={{ color: "var(--color-emerald-600)" }}>
+        <div className="mt-4 flex items-center gap-2 text-sm" style={{ color: "var(--color-purple-600)" }}>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "currentColor" }}/>
           <span>Redirection vers le suivi...</span>
         </div>
@@ -355,8 +355,8 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
 
         <div className="flex flex-col gap-3 mb-6">
           {[
-            { dot: "var(--color-emerald-500)", label: "Départ", value: data.from },
-            { dot: "var(--color-rose-gold-500)", label: "Arrivée", value: data.to },
+            { dot: "var(--color-purple-500)", label: "Départ", value: data.from },
+            { dot: "var(--color-rose-500)", label: "Arrivée", value: data.to },
           ].map(row => (
             <div key={row.label} className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: row.dot }}/>
@@ -372,7 +372,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
 
         <div className="flex items-center gap-3 mb-5">
           <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-            style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+            style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
           <div>
             <div className="font-semibold">{driver.name}</div>
             <div className="text-xs" style={{ color: "var(--color-muted)" }}>⭐ {driver.rating} · ⏱ {driver.eta} min</div>
@@ -424,7 +424,7 @@ export default function BookingPage() {
   const currentIdx = stepOrder.indexOf(step);
 
   return (
-    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       <div className="sticky top-0 z-40 px-6 py-4" style={{ background: "rgba(253,248,245,0.95)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--color-border)" }}>
         <div className="flex items-center gap-4 mb-3">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
@@ -434,8 +434,8 @@ export default function BookingPage() {
           {stepOrder.map((s, i) => (
             <div key={s} className="flex-1">
               <div className="h-1 rounded-full transition-all duration-500"
-                style={{ background: i <= currentIdx ? "linear-gradient(90deg, var(--color-rose-gold-500), var(--color-rose-gold-400))" : "var(--color-sand-200)" }}/>
-              <div className="text-center text-xs mt-1" style={{ color: i === currentIdx ? "var(--color-rose-gold-600)" : "var(--color-sand-300)", fontSize: "9px", fontWeight: i === currentIdx ? 600 : 400 }}>
+                style={{ background: i <= currentIdx ? "linear-gradient(90deg, var(--color-rose-500), var(--color-rose-400))" : "var(--color-silver-200)" }}/>
+              <div className="text-center text-xs mt-1" style={{ color: i === currentIdx ? "var(--color-rose-600)" : "var(--color-silver-300)", fontSize: "9px", fontWeight: i === currentIdx ? 600 : 400 }}>
                 {stepLabels[s]}
               </div>
             </div>

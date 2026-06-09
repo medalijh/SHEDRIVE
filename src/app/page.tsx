@@ -18,7 +18,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* Zellige Pattern Overlay */}
       <div
         className="absolute inset-0 zellige-pattern opacity-30"
@@ -28,24 +28,24 @@ function HeroSection() {
       {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(200,149,108,0.15) 0%, rgba(13,122,74,0.08) 50%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(225,29,72,0.15) 0%, rgba(147,51,234,0.08) 50%, transparent 70%)",
         }}
       />
 
       {/* Decorative Arcs */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <svg className="absolute -top-20 -right-20 w-96 h-96 opacity-10" viewBox="0 0 400 400" fill="none">
-          <circle cx="200" cy="200" r="180" stroke="#C8956C" strokeWidth="1" strokeDasharray="8 4"/>
-          <circle cx="200" cy="200" r="140" stroke="#D4A017" strokeWidth="0.5" strokeDasharray="4 8"/>
-          <circle cx="200" cy="200" r="100" stroke="#C8956C" strokeWidth="1"/>
+          <circle cx="200" cy="200" r="180" stroke="#E11D48" strokeWidth="1" strokeDasharray="8 4"/>
+          <circle cx="200" cy="200" r="140" stroke="#9333EA" strokeWidth="0.5" strokeDasharray="4 8"/>
+          <circle cx="200" cy="200" r="100" stroke="#E11D48" strokeWidth="1"/>
           {/* Moroccan star pattern */}
-          <path d="M200 60 L215 140 L290 100 L230 160 L290 220 L215 180 L200 260 L185 180 L110 220 L170 160 L110 100 L185 140 Z" stroke="#D4A017" strokeWidth="0.8" fill="none"/>
+          <path d="M200 60 L215 140 L290 100 L230 160 L290 220 L215 180 L200 260 L185 180 L110 220 L170 160 L110 100 L185 140 Z" stroke="#9333EA" strokeWidth="0.8" fill="none"/>
         </svg>
 
         <svg className="absolute -bottom-20 -left-20 w-80 h-80 opacity-10" viewBox="0 0 320 320" fill="none">
-          <circle cx="160" cy="160" r="140" stroke="#0D7A4A" strokeWidth="1" strokeDasharray="6 4"/>
-          <circle cx="160" cy="160" r="100" stroke="#C8956C" strokeWidth="0.6"/>
-          <path d="M160 40 L173 120 L240 80 L190 140 L240 200 L173 160 L160 240 L147 160 L80 200 L130 140 L80 80 L147 120 Z" stroke="#C8956C" strokeWidth="0.7" fill="none"/>
+          <circle cx="160" cy="160" r="140" stroke="#9CA3AF" strokeWidth="1" strokeDasharray="6 4"/>
+          <circle cx="160" cy="160" r="100" stroke="#E11D48" strokeWidth="0.6"/>
+          <path d="M160 40 L173 120 L240 80 L190 140 L240 200 L173 160 L160 240 L147 160 L80 200 L130 140 L80 80 L147 120 Z" stroke="#E11D48" strokeWidth="0.7" fill="none"/>
         </svg>
       </div>
 
@@ -53,31 +53,31 @@ function HeroSection() {
       <div className="relative z-10 container-app px-4 sm:px-6 py-16 md:py-24 text-center">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fade-in"
-          style={{ background: "rgba(200,149,108,0.15)", border: "1px solid rgba(200,149,108,0.3)" }}>
-          <Flower2 size={20} color="var(--color-rose-gold-500)" />
-          <span className="text-sm font-medium" style={{ color: "var(--color-rose-gold-400)" }}>
+          style={{ background: "rgba(225,29,72,0.1)", border: "1px solid rgba(225,29,72,0.2)" }}>
+          <Flower2 size={20} color="var(--color-rose-500)" />
+          <span className="text-sm font-medium" style={{ color: "var(--color-rose-600)" }}>
             Service exclusivement féminin au Maroc
           </span>
         </div>
 
         {/* Main Title */}
-        <h1 className="text-display-2xl text-white mb-6 animate-slide-up">
+        <h1 className="text-display-2xl text-black mb-6 animate-slide-up">
           Voyagez en{" "}
           <span className="gradient-text">Toute Sécurité</span>
           <br />
-          <span className="text-display-xl" style={{ color: "rgba(255,255,255,0.85)" }}>
+          <span className="text-display-xl" style={{ color: "rgba(0,0,0,0.85)" }}>
             Entre Femmes
           </span>
         </h1>
 
         {/* Arabic subtitle */}
         <p className="text-lg mb-4 animate-slide-up delay-100"
-          style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
+          style={{ color: "rgba(0,0,0,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
           خدمة نقل حصرية للمرأة المغربية — أمان، أناقة، تمكين
         </p>
 
         <p className="text-base mb-10 max-w-lg mx-auto animate-slide-up delay-200"
-          style={{ color: "rgba(255,255,255,0.55)" }}>
+          style={{ color: "rgba(0,0,0,0.55)" }}>
           SheDrive Morocco est la première plateforme de covoiturage{" "}
           réservée aux femmes. Conductrices vérifiées, trajets sécurisés,{" "}
           expérience premium dans toutes les villes marocaines.
@@ -90,7 +90,7 @@ function HeroSection() {
             <span>Réserver un Trajet</span>
           </Link>
           <Link href="/auth/register?role=driver" className="btn btn-xl w-full sm:w-auto"
-            style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)", backdropFilter: "blur(10px)" }}>
+            style={{ background: "transparent", color: "var(--color-text)", border: "1.5px solid rgba(225,29,72,0.4)" }}>
             <Sparkles size={20} />
             <span>Devenir Conductrice</span>
           </Link>
@@ -104,9 +104,9 @@ function HeroSection() {
             { value: "24/7", label: "Support", labelAr: "دعم" },
           ].map((stat) => (
             <div key={stat.label} className="text-center p-3 sm:p-4 rounded-xl sm:rounded-2xl"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              style={{ background: "rgba(0,0,0,0.03)", border: "1px solid rgba(225,29,72,0.2)" }}>
               <div className="text-display-sm gradient-text leading-tight">{stat.value}</div>
-              <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</div>
+              <div className="text-xs mt-1" style={{ color: "rgba(0,0,0,0.5)" }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -115,8 +115,8 @@ function HeroSection() {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
         <div className="w-6 h-10 rounded-full border-2 flex items-start justify-center p-1"
-          style={{ borderColor: "rgba(200,149,108,0.4)" }}>
-          <div className="w-1 h-2 rounded-full" style={{ background: "#C8956C", animation: "slideDown 1.5s ease-in-out infinite" }}/>
+          style={{ borderColor: "rgba(225,29,72,0.4)" }}>
+          <div className="w-1 h-2 rounded-full" style={{ background: "var(--color-rose-600)", animation: "slideDown 1.5s ease-in-out infinite" }}/>
         </div>
       </div>
     </section>
@@ -133,53 +133,53 @@ function FeaturesSection() {
       title: "Sécurité Maximale",
       titleAr: "أمان قصوى",
       desc: "Conductrices vérifiées, suivi GPS en temps réel, bouton SOS d'urgence, et contacts de confiance.",
-      color: "var(--color-emerald-500)",
-      bg: "rgba(13,122,74,0.08)",
+      color: "var(--color-rose-600)",
+      bg: "rgba(225, 29, 72, 0.08)",
     },
     {
       icon: <Gem size={28} color="currentColor" />,
       title: "Expérience Premium",
       titleAr: "تجربة راقية",
       desc: "Véhicules élégants, conductrices professionnelles, et une interface luxueuse pensée pour vous.",
-      color: "var(--color-rose-gold-500)",
-      bg: "rgba(200,149,108,0.08)",
+      color: "var(--color-purple-500)",
+      bg: "rgba(147, 51, 234, 0.08)",
     },
     {
       icon: <Handshake size={28} color="currentColor" />,
       title: "Prix Négociables",
       titleAr: "أسعار قابلة للتفاوض",
       desc: "Proposez votre prix. Les conductrices font leurs offres. Vous choisissez la meilleure option.",
-      color: "var(--color-gold-500)",
-      bg: "rgba(212,160,23,0.08)",
+      color: "var(--color-baby-rose-600)",
+      bg: "rgba(219, 39, 119, 0.08)",
     },
     {
       icon: <Map size={28} color="currentColor" />,
       title: "Tout le Maroc",
       titleAr: "كل المغرب",
       desc: "18 villes marocaines couvertes, de Casablanca à Agadir, de Tanger à Oujda.",
-      color: "var(--color-emerald-500)",
-      bg: "rgba(13,122,74,0.08)",
+      color: "var(--color-rose-600)",
+      bg: "rgba(225, 29, 72, 0.08)",
     },
     {
       icon: <MessageCircle size={28} color="currentColor" />,
       title: "Chat Intégré",
       titleAr: "محادثة مدمجة",
       desc: "Communication chiffrée entre passagères et conductrices, avec messages vocaux.",
-      color: "var(--color-rose-gold-500)",
-      bg: "rgba(200,149,108,0.08)",
+      color: "var(--color-purple-500)",
+      bg: "rgba(147, 51, 234, 0.08)",
     },
     {
       icon: <Wallet size={28} color="currentColor" />,
       title: "Paiements Flexibles",
       titleAr: "دفع مرن",
       desc: "Espèces, carte bancaire, CMI, ou portefeuille SheDrive. En dirhams marocains.",
-      color: "var(--color-gold-500)",
-      bg: "rgba(212,160,23,0.08)",
+      color: "var(--color-baby-rose-600)",
+      bg: "rgba(219, 39, 119, 0.08)",
     },
   ];
 
   return (
-    <section className="py-24 px-6" style={{ background: "var(--color-sand-50)" }}>
+    <section className="py-24 px-6" style={{ background: "var(--color-silver-50)" }}>
       <div className="container-app mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -252,7 +252,7 @@ function HowItWorksSection() {
         <div className="relative">
           {/* Connecting line */}
           <div className="hidden md:block absolute top-16 left-1/2 -translate-x-1/2 w-3/4 h-px"
-            style={{ background: "linear-gradient(90deg, transparent, var(--color-rose-gold-300), transparent)" }}
+            style={{ background: "linear-gradient(90deg, transparent, var(--color-rose-300), transparent)" }}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -260,11 +260,11 @@ function HowItWorksSection() {
               <div key={step.num} className="flex flex-col items-center text-center group">
                 <div className="relative mb-6">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg relative z-10 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: i % 2 === 0 ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600))", boxShadow: i % 2 === 0 ? "var(--shadow-rose)" : "var(--shadow-gold)" }}>
+                    style={{ background: i % 2 === 0 ? "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))" : "linear-gradient(135deg, var(--color-purple-400), var(--color-purple-600))", boxShadow: i % 2 === 0 ? "var(--shadow-rose)" : "var(--shadow-gold)" }}>
                     {step.icon}
                   </div>
                   <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
-                    style={{ background: "var(--color-gold-400)", color: "white" }}>
+                    style={{ background: "var(--color-purple-400)", color: "white" }}>
                     {step.num}
                   </div>
                 </div>
@@ -298,12 +298,12 @@ function SafetySection() {
 
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, var(--color-rose-gold-900) 0%, var(--color-rose-gold-800) 100%)" }}>
+      style={{ background: "linear-gradient(135deg, var(--color-rose-900) 0%, var(--color-rose-800) 100%)" }}>
       <div className="zellige-pattern absolute inset-0" style={{ opacity: 0.12 }} />
 
       {/* Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2"
-        style={{ background: "radial-gradient(circle, rgba(13,122,74,0.2) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(147,51,234,0.2) 0%, transparent 70%)" }}
       />
 
       <div className="container-app mx-auto relative z-10">
@@ -311,7 +311,7 @@ function SafetySection() {
           {/* Left */}
           <div>
             <span className="badge mb-6 text-xs tracking-widest"
-              style={{ background: "rgba(13,122,74,0.2)", color: "#4DBF8A", border: "1px solid rgba(13,122,74,0.3)" }}>
+              style={{ background: "rgba(147,51,234,0.2)", color: "#4DBF8A", border: "1px solid rgba(147,51,234,0.3)" }}>
               VOTRE SÉCURITÉ D'ABORD
             </span>
             <h2 className="text-display-xl text-white mb-6">
@@ -335,7 +335,7 @@ function SafetySection() {
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {features.map((f) => (
               <div key={f.label} className="p-4 sm:p-5 rounded-2xl text-center transition-all duration-300 hover:scale-105 cursor-default flex flex-col justify-center items-center"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(212,160,23,0.3)" }}>
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(219,39,119,0.3)" }}>
                 <div className="text-gold-400 mb-2 flex justify-center text-rose-gold-200">
                   {f.icon}
                 </div>
@@ -367,7 +367,7 @@ function CitiesSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6 relative" style={{ background: "var(--color-emerald-50)" }}>
+    <section className="py-16 md:py-24 px-4 sm:px-6 relative" style={{ background: "var(--color-purple-50)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-10" />
       <div className="container-app mx-auto relative z-10">
         <div className="text-center mb-16">
@@ -390,8 +390,8 @@ function CitiesSection() {
                 transition: "all 0.3s ease",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(135deg, rgba(200,149,108,0.08), rgba(13,122,74,0.05))";
-                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(200,149,108,0.3)";
+                (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(135deg, rgba(225,29,72,0.08), rgba(147,51,234,0.05))";
+                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(225,29,72,0.3)";
                 (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
               }}
               onMouseLeave={(e) => {
@@ -401,7 +401,7 @@ function CitiesSection() {
               }}
             >
               <div className="mb-3 flex justify-center text-rose-gold-500">
-                <MapPin size={28} color="var(--color-gold-500)" />
+                <MapPin size={28} color="var(--color-purple-500)" />
               </div>
               <div className="text-sm font-semibold">{city.name}</div>
               <div className="text-xs mt-1" style={{ color: "var(--color-muted)", fontFamily: "var(--font-arabic)" }}>
@@ -410,8 +410,8 @@ function CitiesSection() {
             </div>
           ))}
           <div className="p-4 rounded-2xl text-center flex flex-col justify-center items-center"
-            style={{ background: "linear-gradient(135deg, rgba(200,149,108,0.1), rgba(13,122,74,0.08))", border: "1.5px dashed rgba(200,149,108,0.3)" }}>
-            <Sparkles size={28} color="var(--color-gold-400)" className="mb-2" />
+            style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.1), rgba(147,51,234,0.08))", border: "1.5px dashed rgba(225,29,72,0.3)" }}>
+            <Sparkles size={28} color="var(--color-purple-400)" className="mb-2" />
             <div className="text-sm font-semibold gradient-text">+9 Villes</div>
             <div className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>et plus encore</div>
           </div>
@@ -451,7 +451,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 sm:px-6" style={{ background: "var(--color-sand-50)" }}>
+    <section className="py-16 md:py-24 px-4 sm:px-6" style={{ background: "var(--color-silver-50)" }}>
       <div className="container-app mx-auto">
         <div className="text-center mb-16">
           <span className="badge badge-primary mb-4 text-xs tracking-widest">TÉMOIGNAGES</span>
@@ -465,7 +465,7 @@ function TestimonialsSection() {
             <div key={t.name} className="card-luxury p-6">
               <div className="flex items-center gap-4 mb-5">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg"
-                  style={{ background: "rgba(200,149,108,0.1)", color: "var(--color-rose-gold-600)" }}>
+                  style={{ background: "rgba(225,29,72,0.1)", color: "var(--color-rose-600)" }}>
                   {t.initials}
                 </div>
                 <div>
@@ -477,7 +477,7 @@ function TestimonialsSection() {
               </div>
               <div className="stars mb-4 flex gap-1">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star key={i} size={16} fill="var(--color-gold-400)" color="var(--color-gold-400)" />
+                  <Star key={i} size={16} fill="var(--color-purple-400)" color="var(--color-purple-400)" />
                 ))}
               </div>
               <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>
@@ -497,12 +497,12 @@ function TestimonialsSection() {
 function CTASection() {
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, var(--color-rose-gold-600) 0%, var(--color-rose-gold-800) 50%, #2C1F12 100%)" }}>
+      style={{ background: "linear-gradient(135deg, var(--color-rose-600) 0%, var(--color-rose-800) 50%, #2C1F12 100%)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-15" />
       <div className="container-app mx-auto relative z-10 text-center">
         <h2 className="text-display-xl text-white mb-6">
           Prête à Voyager{" "}
-          <span style={{ color: "var(--color-gold-300)" }}>Autrement</span> ?
+          <span style={{ color: "var(--color-purple-300)" }}>Autrement</span> ?
         </h2>
         <p className="text-base mb-4" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(255,255,255,0.7)" }}>
           انضمي إلى آلاف النساء اللواتي يتنقلن بأمان وأناقة مع شي درايف
@@ -512,7 +512,7 @@ function CTASection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/auth/register?role=passenger" className="btn btn-xl gap-3"
-            style={{ background: "white", color: "var(--color-rose-gold-700)" }}>
+            style={{ background: "white", color: "var(--color-rose-700)" }}>
             <CarFront size={20} />
             Je suis passagère
           </Link>
@@ -543,17 +543,17 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(26,21,15,0.92)" : "transparent",
+        background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(200,149,108,0.2)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(225,29,72,0.2)" : "none",
       }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-200" />
+          <span className="text-lg font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>
             SheDrive
-            <span className="text-sm font-normal ml-1" style={{ color: "var(--color-rose-gold-400)" }}>Morocco</span>
+            <span className="text-sm font-normal ml-1" style={{ color: "var(--color-rose-600)" }}>Morocco</span>
           </span>
         </Link>
 
@@ -566,9 +566,9 @@ function Navbar() {
           ].map((link) => (
             <Link key={link.href} href={link.href}
               className="text-sm font-medium transition-colors duration-200"
-              style={{ color: "rgba(255,255,255,0.7)" }}
-              onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "var(--color-rose-gold-400)")}
-              onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)")}>
+              style={{ color: "rgba(0,0,0,0.7)" }}
+              onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "var(--color-rose-600)")}
+              onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(0,0,0,0.7)")}>
               {link.label}
             </Link>
           ))}
@@ -576,7 +576,7 @@ function Navbar() {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">
+          <Link href="/auth/login" className="btn btn-sm btn-ghost text-black">
             Connexion
           </Link>
           <Link href="/auth/register" className="btn btn-sm btn-primary">
@@ -585,17 +585,17 @@ function Navbar() {
         </div>
 
         {/* Mobile menu button */}
-        <button className="md:hidden text-white p-2" onClick={() => setMenuOpen(!menuOpen)}>
-          <div className="w-5 h-0.5 bg-white mb-1 transition-all" style={{ transform: menuOpen ? "rotate(45deg) translateY(6px)" : "none" }} />
-          <div className="w-5 h-0.5 bg-white mb-1 transition-all" style={{ opacity: menuOpen ? 0 : 1 }} />
-          <div className="w-5 h-0.5 bg-white transition-all" style={{ transform: menuOpen ? "rotate(-45deg) translateY(-6px)" : "none" }} />
+        <button className="md:hidden text-black p-2" onClick={() => setMenuOpen(!menuOpen)}>
+          <div className="w-5 h-0.5 bg-black mb-1 transition-all" style={{ transform: menuOpen ? "rotate(45deg) translateY(6px)" : "none" }} />
+          <div className="w-5 h-0.5 bg-black mb-1 transition-all" style={{ opacity: menuOpen ? 0 : 1 }} />
+          <div className="w-5 h-0.5 bg-black transition-all" style={{ transform: menuOpen ? "rotate(-45deg) translateY(-6px)" : "none" }} />
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden px-6 pb-6 animate-slide-down"
-          style={{ background: "rgba(26,21,15,0.96)", borderBottom: "1px solid rgba(200,149,108,0.2)" }}>
+        <div className="md:hidden px-6 pb-6 animate-slide-down shadow-lg"
+          style={{ background: "rgba(255,255,255,0.98)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
           <div className="flex flex-col gap-4 pt-4">
             {[
               { href: "/about", label: "À propos" },
@@ -604,13 +604,13 @@ function Navbar() {
             ].map((link) => (
               <Link key={link.href} href={link.href}
                 className="text-sm font-medium py-2 border-b"
-                style={{ color: "rgba(255,255,255,0.7)", borderColor: "rgba(200,149,108,0.15)" }}
+                style={{ color: "rgba(0,0,0,0.7)", borderColor: "rgba(225,29,72,0.15)" }}
                 onClick={() => setMenuOpen(false)}>
                 {link.label}
               </Link>
             ))}
             <div className="flex flex-col gap-3 pt-2">
-              <Link href="/auth/login" className="btn btn-outline w-full" style={{ color: "rgba(255,255,255,0.8)", borderColor: "rgba(200,149,108,0.4)" }}
+              <Link href="/auth/login" className="btn btn-outline w-full" style={{ color: "rgba(0,0,0,0.8)", borderColor: "rgba(225,29,72,0.4)" }}
                 onClick={() => setMenuOpen(false)}>
                 Connexion
               </Link>
@@ -630,20 +630,20 @@ function Navbar() {
 // ============================================================
 function Footer() {
   return (
-    <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.6)" }}>
-      <div className="zellige-pattern opacity-5" style={{ height: "4px", background: "linear-gradient(90deg, var(--color-rose-gold-500), var(--color-gold-400), var(--color-emerald-500))" }} />
+    <footer style={{ background: "#F3F4F6", color: "rgba(0,0,0,0.6)" }}>
+      <div className="zellige-pattern opacity-5" style={{ height: "4px", background: "linear-gradient(90deg, var(--color-rose-500), var(--color-purple-400), var(--color-purple-500))" }} />
       <div className="container-app mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
-              <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+              <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-200" />
+              <span className="text-lg font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
             </div>
             <p className="text-sm leading-relaxed mb-4">
               La première plateforme de covoiturage exclusivement féminine au Maroc.
             </p>
-            <p className="text-xs" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(255,255,255,0.4)" }}>
+            <p className="text-xs" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(0,0,0,0.4)" }}>
               أول منصة نقل حصرية للمرأة في المغرب
             </p>
           </div>
@@ -677,13 +677,13 @@ function Footer() {
             },
           ].map((col) => (
             <div key={col.title}>
-              <h4 className="text-white font-semibold mb-4 text-sm">{col.title}</h4>
+              <h4 className="text-black font-semibold mb-4 text-sm">{col.title}</h4>
               <ul className="flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}
-                      className="text-sm hover:text-white transition-colors duration-200"
-                      style={{ color: "rgba(255,255,255,0.5)" }}>
+                      className="text-sm hover:text-black transition-colors duration-200"
+                      style={{ color: "rgba(0,0,0,0.5)" }}>
                       {link.label}
                     </Link>
                   </li>
@@ -693,13 +693,13 @@ function Footer() {
           ))}
         </div>
 
-        <div className="divider mb-8" style={{ background: "linear-gradient(90deg, transparent, rgba(200,149,108,0.3), transparent)" }} />
+        <div className="divider mb-8" style={{ background: "linear-gradient(90deg, transparent, rgba(225,29,72,0.3), transparent)" }} />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <p className="text-xs" style={{ color: "rgba(0,0,0,0.4)" }}>
             © 2025 SheDrive Morocco. Tous droits réservés.
           </p>
-          <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <div className="flex items-center gap-2 text-xs" style={{ color: "rgba(0,0,0,0.4)" }}>
             <MapPin size={12} />
             <span>Fièrement Marocain · صنع في المغرب</span>
             <Flower2 size={12} />

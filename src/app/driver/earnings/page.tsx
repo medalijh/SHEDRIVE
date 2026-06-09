@@ -65,7 +65,7 @@ export default function DriverEarnings() {
   }, [user]);
 
   return (
-    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       {/* Header */}
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
@@ -79,7 +79,7 @@ export default function DriverEarnings() {
             <button key={id} onClick={() => setPeriod(id)}
               className="px-4 py-2 rounded-full text-xs font-semibold transition-all"
               style={{
-                background: period === id ? "linear-gradient(135deg,var(--color-emerald-500),var(--color-emerald-700))" : "white",
+                background: period === id ? "linear-gradient(135deg,var(--color-purple-500),var(--color-purple-700))" : "white",
                 color: period === id ? "white" : "var(--color-muted)",
                 border: `1px solid ${period === id ? "transparent" : "var(--color-border)"}`,
                 boxShadow: period === id ? "var(--shadow-emerald)" : "none",
@@ -92,7 +92,7 @@ export default function DriverEarnings() {
         {/* Main Earnings Card */}
         <div className="rounded-3xl p-7 relative overflow-hidden mb-5"
           style={{
-            background: "linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-800) 60%, #0A1A10 100%)",
+            background: "linear-gradient(135deg, var(--color-purple-600) 0%, var(--color-purple-800) 60%, #0A1A10 100%)",
             boxShadow: "var(--shadow-emerald)",
           }}>
           <div className="zellige-pattern absolute inset-0 opacity-10"/>
@@ -114,9 +114,9 @@ export default function DriverEarnings() {
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
-            { label: "Taux d'acceptation", value: "92%", icon: "✅", color: "var(--color-emerald-600)" },
-            { label: "Taux de complétion", value: "98%", icon: "🏁", color: "var(--color-rose-gold-600)" },
-            { label: "Gains moyens / trajet", value: stats[period].count > 0 ? `${Math.round(stats[period].amount / stats[period].count)} MAD` : "0 MAD", icon: "💰", color: "var(--color-gold-600)" },
+            { label: "Taux d'acceptation", value: "92%", icon: "✅", color: "var(--color-purple-600)" },
+            { label: "Taux de complétion", value: "98%", icon: "🏁", color: "var(--color-rose-600)" },
+            { label: "Gains moyens / trajet", value: stats[period].count > 0 ? `${Math.round(stats[period].amount / stats[period].count)} MAD` : "0 MAD", icon: "💰", color: "var(--color-purple-600)" },
           ].map(s => (
             <div key={s.label} className="card p-4 text-center">
               <div className="text-xl mb-1">{s.icon}</div>
@@ -138,8 +138,8 @@ export default function DriverEarnings() {
                   style={{
                     height: `${(v / maxW) * 80}px`,
                     background: i === 5
-                      ? "linear-gradient(to top, var(--color-emerald-500), var(--color-emerald-400))"
-                      : "linear-gradient(to top, var(--color-sand-200), var(--color-sand-100))",
+                      ? "linear-gradient(to top, var(--color-purple-500), var(--color-purple-400))"
+                      : "linear-gradient(to top, var(--color-silver-200), var(--color-silver-100))",
                     boxShadow: i === 5 ? "var(--shadow-emerald)" : "none",
                   }}/>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>{weekDays[i]}</div>
@@ -175,7 +175,7 @@ export default function DriverEarnings() {
           ) : trips.map((t, i) => (
             <div key={t.id} className="flex items-center gap-4 p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0"
-                style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
+                style={{ background: "rgba(147,51,234,0.08)" }}>✅</div>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium truncate">{t.from_address} → {t.to_address}</div>
                 <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>
@@ -183,8 +183,8 @@ export default function DriverEarnings() {
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="text-sm font-bold" style={{ color: "var(--color-emerald-600)" }}>+{t.final_price || t.passenger_price} MAD</div>
-                <div className="text-xs" style={{ color: "var(--color-gold-500)" }}>{"⭐".repeat(t.driver_rating || 5)}</div>
+                <div className="text-sm font-bold" style={{ color: "var(--color-purple-600)" }}>+{t.final_price || t.passenger_price} MAD</div>
+                <div className="text-xs" style={{ color: "var(--color-purple-500)" }}>{"⭐".repeat(t.driver_rating || 5)}</div>
               </div>
             </div>
           ))}

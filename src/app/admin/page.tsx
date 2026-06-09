@@ -18,16 +18,16 @@ function AdminSidebar({ active }: { active: string }) {
   ];
   return (
     <aside className="hidden md:flex flex-col w-64 min-h-screen"
-      style={{ background: "#0D0A07", borderRight: "1px solid rgba(200,149,108,0.15)" }}>
-      <div className="p-6 border-b" style={{ borderColor: "rgba(200,149,108,0.15)" }}>
+      style={{ background: "#F3F4F6", borderRight: "1px solid rgba(225,29,72,0.15)" }}>
+      <div className="p-6 border-b" style={{ borderColor: "rgba(225,29,72,0.15)" }}>
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>
             🌹
           </div>
           <div>
             <div className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
-            <div className="text-xs" style={{ color: "rgba(200,149,108,0.7)" }}>Admin Panel</div>
+            <div className="text-xs" style={{ color: "rgba(225,29,72,0.7)" }}>Admin Panel</div>
           </div>
         </div>
       </div>
@@ -36,19 +36,19 @@ function AdminSidebar({ active }: { active: string }) {
           <Link key={item.id} href={`/admin/${item.id === "dashboard" ? "" : item.id}`}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
             style={{
-              background: active === item.id ? "rgba(200,149,108,0.15)" : "transparent",
-              color: active === item.id ? "#C8956C" : "rgba(255,255,255,0.5)",
-              borderLeft: active === item.id ? "3px solid var(--color-rose-gold-500)" : "3px solid transparent",
+              background: active === item.id ? "rgba(225,29,72,0.15)" : "transparent",
+              color: active === item.id ? "#E11D48" : "rgba(255,255,255,0.5)",
+              borderLeft: active === item.id ? "3px solid var(--color-rose-500)" : "3px solid transparent",
             }}>
             <span className="text-base">{item.icon}</span>
             <span>{item.label}</span>
           </Link>
         ))}
       </nav>
-      <div className="p-4 border-t" style={{ borderColor: "rgba(200,149,108,0.15)" }}>
+      <div className="p-4 border-t" style={{ borderColor: "rgba(225,29,72,0.15)" }}>
         <div className="flex items-center gap-3 px-4 py-3">
           <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
-            style={{ background: "rgba(200,149,108,0.15)" }}>👩‍💼</div>
+            style={{ background: "rgba(225,29,72,0.15)" }}>👩‍💼</div>
           <div>
             <div className="text-xs text-white font-medium">Admin Principal</div>
             <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>admin@shedrive.ma</div>
@@ -83,7 +83,7 @@ function StatCard({ icon, label, value, sub, color, trend }: {
             style={{ background: `${color}12` }}>{icon}</div>
           {trend && (
             <span className="text-xs font-semibold px-2 py-1 rounded-full"
-              style={{ background: trend.startsWith("+") ? "rgba(13,122,74,0.1)" : "rgba(229,62,62,0.1)", color: trend.startsWith("+") ? "var(--color-emerald-600)" : "#E53E3E" }}>
+              style={{ background: trend.startsWith("+") ? "rgba(147,51,234,0.1)" : "rgba(229,62,62,0.1)", color: trend.startsWith("+") ? "var(--color-purple-600)" : "#E53E3E" }}>
               {trend}
             </span>
           )}
@@ -115,14 +115,14 @@ export default function AdminDashboard() {
   }, []);
 
   const stats = [
-    { icon: "👥", label: "Utilisatrices", value: statsData?.passengers?.toString() || "0",  sub: "comptes passagers",   color: "var(--color-rose-gold-500)",  trend: undefined },
-    { icon: "🚗", label: "Conductrices",  value: statsData?.drivers?.toString() || "0",    sub: "comptes chauffeurs", color: "var(--color-emerald-500)",  trend: undefined },
-    { icon: "🗺️", label: "Trajets totaux", value: statsData?.rides?.toString() || "0", sub: "tous les statuts",          color: "var(--color-gold-500)",      trend: undefined },
-    { icon: "💰", label: "Revenus totaux", value: (statsData?.revenue || 0).toLocaleString() + " MAD", sub: "net après commissions",   color: "var(--color-rose-gold-500)", trend: undefined },
+    { icon: "👥", label: "Utilisatrices", value: statsData?.passengers?.toString() || "0",  sub: "comptes passagers",   color: "var(--color-rose-500)",  trend: undefined },
+    { icon: "🚗", label: "Conductrices",  value: statsData?.drivers?.toString() || "0",    sub: "comptes chauffeurs", color: "var(--color-purple-500)",  trend: undefined },
+    { icon: "🗺️", label: "Trajets totaux", value: statsData?.rides?.toString() || "0", sub: "tous les statuts",          color: "var(--color-purple-500)",      trend: undefined },
+    { icon: "💰", label: "Revenus totaux", value: (statsData?.revenue || 0).toLocaleString() + " MAD", sub: "net après commissions",   color: "var(--color-rose-500)", trend: undefined },
   ];
 
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--color-sand-50)" }}>
+    <div className="flex min-h-screen" style={{ background: "var(--color-silver-50)" }}>
       <AdminSidebar active="dashboard" />
 
       <main className="flex-1 overflow-auto">
@@ -136,15 +136,15 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center gap-3">
             <div className="px-3 py-1.5 rounded-full flex items-center gap-2"
-              style={{ background: "rgba(13,122,74,0.08)", border: "1px solid rgba(13,122,74,0.2)" }}>
-              <div className="w-2 h-2 rounded-full" style={{ background: "var(--color-emerald-500)", animation: "online-pulse 2s infinite" }}/>
-              <span className="text-xs font-medium" style={{ color: "var(--color-emerald-700)" }}>Système opérationnel</span>
+              style={{ background: "rgba(147,51,234,0.08)", border: "1px solid rgba(147,51,234,0.2)" }}>
+              <div className="w-2 h-2 rounded-full" style={{ background: "var(--color-purple-500)", animation: "online-pulse 2s infinite" }}/>
+              <span className="text-xs font-medium" style={{ color: "var(--color-purple-700)" }}>Système opérationnel</span>
             </div>
-            <button className="btn btn-icon" style={{ background: "var(--color-sand-100)", position: "relative" }}>
+            <button className="btn btn-icon" style={{ background: "var(--color-silver-100)", position: "relative" }}>
               🔔
             </button>
             <div className="w-9 h-9 rounded-full flex items-center justify-center text-base"
-              style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>
+              style={{ background: "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))" }}>
               👩‍💼
             </div>
           </div>
@@ -163,8 +163,8 @@ export default function AdminDashboard() {
               {/* Quick Actions */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { icon: "👥", label: "Gérer les utilisateurs", href: "/admin/users", color: "var(--color-rose-gold-500)" },
-                  { icon: "🚗", label: "Approuver conductrices", href: "/admin/drivers", color: "var(--color-emerald-500)" },
+                  { icon: "👥", label: "Gérer les utilisateurs", href: "/admin/users", color: "var(--color-rose-500)" },
+                  { icon: "🚗", label: "Approuver conductrices", href: "/admin/drivers", color: "var(--color-purple-500)" },
                 ].map(a => (
                   <Link key={a.label} href={a.href}
                     className="card p-5 flex flex-col items-center text-center gap-3 transition-all hover:scale-[1.02] hover:shadow-md">

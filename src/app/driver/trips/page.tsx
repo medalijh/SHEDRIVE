@@ -47,7 +47,7 @@ export default function DriverTrips() {
   const filtered = filter === "all" ? trips : trips.filter(t => t.status === filter);
 
   return (
-    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
@@ -60,7 +60,7 @@ export default function DriverTrips() {
             <button key={f} onClick={() => setFilter(f)}
               className="px-4 py-2 rounded-full text-xs font-semibold transition-all"
               style={{
-                background: filter === f ? "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" : "white",
+                background: filter === f ? "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))" : "white",
                 color: filter === f ? "white" : "var(--color-muted)",
                 border: `1px solid ${filter === f ? "transparent" : "var(--color-border)"}`,
                 boxShadow: filter === f ? "var(--shadow-emerald)" : "none",
@@ -80,7 +80,7 @@ export default function DriverTrips() {
           <div key={ride.id} className="card-luxury p-5 transition-all">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
-                style={{ background: ride.status === "completed" ? "rgba(13,122,74,0.1)" : "rgba(197,48,48,0.1)" }}>
+                style={{ background: ride.status === "completed" ? "rgba(147,51,234,0.1)" : "rgba(197,48,48,0.1)" }}>
                 {ride.status === "completed" ? "✅" : "❌"}
               </div>
               <div className="flex-1 min-w-0">
@@ -100,7 +100,7 @@ export default function DriverTrips() {
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="text-base font-bold" style={{ color: "var(--color-emerald-700)", fontFamily: "var(--font-display)" }}>
+                <div className="text-base font-bold" style={{ color: "var(--color-purple-700)", fontFamily: "var(--font-display)" }}>
                   +{ride.final_price || ride.passenger_price} MAD
                 </div>
                 <div className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>#{ride.id.slice(0, 8)}</div>

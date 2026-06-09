@@ -79,7 +79,7 @@ function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: (
         {/* Timer bar */}
         <div className="h-1.5 transition-all duration-1000" style={{
           width: `${pct}%`,
-          background: pct > 50 ? "var(--color-emerald-500)" : pct > 20 ? "var(--color-gold-400)" : "#E53E3E",
+          background: pct > 50 ? "var(--color-purple-500)" : pct > 20 ? "var(--color-purple-400)" : "#E53E3E",
         }}/>
 
         <div className="p-6">
@@ -89,14 +89,14 @@ function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: (
               <p className="text-xs" style={{ color: "var(--color-muted)" }}>Répondez dans <strong>{timer}s</strong></p>
             </div>
             <div className="w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold border-4"
-              style={{ borderColor: timer > 15 ? "var(--color-emerald-500)" : "#E53E3E", color: timer > 15 ? "var(--color-emerald-600)" : "#E53E3E" }}>
+              style={{ borderColor: timer > 15 ? "var(--color-purple-500)" : "#E53E3E", color: timer > 15 ? "var(--color-purple-600)" : "#E53E3E" }}>
               {timer}
             </div>
           </div>
 
           <div className="card p-4 mb-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl" style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
               <div>
                 <div className="text-sm font-semibold">Passagère</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>⭐ 4.8</div>
@@ -109,8 +109,8 @@ function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: (
 
             <div className="flex flex-col gap-2">
               {[
-                { dot: "var(--color-emerald-500)", label: ride.from_address, icon: "📍" },
-                { dot: "var(--color-rose-gold-500)", label: ride.to_address, icon: "🏁" },
+                { dot: "var(--color-purple-500)", label: ride.from_address, icon: "📍" },
+                { dot: "var(--color-rose-500)", label: ride.to_address, icon: "🏁" },
               ].map((row, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: row.dot }}/>
@@ -217,7 +217,7 @@ export default function DriverDashboard() {
   }
 
   return (
-    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       {/* Header */}
       <div className="px-6 pt-12 pb-4 flex items-center justify-between">
         <div>
@@ -225,14 +225,14 @@ export default function DriverDashboard() {
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>{profile?.full_name || "Conductrice"}</h1>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full" style={{ background: isOnline ? "rgba(13,122,74,0.1)" : "var(--color-sand-100)", border: `1px solid ${isOnline ? "rgba(13,122,74,0.3)" : "var(--color-border)"}` }}>
-            <div className="w-2 h-2 rounded-full" style={{ background: isOnline ? "var(--color-emerald-500)" : "var(--color-sand-400)" }}/>
-            <span className="text-xs font-semibold" style={{ color: isOnline ? "var(--color-emerald-700)" : "var(--color-muted)" }}>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full" style={{ background: isOnline ? "rgba(147,51,234,0.1)" : "var(--color-silver-100)", border: `1px solid ${isOnline ? "rgba(147,51,234,0.3)" : "var(--color-border)"}` }}>
+            <div className="w-2 h-2 rounded-full" style={{ background: isOnline ? "var(--color-purple-500)" : "var(--color-silver-400)" }}/>
+            <span className="text-xs font-semibold" style={{ color: isOnline ? "var(--color-purple-700)" : "var(--color-muted)" }}>
               {isOnline ? "En ligne" : "Hors ligne"}
             </span>
           </div>
           <Link href="/driver/settings">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" }}>👩</div>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))" }}>👩</div>
           </Link>
         </div>
       </div>
@@ -243,7 +243,7 @@ export default function DriverDashboard() {
           onClick={handleOnlineToggle}
           className="w-full py-4 rounded-2xl font-semibold text-base transition-all duration-300 relative overflow-hidden"
           style={{
-            background: isOnline ? "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" : "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))",
+            background: isOnline ? "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))" : "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))",
             color: "white",
             boxShadow: isOnline ? "var(--shadow-emerald)" : "var(--shadow-rose)",
           }}>
@@ -268,7 +268,7 @@ export default function DriverDashboard() {
       <div className="px-6 mt-5 mb-5">
         <h2 className="font-semibold mb-3" style={{ fontFamily: "var(--font-display)" }}>Aujourd'hui</h2>
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-3xl p-5 relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-800))", boxShadow: "var(--shadow-emerald)", gridColumn: "span 2" }}>
+          <div className="rounded-3xl p-5 relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--color-purple-600), var(--color-purple-800))", boxShadow: "var(--shadow-emerald)", gridColumn: "span 2" }}>
             <div className="zellige-pattern absolute inset-0 opacity-10"/>
             <div className="relative z-10 flex items-center justify-between">
               <div>
@@ -283,8 +283,8 @@ export default function DriverDashboard() {
           </div>
 
           {[
-            { label: "Note", value: `⭐ ${stats.rating}`, sub: "Excellent", color: "var(--color-gold-600)" },
-            { label: "Acceptation", value: `${stats.acceptance}%`, sub: "Taux", color: "var(--color-emerald-600)" },
+            { label: "Note", value: `⭐ ${stats.rating}`, sub: "Excellent", color: "var(--color-purple-600)" },
+            { label: "Acceptation", value: `${stats.acceptance}%`, sub: "Taux", color: "var(--color-purple-600)" },
           ].map(stat => (
             <div key={stat.label} className="card p-4 text-center">
               <div className="text-2xl font-bold mb-1" style={{ color: stat.color, fontFamily: "var(--font-display)" }}>{stat.value}</div>
@@ -301,13 +301,13 @@ export default function DriverDashboard() {
           <div className="card-luxury p-5">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-emerald-500)" }}/>
-                <span className="text-sm font-semibold" style={{ color: "var(--color-emerald-600)" }}>Trajet en cours</span>
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-purple-500)" }}/>
+                <span className="text-sm font-semibold" style={{ color: "var(--color-purple-600)" }}>Trajet en cours</span>
               </div>
               <span className="text-xs font-medium text-gray-500">{activeRide.status}</span>
             </div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm">Passagère</div>
                 <div className="text-xs line-clamp-1" style={{ color: "var(--color-muted)" }}>{activeRide.from_address} → {activeRide.to_address}</div>
@@ -317,13 +317,13 @@ export default function DriverDashboard() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <button className="btn btn-sm" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
+              <button className="btn btn-sm" style={{ background: "rgba(147,51,234,0.08)", color: "var(--color-purple-700)", border: "1px solid rgba(147,51,234,0.2)" }}>
                 💬 Chat
               </button>
               <button onClick={() => {
                 // In real app, we'd open navigation. For now, mark as completed to test flow
                 getSupabaseClient().from("rides").update({ status: "completed" }).eq("id", activeRide.id).then(() => setActiveRide(null));
-              }} className="btn btn-sm" style={{ background: "rgba(200,149,108,0.08)", color: "var(--color-rose-gold-700)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              }} className="btn btn-sm" style={{ background: "rgba(225,29,72,0.08)", color: "var(--color-rose-700)", border: "1px solid rgba(225,29,72,0.2)" }}>
                 ✅ Terminer
               </button>
             </div>
@@ -335,19 +335,19 @@ export default function DriverDashboard() {
       <div className="px-6 mb-5">
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Trajets récents</h2>
-          <Link href="/driver/earnings" className="text-xs font-medium" style={{ color: "var(--color-rose-gold-600)" }}>Voir tout →</Link>
+          <Link href="/driver/earnings" className="text-xs font-medium" style={{ color: "var(--color-rose-600)" }}>Voir tout →</Link>
         </div>
         <div className="card">
           {recentTrips.length === 0 ? (
              <div className="text-center text-sm text-gray-500 py-4">Aucun trajet récent</div>
           ) : recentTrips.map((trip, i) => (
             <div key={i} className="flex items-center gap-4 p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: "rgba(147,51,234,0.08)" }}>✅</div>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium line-clamp-1">{trip.from_address} → {trip.to_address}</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>{new Date(trip.created_at).toLocaleDateString("fr-FR")}</div>
               </div>
-              <div className="text-sm font-bold flex-shrink-0" style={{ color: "var(--color-emerald-600)" }}>+{trip.final_price || trip.passenger_price} MAD</div>
+              <div className="text-sm font-bold flex-shrink-0" style={{ color: "var(--color-purple-600)" }}>+{trip.final_price || trip.passenger_price} MAD</div>
             </div>
           ))}
         </div>

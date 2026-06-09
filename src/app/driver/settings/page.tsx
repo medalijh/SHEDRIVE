@@ -52,13 +52,13 @@ export default function DriverSettings() {
   }) => (
     <button className="flex items-center gap-4 w-full py-4 border-b last:border-0 text-left"
       style={{ borderColor: "var(--color-border)" }} onClick={onClick}>
-      <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg" style={{ background: "rgba(13,122,74,0.08)" }}>{icon}</div>
+      <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg" style={{ background: "rgba(147,51,234,0.08)" }}>{icon}</div>
       <div className="flex-1 min-w-0">
         <div className="text-sm font-medium">{label}</div>
         {value && <div className="text-xs mt-0.5 truncate" style={{ color: "var(--color-muted)" }}>{value}</div>}
       </div>
       {toggle ? (
-        <div className="relative w-12 h-6 rounded-full transition-all" style={{ background: toggled ? "var(--color-emerald-500)" : "var(--color-sand-300)" }}>
+        <div className="relative w-12 h-6 rounded-full transition-all" style={{ background: toggled ? "var(--color-purple-500)" : "var(--color-silver-300)" }}>
           <div className="absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-all" style={{ left: toggled ? "26px" : "2px" }}/>
         </div>
       ) : (
@@ -68,7 +68,7 @@ export default function DriverSettings() {
   );
 
   return (
-    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
@@ -79,9 +79,9 @@ export default function DriverSettings() {
         <div className="card-luxury p-6 flex items-center gap-5 mb-6">
           <div className="relative">
             <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
-              style={{ background: "linear-gradient(135deg,var(--color-emerald-400),var(--color-emerald-600))" }}>👩</div>
+              style={{ background: "linear-gradient(135deg,var(--color-purple-400),var(--color-purple-600))" }}>👩</div>
             <button className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center text-sm"
-              style={{ background: "var(--color-gold-400)", color: "white" }}>✏️</button>
+              style={{ background: "var(--color-purple-400)", color: "white" }}>✏️</button>
             {isOnline && <div className="online-dot absolute top-0 right-0"/>}
           </div>
           <div className="flex-1 min-w-0">
@@ -139,12 +139,12 @@ export default function DriverSettings() {
             { icon: "📋", label: "Assurance", status: `Exp. ${driverProfile?.insurance_expiry ? new Date(driverProfile.insurance_expiry).toLocaleDateString() : "Inconnue"}`, ok: true },
           ].map(d => (
             <div key={d.label} className="flex items-center gap-4 py-3 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg" style={{ background: "rgba(13,122,74,0.08)" }}>{d.icon}</div>
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg" style={{ background: "rgba(147,51,234,0.08)" }}>{d.icon}</div>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium truncate">{d.label}</div>
                 <div className="text-xs truncate" style={{ color: "var(--color-muted)" }}>{d.status}</div>
               </div>
-              <span style={{ color: d.ok ? "var(--color-emerald-500)" : "#E53E3E", fontSize: "1.2rem" }}>{d.ok ? "✓" : "✕"}</span>
+              <span style={{ color: d.ok ? "var(--color-purple-500)" : "#E53E3E", fontSize: "1.2rem" }}>{d.ok ? "✓" : "✕"}</span>
             </div>
           ))}
         </div>

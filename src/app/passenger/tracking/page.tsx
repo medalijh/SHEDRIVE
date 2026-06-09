@@ -74,11 +74,11 @@ function TrackingContent() {
   const currentStatus = rideStatus || ride?.status || "searching";
 
   const statusConfig: Record<string, any> = {
-    searching: { label: "Recherche en cours", labelAr: "جاري البحث", color: "var(--color-gold-600)", bg: "rgba(212,160,23,0.1)", icon: "🔍" },
-    accepted: { label: "Conductrice en route", labelAr: "السائقة في الطريق", color: "var(--color-gold-600)", bg: "rgba(212,160,23,0.1)", icon: "🚗" },
-    driver_arrived: { label: "Conductrice arrivée !", labelAr: "وصلت السائقة!", color: "var(--color-emerald-600)", bg: "rgba(13,122,74,0.1)", icon: "📍" },
-    in_progress: { label: "Trajet en cours", labelAr: "الرحلة جارية", color: "var(--color-rose-gold-600)", bg: "rgba(200,149,108,0.1)", icon: "🌹" },
-    completed: { label: "Trajet terminé !", labelAr: "انتهت الرحلة!", color: "var(--color-emerald-600)", bg: "rgba(13,122,74,0.1)", icon: "✅" },
+    searching: { label: "Recherche en cours", labelAr: "جاري البحث", color: "var(--color-purple-600)", bg: "rgba(219,39,119,0.1)", icon: "🔍" },
+    accepted: { label: "Conductrice en route", labelAr: "السائقة في الطريق", color: "var(--color-purple-600)", bg: "rgba(219,39,119,0.1)", icon: "🚗" },
+    driver_arrived: { label: "Conductrice arrivée !", labelAr: "وصلت السائقة!", color: "var(--color-purple-600)", bg: "rgba(147,51,234,0.1)", icon: "📍" },
+    in_progress: { label: "Trajet en cours", labelAr: "الرحلة جارية", color: "var(--color-rose-600)", bg: "rgba(225,29,72,0.1)", icon: "🌹" },
+    completed: { label: "Trajet terminé !", labelAr: "انتهت الرحلة!", color: "var(--color-purple-600)", bg: "rgba(147,51,234,0.1)", icon: "✅" },
     cancelled: { label: "Trajet annulé", labelAr: "تم الإلغاء", color: "#E53E3E", bg: "rgba(229,62,62,0.1)", icon: "❌" },
   };
 
@@ -96,7 +96,7 @@ function TrackingContent() {
   const mapCenter: [number, number] = driverLocation ? [driverLocation.lat, driverLocation.lng] : (ride ? [ride.from_lat, ride.from_lng] : [33.5731, -7.5898]);
 
   return (
-    <div className="container-app mx-auto" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       {/* Back */}
       <div className="absolute top-4 left-4 z-30">
         <Link href="/passenger/dashboard" className="btn btn-icon glass shadow-sm text-xl">←</Link>
@@ -131,7 +131,7 @@ function TrackingContent() {
           <div className="card-luxury p-5">
             <div className="flex items-center gap-4 mb-4">
               <div className="relative">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style={{ background: "linear-gradient(135deg, rgba(200,149,108,0.15), rgba(200,149,108,0.05))" }}>👩</div>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.15), rgba(225,29,72,0.05))" }}>👩</div>
                 <div className="online-dot absolute -bottom-1 -right-1"/>
               </div>
               <div className="flex-1">
@@ -146,15 +146,15 @@ function TrackingContent() {
             </div>
 
             <div className="grid grid-cols-3 gap-3">
-              <button onClick={() => setChatOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(200,149,108,0.08)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              <button onClick={() => setChatOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.2)" }}>
                 <span className="text-xl">💬</span>
                 <span className="text-xs font-medium">Chat</span>
               </button>
-              <a href={`tel:${ride.driver.profiles?.phone || ""}`} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105 cursor-pointer" style={{ background: "rgba(13,122,74,0.08)", border: "1px solid rgba(13,122,74,0.2)" }}>
+              <a href={`tel:${ride.driver.profiles?.phone || ""}`} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105 cursor-pointer" style={{ background: "rgba(147,51,234,0.08)", border: "1px solid rgba(147,51,234,0.2)" }}>
                 <span className="text-xl">📞</span>
                 <span className="text-xs font-medium">Appeler</span>
               </a>
-              <button onClick={() => setShareOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(212,160,23,0.08)", border: "1px solid rgba(212,160,23,0.2)" }}>
+              <button onClick={() => setShareOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.2)" }}>
                 <span className="text-xl">🔗</span>
                 <span className="text-xs font-medium">Partager</span>
               </button>
@@ -182,15 +182,15 @@ function TrackingContent() {
       {shareOpen && (
         <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShareOpen(false)}>
           <div className="w-full max-w-md bg-white rounded-t-3xl p-6" onClick={e => e.stopPropagation()}>
-            <div className="w-10 h-1 rounded-full mx-auto mb-5" style={{ background: "var(--color-sand-300)" }}/>
+            <div className="w-10 h-1 rounded-full mx-auto mb-5" style={{ background: "var(--color-silver-300)" }}/>
             <h3 className="font-semibold text-lg mb-2" style={{ fontFamily: "var(--font-display)" }}>Partager ma position</h3>
-            <div className="flex items-center gap-3 p-3 rounded-xl mb-5" style={{ background: "var(--color-sand-100)" }}>
+            <div className="flex items-center gap-3 p-3 rounded-xl mb-5" style={{ background: "var(--color-silver-100)" }}>
               <span className="text-sm flex-1 truncate" style={{ color: "var(--color-muted)" }}>https://track.shedrive.ma/{rideId}</span>
               <button className="btn btn-sm btn-primary">Copier</button>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {[{ icon: "📱", label: "WhatsApp" }, { icon: "💬", label: "SMS" }, { icon: "📧", label: "Email" }].map(s => (
-                <button key={s.label} className="p-3 rounded-xl text-center" style={{ background: "var(--color-sand-100)" }}>
+                <button key={s.label} className="p-3 rounded-xl text-center" style={{ background: "var(--color-silver-100)" }}>
                   <div className="text-2xl mb-1">{s.icon}</div>
                   <div className="text-xs">{s.label}</div>
                 </button>
@@ -202,14 +202,14 @@ function TrackingContent() {
 
       {/* Chat Modal */}
       {chatOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col" style={{ background: "var(--color-sand-50)" }}>
+        <div className="fixed inset-0 z-50 flex flex-col" style={{ background: "var(--color-silver-50)" }}>
           <div className="flex items-center gap-4 px-5 py-4" style={{ background: "white", borderBottom: "1px solid var(--color-border)" }}>
             <button onClick={() => setChatOpen(false)} className="btn btn-icon-sm btn-ghost text-xl">←</button>
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+              <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg" style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
               <div>
                 <div className="font-semibold text-sm">{ride?.driver?.profiles?.full_name || "Conductrice"}</div>
-                <div className="text-xs" style={{ color: "var(--color-emerald-600)" }}>En ligne</div>
+                <div className="text-xs" style={{ color: "var(--color-purple-600)" }}>En ligne</div>
               </div>
             </div>
           </div>
@@ -217,7 +217,7 @@ function TrackingContent() {
           <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.from === "passenger" ? "justify-end" : "justify-start"}`}>
-                <div className="max-w-[75%] px-4 py-3 rounded-2xl" style={{ background: msg.from === "passenger" ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "white", color: msg.from === "passenger" ? "white" : "var(--color-text)", boxShadow: "var(--shadow-xs)" }}>
+                <div className="max-w-[75%] px-4 py-3 rounded-2xl" style={{ background: msg.from === "passenger" ? "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))" : "white", color: msg.from === "passenger" ? "white" : "var(--color-text)", boxShadow: "var(--shadow-xs)" }}>
                   <p className="text-sm">{msg.text}</p>
                   <p className="text-xs mt-1 opacity-60">{msg.time}</p>
                 </div>
@@ -226,7 +226,7 @@ function TrackingContent() {
           </div>
 
           <div className="px-4 py-3 flex gap-3" style={{ background: "white", borderTop: "1px solid var(--color-border)" }}>
-            <button className="btn btn-icon-sm" style={{ background: "var(--color-sand-100)" }}>🎙</button>
+            <button className="btn btn-icon-sm" style={{ background: "var(--color-silver-100)" }}>🎙</button>
             <input value={newMsg} onChange={e => setNewMsg(e.target.value)} className="flex-1 input-field py-3 text-sm" placeholder="Tapez un message..." onKeyDown={e => {
               if (e.key === "Enter" && newMsg.trim()) { setMessages(m => [...m, { from: "passenger", text: newMsg, time: new Date().toLocaleTimeString("fr-MA", { hour: "2-digit", minute: "2-digit" }) }]); setNewMsg(""); }
             }}/>

@@ -7,12 +7,12 @@ import { MessageCircle, Phone, Mail, MessageSquare, MapPin, TriangleAlert, Check
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(200,149,108,0.2)" }}>
+      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-gold-400)" }}>Morocco</span></span>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
+          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
@@ -33,13 +33,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ background: "var(--color-sand-50)" }}>
+    <div style={{ background: "var(--color-silver-50)" }}>
       <Navbar />
 
-      <section className="pt-28 pb-16 px-6 text-center relative overflow-hidden bg-hero-gradient">
+      <section className="pt-28 pb-16 px-6 text-center relative overflow-hidden bg-white">
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto relative z-10">
-          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(200,149,108,0.15)", color: "var(--color-rose-gold-400)", border: "1px solid rgba(200,149,108,0.3)" }}>CONTACT</span>
+          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(225,29,72,0.15)", color: "var(--color-rose-400)", border: "1px solid rgba(225,29,72,0.3)" }}>CONTACT</span>
           <h1 className="text-display-xl text-white mb-4">Parlons-nous <span className="gradient-text"><MessageCircle className="inline-block ml-2 mb-2" size={40} /></span></h1>
           <p style={{ color: "rgba(255,255,255,0.6)" }}>Notre équipe est disponible 24h/24 pour vous aider</p>
         </div>
@@ -60,9 +60,9 @@ export default function ContactPage() {
                 ].map(c => (
                   <div key={c.label} className="flex items-start gap-4 p-5 card-luxury">
                     <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-rose-gold-600 flex-shrink-0"
-                      style={{ background: "rgba(200,149,108,0.08)" }}>{c.icon}</div>
+                      style={{ background: "rgba(225,29,72,0.08)" }}>{c.icon}</div>
                     <div>
-                      <div className="text-xs font-semibold mb-1" style={{ color: "var(--color-rose-gold-600)", textTransform: "uppercase", letterSpacing: "0.06em" }}>{c.label}</div>
+                      <div className="text-xs font-semibold mb-1" style={{ color: "var(--color-rose-600)", textTransform: "uppercase", letterSpacing: "0.06em" }}>{c.label}</div>
                       <div className="font-semibold">{c.value}</div>
                       <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>{c.sub}</div>
                     </div>
@@ -136,7 +136,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />

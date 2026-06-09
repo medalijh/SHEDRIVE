@@ -6,12 +6,12 @@ import { Users, ShieldCheck, Gem, Scale, MapPin, SearchCheck, UserCheck, Star, H
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(200,149,108,0.2)" }}>
+      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-gold-400)" }}>Morocco</span></span>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
+          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
@@ -24,11 +24,11 @@ function Navbar() {
 
 function Footer() {
   return (
-    <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
+    <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
       <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full flex items-center justify-center text-base"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
           <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
         </div>
         <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
@@ -55,14 +55,14 @@ export default function AboutPage() {
   ];
 
   return (
-    <div style={{ background: "var(--color-sand-50)" }}>
+    <div style={{ background: "var(--color-silver-50)" }}>
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-28 pb-20 px-6 relative overflow-hidden bg-hero-gradient">
+      <section className="pt-28 pb-20 px-6 relative overflow-hidden bg-white">
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto text-center relative z-10">
-          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(200,149,108,0.15)", color: "var(--color-rose-gold-400)", border: "1px solid rgba(200,149,108,0.3)" }}>À PROPOS</span>
+          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(225,29,72,0.15)", color: "var(--color-rose-400)", border: "1px solid rgba(225,29,72,0.3)" }}>À PROPOS</span>
           <h1 className="text-display-xl text-white mb-6">
             Plus qu'un service de transport,<br/>
             <span className="gradient-text">un mouvement féminin</span>
@@ -139,9 +139,9 @@ export default function AboutPage() {
             {team.map(t => (
               <div key={t.name} className="card-luxury p-6 text-center">
                 <div className="w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-4 text-rose-gold-600"
-                  style={{ background: "linear-gradient(135deg,rgba(200,149,108,0.15),rgba(13,122,74,0.08))" }}>{t.icon}</div>
+                  style={{ background: "linear-gradient(135deg,rgba(225,29,72,0.15),rgba(147,51,234,0.08))" }}>{t.icon}</div>
                 <h3 className="font-semibold mb-1" style={{ fontFamily: "var(--font-display)" }}>{t.name}</h3>
-                <p className="text-xs mb-1" style={{ color: "var(--color-rose-gold-600)" }}>{t.role}</p>
+                <p className="text-xs mb-1" style={{ color: "var(--color-rose-600)" }}>{t.role}</p>
                 <p className="text-xs" style={{ color: "var(--color-muted)" }}>{t.city}</p>
               </div>
             ))}
@@ -150,7 +150,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center relative overflow-hidden bg-hero-gradient">
+      <section className="py-20 px-6 text-center relative overflow-hidden bg-white">
         <div className="zellige-pattern absolute inset-0 opacity-15"/>
         <div className="relative z-10">
           <h2 className="text-display-lg text-white mb-6">Rejoignez notre <span className="gradient-text">communauté</span></h2>
@@ -158,7 +158,7 @@ export default function AboutPage() {
             <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg flex items-center gap-2">
               <Users size={20} /> Je suis passagère
             </Link>
-            <Link href="/auth/register?role=driver" className="btn btn-lg flex items-center gap-2" style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(200,149,108,0.4)" }}>
+            <Link href="/auth/register?role=driver" className="btn btn-lg flex items-center gap-2" style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(225,29,72,0.4)" }}>
               <CarFront size={20} /> Je suis conductrice
             </Link>
           </div>

@@ -89,7 +89,7 @@ export const metadata: Metadata = {
       { url: "/icons/apple-icon-180x180.png", sizes: "180x180" },
     ],
     other: [
-      { rel: "mask-icon", url: "/icons/safari-pinned-tab.svg", color: "#C8956C" },
+      { rel: "mask-icon", url: "/icons/safari-pinned-tab.svg", color: "#E11D48" },
     ],
   },
 
@@ -114,7 +114,7 @@ export const metadata: Metadata = {
 // --- Viewport -------------------------------------------------
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#C8956C" },
+    { media: "(prefers-color-scheme: light)", color: "#E11D48" },
     { media: "(prefers-color-scheme: dark)",  color: "#1A150F" },
   ],
   width: "device-width",
@@ -155,7 +155,7 @@ export default function RootLayout({
         <meta name="MobileOptimized" content="320" />
 
         {/* Microsoft Tiles */}
-        <meta name="msapplication-TileColor" content="#C8956C" />
+        <meta name="msapplication-TileColor" content="#E11D48" />
         <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
 

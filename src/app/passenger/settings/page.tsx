@@ -32,14 +32,14 @@ const SettingRow = ({ icon, label, value, onClick, isToggle, toggled }: {
   <button className="flex items-center gap-4 w-full py-4 border-b last:border-0 text-left transition-colors hover:bg-sand-50"
     style={{ borderColor: "var(--color-border)" }} onClick={onClick}>
     <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0"
-      style={{ background: "rgba(200,149,108,0.08)" }}>{icon}</div>
+      style={{ background: "rgba(225,29,72,0.08)" }}>{icon}</div>
     <div className="flex-1">
       <div className="text-sm font-medium">{label}</div>
       {value && <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>{value}</div>}
     </div>
     {isToggle ? (
       <div className="relative w-12 h-6 rounded-full transition-all duration-300"
-        style={{ background: toggled ? "var(--color-emerald-500)" : "var(--color-sand-300)" }}>
+        style={{ background: toggled ? "var(--color-purple-500)" : "var(--color-silver-300)" }}>
         <div className="absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-all duration-300"
           style={{ left: toggled ? "26px" : "2px" }}/>
       </div>
@@ -75,7 +75,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
+    <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
@@ -86,11 +86,11 @@ export default function SettingsPage() {
         <div className="card-luxury p-5 flex items-center gap-5 mb-6">
           <div className="relative">
             <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
-              style={{ background: "linear-gradient(135deg, var(--color-rose-gold-400), var(--color-rose-gold-600))" }}>
+              style={{ background: "linear-gradient(135deg, var(--color-rose-400), var(--color-rose-600))" }}>
               👩
             </div>
             <button className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center text-sm"
-              style={{ background: "var(--color-gold-400)", color: "white" }}>
+              style={{ background: "var(--color-purple-400)", color: "white" }}>
               ✏️
             </button>
           </div>
@@ -112,7 +112,7 @@ export default function SettingsPage() {
             <button key={t.id} onClick={() => setTab(t.id)}
               className="flex flex-col items-center gap-1.5 p-3 rounded-2xl text-center transition-all"
               style={{
-                background: tab === t.id ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "white",
+                background: tab === t.id ? "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))" : "white",
                 color: tab === t.id ? "white" : "var(--color-muted)",
                 border: tab === t.id ? "none" : "1px solid var(--color-border)",
                 boxShadow: tab === t.id ? "var(--shadow-rose)" : "none",
@@ -150,14 +150,14 @@ export default function SettingsPage() {
               ].map((c, i) => (
                 <div key={i} className="flex items-center gap-3 py-3 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
                   <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg"
-                    style={{ background: c.primary ? "rgba(197,48,48,0.1)" : "rgba(200,149,108,0.08)" }}>
+                    style={{ background: c.primary ? "rgba(197,48,48,0.1)" : "rgba(225,29,72,0.08)" }}>
                     {c.primary ? "⭐" : "👤"}
                   </div>
                   <div className="flex-1">
                     <div className="text-sm font-medium">{c.name}</div>
                     <div className="text-xs" style={{ color: "var(--color-muted)" }}>{c.rel} · {c.phone}</div>
                   </div>
-                  <button className="btn btn-sm btn-ghost" style={{ color: "var(--color-rose-gold-600)" }}>✏️</button>
+                  <button className="btn btn-sm btn-ghost" style={{ color: "var(--color-rose-600)" }}>✏️</button>
                 </div>
               ))}
               <button className="btn btn-outline w-full mt-4">+ Ajouter un contact</button>
@@ -192,7 +192,7 @@ export default function SettingsPage() {
             <SettingRow icon="💬" label="Notifications SMS" value="Alertes importantes par SMS" isToggle toggled={smsNotifs} onClick={() => setSmsNotifs(!smsNotifs)}/>
             <SettingRow icon="📧" label="Notifications email" value="Résumé hebdomadaire" isToggle toggled={emailNotifs} onClick={() => setEmailNotifs(!emailNotifs)}/>
             <div className="divider my-4"/>
-            <h4 className="text-sm font-semibold mb-3" style={{ color: "var(--color-sand-700)" }}>Types de notifications</h4>
+            <h4 className="text-sm font-semibold mb-3" style={{ color: "var(--color-silver-700)" }}>Types de notifications</h4>
             <SettingRow icon="🚗" label="Mises à jour du trajet" isToggle toggled={true} onClick={() => {}}/>
             <SettingRow icon="💳" label="Transactions wallet" isToggle toggled={true} onClick={() => {}}/>
             <SettingRow icon="🎁" label="Promotions et offres" isToggle toggled={false} onClick={() => {}}/>
@@ -218,12 +218,12 @@ export default function SettingsPage() {
                     <div className="text-sm font-medium">{l.label}</div>
                     <div className="text-xs" style={{ color: "var(--color-muted)", fontFamily: l.id === "ar" ? "var(--font-arabic)" : undefined }}>{l.native}</div>
                   </div>
-                  {lang === l.id && <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-emerald-500)" }}>✓</div>}
+                  {lang === l.id && <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-purple-500)" }}>✓</div>}
                 </button>
               ))}
             </div>
-            <div className="p-4 rounded-2xl" style={{ background: "rgba(200,149,108,0.08)", border: "1px solid rgba(200,149,108,0.2)" }}>
-              <p className="text-xs" style={{ color: "var(--color-rose-gold-700)" }}>
+            <div className="p-4 rounded-2xl" style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.2)" }}>
+              <p className="text-xs" style={{ color: "var(--color-rose-700)" }}>
                 🌍 L'application supporte le RTL (droite à gauche) en arabe automatiquement.
               </p>
             </div>
@@ -237,7 +237,7 @@ export default function SettingsPage() {
             🚪 Se déconnecter
           </button>
         </div>
-        <p className="text-center text-xs mb-6" style={{ color: "var(--color-sand-300)" }}>SheDrive Morocco v1.0.0</p>
+        <p className="text-center text-xs mb-6" style={{ color: "var(--color-silver-300)" }}>SheDrive Morocco v1.0.0</p>
       </div>
 
       <BottomNav active="profile"/>

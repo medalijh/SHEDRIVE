@@ -42,8 +42,8 @@ export default function OfflinePage() {
         <div
           className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-6"
           style={{
-            background: "linear-gradient(135deg,#C8956C,#8E5E3C)",
-            boxShadow: "0 8px 40px rgba(200,149,108,0.4)",
+            background: "linear-gradient(135deg,#E11D48,#8E5E3C)",
+            boxShadow: "0 8px 40px rgba(225,29,72,0.4)",
           }}
         >
           🌹
@@ -86,7 +86,7 @@ export default function OfflinePage() {
           className="flex items-center gap-3 px-5 py-3 rounded-full mb-8"
           style={{
             background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(200,149,108,0.2)",
+            border: "1px solid rgba(225,29,72,0.2)",
           }}
         >
           <div
@@ -106,8 +106,8 @@ export default function OfflinePage() {
           onClick={() => window.location.reload()}
           className="px-8 py-4 rounded-full font-semibold text-white mb-4"
           style={{
-            background: "linear-gradient(135deg,#C8956C,#8E5E3C)",
-            boxShadow: "0 4px 24px rgba(200,149,108,0.4)",
+            background: "linear-gradient(135deg,#E11D48,#8E5E3C)",
+            boxShadow: "0 4px 24px rgba(225,29,72,0.4)",
             fontSize: "0.9375rem",
           }}
         >
@@ -117,7 +117,7 @@ export default function OfflinePage() {
         <Link
           href="/"
           className="text-sm"
-          style={{ color: "rgba(200,149,108,0.7)", textDecoration: "underline" }}
+          style={{ color: "rgba(225,29,72,0.7)", textDecoration: "underline" }}
         >
           Retour à l'accueil
         </Link>
@@ -126,8 +126,8 @@ export default function OfflinePage() {
         <div
           className="mt-12 p-5 rounded-2xl max-w-xs"
           style={{
-            background: "rgba(200,149,108,0.08)",
-            border: "1px solid rgba(200,149,108,0.15)",
+            background: "rgba(225,29,72,0.08)",
+            border: "1px solid rgba(225,29,72,0.15)",
           }}
         >
           <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)", lineHeight: "1.6" }}>

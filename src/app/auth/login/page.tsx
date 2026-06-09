@@ -19,10 +19,10 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
             className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300"
             style={{
               background: i < current
-                ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))"
+                ? "linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700))"
                 : i === current
-                ? "linear-gradient(135deg, var(--color-rose-gold-400), var(--color-rose-gold-600))"
-                : "var(--color-sand-100)",
+                ? "linear-gradient(135deg, var(--color-rose-400), var(--color-rose-600))"
+                : "var(--color-silver-100)",
               color: i <= current ? "white" : "var(--color-muted)",
               boxShadow: i === current ? "var(--shadow-rose)" : "none",
               transform: i === current ? "scale(1.1)" : "scale(1)",
@@ -35,8 +35,8 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
               className="flex-1 h-0.5 transition-all duration-300"
               style={{
                 background: i < current - 1
-                  ? "linear-gradient(90deg, var(--color-rose-gold-400), var(--color-rose-gold-300))"
-                  : "var(--color-sand-200)",
+                  ? "linear-gradient(90deg, var(--color-rose-400), var(--color-rose-300))"
+                  : "var(--color-silver-200)",
               }}
             />
           )}
@@ -100,7 +100,7 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div>
-        <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>
+        <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>
           Email
         </label>
         <input
@@ -114,7 +114,7 @@ function LoginForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>
+        <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>
           Mot de passe
         </label>
         <div className="relative">
@@ -144,14 +144,14 @@ function LoginForm() {
             Se souvenir de moi
           </span>
         </label>
-        <Link href="/auth/forgot-password" className="text-sm font-medium" style={{ color: "var(--color-rose-gold-600)" }}>
+        <Link href="/auth/forgot-password" className="text-sm font-medium" style={{ color: "var(--color-rose-600)" }}>
           Mot de passe oublié ?
         </Link>
       </div>
 
       {error && (
-        <div className="p-3 rounded-xl text-sm text-red-700" style={{ background: "rgba(229,62,62,0.1)" }}>
-          ⚠️ {error}
+        <div className="p-3 rounded-xl text-sm flex gap-2 items-center text-red-700" style={{ background: "rgba(229,62,62,0.1)" }}>
+          <TriangleAlert size={16} /> {error}
         </div>
       )}
 
@@ -225,14 +225,14 @@ function PassengerRegisterForm() {
       fields: (
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Nom complet *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Nom complet *</label>
             <input className="input-field" type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Fatima Zahra Bennani" required />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Date de naissance *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Date de naissance *</label>
             <input className="input-field" type="date" name="dob" value={formData.dob} onChange={handleChange} required />
           </div>
-          <div className="p-3 rounded-xl text-sm flex gap-2 items-start" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
+          <div className="p-3 rounded-xl text-sm flex gap-2 items-start" style={{ background: "rgba(147,51,234,0.08)", color: "var(--color-purple-700)", border: "1px solid rgba(147,51,234,0.2)" }}>
             <Flower2 size={16} className="mt-0.5" />
             <span>SheDrive Morocco est un service exclusivement féminin.</span>
           </div>
@@ -245,24 +245,24 @@ function PassengerRegisterForm() {
       fields: (
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Numéro de téléphone marocain *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Numéro de téléphone marocain *</label>
             <div className="flex gap-2">
-              <div className="btn btn-sm flex items-center gap-2" style={{ background: "var(--color-sand-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem", cursor: "default" }}>
+              <div className="btn btn-sm flex items-center gap-2" style={{ background: "var(--color-silver-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem", cursor: "default" }}>
                 <span className="font-semibold text-rose-gold-600">MA</span> +212
               </div>
               <input className="input-field flex-1" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="6XX XXX XXX" required />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Email *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Email *</label>
             <input className="input-field" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="votre@email.ma" required />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Mot de passe *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Mot de passe *</label>
             <input className="input-field" type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Minimum 8 caractères" required />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Ville principale *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Ville principale *</label>
             <select className="input-field" name="city" value={formData.city} onChange={handleChange}>
               {["Casablanca", "Rabat", "Marrakech", "Fès", "Agadir", "Tanger", "Meknès", "Oujda", "Tétouan", "Salé"].map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
@@ -275,7 +275,7 @@ function PassengerRegisterForm() {
       titleAr: "التحقق من رقم الهاتف",
       fields: (
         <div className="flex flex-col gap-6 items-center text-center">
-          <div className="w-20 h-20 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(200,149,108,0.1)" }}>
+          <div className="w-20 h-20 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(225,29,72,0.1)" }}>
             <Smartphone size={32} />
           </div>
           <div>
@@ -295,11 +295,11 @@ function PassengerRegisterForm() {
                   if (e.key === "Backspace" && !formData.otp[i] && i > 0) otpRefs[i-1].current?.focus();
                 }}
                 className="w-12 h-14 text-center text-xl font-bold border-2 rounded-xl"
-                style={{ borderColor: "var(--color-rose-gold-300)", color: "var(--color-text)" }}
+                style={{ borderColor: "var(--color-rose-300)", color: "var(--color-text)" }}
               />
             ))}
           </div>
-          <button type="button" className="text-sm flex items-center gap-1 hover:underline" style={{ color: "var(--color-rose-gold-600)" }}>Renvoyer le code <ArrowRight size={14} /></button>
+          <button type="button" className="text-sm flex items-center gap-1 hover:underline" style={{ color: "var(--color-rose-600)" }}>Renvoyer le code <ArrowRight size={14} /></button>
         </div>
       ),
     },
@@ -316,20 +316,20 @@ function PassengerRegisterForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Nom du contact *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Nom du contact *</label>
             <input className="input-field" type="text" name="emName" value={formData.emName} onChange={handleChange} placeholder="Prénom Nom" required />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Téléphone du contact *</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Téléphone du contact *</label>
             <div className="flex gap-2">
-              <div className="flex items-center gap-2" style={{ background: "var(--color-sand-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem" }}>
+              <div className="flex items-center gap-2" style={{ background: "var(--color-silver-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem" }}>
                 <span className="font-semibold text-rose-gold-600">MA</span> +212
               </div>
               <input className="input-field flex-1" type="tel" name="emPhone" value={formData.emPhone} onChange={handleChange} placeholder="6XX XXX XXX" required />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Relation</label>
+            <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-silver-700)" }}>Relation</label>
             <select className="input-field" name="emRelation" value={formData.emRelation} onChange={handleChange}>
               {["Mère", "Sœur", "Amie", "Collègue", "Mari", "Père", "Autre"].map((r) => <option key={r} value={r}>{r}</option>)}
             </select>
@@ -484,7 +484,7 @@ function DriverRegisterForm() {
             <div>
               <label className="block text-sm font-medium mb-2">Téléphone *</label>
               <div className="flex gap-2">
-                <div className="flex items-center gap-2" style={{ background: "var(--color-sand-100)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px" }}>
+                <div className="flex items-center gap-2" style={{ background: "var(--color-silver-100)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px" }}>
                   <span className="font-semibold text-rose-gold-600">MA</span> +212
                 </div>
                 <input className="input-field flex-1" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="6XX XXX XXX" required />
@@ -512,10 +512,10 @@ function DriverRegisterForm() {
       title: "Carte Nationale d'Identité (CIN)",
       content: (
         <div className="flex flex-col gap-5">
-          <div className="p-4 rounded-2xl flex gap-2 items-start" style={{ background: "rgba(200,149,108,0.08)", border: "1px solid rgba(200,149,108,0.2)" }}>
+          <div className="p-4 rounded-2xl flex gap-2 items-start" style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.2)" }}>
             <IdCard size={20} className="text-rose-gold-700 mt-0.5" />
             <div>
-              <p className="text-sm font-medium mb-1" style={{ color: "var(--color-rose-gold-700)" }}>Vérification d'identité requise</p>
+              <p className="text-sm font-medium mb-1" style={{ color: "var(--color-rose-700)" }}>Vérification d'identité requise</p>
               <p className="text-xs" style={{ color: "var(--color-muted)" }}>Pour la sécurité de toutes les passagères, nous vérifions l'identité de chaque conductrice.</p>
             </div>
           </div>
@@ -526,7 +526,7 @@ function DriverRegisterForm() {
           {["Recto de la CIN", "Verso de la CIN"].map((label) => (
             <div key={label}>
               <label className="block text-sm font-medium mb-2">{label} *</label>
-              <div className="border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer hover:border-rose-400 transition-colors relative" style={{ borderColor: "var(--color-rose-gold-300)" }}>
+              <div className="border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer hover:border-rose-400 transition-colors relative" style={{ borderColor: "var(--color-rose-300)" }}>
                 <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*,.pdf" />
                 <div className="flex justify-center mb-2 text-rose-gold-400"><Camera size={36} /></div>
                 <p className="text-sm font-medium">Cliquez pour uploader</p>
@@ -541,14 +541,14 @@ function DriverRegisterForm() {
       title: "Selfie de vérification",
       content: (
         <div className="flex flex-col gap-5 items-center text-center">
-          <div className="w-24 h-24 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(200,149,108,0.1)" }}>
+          <div className="w-24 h-24 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(225,29,72,0.1)" }}>
             <UserCircle size={48} />
           </div>
           <div>
             <h4 className="font-semibold mb-2">Photo de vérification</h4>
             <p className="text-sm" style={{ color: "var(--color-muted)" }}>Prenez un selfie en tenant votre CIN visible pour vérifier que vous êtes bien la titulaire.</p>
           </div>
-          <div className="w-full border-2 border-dashed rounded-2xl p-6 cursor-pointer hover:border-rose-400 transition-colors relative" style={{ borderColor: "var(--color-rose-gold-300)" }}>
+          <div className="w-full border-2 border-dashed rounded-2xl p-6 cursor-pointer hover:border-rose-400 transition-colors relative" style={{ borderColor: "var(--color-rose-300)" }}>
             <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
             <div className="flex justify-center mb-3 text-rose-gold-400"><Camera size={40} /></div>
             <p className="font-medium text-sm">Prendre ou uploader une photo</p>
@@ -572,7 +572,7 @@ function DriverRegisterForm() {
           {["Recto du permis", "Verso du permis"].map((label) => (
             <div key={label}>
               <label className="block text-sm font-medium mb-2">{label} *</label>
-              <div className="border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer relative" style={{ borderColor: "var(--color-rose-gold-300)" }}>
+              <div className="border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer relative" style={{ borderColor: "var(--color-rose-300)" }}>
                 <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*,.pdf" />
                 <div className="flex justify-center mb-2 text-rose-gold-400"><IdCard size={36} /></div>
                 <p className="text-sm font-medium">Cliquez pour uploader</p>
@@ -616,7 +616,7 @@ function DriverRegisterForm() {
                 { id: "luxury", label: "Luxe", icon: <Sparkles size={24} />, desc: "Mercedes, BMW..." },
                 { id: "van", label: "Van / Monospace", icon: <CarFront size={24} />, desc: "Kangoo, Berlingo..." },
               ].map((cat) => (
-                <div key={cat.id} onClick={() => setFormData({...formData, vehicleCategory: cat.id})} className="p-4 rounded-xl cursor-pointer border-2 transition-all" style={{ borderColor: formData.vehicleCategory === cat.id ? "var(--color-emerald-500)" : "var(--color-border)", background: formData.vehicleCategory === cat.id ? "rgba(13,122,74,0.05)" : "transparent" }}>
+                <div key={cat.id} onClick={() => setFormData({...formData, vehicleCategory: cat.id})} className="p-4 rounded-xl cursor-pointer border-2 transition-all" style={{ borderColor: formData.vehicleCategory === cat.id ? "var(--color-purple-500)" : "var(--color-border)", background: formData.vehicleCategory === cat.id ? "rgba(147,51,234,0.05)" : "transparent" }}>
                   <div className="mb-2 text-rose-gold-600">{cat.icon}</div>
                   <div className="text-sm font-semibold">{cat.label}</div>
                   <div className="text-xs" style={{ color: "var(--color-muted)" }}>{cat.desc}</div>
@@ -681,7 +681,7 @@ function DriverRegisterForm() {
       <div className="mb-6">
         <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-display)" }}>{steps[step].title}</h3>
       </div>
-      {error && <div className="p-3 mb-4 rounded-xl text-sm text-red-700" style={{ background: "rgba(229,62,62,0.1)" }}>⚠️ {error}</div>}
+      {error && <div className="p-3 mb-4 rounded-xl text-sm flex gap-2 items-center text-red-700" style={{ background: "rgba(229,62,62,0.1)" }}><TriangleAlert size={16} /> {error}</div>}
       <form onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
         {steps[step].content}
         <div className="flex gap-3 mt-6">
@@ -689,7 +689,11 @@ function DriverRegisterForm() {
           <button type="submit" className="btn btn-primary flex-1" disabled={loading}>
             {loading ? (
               <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Soumission...</span>
-            ) : step < totalSteps - 1 ? "Continuer →" : "🌸 Soumettre ma demande"}
+            ) : step < totalSteps - 1 ? (
+              <span className="flex items-center gap-2">Continuer <ArrowRight size={20} /></span>
+            ) : (
+              <span className="flex items-center gap-2"><Sparkles size={20} /> Soumettre ma demande</span>
+            )}
           </button>
         </div>
       </form>
@@ -714,21 +718,21 @@ function AuthContent() {
   const [role, setRole] = useState<Role>(initialRole);
 
   return (
-    <div className="min-h-screen flex" style={{ background: "var(--color-sand-50)" }}>
+    <div className="min-h-screen flex" style={{ background: "var(--color-silver-50)" }}>
       {/* Left Panel (Desktop) */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col justify-between p-12 bg-hero-gradient">
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col justify-between p-12 bg-white">
         <div className="zellige-pattern absolute inset-0 opacity-20" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "radial-gradient(circle, rgba(200,149,108,0.2) 0%, transparent 70%)" }} />
-        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full translate-y-1/2 -translate-x-1/2" style={{ background: "radial-gradient(circle, rgba(13,122,74,0.15) 0%, transparent 70%)" }} />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "radial-gradient(circle, rgba(225,29,72,0.2) 0%, transparent 70%)" }} />
+        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full translate-y-1/2 -translate-x-1/2" style={{ background: "radial-gradient(circle, rgba(147,51,234,0.15) 0%, transparent 70%)" }} />
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <img src="/logo.png" alt="SheDrive Logo" className="w-12 h-12 object-cover rounded-full border-2 border-rose-gold-500 shadow-sm" />
-            <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+            <img src="/logo.png" alt="SheDrive Logo" className="w-12 h-12 object-cover rounded-full border-2 border-rose-500 shadow-sm" />
+            <span className="text-xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
-          <h2 className="text-display-lg text-white mb-6">Bienvenue dans <br /><span className="gradient-text">votre espace</span></h2>
-          <p className="text-base mb-8" style={{ color: "rgba(255,255,255,0.6)" }}>La plateforme de transport exclusive pour les femmes marocaines. Sécurité, élégance, et liberté à chaque trajet.</p>
-          <p style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(255,255,255,0.4)", fontSize: "0.9rem" }}>منصة النقل الحصرية للمرأة المغربية — أمان وأناقة في كل رحلة</p>
+          <h2 className="text-display-lg text-black mb-6">Bienvenue dans <br /><span className="gradient-text">votre espace</span></h2>
+          <p className="text-base mb-8" style={{ color: "rgba(0,0,0,0.6)" }}>La plateforme de transport exclusive pour les femmes marocaines. Sécurité, élégance, et liberté à chaque trajet.</p>
+          <p style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(0,0,0,0.4)", fontSize: "0.9rem" }}>منصة النقل الحصرية للمرأة المغربية — أمان وأناقة في كل رحلة</p>
         </div>
 
         <div className="relative z-10 grid grid-cols-3 gap-4">
@@ -737,9 +741,9 @@ function AuthContent() {
             { icon: <Flower2 size={28} />, label: "100% Féminin" },
             { icon: <Map size={28} />, label: "100% Marocain" }
           ].map((f) => (
-            <div key={f.label} className="text-center p-4 rounded-2xl flex flex-col items-center justify-center" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
-              <div className="mb-2 text-rose-gold-400">{f.icon}</div>
-              <div className="text-xs text-white font-medium">{f.label}</div>
+            <div key={f.label} className="text-center p-4 rounded-2xl flex flex-col items-center justify-center" style={{ background: "rgba(0,0,0,0.06)", border: "1px solid rgba(225,29,72,0.2)" }}>
+              <div className="mb-2 text-rose-400">{f.icon}</div>
+              <div className="text-xs text-black font-medium">{f.label}</div>
             </div>
           ))}
         </div>
@@ -749,11 +753,11 @@ function AuthContent() {
       <div className="w-full lg:w-1/2 flex flex-col justify-start overflow-y-auto">
         <div className="lg:hidden p-6 pb-0 flex items-center gap-2">
           <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border-2 border-rose-gold-500 shadow-sm" />
-          <span className="font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-gold-700)" }}>SheDrive Morocco</span>
+          <span className="font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-700)" }}>SheDrive Morocco</span>
         </div>
 
         <div className="flex-1 p-6 lg:p-12 flex flex-col justify-center max-w-md w-full mx-auto lg:mx-0">
-          <div className="flex rounded-2xl p-1 mb-8" style={{ background: "var(--color-sand-100)" }}>
+          <div className="flex rounded-2xl p-1 mb-8" style={{ background: "var(--color-silver-100)" }}>
             {[{ id: "login" as AuthTab, label: "Connexion" }, { id: "register" as AuthTab, label: "S'inscrire" }].map((t) => (
               <button
                 key={t.id}
@@ -761,7 +765,7 @@ function AuthContent() {
                 className="flex-1 py-3 rounded-xl text-sm font-semibold transition-all duration-200"
                 style={{
                   background: tab === t.id ? "white" : "transparent",
-                  color: tab === t.id ? "var(--color-rose-gold-700)" : "var(--color-muted)",
+                  color: tab === t.id ? "var(--color-rose-700)" : "var(--color-muted)",
                   boxShadow: tab === t.id ? "var(--shadow-sm)" : "none",
                 }}
               >{t.label}</button>
@@ -791,8 +795,8 @@ function AuthContent() {
                       onClick={() => setRole(r.id)}
                       className="p-4 rounded-2xl border-2 text-center transition-all duration-200 flex flex-col items-center"
                       style={{
-                        borderColor: role === r.id ? "var(--color-rose-gold-400)" : "var(--color-border)",
-                        background: role === r.id ? "rgba(200,149,108,0.06)" : "transparent",
+                        borderColor: role === r.id ? "var(--color-rose-400)" : "var(--color-border)",
+                        background: role === r.id ? "rgba(225,29,72,0.06)" : "transparent",
                       }}
                     >
                       <div className="mb-2 text-rose-gold-500">{r.icon}</div>
@@ -807,7 +811,7 @@ function AuthContent() {
           )}
 
           <p className="text-xs text-center mt-6" style={{ color: "var(--color-muted)" }}>
-            En continuant, vous acceptez nos <Link href="/terms" className="underline" style={{ color: "var(--color-rose-gold-600)" }}>Conditions d'utilisation</Link> et notre <Link href="/privacy" className="underline" style={{ color: "var(--color-rose-gold-600)" }}>Politique de confidentialité</Link>.
+            En continuant, vous acceptez nos <Link href="/terms" className="underline" style={{ color: "var(--color-rose-600)" }}>Conditions d'utilisation</Link> et notre <Link href="/privacy" className="underline" style={{ color: "var(--color-rose-600)" }}>Politique de confidentialité</Link>.
           </p>
         </div>
       </div>
@@ -819,10 +823,10 @@ export default function AuthPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--color-sand-50)" }}>
+        <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--color-silver-50)" }}>
           <div className="flex flex-col items-center gap-4">
             <img src="/logo.png" alt="SheDrive Logo" className="w-16 h-16 object-cover rounded-full animate-float border-4 border-rose-gold-500 shadow-sm" />
-            <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "var(--color-rose-gold-400)" }}/>
+            <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "var(--color-rose-400)" }}/>
           </div>
         </div>
       }

@@ -5,90 +5,80 @@
    DESIGN TOKENS — SheDrive Morocco Tulips Floral Palette
    ============================================================ */
 :root {
-  /* Vibrant Rose Gold / Pink */
-  --color-rose-gold-50:  #FFF5F7;
-  --color-rose-gold-100: #FFE4EA;
-  --color-rose-gold-200: #FFBFCF;
-  --color-rose-gold-300: #FF8FAF;
-  --color-rose-gold-400: #F5608F;
-  --color-rose-gold-500: #E83870;
-  --color-rose-gold-600: #C8956C;
-  --color-rose-gold-700: #A87A55;
-  --color-rose-gold-800: #7A5A3E;
-  --color-rose-gold-900: #2D1F14;
+  /* Rose (Primary) */
+  --color-rose-50:  #FFF1F2;
+  --color-rose-100: #FFE4E6;
+  --color-rose-200: #FECDD3;
+  --color-rose-300: #FDA4AF;
+  --color-rose-400: #FB7185;
+  --color-rose-500: #F43F5E;
+  --color-rose-600: #E11D48;
+  --color-rose-700: #BE123C;
+  --color-rose-800: #9F1239;
+  --color-rose-900: #881337;
 
-  /* Rich Emerald Green */
-  --color-emerald-50:  #ECFDF5;
-  --color-emerald-100: #D1FAE5;
-  --color-emerald-200: #A7F3D0;
-  --color-emerald-300: #6EE7B7;
-  --color-emerald-400: #34D399;
-  --color-emerald-500: #0D7A4A;
-  --color-emerald-600: #059669;
-  --color-emerald-700: #047857;
-  --color-emerald-800: #065F46;
-  --color-emerald-900: #064E3B;
+  /* Baby Rose (Soft Accents) */
+  --color-baby-rose-50:  #FDF2F8;
+  --color-baby-rose-100: #FCE7F3;
+  --color-baby-rose-200: #FBCFE8;
+  --color-baby-rose-300: #F9A8D4;
+  --color-baby-rose-400: #F472B6;
+  --color-baby-rose-500: #EC4899;
+  --color-baby-rose-600: #DB2777;
+  --color-baby-rose-700: #BE185D;
+  --color-baby-rose-800: #9D174D;
+  --color-baby-rose-900: #831843;
 
-  /* Warm Gold */
-  --color-gold-50:  #FFFDF0;
-  --color-gold-100: #FEF9C3;
-  --color-gold-200: #FEF08A;
-  --color-gold-300: #FDE047;
-  --color-gold-400: #D4A017;
-  --color-gold-500: #B8860B;
-  --color-gold-600: #9A7209;
-  --color-gold-700: #7C5E08;
-  --color-gold-800: #5E4506;
-  --color-gold-900: #3F2E04;
+  /* Purple (Secondary) */
+  --color-purple-50:  #FAF5FF;
+  --color-purple-100: #F3E8FF;
+  --color-purple-200: #E9D5FF;
+  --color-purple-300: #D8B4FE;
+  --color-purple-400: #C084FC;
+  --color-purple-500: #A855F7;
+  --color-purple-600: #9333EA;
+  --color-purple-700: #7E22CE;
+  --color-purple-800: #6B21A8;
+  --color-purple-900: #581C87;
 
-  /* Baby Rose (Accent Pink) */
-  --color-blush-50:  #FFF8FB;
-  --color-blush-100: #FFE9F3;
-  --color-blush-200: #FFD4E8;
-  --color-blush-300: #FFBEE0;
-  --color-blush-400: #FFA3D3;
-  --color-blush-500: #FF88C8; /* Baby Rose */
-  --color-blush-600: #E067A8;
-  --color-blush-700: #C24C8A;
-  --color-blush-800: #A5346F;
-  --color-blush-900: #8B215A;
+  /* Silver (Grays/Neutrals) */
+  --color-silver-50:  #F9FAFB;
+  --color-silver-100: #F3F4F6;
+  --color-silver-200: #E5E7EB;
+  --color-silver-300: #D1D5DB;
+  --color-silver-400: #9CA3AF;
+  --color-silver-500: #6B7280;
+  --color-silver-600: #4B5563;
+  --color-silver-700: #374151;
+  --color-silver-800: #1F2937;
+  --color-silver-900: #111827;
 
-  /* Pure White Background */
-  --color-sand-50:  #FFFFFF;
-  --color-sand-100: #FAFBFC;
-  --color-sand-200: #F3F4F6;
-  --color-sand-300: #E5E7EB;
-  --color-sand-400: #D1D5DB;
-  --color-sand-500: #9CA3AF;
-  --color-sand-600: #6B7280;
-  --color-sand-700: #4B5563;
-  --color-sand-800: #1F2937;
-  --color-sand-900: #111827;
-
-  /* Semantic Colors */
-  --color-primary:   var(--color-rose-gold-500);
-  --color-secondary: var(--color-emerald-500);
-  --color-accent:    var(--color-blush-500);
+  /* Background & Surface (White) */
   --color-bg:        #FFFFFF;
   --color-surface:   #FFFFFF;
-  --color-text:      #1F2937;
+  --color-text:      #111827;
   --color-muted:     #6B7280;
   --color-border:    #E5E7EB;
+
+  /* Semantic Colors mapped to new palette */
+  --color-primary:   var(--color-rose-600);
+  --color-secondary: var(--color-purple-600);
+  --color-accent:    var(--color-baby-rose-500);
 
   /* Typography */
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-arabic:  'Noto Sans Arabic', Arial, sans-serif;
 
-  /* Shadows */
-  --shadow-xs:  0 1px 2px rgba(200, 149, 108, 0.06);
-  --shadow-sm:  0 2px 8px rgba(200, 149, 108, 0.08);
-  --shadow-md:  0 4px 20px rgba(200, 149, 108, 0.12);
-  --shadow-lg:  0 8px 40px rgba(200, 149, 108, 0.16);
-  --shadow-xl:  0 16px 60px rgba(200, 149, 108, 0.20);
-  --shadow-gold: 0 4px 24px rgba(212, 160, 23, 0.30);
-  --shadow-rose: 0 4px 24px rgba(200, 149, 108, 0.35);
-  --shadow-emerald: 0 4px 24px rgba(13, 122, 74, 0.25);
+  /* Shadows (Updated tints to Rose/Purple/Silver) */
+  --shadow-xs:  0 1px 2px rgba(225, 29, 72, 0.05);
+  --shadow-sm:  0 2px 8px rgba(225, 29, 72, 0.08);
+  --shadow-md:  0 4px 20px rgba(225, 29, 72, 0.12);
+  --shadow-lg:  0 8px 40px rgba(225, 29, 72, 0.16);
+  --shadow-xl:  0 16px 60px rgba(225, 29, 72, 0.20);
+  --shadow-rose: 0 4px 24px rgba(225, 29, 72, 0.25);
+  --shadow-purple: 0 4px 24px rgba(147, 51, 234, 0.25);
+  --shadow-silver: 0 4px 24px rgba(156, 163, 175, 0.30);
 
   /* Border Radius */
   --radius-xs: 4px;
@@ -153,15 +143,15 @@ body {
 .text-display-sm  { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 500; line-height: 1.3; }
 
 /* ============================================================
-   MOROCCAN GEOMETRIC PATTERN (Subtle, elegant tulip-inspired)
+   GEOMETRIC PATTERN (Tulip/Floral-inspired new theme)
    ============================================================ */
 .zellige-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23C8956C' stroke-width='0.8' opacity='0.12'%3E%3Cpath d='M40 10 Q 50 20 40 30 Q 30 20 40 10' fill='%23D4A017' opacity='0.08'/%3E%3Cpath d='M40 50 Q 50 60 40 70 Q 30 60 40 50' fill='%230D7A4A' opacity='0.08'/%3E%3Cline x1='40' y1='0' x2='40' y2='80' stroke='%23D4A017' opacity='0.08'/%3E%3Cline x1='0' y1='40' x2='80' y2='40' stroke='%23D4A017' opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23E11D48' stroke-width='0.8' opacity='0.15'%3E%3Cpath d='M40 10 Q 50 20 40 30 Q 30 20 40 10' fill='%23F472B6' opacity='0.1'/%3E%3Cpath d='M40 50 Q 50 60 40 70 Q 30 60 40 50' fill='%239333EA' opacity='0.1'/%3E%3Cline x1='40' y1='0' x2='40' y2='80' stroke='%239CA3AF' opacity='0.15'/%3E%3Cline x1='0' y1='40' x2='80' y2='40' stroke='%239CA3AF' opacity='0.15'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 80px 80px;
 }
 
 .zellige-pattern-dense {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cg fill='none' stroke='%23C8956C' stroke-width='0.6' opacity='0.12'%3E%3Cpath d='M25 8 Q 32 15 25 22 Q 18 15 25 8' fill='%23D4A017' opacity='0.08'/%3E%3Cline x1='25' y1='0' x2='25' y2='50' stroke='%230D7A4A' opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cg fill='none' stroke='%23E11D48' stroke-width='0.6' opacity='0.15'%3E%3Cpath d='M25 8 Q 32 15 25 22 Q 18 15 25 8' fill='%239333EA' opacity='0.1'/%3E%3Cline x1='25' y1='0' x2='25' y2='50' stroke='%239CA3AF' opacity='0.15'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 50px 50px;
 }
 
@@ -177,7 +167,7 @@ body {
   transform: translateX(-50%);
   width: 60%;
   height: 4px;
-  background: linear-gradient(90deg, transparent, var(--color-rose-gold-500), var(--color-gold-400), var(--color-rose-gold-500), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-rose-600), var(--color-purple-500), var(--color-rose-600), transparent);
   border-radius: 0 0 50% 50%;
 }
 
@@ -185,31 +175,24 @@ body {
    TULIPS GRADIENT BACKGROUNDS
    ============================================================ */
 .bg-hero-gradient {
-  background: linear-gradient(
-    135deg,
-    #1A0A14 0%,
-    #2D1025 25%,
-    #1F0E2E 50%,
-    #2D1025 75%,
-    #1A0A14 100%
-  );
+  background: white; /* White background requested by user */
 }
 
 .bg-rose-gradient {
-  background: linear-gradient(135deg, var(--color-rose-gold-500) 0%, var(--color-rose-gold-700) 100%);
+  background: linear-gradient(135deg, var(--color-rose-500) 0%, var(--color-rose-700) 100%);
 }
 
-.bg-emerald-gradient {
-  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-700) 100%);
+.bg-purple-gradient {
+  background: linear-gradient(135deg, var(--color-purple-500) 0%, var(--color-purple-700) 100%);
 }
 
-.bg-gold-shimmer {
+.bg-silver-shimmer {
   background: linear-gradient(
     90deg,
-    var(--color-gold-400) 0%,
-    var(--color-gold-200) 40%,
-    var(--color-gold-400) 60%,
-    var(--color-gold-300) 100%
+    var(--color-silver-200) 0%,
+    var(--color-silver-100) 40%,
+    var(--color-silver-200) 60%,
+    var(--color-silver-300) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
@@ -222,21 +205,21 @@ body {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(217, 122, 184, 0.15);
+  border: 1px solid rgba(225, 29, 72, 0.15); /* Rose 600 tint */
 }
 
 .glass-dark {
-  background: rgba(54, 46, 37, 0.85);
+  background: rgba(17, 24, 39, 0.85); /* Dark Gray instead of brown */
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(217, 122, 184, 0.2);
+  border: 1px solid rgba(225, 29, 72, 0.2);
 }
 
 .glass-rose {
-  background: rgba(254, 248, 251, 0.95);
+  background: rgba(253, 242, 248, 0.95); /* Baby rose 50 */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(217, 122, 184, 0.2);
+  border: 1px solid rgba(225, 29, 72, 0.2);
 }
 
 /* ============================================================
@@ -258,8 +241,8 @@ body {
 .card-luxury {
   background: var(--color-surface);
   border-radius: 24px 8px 24px 8px;
-  box-shadow: 0 4px 24px rgba(217, 122, 184, 0.15);
-  border: 1px solid rgba(217, 122, 184, 0.2);
+  box-shadow: 0 4px 24px rgba(225, 29, 72, 0.15);
+  border: 1px solid rgba(225, 29, 72, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -271,12 +254,12 @@ body {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-rose-gold-500), var(--color-emerald-500), var(--color-rose-gold-500));
+  background: linear-gradient(90deg, var(--color-rose-600), var(--color-purple-500), var(--color-rose-600));
 }
 
 .moroccan-arch-card {
   border-radius: 8px 24px 8px 24px;
-  border-top: 3px solid var(--color-rose-gold-500);
+  border-top: 3px solid var(--color-rose-600);
 }
 
 /* ============================================================
@@ -310,12 +293,12 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700));
+  background: linear-gradient(135deg, var(--color-rose-500), var(--color-rose-700));
   color: white;
   box-shadow: var(--shadow-rose);
 }
 .btn-primary:hover {
-  box-shadow: 0 6px 30px rgba(217, 122, 184, 0.45);
+  box-shadow: 0 6px 30px rgba(225, 29, 72, 0.45);
   transform: translateY(-1px);
 }
 .btn-primary:active {
@@ -323,34 +306,34 @@ body {
   box-shadow: var(--shadow-rose);
 }
 
-.btn-emerald {
-  background: linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700));
+.btn-purple {
+  background: linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700));
   color: white;
-  box-shadow: var(--shadow-emerald);
+  box-shadow: var(--shadow-purple);
 }
-.btn-emerald:hover {
-  box-shadow: 0 6px 30px rgba(138, 95, 191, 0.4);
+.btn-purple:hover {
+  box-shadow: 0 6px 30px rgba(147, 51, 234, 0.4);
   transform: translateY(-1px);
 }
 
-.btn-gold {
-  background: linear-gradient(135deg, var(--color-blush-500), var(--color-blush-700));
+.btn-silver {
+  background: linear-gradient(135deg, var(--color-silver-400), var(--color-silver-600));
   color: white;
-  box-shadow: var(--shadow-gold);
+  box-shadow: var(--shadow-silver);
 }
-.btn-gold:hover {
-  box-shadow: 0 6px 30px rgba(255, 136, 200, 0.45);
+.btn-silver:hover {
+  box-shadow: 0 6px 30px rgba(156, 163, 175, 0.45);
   transform: translateY(-1px);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--color-rose-gold-600);
-  border: 1.5px solid var(--color-rose-gold-400);
+  color: var(--color-rose-600);
+  border: 1.5px solid var(--color-rose-400);
 }
 .btn-outline:hover {
-  background: var(--color-rose-gold-50);
-  border-color: var(--color-rose-gold-500);
+  background: var(--color-rose-50);
+  border-color: var(--color-rose-500);
 }
 
 .btn-ghost {
@@ -358,7 +341,7 @@ body {
   color: var(--color-text);
 }
 .btn-ghost:hover {
-  background: var(--color-sand-100);
+  background: var(--color-silver-100);
 }
 
 .btn-sm  { padding: 8px 16px; font-size: 0.875rem; }
@@ -388,8 +371,8 @@ body {
 }
 
 .input-field:focus {
-  border-color: var(--color-rose-gold-500);
-  box-shadow: 0 0 0 3px rgba(217, 122, 184, 0.15);
+  border-color: var(--color-rose-500);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
 }
 
 .input-field.error {
@@ -417,11 +400,11 @@ body {
   text-transform: uppercase;
 }
 
-.badge-primary  { background: rgba(217, 122, 184, 0.12); color: var(--color-rose-gold-700); }
-.badge-success  { background: rgba(138, 95, 191, 0.10); color: var(--color-emerald-700); }
-.badge-warning  { background: rgba(255, 136, 200, 0.12); color: var(--color-blush-700); }
+.badge-primary  { background: rgba(225, 29, 72, 0.12); color: var(--color-rose-700); }
+.badge-success  { background: rgba(147, 51, 234, 0.10); color: var(--color-purple-700); }
+.badge-warning  { background: rgba(236, 72, 153, 0.12); color: var(--color-baby-rose-700); }
 .badge-danger   { background: rgba(229, 62, 62, 0.10); color: #C53030; }
-.badge-neutral  { background: var(--color-sand-100); color: var(--color-sand-700); }
+.badge-neutral  { background: var(--color-silver-100); color: var(--color-silver-700); }
 
 /* ============================================================
    SOS BUTTON (Always Accessible)
@@ -468,30 +451,30 @@ body {
    TEXT COLOR UTILITIES — Perfect Visibility
    ============================================================ */
 .text-primary {
-  color: var(--color-rose-gold-600);
+  color: var(--color-rose-600);
   font-weight: 600;
 }
 
 .text-secondary {
-  color: var(--color-emerald-600);
+  color: var(--color-purple-600);
   font-weight: 600;
 }
 
 .text-accent {
-  color: var(--color-blush-600);
+  color: var(--color-baby-rose-600);
   font-weight: 600;
 }
 
 .text-muted {
-  color: var(--color-sand-600);
+  color: var(--color-silver-600);
 }
 
 .text-light {
-  color: var(--color-sand-500);
+  color: var(--color-silver-500);
 }
 
 .text-dark {
-  color: var(--color-sand-900);
+  color: var(--color-silver-900);
 }
 
 .text-white-emphasis {
@@ -501,22 +484,22 @@ body {
 
 /* Link and heading styles */
 a {
-  color: var(--color-rose-gold-600);
+  color: var(--color-rose-600);
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-rose-gold-700);
+  color: var(--color-rose-700);
   text-decoration: underline;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--color-sand-900);
+  color: var(--color-silver-900);
   font-weight: 600;
 }
 
 label {
-  color: var(--color-sand-800);
+  color: var(--color-silver-800);
   font-weight: 500;
 }
 
@@ -631,12 +614,12 @@ label {
 }
 
 .bottom-nav-item.active {
-  color: var(--color-rose-gold-600);
+  color: var(--color-rose-600);
 }
 
 .bottom-nav-item.active .nav-icon {
-  background: rgba(200, 149, 108, 0.12);
-  color: var(--color-rose-gold-600);
+  background: rgba(225, 29, 72, 0.12);
+  color: var(--color-rose-600);
 }
 
 .nav-icon {
@@ -653,22 +636,22 @@ label {
    SCROLLBAR CUSTOM STYLING
    ============================================================ */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--color-sand-100); border-radius: 3px; }
-::-webkit-scrollbar-thumb { background: var(--color-sand-300); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-rose-gold-400); }
+::-webkit-scrollbar-track { background: var(--color-silver-100); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--color-silver-300); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-rose-400); }
 
 /* ============================================================
    UTILITY CLASSES
    ============================================================ */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-rose-gold-600), var(--color-gold-400));
+  background: linear-gradient(135deg, var(--color-rose-600), var(--color-purple-500));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-emerald {
-  background: linear-gradient(135deg, var(--color-emerald-400), var(--color-emerald-300));
+  background: linear-gradient(135deg, var(--color-purple-400), var(--color-purple-600));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -681,7 +664,7 @@ label {
 
 .divider-gold {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold-300), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-purple-300), transparent);
 }
 
 /* Safe area support */
@@ -700,7 +683,7 @@ label {
 
 /* Skeleton loading */
 .skeleton {
-  background: linear-gradient(90deg, var(--color-sand-100) 25%, var(--color-sand-200) 50%, var(--color-sand-100) 75%);
+  background: linear-gradient(90deg, var(--color-silver-100) 25%, var(--color-silver-200) 50%, var(--color-silver-100) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: var(--radius-sm);
@@ -710,7 +693,7 @@ label {
 .stars {
   display: flex;
   gap: 2px;
-  color: var(--color-gold-400);
+  color: var(--color-purple-400);
 }
 
 /* Online indicator */
@@ -739,7 +722,7 @@ label {
 
 /* Focus visible for accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-rose-gold-500);
+  outline: 2px solid var(--color-rose-500);
   outline-offset: 2px;
 }
 
@@ -789,7 +772,7 @@ label {
   display: block;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-sand-700);
+  color: var(--color-silver-700);
   margin-bottom: 6px;
   letter-spacing: 0.01em;
 }
@@ -804,7 +787,7 @@ label {
 
 /* Admin table hover */
 .hover\:bg-sand-50:hover {
-  background-color: var(--color-sand-50);
+  background-color: var(--color-silver-50);
 }
 
 /* Btn-sm extra small variant */
@@ -819,7 +802,7 @@ details > summary::-webkit-details-marker { display: none; }
 
 /* Admin sidebar active left bar */
 .admin-active-bar {
-  border-left: 3px solid var(--color-rose-gold-500);
+  border-left: 3px solid var(--color-rose-500);
 }
 
 /* Ping animation (used for online indicator) */
@@ -846,7 +829,7 @@ details > summary::-webkit-details-marker { display: none; }
 
 /* Gold gradient text */
 .gradient-text-gold {
-  background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+  background: linear-gradient(135deg, var(--color-purple-400), var(--color-rose-400));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

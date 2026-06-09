@@ -16,14 +16,14 @@ function AdminSidebar({ active }: { active: string }) {
   ];
   return (
     <aside className="hidden md:flex flex-col w-64 min-h-screen"
-      style={{ background: "#0D0A07", borderRight: "1px solid rgba(200,149,108,0.15)" }}>
-      <div className="p-6 border-b" style={{ borderColor: "rgba(200,149,108,0.15)" }}>
+      style={{ background: "#F3F4F6", borderRight: "1px solid rgba(225,29,72,0.15)" }}>
+      <div className="p-6 border-b" style={{ borderColor: "rgba(225,29,72,0.15)" }}>
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
           <div>
             <div className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
-            <div className="text-xs" style={{ color: "rgba(200,149,108,0.7)" }}>Admin Panel</div>
+            <div className="text-xs" style={{ color: "rgba(225,29,72,0.7)" }}>Admin Panel</div>
           </div>
         </div>
       </div>
@@ -32,9 +32,9 @@ function AdminSidebar({ active }: { active: string }) {
           <Link key={item.id} href={item.href}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all"
             style={{
-              background: active === item.id ? "rgba(200,149,108,0.15)" : "transparent",
-              color: active === item.id ? "#C8956C" : "rgba(255,255,255,0.5)",
-              borderLeft: active === item.id ? "3px solid var(--color-rose-gold-500)" : "3px solid transparent",
+              background: active === item.id ? "rgba(225,29,72,0.15)" : "transparent",
+              color: active === item.id ? "#E11D48" : "rgba(255,255,255,0.5)",
+              borderLeft: active === item.id ? "3px solid var(--color-rose-500)" : "3px solid transparent",
             }}>
             <span>{item.icon}</span><span>{item.label}</span>
           </Link>
@@ -110,7 +110,7 @@ export default function AdminDrivers() {
   };
 
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--color-sand-50)" }}>
+    <div className="flex min-h-screen" style={{ background: "var(--color-silver-50)" }}>
       <AdminSidebar active="drivers" />
       <main className="flex-1 overflow-auto">
         <div className="sticky top-0 z-30 px-8 py-4 flex items-center justify-between"
@@ -127,7 +127,7 @@ export default function AdminDrivers() {
               <button key={f} onClick={() => setFilter(f)}
                 className="px-4 py-2 rounded-full text-xs font-semibold transition-all"
                 style={{
-                  background: filter === f ? "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" : "white",
+                  background: filter === f ? "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" : "white",
                   color: filter === f ? "white" : "var(--color-muted)",
                   border: `1px solid ${filter === f ? "transparent" : "var(--color-border)"}`,
                   boxShadow: filter === f ? "var(--shadow-rose)" : "none",
@@ -139,10 +139,10 @@ export default function AdminDrivers() {
 
           {counts.pending > 0 && (
             <div className="p-4 rounded-2xl flex items-center gap-4"
-              style={{ background: "rgba(212,160,23,0.08)", border: "1px solid rgba(212,160,23,0.25)" }}>
+              style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.25)" }}>
               <span className="text-2xl">⏳</span>
               <div className="flex-1">
-                <div className="text-sm font-semibold" style={{ color: "var(--color-gold-700)" }}>
+                <div className="text-sm font-semibold" style={{ color: "var(--color-purple-700)" }}>
                   {counts.pending} conductrice(s) en attente d'approbation
                 </div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>Vérifiez les dossiers et approuvez ou rejetez</div>
@@ -155,7 +155,7 @@ export default function AdminDrivers() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr style={{ background: "var(--color-sand-50)" }}>
+                  <tr style={{ background: "var(--color-silver-50)" }}>
                     {["ID","Nom","Véhicule","Créé le","Statut","Actions"].map(h => (
                       <th key={h} className="px-4 py-3 text-left text-xs font-semibold" style={{ color: "var(--color-muted)", textTransform: "uppercase" }}>{h}</th>
                     ))}
@@ -172,7 +172,7 @@ export default function AdminDrivers() {
                       <td className="px-4 py-3 font-mono text-xs" style={{ color: "var(--color-muted)" }}>{d.id.slice(0, 8)}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-base" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-base" style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
                           <span className="font-medium">{d.profiles?.full_name}</span>
                         </div>
                       </td>
@@ -216,7 +216,7 @@ export default function AdminDrivers() {
           <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl" style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
                 <div>
                   <h3 className="text-xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>{selected.profiles?.full_name}</h3>
                   <p className="text-sm" style={{ color: "var(--color-muted)" }}>{selected.profiles?.phone} · {selected.id.slice(0, 8)}</p>
@@ -234,8 +234,8 @@ export default function AdminDrivers() {
                 { label: "Exp Assur", val: new Date(selected.insurance_expiry).toLocaleDateString("fr-FR") },
               ].map(doc => (
                 <div key={doc.label} className="flex items-center gap-2 p-3 rounded-xl"
-                  style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.2)" }}>
-                  <span style={{ color: "var(--color-emerald-500)" }}>✓</span>
+                  style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.2)" }}>
+                  <span style={{ color: "var(--color-purple-500)" }}>✓</span>
                   <div className="text-xs font-medium truncate flex-1 min-w-0" title={doc.val}>{doc.label}: {doc.val}</div>
                 </div>
               ))}

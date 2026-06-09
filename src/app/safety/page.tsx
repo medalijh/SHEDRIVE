@@ -6,12 +6,12 @@ import { ShieldCheck, UserCheck, Eye, EyeOff, Navigation, BrainCircuit, Lock, Se
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(200,149,108,0.2)" }}>
+      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-gold-400)" }}>Morocco</span></span>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
+          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
@@ -36,13 +36,13 @@ export default function SafetyPage() {
 
   const levelColor: Record<string, string> = {
     "Basique": "var(--color-blue-600)",
-    "Standard": "var(--color-emerald-600)",
-    "Avancé": "var(--color-gold-600)",
-    "Protection": "var(--color-rose-gold-700)",
+    "Standard": "var(--color-purple-600)",
+    "Avancé": "var(--color-purple-600)",
+    "Protection": "var(--color-rose-700)",
   };
 
   return (
-    <div style={{ background: "var(--color-sand-50)" }}>
+    <div style={{ background: "var(--color-silver-50)" }}>
       <Navbar />
 
       {/* Hero */}
@@ -50,9 +50,9 @@ export default function SafetyPage() {
         style={{ background: "linear-gradient(135deg, #0A1F15 0%, #0D2A1A 50%, #121A10 100%)" }}>
         <div className="zellige-pattern absolute inset-0 opacity-10"/>
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2"
-          style={{ background: "radial-gradient(circle,rgba(13,122,74,0.2) 0%,transparent 70%)" }}/>
+          style={{ background: "radial-gradient(circle,rgba(147,51,234,0.2) 0%,transparent 70%)" }}/>
         <div className="container-app mx-auto text-center relative z-10">
-          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(13,122,74,0.2)", color: "#4DBF8A", border: "1px solid rgba(13,122,74,0.3)" }}>VOTRE SÉCURITÉ</span>
+          <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(147,51,234,0.2)", color: "#4DBF8A", border: "1px solid rgba(147,51,234,0.3)" }}>VOTRE SÉCURITÉ</span>
           <h1 className="text-display-xl text-white mb-6">
             Sécurité de Niveau<br/>
             <span className="gradient-text-emerald">Entreprise</span>
@@ -101,7 +101,7 @@ export default function SafetyPage() {
               <div key={f.title} className="card-luxury p-6 hover:scale-[1.01] transition-transform duration-300">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-emerald-600"
-                    style={{ background: "rgba(13,122,74,0.08)" }}>{f.icon}</div>
+                    style={{ background: "rgba(147,51,234,0.08)" }}>{f.icon}</div>
                   <span className="text-xs font-semibold px-2 py-1 rounded-full"
                     style={{ background: `${levelColor[f.level]}15`, color: levelColor[f.level] }}>
                     {f.level}
@@ -149,7 +149,7 @@ export default function SafetyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center" style={{ background: "var(--color-sand-50)" }}>
+      <section className="py-20 px-6 text-center" style={{ background: "var(--color-silver-50)" }}>
         <div className="container-app mx-auto">
           <h2 className="text-display-lg mb-6">Voyagez en toute <span className="gradient-text">confiance</span></h2>
           <p className="mb-8" style={{ color: "var(--color-muted)" }}>Rejoignez des milliers de femmes qui font confiance à SheDrive Morocco.</p>
@@ -157,7 +157,7 @@ export default function SafetyPage() {
         </div>
       </section>
 
-      <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />

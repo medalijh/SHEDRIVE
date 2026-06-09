@@ -16,14 +16,14 @@ function AdminSidebar({ active }: { active: string }) {
   ];
   return (
     <aside className="hidden md:flex flex-col w-64 min-h-screen"
-      style={{ background: "#0D0A07", borderRight: "1px solid rgba(200,149,108,0.15)" }}>
-      <div className="p-6 border-b" style={{ borderColor: "rgba(200,149,108,0.15)" }}>
+      style={{ background: "#F3F4F6", borderRight: "1px solid rgba(225,29,72,0.15)" }}>
+      <div className="p-6 border-b" style={{ borderColor: "rgba(225,29,72,0.15)" }}>
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
           <div>
             <div className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
-            <div className="text-xs" style={{ color: "rgba(200,149,108,0.7)" }}>Admin Panel</div>
+            <div className="text-xs" style={{ color: "rgba(225,29,72,0.7)" }}>Admin Panel</div>
           </div>
         </div>
       </div>
@@ -32,9 +32,9 @@ function AdminSidebar({ active }: { active: string }) {
           <Link key={item.id} href={item.href}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all"
             style={{
-              background: active === item.id ? "rgba(200,149,108,0.15)" : "transparent",
-              color: active === item.id ? "#C8956C" : "rgba(255,255,255,0.5)",
-              borderLeft: active === item.id ? "3px solid var(--color-rose-gold-500)" : "3px solid transparent",
+              background: active === item.id ? "rgba(225,29,72,0.15)" : "transparent",
+              color: active === item.id ? "#E11D48" : "rgba(255,255,255,0.5)",
+              borderLeft: active === item.id ? "3px solid var(--color-rose-500)" : "3px solid transparent",
             }}>
             <span>{item.icon}</span><span>{item.label}</span>
           </Link>
@@ -77,7 +77,7 @@ export default function AdminRides() {
   };
 
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--color-sand-50)" }}>
+    <div className="flex min-h-screen" style={{ background: "var(--color-silver-50)" }}>
       <AdminSidebar active="rides" />
       <main className="flex-1 overflow-auto">
         <div className="sticky top-0 z-30 px-8 py-4 flex items-center justify-between"
@@ -92,7 +92,7 @@ export default function AdminRides() {
               <button key={f} onClick={() => setFilter(f)}
                 className="px-4 py-2 rounded-full text-xs font-semibold transition-all"
                 style={{
-                  background: filter === f ? "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" : "white",
+                  background: filter === f ? "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" : "white",
                   color: filter === f ? "white" : "var(--color-muted)",
                   border: `1px solid ${filter === f ? "transparent" : "var(--color-border)"}`,
                 }}>
@@ -104,7 +104,7 @@ export default function AdminRides() {
           <div className="card overflow-hidden">
             <table className="w-full text-sm">
               <thead>
-                <tr style={{ background: "var(--color-sand-50)" }}>
+                <tr style={{ background: "var(--color-silver-50)" }}>
                   {["ID","Passagère ID","Conductrice ID","Départ","Arrivée","Prix","Statut","Date"].map(h => (
                     <th key={h} className="px-4 py-3 text-left text-xs font-semibold" style={{ color: "var(--color-muted)", textTransform: "uppercase" }}>{h}</th>
                   ))}
@@ -122,7 +122,7 @@ export default function AdminRides() {
                     <td className="px-4 py-3 text-xs">{r.driver_id?.slice(0, 8) || "Aucune"}</td>
                     <td className="px-4 py-3 text-xs truncate max-w-[150px]">{r.from_address}</td>
                     <td className="px-4 py-3 text-xs truncate max-w-[150px]">{r.to_address}</td>
-                    <td className="px-4 py-3 font-semibold" style={{ color: "var(--color-rose-gold-700)" }}>{r.final_price || r.passenger_price} MAD</td>
+                    <td className="px-4 py-3 font-semibold" style={{ color: "var(--color-rose-700)" }}>{r.final_price || r.passenger_price} MAD</td>
                     <td className="px-4 py-3"><span className={`badge ${statusBadge[r.status]?.cls || 'badge-neutral'}`} style={{ fontSize: 10 }}>{statusBadge[r.status]?.label || r.status}</span></td>
                     <td className="px-4 py-3 text-xs" style={{ color: "var(--color-muted)" }}>
                       {new Date(r.created_at).toLocaleString("fr-FR")}

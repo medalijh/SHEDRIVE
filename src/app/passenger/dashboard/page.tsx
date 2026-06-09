@@ -79,18 +79,18 @@ function QuickBookWidget() {
         <h3 className="font-semibold text-base" style={{ fontFamily: "var(--font-display)" }}>Où souhaitez-vous aller ?</h3>
       </div>
       <div className="flex flex-col gap-3 mb-4">
-        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.15)" }}>
-          <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-emerald-500)" }} />
+        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.15)" }}>
+          <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-purple-500)" }} />
           <input className="flex-1 bg-transparent outline-none text-sm" placeholder="Votre position actuelle" style={{ color: "var(--color-text)" }} />
-          <span style={{ color: "var(--color-emerald-600)", fontSize: "1rem" }}>📍</span>
+          <span style={{ color: "var(--color-purple-600)", fontSize: "1rem" }}>📍</span>
         </div>
         <div className="ml-[18px] flex flex-col gap-1">
-          {[1, 2].map((i) => <div key={i} className="w-0.5 h-1 rounded-full ml-[4px]" style={{ background: "var(--color-sand-300)" }} />)}
+          {[1, 2].map((i) => <div key={i} className="w-0.5 h-1 rounded-full ml-[4px]" style={{ background: "var(--color-silver-300)" }} />)}
         </div>
-        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(200,149,108,0.06)", border: "1px solid rgba(200,149,108,0.15)" }}>
-          <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-rose-gold-500)" }} />
+        <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(225,29,72,0.06)", border: "1px solid rgba(225,29,72,0.15)" }}>
+          <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-rose-500)" }} />
           <input className="flex-1 bg-transparent outline-none text-sm" placeholder="Entrez votre destination" style={{ color: "var(--color-text)" }} />
-          <span style={{ color: "var(--color-rose-gold-500)", fontSize: "1rem" }}>🔍</span>
+          <span style={{ color: "var(--color-rose-500)", fontSize: "1rem" }}>🔍</span>
         </div>
       </div>
       <button onClick={() => router.push("/passenger/book")} className="btn btn-primary w-full">🌹 Trouver une conductrice</button>
@@ -120,14 +120,14 @@ function RecentRides() {
     <div className="card p-5">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Trajets récents</h3>
-        <Link href="/passenger/history" className="text-xs font-medium" style={{ color: "var(--color-rose-gold-600)" }}>Voir tout →</Link>
+        <Link href="/passenger/history" className="text-xs font-medium" style={{ color: "var(--color-rose-600)" }}>Voir tout →</Link>
       </div>
       <div className="flex flex-col gap-4">
         {rides.length === 0 ? (
           <div className="text-center text-sm text-gray-500 py-4">Aucun trajet récent</div>
         ) : rides.map((ride, i) => (
           <div key={i} className="flex items-center gap-4 py-3 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-            <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: "rgba(200,149,108,0.1)" }}>🚗</div>
+            <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: "rgba(225,29,72,0.1)" }}>🚗</div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium truncate">{ride.from_address} → {ride.to_address}</div>
               <div className="text-xs mt-1 flex items-center gap-2" style={{ color: "var(--color-muted)" }}>
@@ -137,7 +137,7 @@ function RecentRides() {
               </div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="text-sm font-semibold" style={{ color: "var(--color-rose-gold-700)" }}>{ride.final_price || ride.passenger_price} MAD</div>
+              <div className="text-sm font-semibold" style={{ color: "var(--color-rose-700)" }}>{ride.final_price || ride.passenger_price} MAD</div>
               {ride.status === "completed" && <span className="badge badge-success mt-1" style={{ fontSize: "10px" }}>✓</span>}
             </div>
           </div>
@@ -161,7 +161,7 @@ function WalletCard() {
   }, []);
 
   return (
-    <div className="rounded-3xl p-5 relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-800) 100%)", boxShadow: "var(--shadow-emerald)" }}>
+    <div className="rounded-3xl p-5 relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--color-purple-600) 0%, var(--color-purple-800) 100%)", boxShadow: "var(--shadow-emerald)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-10" />
       <div className="relative z-10 flex items-start justify-between mb-6">
         <div>
@@ -220,11 +220,11 @@ export default function PassengerDashboard() {
             <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>{profile?.full_name || "Passagère"}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/passenger/notifications" className="btn btn-icon" style={{ background: "var(--color-sand-100)" }}>
+            <Link href="/passenger/notifications" className="btn btn-icon" style={{ background: "var(--color-silver-100)" }}>
               <span className="text-xl relative">🔔<span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500" /></span>
             </Link>
             <Link href="/passenger/settings">
-              <div className="w-11 h-11 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-rose-gold-400), var(--color-rose-gold-600))" }}>👩</div>
+              <div className="w-11 h-11 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-rose-400), var(--color-rose-600))" }}>👩</div>
             </Link>
           </div>
         </div>
