@@ -103,22 +103,7 @@ interface LiveMapProps {
 const DEFAULT_CENTER: [number, number] = [33.5731, -7.5898];
 const DEFAULT_ZOOM = 14;
 
-// Leaflet CSS must be loaded
-function LeafletCSS() {
-  useEffect(() => {
-    // Add Leaflet CSS if not already loaded
-    if (!document.getElementById("leaflet-css")) {
-      const link = document.createElement("link");
-      link.id = "leaflet-css";
-      link.rel = "stylesheet";
-      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-      link.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
-      link.crossOrigin = "";
-      document.head.appendChild(link);
-    }
-  }, []);
-  return null;
-}
+// Leaflet CSS is now loaded globally in layout.tsx
 
 export default function LiveMap({
   center,
@@ -206,7 +191,6 @@ export default function LiveMap({
 
   return (
     <>
-      <LeafletCSS />
       <div style={{ height, borderRadius, overflow: "hidden", position: "relative" }} className={className}>
         <MapContainerDynamic
           center={mapCenter}
