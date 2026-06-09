@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { UserCircle, MapPin, Coins, CarFront, ShieldCheck, ClipboardEdit, FileCheck2, SearchCheck, GraduationCap, Power, Banknote } from "lucide-react";
+import { UserCircle, MapPin, Coins, CarFront, ShieldCheck, ClipboardEdit, FileCheck2, SearchCheck, GraduationCap, Power, Banknote, Star } from "lucide-react";
 
 function Navbar() {
   return (
