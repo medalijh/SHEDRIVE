@@ -2,7 +2,16 @@ import { createBrowserClient } from "@supabase/ssr";
 import type { Database } from "@/types/database";
 
 // Placeholder values for local dev without Supabase configured yet
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co";
+
+function cleanUrl(url) {
+  if (!url) return "";
+  let cleaned = url.trim();
+  if (cleaned.endsWith('/')) cleaned = cleaned.slice(0, -1);
+  if (cleaned.endsWith('/rest/v1')) cleaned = cleaned.replace('/rest/v1', '');
+  if (cleaned && !cleaned.startsWith('http')) cleaned = 'https://' + cleaned;
+  return cleaned;
+}
+const SUPABASE_URL = cleanUrl(process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co");
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
 
 export function createClient() {

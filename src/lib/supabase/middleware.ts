@@ -1,10 +1,19 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
+function cleanUrl(url) {
+  if (!url) return "";
+  let cleaned = url.trim();
+  if (cleaned.endsWith('/')) cleaned = cleaned.slice(0, -1);
+  if (cleaned.endsWith('/rest/v1')) cleaned = cleaned.replace('/rest/v1', '');
+  if (cleaned && !cleaned.startsWith('http')) cleaned = 'https://' + cleaned;
+  return cleaned;
+}
+
 export async function updateSession(request: NextRequest) {
   // Guard: if Supabase env vars not configured, allow all requests through
   // This allows the app to work in local dev without Supabase configured yet
-  const supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseUrl  = cleanUrl(process.env.NEXT_PUBLIC_SUPABASE_URL || "");
   const supabaseKey  = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseKey || supabaseUrl.includes("your-project-id") || supabaseUrl.includes("placeholder")) {
