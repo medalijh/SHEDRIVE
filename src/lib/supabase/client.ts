@@ -12,7 +12,7 @@ function cleanUrl(url: string | undefined | null): string {
   return cleaned;
 }
 const SUPABASE_URL = cleanUrl(process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co");
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
+const SUPABASE_ANON_KEY = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key").trim();
 
 export function createClient() {
   return createBrowserClient<any>(SUPABASE_URL, SUPABASE_ANON_KEY);

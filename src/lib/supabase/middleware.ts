@@ -14,7 +14,7 @@ export async function updateSession(request: NextRequest) {
   // Guard: if Supabase env vars not configured, allow all requests through
   // This allows the app to work in local dev without Supabase configured yet
   const supabaseUrl  = cleanUrl(process.env.NEXT_PUBLIC_SUPABASE_URL || "");
-  const supabaseKey  = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseKey = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "").trim();
 
   if (!supabaseUrl || !supabaseKey || supabaseUrl.includes("your-project-id") || supabaseUrl.includes("placeholder")) {
     // No Supabase configured — allow all requests through (dev mode)
