@@ -11,10 +11,10 @@ const inter = Inter({
   preload: true,
 });
 
-// ─── SEO Metadata ─────────────────────────────────────────────
+// --- SEO Metadata -------------------------------------------------------------
 export const metadata: Metadata = {
   title: {
-    default: "SheDrive Morocco — Taxi Femme Maroc 🌹",
+    default: "SheDrive Morocco - Taxi Femme Maroc",
     template: "%s | SheDrive Morocco",
   },
   description:
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     alternateLocale: ["ar_MA", "en_US"],
     url: "https://shedrive.ma",
     siteName: "SheDrive Morocco",
-    title: "SheDrive Morocco — Transport Féminin Premium 🌹",
+    title: "SheDrive Morocco - Transport Féminin Premium",
     description:
       "Service de transport exclusivement féminin au Maroc. Sûr, élégant, empowerant.",
     images: [
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "SheDrive Morocco — Women-Only Ride-Hailing",
+        alt: "SheDrive Morocco - Women-Only Ride-Hailing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SheDrive Morocco 🌹",
+    title: "SheDrive Morocco",
     description: "Transport féminin premium au Maroc",
     images: ["/images/og-image.jpg"],
     site: "@SheDriverMaroc",
@@ -111,7 +111,7 @@ export const metadata: Metadata = {
   category: "transportation",
 };
 
-// ─── Viewport ─────────────────────────────────────────────────
+// --- Viewport -------------------------------------------------
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#C8956C" },
@@ -127,7 +127,7 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-visual",
 };
 
-// ─── Root Layout ──────────────────────────────────────────────
+// --- Root Layout --------------------------------------------------------------
 export default function RootLayout({
   children,
 }: {

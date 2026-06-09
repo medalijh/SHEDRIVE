@@ -2,82 +2,78 @@
 @import "tailwindcss";
 
 /* ============================================================
-   DESIGN TOKENS — SheDrive Morocco Premium Palette
+   DESIGN TOKENS — SheDrive Morocco Tulips Floral Palette
    ============================================================ */
 :root {
-  /* Rose Gold (Primary Brand) */
-  --color-rose-gold-50:  #FFF5F0;
-  --color-rose-gold-100: #FFE8DB;
-  --color-rose-gold-200: #FFD0B5;
-  --color-rose-gold-300: #E8B090;
-  --color-rose-gold-400: #D4976E;
-  --color-rose-gold-500: #C8956C;
-  --color-rose-gold-600: #B07A52;
-  --color-rose-gold-700: #8E5E3C;
-  --color-rose-gold-800: #6B4529;
-  --color-rose-gold-900: #4A2E1A;
+  /* Vibrant Rose Gold / Pink */
+  --color-rose-gold-50:  #FFF5F7;
+  --color-rose-gold-100: #FFE4EA;
+  --color-rose-gold-200: #FFBFCF;
+  --color-rose-gold-300: #FF8FAF;
+  --color-rose-gold-400: #F5608F;
+  --color-rose-gold-500: #E83870;
+  --color-rose-gold-600: #C8956C;
+  --color-rose-gold-700: #A87A55;
+  --color-rose-gold-800: #7A5A3E;
+  --color-rose-gold-900: #2D1F14;
 
-  /* Emerald Green (Secondary Brand) */
+  /* Rich Emerald Green */
   --color-emerald-50:  #ECFDF5;
   --color-emerald-100: #D1FAE5;
   --color-emerald-200: #A7F3D0;
   --color-emerald-300: #6EE7B7;
   --color-emerald-400: #34D399;
   --color-emerald-500: #0D7A4A;
-  --color-emerald-600: #0B6B40;
-  --color-emerald-700: #085C36;
-  --color-emerald-800: #064D2C;
-  --color-emerald-900: #043E22;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065F46;
+  --color-emerald-900: #064E3B;
 
-  /* Royal Gold (Accent) */
+  /* Warm Gold */
   --color-gold-50:  #FFFDF0;
-  --color-gold-100: #FFF8D6;
-  --color-gold-200: #FFEEA3;
-  --color-gold-300: #FFE070;
+  --color-gold-100: #FEF9C3;
+  --color-gold-200: #FEF08A;
+  --color-gold-300: #FDE047;
   --color-gold-400: #D4A017;
   --color-gold-500: #B8860B;
   --color-gold-600: #9A7209;
-  --color-gold-700: #7C5B07;
-  --color-gold-800: #5E4505;
-  --color-gold-900: #402F03;
+  --color-gold-700: #7C5E08;
+  --color-gold-800: #5E4506;
+  --color-gold-900: #3F2E04;
 
-  /* Blush (Accent Pink) */
-  --color-blush-50:  #FFF5F7;
-  --color-blush-100: #FFE3EA;
-  --color-blush-200: #FFC7D5;
-  --color-blush-300: #FFABC0;
-  --color-blush-400: #FF8FAB;
-  --color-blush-500: #FF7096;
-  --color-blush-600: #E0567C;
-  --color-blush-700: #C24066;
-  --color-blush-800: #A32D52;
-  --color-blush-900: #851D3F;
+  /* Baby Rose (Accent Pink) */
+  --color-blush-50:  #FFF8FB;
+  --color-blush-100: #FFE9F3;
+  --color-blush-200: #FFD4E8;
+  --color-blush-300: #FFBEE0;
+  --color-blush-400: #FFA3D3;
+  --color-blush-500: #FF88C8; /* Baby Rose */
+  --color-blush-600: #E067A8;
+  --color-blush-700: #C24C8A;
+  --color-blush-800: #A5346F;
+  --color-blush-900: #8B215A;
 
-  /* Sand / Ivory Background */
-  --color-sand-50:  #FFFDF8;
-  --color-sand-100: #FAF6F0;
-  --color-sand-200: #F0EBE2;
-  --color-sand-300: #E0D8CC;
-  --color-sand-400: #C8BFB0;
-  --color-sand-500: #A09788;
-  --color-sand-600: #78706A;
-  --color-sand-700: #5A534E;
-  --color-sand-800: #3A3532;
-  --color-sand-900: #1A1715;
-
-  /* Ivory tones */
-  --color-ivory-50:  #FFFEF8;
-  --color-ivory-100: #FDF9EE;
+  /* Pure White Background */
+  --color-sand-50:  #FFFFFF;
+  --color-sand-100: #FAFBFC;
+  --color-sand-200: #F3F4F6;
+  --color-sand-300: #E5E7EB;
+  --color-sand-400: #D1D5DB;
+  --color-sand-500: #9CA3AF;
+  --color-sand-600: #6B7280;
+  --color-sand-700: #4B5563;
+  --color-sand-800: #1F2937;
+  --color-sand-900: #111827;
 
   /* Semantic Colors */
   --color-primary:   var(--color-rose-gold-500);
   --color-secondary: var(--color-emerald-500);
-  --color-accent:    var(--color-gold-400);
-  --color-bg:        var(--color-sand-50);
+  --color-accent:    var(--color-blush-500);
+  --color-bg:        #FFFFFF;
   --color-surface:   #FFFFFF;
-  --color-text:      #1A150F;
-  --color-muted:     #6B6058;
-  --color-border:    #E8E0D5;
+  --color-text:      #1F2937;
+  --color-muted:     #6B7280;
+  --color-border:    #E5E7EB;
 
   /* Typography */
   --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -85,14 +81,14 @@
   --font-arabic:  'Noto Sans Arabic', Arial, sans-serif;
 
   /* Shadows */
-  --shadow-xs:  0 1px 2px rgba(200,149,108,0.06);
-  --shadow-sm:  0 2px 8px rgba(200,149,108,0.08);
-  --shadow-md:  0 4px 20px rgba(200,149,108,0.10);
-  --shadow-lg:  0 8px 40px rgba(200,149,108,0.14);
-  --shadow-xl:  0 16px 60px rgba(200,149,108,0.18);
-  --shadow-gold: 0 4px 24px rgba(212,160,23,0.30);
-  --shadow-rose: 0 4px 24px rgba(200,149,108,0.35);
-  --shadow-emerald: 0 4px 24px rgba(13,122,74,0.25);
+  --shadow-xs:  0 1px 2px rgba(200, 149, 108, 0.06);
+  --shadow-sm:  0 2px 8px rgba(200, 149, 108, 0.08);
+  --shadow-md:  0 4px 20px rgba(200, 149, 108, 0.12);
+  --shadow-lg:  0 8px 40px rgba(200, 149, 108, 0.16);
+  --shadow-xl:  0 16px 60px rgba(200, 149, 108, 0.20);
+  --shadow-gold: 0 4px 24px rgba(212, 160, 23, 0.30);
+  --shadow-rose: 0 4px 24px rgba(200, 149, 108, 0.35);
+  --shadow-emerald: 0 4px 24px rgba(13, 122, 74, 0.25);
 
   /* Border Radius */
   --radius-xs: 4px;
@@ -160,12 +156,12 @@ body {
    MOROCCAN GEOMETRIC PATTERN (Subtle, elegant tulip-inspired)
    ============================================================ */
 .zellige-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23C8956C' stroke-width='0.8' opacity='0.08'%3E%3Cpath d='M40 10 Q50 20 40 30 Q30 20 40 10' fill='%23D4A017' opacity='0.05'/%3E%3Cpath d='M40 50 Q50 60 40 70 Q30 60 40 50' fill='%230D7A4A' opacity='0.05'/%3E%3Cline x1='40' y1='0' x2='40' y2='80' stroke='%23D4A017' opacity='0.04'/%3E%3Cline x1='0' y1='40' x2='80' y2='40' stroke='%23D4A017' opacity='0.04'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23C8956C' stroke-width='0.8' opacity='0.12'%3E%3Cpath d='M40 10 Q 50 20 40 30 Q 30 20 40 10' fill='%23D4A017' opacity='0.08'/%3E%3Cpath d='M40 50 Q 50 60 40 70 Q 30 60 40 50' fill='%230D7A4A' opacity='0.08'/%3E%3Cline x1='40' y1='0' x2='40' y2='80' stroke='%23D4A017' opacity='0.08'/%3E%3Cline x1='0' y1='40' x2='80' y2='40' stroke='%23D4A017' opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 80px 80px;
 }
 
 .zellige-pattern-dense {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cg fill='none' stroke='%23C8956C' stroke-width='0.6' opacity='0.06'%3E%3Cpath d='M25 8 Q32 15 25 22 Q18 15 25 8' fill='%23D4A017' opacity='0.03'/%3E%3Cline x1='25' y1='0' x2='25' y2='50' stroke='%230D7A4A' opacity='0.03'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cg fill='none' stroke='%23C8956C' stroke-width='0.6' opacity='0.12'%3E%3Cpath d='M25 8 Q 32 15 25 22 Q 18 15 25 8' fill='%23D4A017' opacity='0.08'/%3E%3Cline x1='25' y1='0' x2='25' y2='50' stroke='%230D7A4A' opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 50px 50px;
 }
 
@@ -191,11 +187,11 @@ body {
 .bg-hero-gradient {
   background: linear-gradient(
     135deg,
-    #1A150F 0%,
-    #2C1F12 25%,
-    #1F1A12 50%,
-    #26200F 75%,
-    #1A150F 100%
+    #1A0A14 0%,
+    #2D1025 25%,
+    #1F0E2E 50%,
+    #2D1025 75%,
+    #1A0A14 100%
   );
 }
 
@@ -226,21 +222,21 @@ body {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(200,149,108,0.15);
+  border: 1px solid rgba(217, 122, 184, 0.15);
 }
 
 .glass-dark {
-  background: rgba(26, 21, 15, 0.85);
+  background: rgba(54, 46, 37, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(200,149,108,0.2);
+  border: 1px solid rgba(217, 122, 184, 0.2);
 }
 
 .glass-rose {
-  background: rgba(255,245,240,0.95);
+  background: rgba(254, 248, 251, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(200,149,108,0.2);
+  border: 1px solid rgba(217, 122, 184, 0.2);
 }
 
 /* ============================================================
@@ -262,8 +258,8 @@ body {
 .card-luxury {
   background: var(--color-surface);
   border-radius: 24px 8px 24px 8px;
-  box-shadow: 0 4px 24px rgba(200,149,108,0.12);
-  border: 1px solid rgba(200,149,108,0.18);
+  box-shadow: 0 4px 24px rgba(217, 122, 184, 0.15);
+  border: 1px solid rgba(217, 122, 184, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -275,7 +271,7 @@ body {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-rose-gold-500), var(--color-gold-400), var(--color-emerald-500));
+  background: linear-gradient(90deg, var(--color-rose-gold-500), var(--color-emerald-500), var(--color-rose-gold-500));
 }
 
 .moroccan-arch-card {
@@ -665,7 +661,7 @@ label {
    UTILITY CLASSES
    ============================================================ */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-rose-gold-500), var(--color-gold-400));
+  background: linear-gradient(135deg, var(--color-rose-gold-600), var(--color-gold-400));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -680,7 +676,7 @@ label {
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  background: linear-gradient(90deg, transparent, #E5E7EB, transparent);
 }
 
 .divider-gold {

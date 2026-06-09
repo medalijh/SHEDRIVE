@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense, useState, useRef } from "react";
-import { Eye, EyeOff, ShieldCheck, Flower2, Map, UserCircle, CarFront } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck, Flower2, Map, UserCircle, CarFront, Smartphone, ArrowRight, Check, TriangleAlert, ArrowLeft, Camera, IdCard, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
@@ -162,7 +162,7 @@ function LoginForm() {
             Connexion en cours...
           </span>
         ) : (
-          "Se connecter →"
+          <span className="flex items-center gap-2 justify-center">Se connecter <ArrowRight size={20} /></span>
         )}
       </button>
 
@@ -172,8 +172,8 @@ function LoginForm() {
         <div className="flex-1 divider" />
       </div>
 
-      <button type="button" className="btn btn-outline btn-lg w-full gap-3" onClick={() => alert("Non implémenté")}>
-        <span>📱</span>
+      <button type="button" className="btn btn-outline btn-lg w-full flex items-center justify-center gap-3" onClick={() => alert("Non implémenté")}>
+        <Smartphone size={20} />
         <span>Connexion par SMS</span>
       </button>
     </form>
@@ -232,8 +232,9 @@ function PassengerRegisterForm() {
             <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Date de naissance *</label>
             <input className="input-field" type="date" name="dob" value={formData.dob} onChange={handleChange} required />
           </div>
-          <div className="p-3 rounded-xl text-sm" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
-            🌸 SheDrive Morocco est un service exclusivement féminin.
+          <div className="p-3 rounded-xl text-sm flex gap-2 items-start" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
+            <Flower2 size={16} className="mt-0.5" />
+            <span>SheDrive Morocco est un service exclusivement féminin.</span>
           </div>
         </div>
       ),
@@ -246,7 +247,9 @@ function PassengerRegisterForm() {
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Numéro de téléphone marocain *</label>
             <div className="flex gap-2">
-              <div className="btn btn-sm" style={{ background: "var(--color-sand-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem", cursor: "default" }}>🇲🇦 +212</div>
+              <div className="btn btn-sm flex items-center gap-2" style={{ background: "var(--color-sand-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem", cursor: "default" }}>
+                <span className="font-semibold text-rose-gold-600">MA</span> +212
+              </div>
               <input className="input-field flex-1" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="6XX XXX XXX" required />
             </div>
           </div>
@@ -271,8 +274,9 @@ function PassengerRegisterForm() {
       title: "Vérification du téléphone",
       titleAr: "التحقق من رقم الهاتف",
       fields: (
-        <div className="flex flex-col gap-6 items-center text-center">
-          <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl" style={{ background: "rgba(200,149,108,0.1)" }}>📱</div>
+          <div className="w-20 h-20 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(200,149,108,0.1)" }}>
+            <Smartphone size={32} />
+          </div>
           <div>
             <p className="font-medium mb-2">Code envoyé par SMS</p>
             <p className="text-sm" style={{ color: "var(--color-muted)" }}>Entrez le code à 6 chiffres envoyé au +212 {formData.phone}</p>
@@ -294,7 +298,7 @@ function PassengerRegisterForm() {
               />
             ))}
           </div>
-          <button type="button" className="text-sm" style={{ color: "var(--color-rose-gold-600)" }}>Renvoyer le code →</button>
+          <button type="button" className="text-sm flex items-center gap-1 hover:underline" style={{ color: "var(--color-rose-gold-600)" }}>Renvoyer le code <ArrowRight size={14} /></button>
         </div>
       ),
     },
@@ -303,9 +307,12 @@ function PassengerRegisterForm() {
       titleAr: "جهات الطوارئ",
       fields: (
         <div className="flex flex-col gap-4">
-          <div className="p-4 rounded-2xl" style={{ background: "rgba(197,48,48,0.08)", border: "1px solid rgba(197,48,48,0.2)" }}>
-            <p className="text-sm font-semibold text-red-700 mb-1">🆘 Contact d'urgence SOS</p>
-            <p className="text-xs" style={{ color: "var(--color-muted)" }}>En cas d'urgence, cette personne sera alertée automatiquement avec votre position GPS.</p>
+          <div className="p-4 rounded-2xl flex items-start gap-2" style={{ background: "rgba(197,48,48,0.08)", border: "1px solid rgba(197,48,48,0.2)" }}>
+            <TriangleAlert size={20} className="text-red-700 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-red-700 mb-1">Contact d'urgence SOS</p>
+              <p className="text-xs" style={{ color: "var(--color-muted)" }}>En cas d'urgence, cette personne sera alertée automatiquement avec votre position GPS.</p>
+            </div>
           </div>
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Nom du contact *</label>
@@ -314,7 +321,9 @@ function PassengerRegisterForm() {
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Téléphone du contact *</label>
             <div className="flex gap-2">
-              <div style={{ background: "var(--color-sand-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem" }}>🇲🇦 +212</div>
+              <div className="flex items-center gap-2" style={{ background: "var(--color-sand-100)", color: "var(--color-text)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px", fontSize: "0.875rem" }}>
+                <span className="font-semibold text-rose-gold-600">MA</span> +212
+              </div>
               <input className="input-field flex-1" type="tel" name="emPhone" value={formData.emPhone} onChange={handleChange} placeholder="6XX XXX XXX" required />
             </div>
           </div>
@@ -408,19 +417,23 @@ function PassengerRegisterForm() {
         <p className="text-xs" style={{ color: "var(--color-muted)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>{steps[step].titleAr}</p>
       </div>
 
-      {error && <div className="p-3 mb-4 rounded-xl text-sm text-red-700" style={{ background: "rgba(229,62,62,0.1)" }}>⚠️ {error}</div>}
+      {error && <div className="p-3 mb-4 rounded-xl text-sm flex gap-2 items-center text-red-700" style={{ background: "rgba(229,62,62,0.1)" }}><TriangleAlert size={16} /> {error}</div>}
       
       <form onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
         {steps[step].fields}
 
         <div className="flex gap-3 mt-6">
           {step > 0 && step !== 2 && (
-            <button type="button" onClick={() => setStep(step - 1)} className="btn btn-outline flex-1">← Retour</button>
+            <button type="button" onClick={() => setStep(step - 1)} className="btn btn-outline flex-1 flex items-center justify-center gap-2"><ArrowLeft size={16} /> Retour</button>
           )}
           <button type="submit" className="btn btn-primary flex-1" disabled={loading}>
             {loading ? (
-              <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Traitement...</span>
-            ) : step < totalSteps - 1 ? "Continuer →" : "🌹 Créer mon compte"}
+              <span className="flex items-center gap-2 justify-center"><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Traitement...</span>
+            ) : step < totalSteps - 1 ? (
+              <span className="flex items-center justify-center gap-2">Continuer <ArrowRight size={20} /></span>
+            ) : (
+              <span className="flex items-center justify-center gap-2"><Flower2 size={20} /> Créer mon compte</span>
+            )}
           </button>
         </div>
       </form>
@@ -470,7 +483,9 @@ function DriverRegisterForm() {
             <div>
               <label className="block text-sm font-medium mb-2">Téléphone *</label>
               <div className="flex gap-2">
-                <div style={{ background: "var(--color-sand-100)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px" }}>🇲🇦 +212</div>
+                <div className="flex items-center gap-2" style={{ background: "var(--color-sand-100)", border: "1.5px solid var(--color-border)", borderRadius: "var(--radius-md)", padding: "14px 12px" }}>
+                  <span className="font-semibold text-rose-gold-600">MA</span> +212
+                </div>
                 <input className="input-field flex-1" type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="6XX XXX XXX" required />
               </div>
             </div>
@@ -496,9 +511,12 @@ function DriverRegisterForm() {
       title: "Carte Nationale d'Identité (CIN)",
       content: (
         <div className="flex flex-col gap-5">
-          <div className="p-4 rounded-2xl" style={{ background: "rgba(200,149,108,0.08)", border: "1px solid rgba(200,149,108,0.2)" }}>
-            <p className="text-sm font-medium mb-1" style={{ color: "var(--color-rose-gold-700)" }}>📋 Vérification d'identité requise</p>
-            <p className="text-xs" style={{ color: "var(--color-muted)" }}>Pour la sécurité de toutes les passagères, nous vérifions l'identité de chaque conductrice.</p>
+          <div className="p-4 rounded-2xl flex gap-2 items-start" style={{ background: "rgba(200,149,108,0.08)", border: "1px solid rgba(200,149,108,0.2)" }}>
+            <IdCard size={20} className="text-rose-gold-700 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium mb-1" style={{ color: "var(--color-rose-gold-700)" }}>Vérification d'identité requise</p>
+              <p className="text-xs" style={{ color: "var(--color-muted)" }}>Pour la sécurité de toutes les passagères, nous vérifions l'identité de chaque conductrice.</p>
+            </div>
           </div>
           <div>
             <label className="block text-sm font-medium mb-2">Numéro de CIN *</label>
@@ -509,7 +527,7 @@ function DriverRegisterForm() {
               <label className="block text-sm font-medium mb-2">{label} *</label>
               <div className="border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer hover:border-rose-400 transition-colors relative" style={{ borderColor: "var(--color-rose-gold-300)" }}>
                 <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*,.pdf" />
-                <div className="text-3xl mb-2">📷</div>
+                <div className="flex justify-center mb-2 text-rose-gold-400"><Camera size={36} /></div>
                 <p className="text-sm font-medium">Cliquez pour uploader</p>
                 <p className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>JPG, PNG ou PDF — max 5MB</p>
               </div>
@@ -522,14 +540,16 @@ function DriverRegisterForm() {
       title: "Selfie de vérification",
       content: (
         <div className="flex flex-col gap-5 items-center text-center">
-          <div className="w-24 h-24 rounded-full flex items-center justify-center text-5xl" style={{ background: "rgba(200,149,108,0.1)" }}>🤳</div>
+          <div className="w-24 h-24 rounded-full flex items-center justify-center text-rose-gold-600" style={{ background: "rgba(200,149,108,0.1)" }}>
+            <UserCircle size={48} />
+          </div>
           <div>
             <h4 className="font-semibold mb-2">Photo de vérification</h4>
             <p className="text-sm" style={{ color: "var(--color-muted)" }}>Prenez un selfie en tenant votre CIN visible pour vérifier que vous êtes bien la titulaire.</p>
           </div>
           <div className="w-full border-2 border-dashed rounded-2xl p-6 cursor-pointer hover:border-rose-400 transition-colors relative" style={{ borderColor: "var(--color-rose-gold-300)" }}>
             <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*" />
-            <div className="text-4xl mb-3">📸</div>
+            <div className="flex justify-center mb-3 text-rose-gold-400"><Camera size={40} /></div>
             <p className="font-medium text-sm">Prendre ou uploader une photo</p>
             <p className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>Format carré recommandé</p>
           </div>
@@ -553,7 +573,7 @@ function DriverRegisterForm() {
               <label className="block text-sm font-medium mb-2">{label} *</label>
               <div className="border-2 border-dashed rounded-2xl p-4 text-center cursor-pointer relative" style={{ borderColor: "var(--color-rose-gold-300)" }}>
                 <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept="image/*,.pdf" />
-                <div className="text-3xl mb-2">🪪</div>
+                <div className="flex justify-center mb-2 text-rose-gold-400"><IdCard size={36} /></div>
                 <p className="text-sm font-medium">Cliquez pour uploader</p>
                 <p className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>JPG, PNG — max 5MB</p>
               </div>
@@ -590,13 +610,13 @@ function DriverRegisterForm() {
             <label className="block text-sm font-medium mb-2">Catégorie du véhicule *</label>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { id: "economy", label: "Économique", emoji: "🚗", desc: "Logan, Sandero..." },
-                { id: "comfort", label: "Confort", emoji: "🚙", desc: "Duster, Megane..." },
-                { id: "luxury", label: "Luxe", emoji: "✨", desc: "Mercedes, BMW..." },
-                { id: "van", label: "Van / Monospace", emoji: "🚐", desc: "Kangoo, Berlingo..." },
+                { id: "economy", label: "Économique", icon: <CarFront size={24} />, desc: "Logan, Sandero..." },
+                { id: "comfort", label: "Confort", icon: <CarFront size={24} />, desc: "Duster, Megane..." },
+                { id: "luxury", label: "Luxe", icon: <Sparkles size={24} />, desc: "Mercedes, BMW..." },
+                { id: "van", label: "Van / Monospace", icon: <CarFront size={24} />, desc: "Kangoo, Berlingo..." },
               ].map((cat) => (
                 <div key={cat.id} onClick={() => setFormData({...formData, vehicleCategory: cat.id})} className="p-4 rounded-xl cursor-pointer border-2 transition-all" style={{ borderColor: formData.vehicleCategory === cat.id ? "var(--color-emerald-500)" : "var(--color-border)", background: formData.vehicleCategory === cat.id ? "rgba(13,122,74,0.05)" : "transparent" }}>
-                  <div className="text-2xl mb-1">{cat.emoji}</div>
+                  <div className="mb-2 text-rose-gold-600">{cat.icon}</div>
                   <div className="text-sm font-semibold">{cat.label}</div>
                   <div className="text-xs" style={{ color: "var(--color-muted)" }}>{cat.desc}</div>
                 </div>
