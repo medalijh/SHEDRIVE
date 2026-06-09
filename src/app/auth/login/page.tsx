@@ -732,7 +732,7 @@ function AuthContent() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-12 h-12 object-cover rounded-full border-2 border-rose-500 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.15]" /></div>
+            <div className="w-12 h-12 object-cover rounded-full border-2 border-rose-500 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.35]" /></div>
             <span className="text-xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
           <h2 className="text-display-lg text-black mb-6">Bienvenue dans <br /><span className="gradient-text">votre espace</span></h2>
@@ -757,7 +757,7 @@ function AuthContent() {
       {/* Right Panel */}
       <div className="w-full lg:w-1/2 flex flex-col justify-start overflow-y-auto">
         <div className="lg:hidden p-6 pb-0 flex items-center gap-2">
-          <div className="w-10 h-10 object-cover rounded-full border-2 border-rose-gold-500 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.15]" /></div>
+          <div className="w-10 h-10 object-cover rounded-full border-2 border-rose-gold-500 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.35]" /></div>
           <span className="font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-700)" }}>SheDrive Morocco</span>
         </div>
 
@@ -830,7 +830,7 @@ export default function AuthPage() {
       fallback={
         <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--color-silver-50)" }}>
           <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 object-cover rounded-full animate-float border-4 border-rose-gold-500 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.15]" /></div>
+            <div className="w-16 h-16 object-cover rounded-full animate-float border-4 border-rose-gold-500 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.35]" /></div>
             <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "var(--color-rose-400)" }}/>
           </div>
         </div>

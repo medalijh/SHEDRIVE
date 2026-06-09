@@ -97,7 +97,7 @@ export default function PWAManager() {
       >
         <div className="flex items-start gap-4">
           <div className="flex-shrink-0">
-            <div className="w-12 h-12 object-cover rounded-2xl border border-rose-200 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.15]" /></div>
+            <div className="w-12 h-12 object-cover rounded-2xl border border-rose-200 shadow-sm overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.35]" /></div>
           </div>
           <div className="flex-1 min-w-0">
             <h3

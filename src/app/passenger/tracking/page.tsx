@@ -206,7 +206,7 @@ function TrackingContent() {
           <div className="flex items-center gap-4 px-5 py-4" style={{ background: "white", borderBottom: "1px solid var(--color-border)" }}>
             <button onClick={() => setChatOpen(false)} className="btn btn-icon-sm btn-ghost text-xl">←</button>
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 object-cover rounded-full border border-rose-200 overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.15]" /></div>
+              <div className="w-9 h-9 object-cover rounded-full border border-rose-200 overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.35]" /></div>
               <div>
                 <div className="font-semibold text-sm">{ride?.driver?.profiles?.full_name || "Conductrice"}</div>
                 <div className="text-xs" style={{ color: "var(--color-purple-600)" }}>En ligne</div>
