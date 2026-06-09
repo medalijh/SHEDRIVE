@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { useRealtimeTracking } from "@/hooks/useRealtimeTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { MapMarker } from "@/components/Map";
+import { ShieldAlert, Search, Car, MapPin, CheckCircle, XCircle, User, Star, Hash, MessageCircle, Phone, Link as LinkIcon, Smartphone, Mail, Mic, Send, HeartHandshake } from "lucide-react";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
@@ -32,14 +33,14 @@ function SOSButton() {
       {pressed && (
         <div className="fixed inset-0 z-[998] flex items-center justify-center" style={{ background: "rgba(153,27,27,0.85)", backdropFilter: "blur(6px)" }}>
           <div className="bg-white rounded-3xl p-8 max-w-sm w-full mx-6 text-center">
-            <div className="text-6xl mb-4">🆘</div>
+            <div className="flex justify-center mb-4 text-red-600"><ShieldAlert size={64} className="animate-pulse" /></div>
             <h3 className="text-2xl font-bold text-red-700 mb-2">Alerte SOS</h3>
             <p className="text-gray-600 mb-6">Envoi dans <strong>{countdown}</strong>s...</p>
             <button onClick={() => { setPressed(false); setCountdown(3); }} className="btn btn-outline w-full" style={{ borderColor: "#E53E3E", color: "#E53E3E" }}>✕ Annuler</button>
           </div>
         </div>
       )}
-      <button className="sos-button" onClick={() => setPressed(true)} aria-label="SOS"><span className="font-bold">SOS</span><span style={{ fontSize: 10 }}>🆘</span></button>
+      <button className="sos-button" onClick={() => setPressed(true)} aria-label="SOS"><span className="font-bold flex items-center gap-1"><ShieldAlert size={18} /> SOS</span></button>
     </>
   );
 }
@@ -74,12 +75,12 @@ function TrackingContent() {
   const currentStatus = rideStatus || ride?.status || "searching";
 
   const statusConfig: Record<string, any> = {
-    searching: { label: "Recherche en cours", labelAr: "جاري البحث", color: "var(--color-purple-600)", bg: "rgba(219,39,119,0.1)", icon: "🔍" },
-    accepted: { label: "Conductrice en route", labelAr: "السائقة في الطريق", color: "var(--color-purple-600)", bg: "rgba(219,39,119,0.1)", icon: "🚗" },
-    driver_arrived: { label: "Conductrice arrivée !", labelAr: "وصلت السائقة!", color: "var(--color-purple-600)", bg: "rgba(147,51,234,0.1)", icon: "📍" },
-    in_progress: { label: "Trajet en cours", labelAr: "الرحلة جارية", color: "var(--color-rose-600)", bg: "rgba(225,29,72,0.1)", icon: "🌹" },
-    completed: { label: "Trajet terminé !", labelAr: "انتهت الرحلة!", color: "var(--color-purple-600)", bg: "rgba(147,51,234,0.1)", icon: "✅" },
-    cancelled: { label: "Trajet annulé", labelAr: "تم الإلغاء", color: "#E53E3E", bg: "rgba(229,62,62,0.1)", icon: "❌" },
+    searching: { label: "Recherche en cours", labelAr: "جاري البحث", color: "var(--color-purple-600)", bg: "rgba(219,39,119,0.1)", icon: <Search size={24} /> },
+    accepted: { label: "Conductrice en route", labelAr: "السائقة في الطريق", color: "var(--color-purple-600)", bg: "rgba(219,39,119,0.1)", icon: <Car size={24} /> },
+    driver_arrived: { label: "Conductrice arrivée !", labelAr: "وصلت السائقة!", color: "var(--color-purple-600)", bg: "rgba(147,51,234,0.1)", icon: <MapPin size={24} /> },
+    in_progress: { label: "Trajet en cours", labelAr: "الرحلة جارية", color: "var(--color-rose-600)", bg: "rgba(225,29,72,0.1)", icon: <HeartHandshake size={24} /> },
+    completed: { label: "Trajet terminé !", labelAr: "انتهت الرحلة!", color: "var(--color-purple-600)", bg: "rgba(147,51,234,0.1)", icon: <CheckCircle size={24} /> },
+    cancelled: { label: "Trajet annulé", labelAr: "تم الإلغاء", color: "#E53E3E", bg: "rgba(229,62,62,0.1)", icon: <XCircle size={24} /> },
   };
 
   const sc = statusConfig[currentStatus] || statusConfig.searching;
@@ -110,7 +111,7 @@ function TrackingContent() {
       {/* Status Banner */}
       <div className="px-6 -mt-4 relative z-10">
         <div className="rounded-2xl p-4 flex items-center gap-4 shadow-md" style={{ background: sc.bg, border: `1px solid ${sc.color}33` }}>
-          <span className="text-2xl">{sc.icon}</span>
+          <span className="text-purple-600" style={{ color: sc.color }}>{sc.icon}</span>
           <div>
             <div className="font-semibold text-sm" style={{ color: sc.color }}>{sc.label}</div>
             <div className="text-xs mt-0.5" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "var(--color-muted)" }}>{sc.labelAr}</div>
@@ -131,13 +132,13 @@ function TrackingContent() {
           <div className="card-luxury p-5">
             <div className="flex items-center gap-4 mb-4">
               <div className="relative">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.15), rgba(225,29,72,0.05))" }}>👩</div>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-rose-600" style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.15), rgba(225,29,72,0.05))" }}><User size={32} /></div>
                 <div className="online-dot absolute -bottom-1 -right-1"/>
               </div>
               <div className="flex-1">
                 <div className="font-semibold">{ride.driver.profiles?.full_name || "Conductrice"}</div>
-                <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>⭐ 4.9 · 🚗 {ride.driver.vehicle_model}</div>
-                <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>🔢 {ride.driver.vehicle_plate}</div>
+                <div className="text-xs mt-0.5 flex items-center gap-1" style={{ color: "var(--color-muted)" }}><Star size={12} className="text-yellow-500 fill-current"/> 4.9 · <Car size={12}/> {ride.driver.vehicle_model}</div>
+                <div className="text-xs mt-0.5 flex items-center gap-1" style={{ color: "var(--color-muted)" }}><Hash size={12}/> {ride.driver.vehicle_plate}</div>
               </div>
               <div className="text-right">
                 <div className="text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{ride.passenger_price} MAD</div>
@@ -146,16 +147,16 @@ function TrackingContent() {
             </div>
 
             <div className="grid grid-cols-3 gap-3">
-              <button onClick={() => setChatOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.2)" }}>
-                <span className="text-xl">💬</span>
+              <button onClick={() => setChatOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.2)", color: "var(--color-rose-600)" }}>
+                <MessageCircle size={24} />
                 <span className="text-xs font-medium">Chat</span>
               </button>
-              <a href={`tel:${ride.driver.profiles?.phone || ""}`} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105 cursor-pointer" style={{ background: "rgba(147,51,234,0.08)", border: "1px solid rgba(147,51,234,0.2)" }}>
-                <span className="text-xl">📞</span>
+              <a href={`tel:${ride.driver.profiles?.phone || ""}`} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105 cursor-pointer" style={{ background: "rgba(147,51,234,0.08)", border: "1px solid rgba(147,51,234,0.2)", color: "var(--color-purple-600)" }}>
+                <Phone size={24} />
                 <span className="text-xs font-medium">Appeler</span>
               </a>
-              <button onClick={() => setShareOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.2)" }}>
-                <span className="text-xl">🔗</span>
+              <button onClick={() => setShareOpen(true)} className="flex flex-col items-center gap-1.5 p-3 rounded-xl transition-all hover:scale-105" style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.2)", color: "var(--color-purple-700)" }}>
+                <LinkIcon size={24} />
                 <span className="text-xs font-medium">Partager</span>
               </button>
             </div>
@@ -167,10 +168,10 @@ function TrackingContent() {
       {currentStatus === "completed" && (
         <div className="px-6 mt-5">
           <div className="card-luxury p-6 text-center">
-            <div className="text-5xl mb-4">🌹</div>
+            <div className="flex justify-center text-rose-500 mb-4"><HeartHandshake size={48} /></div>
             <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: "var(--font-display)" }}>Bonne arrivée ! Comment était votre trajet ?</h3>
             <div className="flex justify-center gap-3 my-6">
-              {[1,2,3,4,5].map(star => <button key={star} className="text-4xl transition-transform hover:scale-125">⭐</button>)}
+              {[1,2,3,4,5].map(star => <button key={star} className="text-gray-300 transition-transform hover:scale-125 focus:text-yellow-500 focus:fill-yellow-500"><Star size={36} className="fill-current"/></button>)}
             </div>
             <textarea className="input-field text-sm mb-4" rows={2} placeholder="Laissez un commentaire (optionnel)..." />
             <Link href="/passenger/dashboard" className="btn btn-primary w-full">Terminer →</Link>
@@ -189,10 +190,10 @@ function TrackingContent() {
               <button className="btn btn-sm btn-primary">Copier</button>
             </div>
             <div className="grid grid-cols-3 gap-3">
-              {[{ icon: "📱", label: "WhatsApp" }, { icon: "💬", label: "SMS" }, { icon: "📧", label: "Email" }].map(s => (
-                <button key={s.label} className="p-3 rounded-xl text-center" style={{ background: "var(--color-silver-100)" }}>
-                  <div className="text-2xl mb-1">{s.icon}</div>
-                  <div className="text-xs">{s.label}</div>
+              {[{ icon: <Smartphone size={24}/>, label: "WhatsApp" }, { icon: <MessageCircle size={24}/>, label: "SMS" }, { icon: <Mail size={24}/>, label: "Email" }].map(s => (
+                <button key={s.label} className="p-3 rounded-xl text-center flex flex-col items-center text-purple-600" style={{ background: "var(--color-silver-100)" }}>
+                  <div className="mb-1">{s.icon}</div>
+                  <div className="text-xs text-black">{s.label}</div>
                 </button>
               ))}
             </div>
@@ -225,14 +226,14 @@ function TrackingContent() {
             ))}
           </div>
 
-          <div className="px-4 py-3 flex gap-3" style={{ background: "white", borderTop: "1px solid var(--color-border)" }}>
-            <button className="btn btn-icon-sm" style={{ background: "var(--color-silver-100)" }}>🎙</button>
+          <div className="px-4 py-3 flex gap-3 items-center" style={{ background: "white", borderTop: "1px solid var(--color-border)" }}>
+            <button className="btn btn-icon-sm" style={{ background: "var(--color-silver-100)", color: "var(--color-muted)" }}><Mic size={18} /></button>
             <input value={newMsg} onChange={e => setNewMsg(e.target.value)} className="flex-1 input-field py-3 text-sm" placeholder="Tapez un message..." onKeyDown={e => {
               if (e.key === "Enter" && newMsg.trim()) { setMessages(m => [...m, { from: "passenger", text: newMsg, time: new Date().toLocaleTimeString("fr-MA", { hour: "2-digit", minute: "2-digit" }) }]); setNewMsg(""); }
             }}/>
             <button onClick={() => {
               if (newMsg.trim()) { setMessages(m => [...m, { from: "passenger", text: newMsg, time: new Date().toLocaleTimeString("fr-MA", { hour: "2-digit", minute: "2-digit" }) }]); setNewMsg(""); }
-            }} className="btn btn-icon btn-primary">→</button>
+            }} className="btn btn-icon btn-primary flex items-center justify-center"><Send size={18} /></button>
           </div>
         </div>
       )}

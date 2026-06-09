@@ -3,14 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { Home, Car, Clock, CreditCard, Settings, Send, BarChart2, Coins, Gift, Ticket, Landmark, Smartphone, Banknote } from "lucide-react";
 
 function BottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/passenger/dashboard", icon: "🏠", label: "Accueil", id: "home" },
-    { href: "/passenger/book", icon: "🚗", label: "Réserver", id: "book" },
-    { href: "/passenger/history", icon: "🕐", label: "Historique", id: "history" },
-    { href: "/passenger/wallet", icon: "💳", label: "Wallet", id: "wallet" },
-    { href: "/passenger/settings", icon: "⚙️", label: "Profil", id: "profile" },
+    { href: "/passenger/dashboard", icon: <Home size={24} />, label: "Accueil", id: "home" },
+    { href: "/passenger/book", icon: <Car size={24} />, label: "Réserver", id: "book" },
+    { href: "/passenger/history", icon: <Clock size={24} />, label: "Historique", id: "history" },
+    { href: "/passenger/wallet", icon: <CreditCard size={24} />, label: "Wallet", id: "wallet" },
+    { href: "/passenger/settings", icon: <Settings size={24} />, label: "Profil", id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -102,9 +103,9 @@ export default function WalletPage() {
                 </div>
                 <div className="text-sm mt-1" style={{ color: "rgba(0,0,0,0.6)" }}>Dirhams marocains (MAD)</div>
               </div>
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-purple-600"
                 style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(8px)" }}>
-                💳
+                <CreditCard size={32} />
               </div>
             </div>
 
@@ -113,9 +114,9 @@ export default function WalletPage() {
                 style={{ background: "rgba(255,255,255,0.92)", color: "white", border: "1px solid rgba(0,0,0,0.6)" }}>
                 + Recharger
               </button>
-              <button className="btn btn-sm flex-1"
+              <button className="btn btn-sm flex-1 flex items-center justify-center gap-1"
                 style={{ background: "rgba(255,255,255,0.92)", color: "white", border: "1px solid rgba(0,0,0,0.6)" }}>
-                📤 Envoyer
+                <Send size={16}/> Envoyer
               </button>
             </div>
           </div>
@@ -124,9 +125,9 @@ export default function WalletPage() {
         {/* Quick Stats */}
         <div className="grid grid-cols-3 gap-3">
           {[
-            { label: "Ce mois", value: "108 MAD", icon: "📊", color: "var(--color-rose-600)" },
-            { label: "Total rechargé", value: "400 MAD", icon: "💰", color: "var(--color-purple-600)" },
-            { label: "Économisé", value: "52 MAD", icon: "🎁", color: "var(--color-purple-600)" },
+            { label: "Ce mois", value: "108 MAD", icon: <BarChart2 size={24} />, color: "var(--color-rose-600)" },
+            { label: "Total rechargé", value: "400 MAD", icon: <Coins size={24} />, color: "var(--color-purple-600)" },
+            { label: "Économisé", value: "52 MAD", icon: <Gift size={24} />, color: "var(--color-purple-600)" },
           ].map(s => (
             <div key={s.label} className="p-4 rounded-2xl text-center"
               style={{ background: "white", border: "1px solid var(--color-border)" }}>
@@ -142,7 +143,7 @@ export default function WalletPage() {
       <div className="px-6 mb-6">
         <div className="rounded-2xl p-4 flex items-center gap-4"
           style={{ background: "linear-gradient(135deg, rgba(219,39,119,0.12), rgba(219,39,119,0.06))", border: "1px solid rgba(219,39,119,0.25)" }}>
-          <span className="text-2xl">🎟️</span>
+          <span className="text-purple-600"><Ticket size={32} /></span>
           <div className="flex-1">
             <div className="text-sm font-semibold" style={{ color: "var(--color-purple-700)" }}>Vous avez un coupon disponible !</div>
             <div className="text-xs" style={{ color: "var(--color-muted)" }}>SHEDRIVE20 · -20% sur votre prochain trajet</div>
@@ -165,8 +166,8 @@ export default function WalletPage() {
             <div key={i} className="flex items-center gap-4 p-4 border-b last:border-0 hover:bg-sand-50 transition-colors"
               style={{ borderColor: "var(--color-border)" }}>
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0"
-                style={{ background: tx.type === "credit" ? "rgba(147,51,234,0.1)" : "rgba(225,29,72,0.1)" }}>
-                {tx.type === "credit" ? "💳" : "🚗"}
+                style={{ background: tx.type === "credit" ? "rgba(147,51,234,0.1)" : "rgba(225,29,72,0.1)", color: tx.type === "credit" ? "var(--color-purple-600)" : "var(--color-rose-600)" }}>
+                {tx.type === "credit" ? <CreditCard size={20} /> : <Car size={20} />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium truncate">{tx.description}</div>
@@ -212,10 +213,10 @@ export default function WalletPage() {
               <p className="text-sm font-medium mb-3" style={{ color: "var(--color-silver-700)" }}>Méthode de paiement</p>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { id: "card", icon: "💳", label: "Carte Bancaire" },
-                  { id: "cmi", icon: "🏦", label: "CMI (Maroc)" },
-                  { id: "payzone", icon: "📱", label: "PayZone" },
-                  { id: "cash", icon: "💵", label: "Agent SheDrive" },
+                  { id: "card", icon: <CreditCard size={20} />, label: "Carte Bancaire" },
+                  { id: "cmi", icon: <Landmark size={20} />, label: "CMI (Maroc)" },
+                  { id: "payzone", icon: <Smartphone size={20} />, label: "PayZone" },
+                  { id: "cash", icon: <Banknote size={20} />, label: "Agent SheDrive" },
                 ].map(m => (
                   <button key={m.id} onClick={() => setMethod(m.id)}
                     className="p-3 rounded-xl border-2 text-left flex items-center gap-2 transition-all"
@@ -223,7 +224,7 @@ export default function WalletPage() {
                       borderColor: method === m.id ? "var(--color-rose-400)" : "var(--color-border)",
                       background: method === m.id ? "rgba(225,29,72,0.06)" : "transparent",
                     }}>
-                    <span className="text-xl">{m.icon}</span>
+                    <span className="text-purple-600">{m.icon}</span>
                     <span className="text-xs font-medium">{m.label}</span>
                   </button>
                 ))}

@@ -3,14 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { Home, Car, Clock, CreditCard, Settings, CheckCircle, XCircle, Star, Calendar, User, RefreshCw, CircleDot, MapPin } from "lucide-react";
 
 function BottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/passenger/dashboard", icon: "🏠", label: "Accueil", id: "home" },
-    { href: "/passenger/book", icon: "🚗", label: "Réserver", id: "book" },
-    { href: "/passenger/history", icon: "🕐", label: "Historique", id: "history" },
-    { href: "/passenger/wallet", icon: "💳", label: "Wallet", id: "wallet" },
-    { href: "/passenger/settings", icon: "⚙️", label: "Profil", id: "profile" },
+    { href: "/passenger/dashboard", icon: <Home size={24} />, label: "Accueil", id: "home" },
+    { href: "/passenger/book", icon: <Car size={24} />, label: "Réserver", id: "book" },
+    { href: "/passenger/history", icon: <Clock size={24} />, label: "Historique", id: "history" },
+    { href: "/passenger/wallet", icon: <CreditCard size={24} />, label: "Wallet", id: "wallet" },
+    { href: "/passenger/settings", icon: <Settings size={24} />, label: "Profil", id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -68,8 +69,8 @@ export default function HistoryPage() {
         {/* Stats bar */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           {[
-            { label: "Trajets", value: stats.total.toString(), icon: "🚗" },
-            { label: "MAD dépensés", value: stats.spent.toString(), icon: "💳" },
+            { label: "Trajets", value: stats.total.toString(), icon: <Car size={24} /> },
+            { label: "MAD dépensés", value: stats.spent.toString(), icon: <CreditCard size={24} /> },
           ].map(s => (
             <div key={s.label} className="p-3 rounded-2xl text-center" style={{ background: "white", border: "1px solid var(--color-border)" }}>
               <div className="text-lg mb-0.5">{s.icon}</div>
@@ -105,9 +106,9 @@ export default function HistoryPage() {
           <div key={ride.id} className="card-luxury p-5 cursor-pointer transition-all hover:scale-[1.01]"
             onClick={() => setSelectedRide(ride)}>
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
-                style={{ background: ride.status === "completed" ? "rgba(147,51,234,0.1)" : "rgba(197,48,48,0.1)" }}>
-                {ride.status === "completed" ? "✅" : "❌"}
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: ride.status === "completed" ? "rgba(16,185,129,0.1)" : "rgba(197,48,48,0.1)", color: ride.status === "completed" ? "var(--color-emerald-600)" : "var(--color-red-600)" }}>
+                {ride.status === "completed" ? <CheckCircle size={24} /> : <XCircle size={24} />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
@@ -118,9 +119,11 @@ export default function HistoryPage() {
                 </div>
                 <div className="flex items-center gap-3 text-xs" style={{ color: "var(--color-muted)" }}>
                   {ride.status === "completed" && (
-                    <>
-                      <span>{"⭐".repeat(ride.passenger_rating || 5)}</span>
-                    </>
+                    <div className="flex text-yellow-500">
+                      {Array.from({ length: ride.passenger_rating || 5 }).map((_, i) => (
+                        <Star key={i} size={14} className="fill-yellow-500" />
+                      ))}
+                    </div>
                   )}
                   {ride.status === "cancelled" && <span className="text-red-500">Annulé</span>}
                 </div>
@@ -147,11 +150,11 @@ export default function HistoryPage() {
 
             <div className="flex flex-col gap-4 mb-6">
               {[
-                { icon: "🟢", label: "Départ", value: selectedRide.from_address },
-                { icon: "🔴", label: "Arrivée", value: selectedRide.to_address },
-                { icon: "📅", label: "Date", value: new Date(selectedRide.created_at).toLocaleString("fr-FR") },
-                { icon: "👩", label: "Conductrice", value: selectedRide.driver?.full_name || "Conductrice" },
-                { icon: "💳", label: "Prix payé", value: `${selectedRide.final_price || selectedRide.passenger_price} MAD` },
+                { icon: <MapPin size={18} className="text-purple-500" />, label: "Départ", value: selectedRide.from_address },
+                { icon: <MapPin size={18} className="text-rose-500" />, label: "Arrivée", value: selectedRide.to_address },
+                { icon: <Calendar size={18} />, label: "Date", value: new Date(selectedRide.created_at).toLocaleString("fr-FR") },
+                { icon: <User size={18} />, label: "Conductrice", value: selectedRide.driver?.full_name || "Conductrice" },
+                { icon: <CreditCard size={18} />, label: "Prix payé", value: `${selectedRide.final_price || selectedRide.passenger_price} MAD` },
               ].map(row => (
                 <div key={row.label} className="flex items-center gap-3">
                   <span className="text-base">{row.icon}</span>
@@ -164,7 +167,7 @@ export default function HistoryPage() {
             </div>
 
             <div className="flex gap-3">
-              <Link href="/passenger/book" className="btn btn-primary flex-1 w-full">🔄 Trajet similaire</Link>
+              <Link href="/passenger/book" className="btn btn-primary flex-1 w-full flex items-center justify-center gap-2"><RefreshCw size={18}/> Trajet similaire</Link>
             </div>
           </div>
         </div>

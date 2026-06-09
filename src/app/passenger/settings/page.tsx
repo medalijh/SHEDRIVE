@@ -4,14 +4,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import { Home, Car, Clock, CreditCard, Settings, User, ShieldCheck, Bell, Globe, Pencil, Cake, MapPin, Image as ImageIcon, Gift, Trash2, Star, Lock, Key, List, ShieldAlert, Smartphone, MessageSquare, Mail, LogOut, Check } from "lucide-react";
 
 function BottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/passenger/dashboard", icon: "🏠", label: "Accueil", id: "home" },
-    { href: "/passenger/book", icon: "🚗", label: "Réserver", id: "book" },
-    { href: "/passenger/history", icon: "🕐", label: "Historique", id: "history" },
-    { href: "/passenger/wallet", icon: "💳", label: "Wallet", id: "wallet" },
-    { href: "/passenger/settings", icon: "⚙️", label: "Profil", id: "profile" },
+    { href: "/passenger/dashboard", icon: <Home size={24} />, label: "Accueil", id: "home" },
+    { href: "/passenger/book", icon: <Car size={24} />, label: "Réserver", id: "book" },
+    { href: "/passenger/history", icon: <Clock size={24} />, label: "Historique", id: "history" },
+    { href: "/passenger/wallet", icon: <CreditCard size={24} />, label: "Wallet", id: "wallet" },
+    { href: "/passenger/settings", icon: <Settings size={24} />, label: "Profil", id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -27,7 +28,7 @@ function BottomNav({ active }: { active: string }) {
 type Tab = "account" | "safety" | "notifications" | "language";
 
 const SettingRow = ({ icon, label, value, onClick, isToggle, toggled }: {
-  icon: string; label: string; value?: string; onClick?: () => void; isToggle?: boolean; toggled?: boolean;
+  icon: React.ReactNode; label: string; value?: string; onClick?: () => void; isToggle?: boolean; toggled?: boolean;
 }) => (
   <button className="flex items-center gap-4 w-full py-4 border-b last:border-0 text-left transition-colors hover:bg-sand-50"
     style={{ borderColor: "var(--color-border)" }} onClick={onClick}>
@@ -60,11 +61,11 @@ export default function SettingsPage() {
   const [shareLocation, setShareLocation] = useState(true);
   const [lang, setLang] = useState<"fr" | "ar" | "en">("fr");
 
-  const tabs: { id: Tab; icon: string; label: string }[] = [
-    { id: "account", icon: "👤", label: "Compte" },
-    { id: "safety", icon: "🛡️", label: "Sécurité" },
-    { id: "notifications", icon: "🔔", label: "Notifs" },
-    { id: "language", icon: "🌍", label: "Langue" },
+  const tabs: { id: Tab; icon: React.ReactNode; label: string }[] = [
+    { id: "account", icon: <User size={24} />, label: "Compte" },
+    { id: "safety", icon: <ShieldCheck size={24} />, label: "Sécurité" },
+    { id: "notifications", icon: <Bell size={24} />, label: "Notifs" },
+    { id: "language", icon: <Globe size={24} />, label: "Langue" },
   ];
 
   const handleLogout = async () => {
@@ -85,13 +86,13 @@ export default function SettingsPage() {
         {/* Profile Card */}
         <div className="card-luxury p-5 flex items-center gap-5 mb-6">
           <div className="relative">
-            <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
+            <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-white"
               style={{ background: "linear-gradient(135deg, var(--color-rose-400), var(--color-rose-600))" }}>
-              👩
+              <User size={40} />
             </div>
-            <button className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center text-sm"
+            <button className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center text-white"
               style={{ background: "var(--color-purple-400)", color: "white" }}>
-              ✏️
+              <Pencil size={14} />
             </button>
           </div>
           <div className="flex-1 min-w-0">
@@ -100,8 +101,8 @@ export default function SettingsPage() {
             </h2>
             <p className="text-sm truncate" style={{ color: "var(--color-muted)" }}>{profile?.phone || user?.email}</p>
             <div className="flex items-center gap-2 mt-2">
-              <span className="badge badge-success" style={{ fontSize: 10 }}>✓ Vérifié</span>
-              <span className="badge badge-primary" style={{ fontSize: 10 }}>⭐ 5.0</span>
+              <span className="badge badge-success flex items-center gap-1" style={{ fontSize: 10 }}><Check size={10}/> Vérifié</span>
+              <span className="badge badge-primary flex items-center gap-1" style={{ fontSize: 10 }}><Star size={10} className="fill-current"/> 5.0</span>
             </div>
           </div>
         </div>
@@ -117,7 +118,7 @@ export default function SettingsPage() {
                 border: tab === t.id ? "none" : "1px solid var(--color-border)",
                 boxShadow: tab === t.id ? "var(--shadow-rose)" : "none",
               }}>
-              <span className="text-xl">{t.icon}</span>
+              <span className="text-purple-600">{t.icon}</span>
               <span className="text-xs font-medium">{t.label}</span>
             </button>
           ))}
@@ -128,14 +129,14 @@ export default function SettingsPage() {
         {/* Account Tab */}
         {tab === "account" && (
           <div className="card p-5">
-            <SettingRow icon="👤" label="Nom complet" value={profile?.full_name}/>
-            <SettingRow icon="📱" label="Téléphone" value={profile?.phone || "Non renseigné"}/>
-            <SettingRow icon="📧" label="Email" value={user?.email}/>
-            <SettingRow icon="🎂" label="Date de naissance" value="Non renseignée"/>
-            <SettingRow icon="🏙️" label="Ville préférée" value="Casablanca"/>
-            <SettingRow icon="🖼️" label="Photo de profil"/>
-            <SettingRow icon="🎁" label="Mon code de parrainage" value="SHEDRIVE2026"/>
-            <SettingRow icon="🗑️" label="Supprimer mon compte"/>
+            <SettingRow icon={<User size={20} />} label="Nom complet" value={profile?.full_name}/>
+            <SettingRow icon={<Smartphone size={20} />} label="Téléphone" value={profile?.phone || "Non renseigné"}/>
+            <SettingRow icon={<Mail size={20} />} label="Email" value={user?.email}/>
+            <SettingRow icon={<Cake size={20} />} label="Date de naissance" value="Non renseignée"/>
+            <SettingRow icon={<MapPin size={20} />} label="Ville préférée" value="Casablanca"/>
+            <SettingRow icon={<ImageIcon size={20} />} label="Photo de profil"/>
+            <SettingRow icon={<Gift size={20} />} label="Mon code de parrainage" value="SHEDRIVE2026"/>
+            <SettingRow icon={<Trash2 size={20} />} label="Supprimer mon compte"/>
           </div>
         )}
 
@@ -150,14 +151,14 @@ export default function SettingsPage() {
               ].map((c, i) => (
                 <div key={i} className="flex items-center gap-3 py-3 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
                   <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg"
-                    style={{ background: c.primary ? "rgba(197,48,48,0.1)" : "rgba(225,29,72,0.08)" }}>
-                    {c.primary ? "⭐" : "👤"}
+                    style={{ background: c.primary ? "rgba(197,48,48,0.1)" : "rgba(225,29,72,0.08)", color: c.primary ? "var(--color-rose-600)" : "var(--color-purple-600)" }}>
+                    {c.primary ? <Star size={20} className="fill-current" /> : <User size={20} />}
                   </div>
                   <div className="flex-1">
                     <div className="text-sm font-medium">{c.name}</div>
                     <div className="text-xs" style={{ color: "var(--color-muted)" }}>{c.rel} · {c.phone}</div>
                   </div>
-                  <button className="btn btn-sm btn-ghost" style={{ color: "var(--color-rose-600)" }}>✏️</button>
+                  <button className="btn btn-sm btn-ghost" style={{ color: "var(--color-rose-600)" }}><Pencil size={16}/></button>
                 </div>
               ))}
               <button className="btn btn-outline w-full mt-4">+ Ajouter un contact</button>
@@ -165,15 +166,15 @@ export default function SettingsPage() {
 
             <div className="card p-5">
               <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Sécurité du compte</h3>
-              <SettingRow icon="🔐" label="Authentification à 2 facteurs" isToggle toggled={true} onClick={() => {}}/>
-              <SettingRow icon="🔑" label="Changer le mot de passe"/>
-              <SettingRow icon="📍" label="Partage de position en temps réel" isToggle toggled={shareLocation} onClick={() => setShareLocation(!shareLocation)}/>
-              <SettingRow icon="📋" label="Sessions actives"/>
+              <SettingRow icon={<Lock size={20} />} label="Authentification à 2 facteurs" isToggle toggled={true} onClick={() => {}}/>
+              <SettingRow icon={<Key size={20} />} label="Changer le mot de passe"/>
+              <SettingRow icon={<MapPin size={20} />} label="Partage de position en temps réel" isToggle toggled={shareLocation} onClick={() => setShareLocation(!shareLocation)}/>
+              <SettingRow icon={<List size={20} />} label="Sessions actives"/>
             </div>
 
             <div className="p-4 rounded-2xl" style={{ background: "rgba(197,48,48,0.06)", border: "1px solid rgba(197,48,48,0.2)" }}>
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-xl">🆘</span>
+                <span className="text-red-700"><ShieldAlert size={24} /></span>
                 <span className="font-semibold text-red-700 text-sm">Bouton SOS</span>
               </div>
               <p className="text-xs" style={{ color: "var(--color-muted)" }}>
@@ -188,15 +189,15 @@ export default function SettingsPage() {
         {tab === "notifications" && (
           <div className="card p-5">
             <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Préférences de notification</h3>
-            <SettingRow icon="📲" label="Notifications push" value="Recevoir des alertes temps réel" isToggle toggled={pushNotifs} onClick={() => setPushNotifs(!pushNotifs)}/>
-            <SettingRow icon="💬" label="Notifications SMS" value="Alertes importantes par SMS" isToggle toggled={smsNotifs} onClick={() => setSmsNotifs(!smsNotifs)}/>
-            <SettingRow icon="📧" label="Notifications email" value="Résumé hebdomadaire" isToggle toggled={emailNotifs} onClick={() => setEmailNotifs(!emailNotifs)}/>
+            <SettingRow icon={<Smartphone size={20} />} label="Notifications push" value="Recevoir des alertes temps réel" isToggle toggled={pushNotifs} onClick={() => setPushNotifs(!pushNotifs)}/>
+            <SettingRow icon={<MessageSquare size={20} />} label="Notifications SMS" value="Alertes importantes par SMS" isToggle toggled={smsNotifs} onClick={() => setSmsNotifs(!smsNotifs)}/>
+            <SettingRow icon={<Mail size={20} />} label="Notifications email" value="Résumé hebdomadaire" isToggle toggled={emailNotifs} onClick={() => setEmailNotifs(!emailNotifs)}/>
             <div className="divider my-4"/>
             <h4 className="text-sm font-semibold mb-3" style={{ color: "var(--color-silver-700)" }}>Types de notifications</h4>
-            <SettingRow icon="🚗" label="Mises à jour du trajet" isToggle toggled={true} onClick={() => {}}/>
-            <SettingRow icon="💳" label="Transactions wallet" isToggle toggled={true} onClick={() => {}}/>
-            <SettingRow icon="🎁" label="Promotions et offres" isToggle toggled={false} onClick={() => {}}/>
-            <SettingRow icon="⭐" label="Rappels d'évaluation" isToggle toggled={true} onClick={() => {}}/>
+            <SettingRow icon={<Car size={20} />} label="Mises à jour du trajet" isToggle toggled={true} onClick={() => {}}/>
+            <SettingRow icon={<CreditCard size={20} />} label="Transactions wallet" isToggle toggled={true} onClick={() => {}}/>
+            <SettingRow icon={<Gift size={20} />} label="Promotions et offres" isToggle toggled={false} onClick={() => {}}/>
+            <SettingRow icon={<Star size={20} />} label="Rappels d'évaluation" isToggle toggled={true} onClick={() => {}}/>
           </div>
         )}
 
@@ -206,25 +207,25 @@ export default function SettingsPage() {
             <div className="card p-5">
               <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Langue de l'application</h3>
               {[
-                { id: "fr" as const, flag: "🇫🇷", label: "Français", native: "Français" },
-                { id: "ar" as const, flag: "🇲🇦", label: "Arabe", native: "العربية" },
-                { id: "en" as const, flag: "🇬🇧", label: "Anglais", native: "English" },
+                { id: "fr" as const, flag: "FR", label: "Français", native: "Français" },
+                { id: "ar" as const, flag: "MA", label: "Arabe", native: "العربية" },
+                { id: "en" as const, flag: "GB", label: "Anglais", native: "English" },
               ].map(l => (
                 <button key={l.id} onClick={() => setLang(l.id)}
                   className="flex items-center gap-4 w-full py-4 border-b last:border-0 transition-colors"
                   style={{ borderColor: "var(--color-border)" }}>
-                  <span className="text-2xl">{l.flag}</span>
+                  <span className="text-sm font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded">{l.flag}</span>
                   <div className="flex-1 text-left">
                     <div className="text-sm font-medium">{l.label}</div>
                     <div className="text-xs" style={{ color: "var(--color-muted)", fontFamily: l.id === "ar" ? "var(--font-arabic)" : undefined }}>{l.native}</div>
                   </div>
-                  {lang === l.id && <div className="w-5 h-5 rounded-full flex items-center justify-center text-black text-xs" style={{ background: "var(--color-purple-500)" }}>✓</div>}
+                  {lang === l.id && <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-purple-500)" }}><Check size={12}/></div>}
                 </button>
               ))}
             </div>
             <div className="p-4 rounded-2xl" style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.2)" }}>
-              <p className="text-xs" style={{ color: "var(--color-rose-700)" }}>
-                🌍 L'application supporte le RTL (droite à gauche) en arabe automatiquement.
+              <p className="text-xs flex items-center gap-1" style={{ color: "var(--color-rose-700)" }}>
+                <Globe size={14}/> L'application supporte le RTL (droite à gauche) en arabe automatiquement.
               </p>
             </div>
           </div>
@@ -232,9 +233,9 @@ export default function SettingsPage() {
 
         {/* Logout */}
         <div className="mt-6 mb-4">
-          <button className="btn btn-outline w-full" style={{ borderColor: "rgba(197,48,48,0.3)", color: "#C53030" }}
+          <button className="btn btn-outline w-full flex items-center justify-center gap-2" style={{ borderColor: "rgba(197,48,48,0.3)", color: "#C53030" }}
             onClick={handleLogout}>
-            🚪 Se déconnecter
+            <LogOut size={18} /> Se déconnecter
           </button>
         </div>
         <p className="text-center text-xs mb-6" style={{ color: "var(--color-silver-300)" }}>SheDrive Morocco v1.0.0</p>

@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAuth } from "@/hooks/useAuth";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { Home, Map as MapIcon, Coins, Settings, CheckCircle, Flag, Landmark, Star, Car, ArrowLeft } from "lucide-react";
 
 function DriverBottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/driver/dashboard", icon: "🏠", label: "Accueil",  id: "home" },
-    { href: "/driver/trips",     icon: "🗺️", label: "Trajets",  id: "trips" },
-    { href: "/driver/earnings",  icon: "💰", label: "Gains",    id: "earnings" },
-    { href: "/driver/settings",  icon: "⚙️", label: "Profil",   id: "profile" },
+    { href: "/driver/dashboard", icon: <Home size={24}/>, label: "Accueil",  id: "home" },
+    { href: "/driver/trips",     icon: <MapIcon size={24}/>, label: "Trajets",  id: "trips" },
+    { href: "/driver/earnings",  icon: <Coins size={24}/>, label: "Gains",    id: "earnings" },
+    { href: "/driver/settings",  icon: <Settings size={24}/>, label: "Profil",   id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -69,7 +69,7 @@ export default function DriverEarnings() {
       {/* Header */}
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
-          <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
+          <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-purple-600"><ArrowLeft size={24} /></Link>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Mes Gains</h1>
         </div>
 
@@ -105,8 +105,8 @@ export default function DriverEarnings() {
               {stats[period].amount.toLocaleString()} <span className="text-2xl">MAD</span>
             </div>
             <div className="flex gap-4 text-xs mt-3" style={{ color: "rgba(0,0,0,0.6)" }}>
-              <span>🚗 {stats[period].count} trajets</span>
-              <span>⭐ 4.9 moy.</span>
+              <span className="flex items-center gap-1"><Car size={14}/> {stats[period].count} trajets</span>
+              <span className="flex items-center gap-1"><Star size={14} className="text-yellow-500 fill-current"/> 4.9 moy.</span>
             </div>
           </div>
         </div>
@@ -114,12 +114,12 @@ export default function DriverEarnings() {
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
-            { label: "Taux d'acceptation", value: "92%", icon: "✅", color: "var(--color-purple-600)" },
-            { label: "Taux de complétion", value: "98%", icon: "🏁", color: "var(--color-rose-600)" },
-            { label: "Gains moyens / trajet", value: stats[period].count > 0 ? `${Math.round(stats[period].amount / stats[period].count)} MAD` : "0 MAD", icon: "💰", color: "var(--color-purple-600)" },
+            { label: "Taux d'acceptation", value: "92%", icon: <CheckCircle size={24} />, color: "var(--color-purple-600)" },
+            { label: "Taux de complétion", value: "98%", icon: <Flag size={24} />, color: "var(--color-rose-600)" },
+            { label: "Gains moyens / trajet", value: stats[period].count > 0 ? `${Math.round(stats[period].amount / stats[period].count)} MAD` : "0 MAD", icon: <Coins size={24} />, color: "var(--color-purple-600)" },
           ].map(s => (
             <div key={s.label} className="card p-4 text-center">
-              <div className="text-xl mb-1">{s.icon}</div>
+              <div className="flex justify-center mb-1 text-purple-600">{s.icon}</div>
               <div className="text-base font-bold" style={{ color: s.color, fontFamily: "var(--font-display)" }}>{s.value}</div>
               <div className="text-xs mt-0.5 leading-tight" style={{ color: "var(--color-muted)" }}>{s.label}</div>
             </div>
@@ -157,7 +157,7 @@ export default function DriverEarnings() {
               <h3 className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Retrait des gains</h3>
               <p className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>Solde disponible : {stats.month.amount} MAD</p>
             </div>
-            <span className="text-3xl">🏦</span>
+            <div className="text-purple-600"><Landmark size={32} /></div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <button className="btn btn-emerald">Virement bancaire</button>
@@ -174,8 +174,8 @@ export default function DriverEarnings() {
              <div className="text-center py-6 text-gray-500 text-sm">Aucun trajet effectué.</div>
           ) : trips.map((t, i) => (
             <div key={t.id} className="flex items-center gap-4 p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0"
-                style={{ background: "rgba(147,51,234,0.08)" }}>✅</div>
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(147,51,234,0.08)", color: "var(--color-purple-600)" }}><CheckCircle size={20}/></div>
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium truncate">{t.from_address} → {t.to_address}</div>
                 <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>
@@ -184,7 +184,11 @@ export default function DriverEarnings() {
               </div>
               <div className="text-right flex-shrink-0">
                 <div className="text-sm font-bold" style={{ color: "var(--color-purple-600)" }}>+{t.final_price || t.passenger_price} MAD</div>
-                <div className="text-xs" style={{ color: "var(--color-purple-500)" }}>{"⭐".repeat(t.driver_rating || 5)}</div>
+                <div className="text-xs flex gap-0.5 justify-end mt-1 text-yellow-500">
+                  {Array.from({ length: t.driver_rating || 5 }).map((_, idx) => (
+                    <Star key={idx} size={10} className="fill-current" />
+                  ))}
+                </div>
               </div>
             </div>
           ))}

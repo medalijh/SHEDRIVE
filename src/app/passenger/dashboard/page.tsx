@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { MapMarker } from "@/components/Map";
+import { ShieldAlert, Home, Car, Clock, CreditCard, Settings, MapPin, Search, Bell, User, MessageCircle, Gift, Star, ShieldCheck, CheckCircle } from "lucide-react";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
@@ -35,7 +36,7 @@ function SOSButton() {
       {pressed && (
         <div className="fixed inset-0 bg-red-900/80 z-[998] flex items-center justify-center backdrop-blur-sm">
           <div className="bg-white rounded-3xl p-8 max-w-sm w-full mx-6 text-center">
-            <div className="text-6xl mb-4 animate-pulse">🆘</div>
+            <div className="flex justify-center mb-4 text-red-600"><ShieldAlert size={64} className="animate-pulse" /></div>
             <h3 className="text-2xl font-bold text-red-700 mb-2">Alerte SOS</h3>
             <p className="text-gray-600 mb-6">L'alerte sera envoyée dans <strong>{countdown}</strong> secondes...</p>
             <button onClick={() => { setPressed(false); setCountdown(3); }} className="btn btn-outline w-full" style={{ borderColor: "#E53E3E", color: "#E53E3E" }}>✕ Annuler</button>
@@ -43,8 +44,7 @@ function SOSButton() {
         </div>
       )}
       <button className="sos-button no-print" onClick={() => setPressed(true)} aria-label="Bouton SOS d'urgence">
-        <span className="text-base font-bold">SOS</span>
-        <span style={{ fontSize: "10px" }}>🆘</span>
+        <span className="text-base font-bold flex items-center gap-1"><ShieldAlert size={18} /> SOS</span>
       </button>
     </>
   );
@@ -52,11 +52,11 @@ function SOSButton() {
 
 function BottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/passenger/dashboard", icon: "🏠", label: "Accueil", id: "home" },
-    { href: "/passenger/book", icon: "🚗", label: "Réserver", id: "book" },
-    { href: "/passenger/history", icon: "🕐", label: "Historique", id: "history" },
-    { href: "/passenger/wallet", icon: "💳", label: "Wallet", id: "wallet" },
-    { href: "/passenger/settings", icon: "⚙️", label: "Profil", id: "profile" },
+    { href: "/passenger/dashboard", icon: <Home size={24} />, label: "Accueil", id: "home" },
+    { href: "/passenger/book", icon: <Car size={24} />, label: "Réserver", id: "book" },
+    { href: "/passenger/history", icon: <Clock size={24} />, label: "Historique", id: "history" },
+    { href: "/passenger/wallet", icon: <CreditCard size={24} />, label: "Wallet", id: "wallet" },
+    { href: "/passenger/settings", icon: <Settings size={24} />, label: "Profil", id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -75,15 +75,15 @@ function QuickBookWidget() {
   const [to, setTo] = useState("");
   return (
     <div className="card-luxury p-5">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-xl">🚗</span>
+      <div className="flex items-center gap-2 mb-4 text-purple-600">
+        <Car size={24} />
         <h3 className="font-semibold text-base" style={{ fontFamily: "var(--font-display)" }}>Où souhaitez-vous aller ?</h3>
       </div>
       <div className="flex flex-col gap-3 mb-4">
         <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.15)" }}>
           <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-purple-500)" }} />
           <input className="flex-1 bg-transparent outline-none text-sm" placeholder="Votre position actuelle" disabled style={{ color: "var(--color-text)", cursor: "not-allowed" }} />
-          <span style={{ color: "var(--color-purple-600)", fontSize: "1rem" }}>📍</span>
+          <MapPin size={20} style={{ color: "var(--color-purple-600)" }} />
         </div>
         <div className="ml-[18px] flex flex-col gap-1">
           {[1, 2].map((i) => <div key={i} className="w-0.5 h-1 rounded-full ml-[4px]" style={{ background: "var(--color-silver-300)" }} />)}
@@ -91,10 +91,10 @@ function QuickBookWidget() {
         <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(225,29,72,0.06)", border: "1px solid rgba(225,29,72,0.15)" }}>
           <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-rose-500)" }} />
           <input value={to} onChange={(e) => setTo(e.target.value)} className="flex-1 bg-transparent outline-none text-sm" placeholder="Entrez votre destination" style={{ color: "var(--color-text)" }} />
-          <span style={{ color: "var(--color-rose-500)", fontSize: "1rem" }}>🔍</span>
+          <Search size={20} style={{ color: "var(--color-rose-500)" }} />
         </div>
       </div>
-      <button onClick={() => router.push(to ? `/passenger/book?to=${encodeURIComponent(to)}` : "/passenger/book")} className="btn btn-primary w-full">🌹 Trouver une conductrice</button>
+      <button onClick={() => router.push(to ? `/passenger/book?to=${encodeURIComponent(to)}` : "/passenger/book")} className="btn btn-primary w-full">Trouver une conductrice</button>
     </div>
   );
 }
@@ -128,7 +128,9 @@ function RecentRides() {
           <div className="text-center text-sm text-gray-500 py-4">Aucun trajet récent</div>
         ) : rides.map((ride, i) => (
           <div key={i} className="flex items-center gap-4 py-3 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-            <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: "rgba(225,29,72,0.1)" }}>🚗</div>
+            <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-rose-600 flex-shrink-0" style={{ background: "rgba(225,29,72,0.1)" }}>
+              <Car size={20} />
+            </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium truncate">{ride.from_address} → {ride.to_address}</div>
               <div className="text-xs mt-1 flex items-center gap-2" style={{ color: "var(--color-muted)" }}>
@@ -139,7 +141,7 @@ function RecentRides() {
             </div>
             <div className="text-right flex-shrink-0">
               <div className="text-sm font-semibold" style={{ color: "var(--color-rose-700)" }}>{ride.final_price || ride.passenger_price} MAD</div>
-              {ride.status === "completed" && <span className="badge badge-success mt-1" style={{ fontSize: "10px" }}>✓</span>}
+              {ride.status === "completed" && <div className="flex justify-end mt-1"><CheckCircle size={14} className="text-emerald-500" /></div>}
             </div>
           </div>
         ))}
@@ -169,7 +171,9 @@ function WalletCard() {
           <p className="text-xs mb-1" style={{ color: "rgba(0,0,0,0.6)" }}>Solde Wallet</p>
           <div className="text-3xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>{balance.toFixed(2)} <span className="text-lg">MAD</span></div>
         </div>
-        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(255,255,255,0.92)" }}>💳</div>
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-purple-700" style={{ background: "rgba(255,255,255,0.92)" }}>
+          <CreditCard size={24} />
+        </div>
       </div>
       <div className="relative z-10 flex gap-3">
         <Link href="/passenger/wallet" className="btn btn-sm flex-1" style={{ background: "rgba(255,255,255,0.92)", color: "white", backdropFilter: "blur(8px)", border: "1px solid rgba(0,0,0,0.6)" }}>Recharger</Link>
@@ -217,15 +221,18 @@ export default function PassengerDashboard() {
       <div className="p-6 pt-12">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <p className="text-sm" style={{ color: "var(--color-muted)" }}>{greeting} 👋</p>
+            <p className="text-sm" style={{ color: "var(--color-muted)" }}>{greeting}</p>
             <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>{profile?.full_name || "Passagère"}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/passenger/notifications" className="btn btn-icon" style={{ background: "var(--color-silver-100)" }}>
-              <span className="text-xl relative">🔔<span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500" /></span>
+            <Link href="/passenger/notifications" className="btn btn-icon relative" style={{ background: "var(--color-silver-100)", color: "var(--color-text)" }}>
+              <Bell size={20} />
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500" />
             </Link>
             <Link href="/passenger/settings">
-              <div className="w-11 h-11 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-rose-400), var(--color-rose-600))" }}>👩</div>
+              <div className="w-11 h-11 rounded-full flex items-center justify-center text-white" style={{ background: "linear-gradient(135deg, var(--color-rose-400), var(--color-rose-600))" }}>
+                <User size={20} />
+              </div>
             </Link>
           </div>
         </div>
@@ -256,13 +263,13 @@ export default function PassengerDashboard() {
       <div className="px-6 mb-6">
         <div className="grid grid-cols-4 gap-3">
           {[
-            { icon: "📍", label: "Récents", href: "/passenger/history" },
-            { icon: "💬", label: "Messages", href: "/passenger/messages" },
-            { icon: "🎁", label: "Coupons", href: "/passenger/coupons" },
-            { icon: "⭐", label: "Favoris", href: "/passenger/favorites" },
+            { icon: <MapPin size={24} />, label: "Récents", href: "/passenger/history" },
+            { icon: <MessageCircle size={24} />, label: "Messages", href: "/passenger/messages" },
+            { icon: <Gift size={24} />, label: "Coupons", href: "/passenger/coupons" },
+            { icon: <Star size={24} />, label: "Favoris", href: "/passenger/favorites" },
           ].map((action) => (
             <Link key={action.label} href={action.href} className="flex flex-col items-center gap-2 p-4 rounded-2xl text-center transition-all duration-200 hover:scale-105" style={{ background: "white", border: "1px solid var(--color-border)", boxShadow: "var(--shadow-xs)" }}>
-              <span className="text-2xl">{action.icon}</span>
+              <span className="text-purple-600">{action.icon}</span>
               <span className="text-xs font-medium" style={{ color: "var(--color-muted)" }}>{action.label}</span>
             </Link>
           ))}
@@ -276,7 +283,9 @@ export default function PassengerDashboard() {
       <div className="px-6 mb-6">
         <div className="rounded-3xl p-5" style={{ background: "linear-gradient(135deg, rgba(197,48,48,0.08), rgba(197,48,48,0.04))", border: "1px solid rgba(197,48,48,0.2)" }}>
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(197,48,48,0.12)" }}>🛡️</div>
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-red-600" style={{ background: "rgba(197,48,48,0.12)" }}>
+              <ShieldCheck size={24} />
+            </div>
             <div className="flex-1">
               <h3 className="font-semibold text-sm mb-1">Sécurité & Contacts d'urgence</h3>
               <p className="text-xs" style={{ color: "var(--color-muted)" }}>Ajoutez vos contacts de confiance pour que le bouton SOS fonctionne</p>

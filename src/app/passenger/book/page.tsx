@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { searchAddress, getRoute, GeocodingResult } from "@/lib/mapUtils";
+import { ShieldAlert, Home, Car, Clock, CreditCard, Settings, Banknote, Landmark, User, Star, Hash, Timer, MapPin, Lightbulb, ShieldCheck, Check } from "lucide-react";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
@@ -30,7 +31,7 @@ function SOSButton() {
       {pressed && (
         <div className="fixed inset-0 z-[998] flex items-center justify-center" style={{ background: "rgba(153,27,27,0.85)", backdropFilter: "blur(6px)" }}>
           <div className="bg-white rounded-3xl p-8 max-w-sm w-full mx-6 text-center shadow-2xl">
-            <div className="text-6xl mb-4">🆘</div>
+            <div className="flex justify-center mb-4 text-red-600"><ShieldAlert size={64} className="animate-pulse" /></div>
             <h3 className="text-2xl font-bold text-red-700 mb-2">Alerte SOS</h3>
             <p className="text-gray-600 mb-6">Envoi dans <strong>{countdown}</strong>s...</p>
             <button onClick={() => { setPressed(false); setCountdown(3); }} className="btn btn-outline w-full" style={{ borderColor: "#E53E3E", color: "#E53E3E" }}>✕ Annuler</button>
@@ -38,7 +39,7 @@ function SOSButton() {
         </div>
       )}
       <button className="sos-button" onClick={() => setPressed(true)} aria-label="SOS">
-        <span className="font-bold">SOS</span><span style={{ fontSize: 10 }}>🆘</span>
+        <span className="font-bold flex items-center gap-1"><ShieldAlert size={18} /> SOS</span>
       </button>
     </>
   );
@@ -46,11 +47,11 @@ function SOSButton() {
 
 function BottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/passenger/dashboard", icon: "🏠", label: "Accueil", id: "home" },
-    { href: "/passenger/book", icon: "🚗", label: "Réserver", id: "book" },
-    { href: "/passenger/history", icon: "🕐", label: "Historique", id: "history" },
-    { href: "/passenger/wallet", icon: "💳", label: "Wallet", id: "wallet" },
-    { href: "/passenger/settings", icon: "⚙️", label: "Profil", id: "profile" },
+    { href: "/passenger/dashboard", icon: <Home size={24} />, label: "Accueil", id: "home" },
+    { href: "/passenger/book", icon: <Car size={24} />, label: "Réserver", id: "book" },
+    { href: "/passenger/history", icon: <Clock size={24} />, label: "Historique", id: "history" },
+    { href: "/passenger/wallet", icon: <CreditCard size={24} />, label: "Wallet", id: "wallet" },
+    { href: "/passenger/settings", icon: <Settings size={24} />, label: "Profil", id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -215,8 +216,10 @@ function PriceStep({ from, to, routeData, onNext }: { from: string; to: string; 
           <span>→</span>
           <span className="font-medium truncate max-w-[120px]">{to}</span>
         </div>
-        <div className="flex items-center justify-center gap-2 mb-1" style={{ color: "var(--color-muted)", fontSize: "0.75rem" }}>
-          <span>📏 ~{distanceKm} km</span><span>·</span><span>⏱ ~{durationMin} min</span>
+        <div className="flex items-center justify-center gap-4 mb-1" style={{ color: "var(--color-muted)", fontSize: "0.75rem" }}>
+          <span className="flex items-center gap-1"><MapPin size={12}/> ~{distanceKm} km</span>
+          <span>·</span>
+          <span className="flex items-center gap-1"><Timer size={12}/> ~{durationMin} min</span>
         </div>
 
         <h3 className="font-semibold mb-6 mt-4" style={{ fontFamily: "var(--font-display)" }}>Proposez votre prix</h3>
@@ -248,8 +251,9 @@ function PriceStep({ from, to, routeData, onNext }: { from: string; to: string; 
           ))}
         </div>
 
-        <div className="p-3 rounded-xl text-xs" style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.2)", color: "var(--color-purple-700)" }}>
-          💡 Prix suggéré : <strong>{basePrice - 5}–{basePrice + 5} MAD</strong> pour {distanceKm} km
+        <div className="p-3 rounded-xl text-xs flex gap-2 items-start" style={{ background: "rgba(219,39,119,0.08)", border: "1px solid rgba(219,39,119,0.2)", color: "var(--color-purple-700)" }}>
+          <Lightbulb size={16} className="flex-shrink-0" />
+          <span>Prix suggéré : <strong>{basePrice - 5}–{basePrice + 5} MAD</strong> pour {distanceKm} km</span>
         </div>
       </div>
 
@@ -257,9 +261,9 @@ function PriceStep({ from, to, routeData, onNext }: { from: string; to: string; 
         <h4 className="font-semibold mb-4 text-sm">Mode de paiement</h4>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { id: "cash" as const, icon: "💵", label: "Espèces" },
-            { id: "wallet" as const, icon: "💳", label: "Wallet" },
-            { id: "card" as const, icon: "🏦", label: "Carte" },
+            { id: "cash" as const, icon: <Banknote size={24} />, label: "Espèces" },
+            { id: "wallet" as const, icon: <CreditCard size={24} />, label: "Wallet" },
+            { id: "card" as const, icon: <Landmark size={24} />, label: "Carte" },
           ].map(m => (
             <button key={m.id} onClick={() => setMethod(m.id)}
               className="p-3 rounded-xl border-2 text-center transition-all"
@@ -325,19 +329,19 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
           style={{ outline: selected === i ? "2px solid var(--color-rose-400)" : "none", outlineOffset: "2px" }}
           onClick={() => setSelected(i)}>
           <div className="flex items-start gap-4">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-rose-600 flex-shrink-0"
               style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.15), rgba(225,29,72,0.08))" }}>
-              👩
+              <User size={24} />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-semibold truncate">{driver.name}</span>
                 {driver.badge && <span className="badge badge-warning flex-shrink-0" style={{ fontSize: 10 }}>{driver.badge}</span>}
               </div>
-              <div className="text-xs mb-2 truncate" style={{ color: "var(--color-muted)" }}>
-                ⭐ {driver.rating} · {driver.trips} trajets · 🚗 {driver.car}
+              <div className="text-xs mb-2 truncate flex items-center gap-1" style={{ color: "var(--color-muted)" }}>
+                <Star size={12} className="text-yellow-500 fill-yellow-500"/> {driver.rating} · {driver.trips} trajets · <Car size={12}/> {driver.car}
               </div>
-              <div className="text-xs" style={{ color: "var(--color-muted)" }}>🔢 {driver.plate}</div>
+              <div className="text-xs flex items-center gap-1" style={{ color: "var(--color-muted)" }}><Hash size={12}/> {driver.plate}</div>
             </div>
             <div className="text-right flex-shrink-0">
               <div className="text-xl font-bold" style={{ color: "var(--color-rose-700)", fontFamily: "var(--font-display)" }}>
@@ -346,7 +350,7 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
               <div className="text-xs mt-1" style={{ color: "var(--color-purple-600)" }}>⏱ {driver.eta} min</div>
               {selected === i && (
                 <div className="mt-2">
-                  <span className="badge badge-primary" style={{ fontSize: 10 }}>✓ Sélectionnée</span>
+                  <span className="badge badge-primary flex items-center gap-1" style={{ fontSize: 10 }}><Check size={10}/> Sélectionnée</span>
                 </div>
               )}
             </div>
@@ -407,9 +411,9 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
   if (confirmed) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="w-24 h-24 rounded-full flex items-center justify-center text-5xl mb-6 animate-scale-in"
+        <div className="w-24 h-24 rounded-full flex items-center justify-center text-white mb-6 animate-scale-in"
           style={{ background: "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))", boxShadow: "var(--shadow-emerald)" }}>
-          ✓
+          <Check size={48} />
         </div>
         <h2 className="text-display-sm text-black mb-3" style={{ color: "var(--color-purple-700)" }}>
           Trajet confirmé !
@@ -448,11 +452,13 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
         <div className="divider mb-5"/>
 
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-            style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-rose-600"
+            style={{ background: "rgba(225,29,72,0.1)" }}>
+            <User size={24} />
+          </div>
           <div>
             <div className="font-semibold">{driver.name}</div>
-            <div className="text-xs" style={{ color: "var(--color-muted)" }}>⭐ {driver.rating} · ⏱ {driver.eta} min</div>
+            <div className="text-xs flex items-center gap-1" style={{ color: "var(--color-muted)" }}><Star size={12} className="text-yellow-500 fill-yellow-500" /> {driver.rating} · <Timer size={12} /> {driver.eta} min</div>
           </div>
         </div>
 
@@ -467,7 +473,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
       </div>
 
       <div className="p-4 rounded-2xl" style={{ background: "rgba(197,48,48,0.06)", border: "1px solid rgba(197,48,48,0.15)" }}>
-        <p className="text-xs text-red-700 font-medium mb-1">🛡️ Rappel sécurité</p>
+        <p className="text-xs text-red-700 font-medium mb-1 flex items-center gap-1"><ShieldCheck size={14}/> Rappel sécurité</p>
         <p className="text-xs" style={{ color: "var(--color-muted)" }}>
           Vérifiez toujours la plaque d'immatriculation et le nom de la conductrice avant de monter.
         </p>

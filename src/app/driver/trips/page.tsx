@@ -4,13 +4,14 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { Home, Map as MapIcon, Coins, Settings, CheckCircle, XCircle, Star, ArrowLeft } from "lucide-react";
 
 function DriverBottomNav({ active }: { active: string }) {
   const items = [
-    { href: "/driver/dashboard", icon: "🏠", label: "Accueil",  id: "home" },
-    { href: "/driver/trips",     icon: "🗺️", label: "Trajets",  id: "trips" },
-    { href: "/driver/earnings",  icon: "💰", label: "Gains",    id: "earnings" },
-    { href: "/driver/settings",  icon: "⚙️", label: "Profil",   id: "profile" },
+    { href: "/driver/dashboard", icon: <Home size={24}/>, label: "Accueil",  id: "home" },
+    { href: "/driver/trips",     icon: <MapIcon size={24}/>, label: "Trajets",  id: "trips" },
+    { href: "/driver/earnings",  icon: <Coins size={24}/>, label: "Gains",    id: "earnings" },
+    { href: "/driver/settings",  icon: <Settings size={24}/>, label: "Profil",   id: "profile" },
   ];
   return (
     <nav className="bottom-nav">
@@ -50,7 +51,7 @@ export default function DriverTrips() {
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
-          <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
+          <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-purple-600"><ArrowLeft size={24} /></Link>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Mes Trajets</h1>
         </div>
 
@@ -79,9 +80,9 @@ export default function DriverTrips() {
         ) : filtered.map((ride) => (
           <div key={ride.id} className="card-luxury p-5 transition-all">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
-                style={{ background: ride.status === "completed" ? "rgba(147,51,234,0.1)" : "rgba(197,48,48,0.1)" }}>
-                {ride.status === "completed" ? "✅" : "❌"}
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: ride.status === "completed" ? "rgba(16,185,129,0.1)" : "rgba(197,48,48,0.1)", color: ride.status === "completed" ? "var(--color-emerald-600)" : "var(--color-red-600)" }}>
+                {ride.status === "completed" ? <CheckCircle size={24} /> : <XCircle size={24} />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
@@ -92,9 +93,11 @@ export default function DriverTrips() {
                 </div>
                 <div className="flex items-center gap-3 text-xs" style={{ color: "var(--color-muted)" }}>
                   {ride.status === "completed" && (
-                    <>
-                      <span>{"⭐".repeat(ride.driver_rating || 5)}</span>
-                    </>
+                    <div className="flex text-yellow-500">
+                      {Array.from({ length: ride.driver_rating || 5 }).map((_, i) => (
+                        <Star key={i} size={14} className="fill-yellow-500" />
+                      ))}
+                    </div>
                   )}
                   {ride.status === "cancelled" && <span className="text-red-500">Annulé</span>}
                 </div>

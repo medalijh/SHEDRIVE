@@ -147,19 +147,19 @@ export default function LiveMap({
       iconsRef.current = {
         passenger: new L.DivIcon({
           className: "custom-marker",
-          html: `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#C8956C,#A0714E);display:flex;align-items:center;justify-content:center;color:white;font-size:18px;box-shadow:0 3px 12px rgba(200,149,108,0.5);border:3px solid white;">📍</div>`,
+          html: `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#C8956C,#A0714E);display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 3px 12px rgba(200,149,108,0.5);border:3px solid white;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`,
           iconSize: [36, 36],
           iconAnchor: [18, 18],
         }),
         driver: new L.DivIcon({
           className: "custom-marker",
-          html: `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#0D7A4A,#065F3A);display:flex;align-items:center;justify-content:center;color:white;font-size:18px;box-shadow:0 3px 12px rgba(13,122,74,0.5);border:3px solid white;">🚗</div>`,
+          html: `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#0D7A4A,#065F3A);display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 3px 12px rgba(13,122,74,0.5);border:3px solid white;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>`,
           iconSize: [36, 36],
           iconAnchor: [18, 18],
         }),
         "driver-active": new L.DivIcon({
           className: "custom-marker",
-          html: `<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#0D7A4A,#065F3A);display:flex;align-items:center;justify-content:center;color:white;font-size:20px;box-shadow:0 3px 16px rgba(13,122,74,0.6);border:3px solid #4ADE80;animation:pulse 2s infinite;">🚗</div>`,
+          html: `<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#0D7A4A,#065F3A);display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 3px 16px rgba(13,122,74,0.6);border:3px solid #4ADE80;animation:pulse 2s infinite;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>`,
           iconSize: [42, 42],
           iconAnchor: [21, 21],
         }),
@@ -195,7 +195,9 @@ export default function LiveMap({
         }}
       >
         <div style={{ textAlign: "center", color: "#4a7c59" }}>
-          <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>🗺️</div>
+          <div style={{ marginBottom: "0.5rem", display: "flex", justifyContent: "center" }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
+          </div>
           <div style={{ fontSize: "0.875rem" }}>Chargement de la carte...</div>
         </div>
       </div>
@@ -289,7 +291,7 @@ export default function LiveMap({
             aria-label="Ma position"
             title="Recentrer sur ma position"
           >
-            📍
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           </button>
         )}
 
