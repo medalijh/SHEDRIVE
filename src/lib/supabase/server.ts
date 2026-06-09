@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import type { Database } from "@/types/database";
 
 
-function cleanUrl(url) {
+function cleanUrl(url: string | undefined | null): string {
   if (!url) return "";
   let cleaned = url.trim();
   if (cleaned.endsWith('/')) cleaned = cleaned.slice(0, -1);
