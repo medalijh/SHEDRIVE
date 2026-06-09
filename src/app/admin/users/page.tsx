@@ -19,7 +19,7 @@ function AdminSidebar({ active }: { active: string }) {
       style={{ background: "#F3F4F6", borderRight: "1px solid rgba(225,29,72,0.15)" }}>
       <div className="p-6 border-b" style={{ borderColor: "rgba(225,29,72,0.15)" }}>
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="SheDrive Logo" className="w-9 h-9 object-cover rounded-full border border-rose-200" />
+          <div className="w-9 h-9 object-cover rounded-full border border-rose-200 overflow-hidden flex items-center justify-center bg-white flex-shrink-0"><img src="/logo.png" alt="SheDrive Logo" className="w-full h-full object-cover mix-blend-multiply scale-[1.15]" /></div>
           <div>
             <div className="text-black font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
             <div className="text-xs" style={{ color: "rgba(225,29,72,0.7)" }}>Admin Panel</div>
