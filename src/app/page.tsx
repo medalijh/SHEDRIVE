@@ -659,8 +659,6 @@ function Footer() {
             {
               title: "Application",
               links: [
-                { href: "/passenger/dashboard", label: "Espace Passagère" },
-                { href: "/driver/dashboard", label: "Espace Conductrice" },
                 { href: "/how-it-works", label: "Comment ça marche" },
                 { href: "/auth/register", label: "S'inscrire" },
               ],
