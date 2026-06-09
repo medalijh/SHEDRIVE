@@ -72,6 +72,7 @@ function BottomNav({ active }: { active: string }) {
 
 function QuickBookWidget() {
   const router = useRouter();
+  const [to, setTo] = useState("");
   return (
     <div className="card-luxury p-5">
       <div className="flex items-center gap-2 mb-4">
@@ -81,7 +82,7 @@ function QuickBookWidget() {
       <div className="flex flex-col gap-3 mb-4">
         <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.15)" }}>
           <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-purple-500)" }} />
-          <input className="flex-1 bg-transparent outline-none text-sm" placeholder="Votre position actuelle" style={{ color: "var(--color-text)" }} />
+          <input className="flex-1 bg-transparent outline-none text-sm" placeholder="Votre position actuelle" disabled style={{ color: "var(--color-text)", cursor: "not-allowed" }} />
           <span style={{ color: "var(--color-purple-600)", fontSize: "1rem" }}>📍</span>
         </div>
         <div className="ml-[18px] flex flex-col gap-1">
@@ -89,11 +90,11 @@ function QuickBookWidget() {
         </div>
         <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(225,29,72,0.06)", border: "1px solid rgba(225,29,72,0.15)" }}>
           <div className="w-3 h-3 rounded-full" style={{ background: "var(--color-rose-500)" }} />
-          <input className="flex-1 bg-transparent outline-none text-sm" placeholder="Entrez votre destination" style={{ color: "var(--color-text)" }} />
+          <input value={to} onChange={(e) => setTo(e.target.value)} className="flex-1 bg-transparent outline-none text-sm" placeholder="Entrez votre destination" style={{ color: "var(--color-text)" }} />
           <span style={{ color: "var(--color-rose-500)", fontSize: "1rem" }}>🔍</span>
         </div>
       </div>
-      <button onClick={() => router.push("/passenger/book")} className="btn btn-primary w-full">🌹 Trouver une conductrice</button>
+      <button onClick={() => router.push(to ? `/passenger/book?to=${encodeURIComponent(to)}` : "/passenger/book")} className="btn btn-primary w-full">🌹 Trouver une conductrice</button>
     </div>
   );
 }
@@ -232,7 +233,17 @@ export default function PassengerDashboard() {
 
       {/* Map */}
       <div className="px-6 mb-6">
-        <LiveMap center={mapCenter} zoom={14} markers={markers} height="250px" />
+        <LiveMap 
+          center={mapCenter} 
+          zoom={14} 
+          markers={markers} 
+          height="250px" 
+          showUserLocation={true} 
+          onMapClick={(lat, lng) => {
+            // Optionnel : on pourrait stocker la position forcée ici
+            console.log("Locate:", lat, lng);
+          }}
+        />
       </div>
 
       {/* Quick Book */}

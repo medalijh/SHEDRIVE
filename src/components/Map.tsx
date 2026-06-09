@@ -46,6 +46,30 @@ function MapUpdater({ center, zoom }: { center: [number, number]; zoom?: number 
   return <MapUpdaterInner center={center} zoom={zoom} />;
 }
 
+// Map Route Bounds Updater component
+function RouteBoundsUpdater({ routePoints }: { routePoints: [number, number][] }) {
+  const RouteBoundsUpdaterInner = dynamic(
+    () =>
+      import("react-leaflet").then(mod => {
+        const { useMap } = mod;
+        return function Updater({ points }: { points: [number, number][] }) {
+          const map = useMap();
+          useEffect(() => {
+            if (points && points.length >= 2) {
+              import("leaflet").then((L) => {
+                const bounds = L.latLngBounds(points);
+                map.fitBounds(bounds, { padding: [50, 50], animate: true });
+              });
+            }
+          }, [points, map]);
+          return null;
+        };
+      }),
+    { ssr: false }
+  );
+  return <RouteBoundsUpdaterInner points={routePoints} />;
+}
+
 export interface MapMarker {
   id: string;
   position: [number, number]; // [lat, lng]
@@ -193,6 +217,7 @@ export default function LiveMap({
           />
           
           <MapUpdater center={mapCenter} zoom={zoom} />
+          {routePoints && routePoints.length >= 2 && <RouteBoundsUpdater routePoints={routePoints} />}
 
           {leafletReady && markers.map((marker) => (
             <MarkerDynamic
@@ -224,6 +249,48 @@ export default function LiveMap({
             />
           )}
         </MapContainerDynamic>
+
+        {/* Floating "Where am I" button if showUserLocation is enabled or if there's a click handler */}
+        {showUserLocation && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                  (pos) => {
+                    if (onMapClick) onMapClick(pos.coords.latitude, pos.coords.longitude);
+                  },
+                  () => alert("Veuillez autoriser l'accès à votre position.")
+                );
+              }
+            }}
+            style={{
+              position: "absolute",
+              bottom: "75px",
+              right: "15px",
+              zIndex: 401,
+              width: "44px",
+              height: "44px",
+              borderRadius: "50%",
+              background: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              border: "1.5px solid var(--color-border)",
+              color: "var(--color-purple-600)",
+              fontSize: "20px",
+              cursor: "pointer",
+              transition: "transform 0.2s"
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            aria-label="Ma position"
+            title="Recentrer sur ma position"
+          >
+            📍
+          </button>
+        )}
 
         {/* Gradient overlay at bottom */}
         <div
