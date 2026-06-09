@@ -11,12 +11,23 @@ export async function POST(req: NextRequest) {
     if (role !== "passenger" && role !== "driver") {
       return NextResponse.json({ error: "Rôle invalide" }, { status: 400 });
     }
+
+    // Format phone to E.164 (+212)
+    let formattedPhone = phone;
+    if (phone) {
+      if (phone.startsWith("0")) {
+        formattedPhone = "+212" + phone.substring(1);
+      } else if (!phone.startsWith("+")) {
+        formattedPhone = "+212" + phone;
+      }
+    }
+
     const supabase = await createAdminClient();
     // Create auth user
     const { data: authData, error: authError } = await supabase.auth.admin.createUser({
       email,
       password,
-      phone: phone || undefined,
+      phone: formattedPhone || undefined,
       email_confirm: true,
       user_metadata: { full_name, role },
     });
@@ -27,7 +38,7 @@ export async function POST(req: NextRequest) {
     const { error: profileError } = await supabase.from("profiles").insert({
       id: authData.user.id,
       full_name,
-      phone: phone || "",
+      phone: formattedPhone || "",
       email,
       role,
       status: "active",
