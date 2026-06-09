@@ -70,23 +70,28 @@ function LoginForm() {
     }
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const supabase = getSupabaseClient();
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Erreur de connexion");
+      if (authError || !data.user) {
+        throw new Error(authError?.message || "Erreur de connexion");
       }
+
+      // Fetch profile role directly to redirect properly
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", data.user.id)
+        .single();
 
       const redirect = searchParams.get("redirect");
       if (redirect) {
         router.push(redirect);
       } else {
-        const role = data.profile?.role;
+        const role = profile?.role;
         if (role === "admin") router.push("/admin");
         else if (role === "driver") router.push("/driver/dashboard");
         else router.push("/passenger/dashboard");
@@ -402,9 +407,20 @@ function PassengerRegisterForm() {
     if (step === 3) {
       if (!formData.emName || !formData.emPhone) { setError("Veuillez remplir les contacts d'urgence"); return; }
       setLoading(true);
-      // In a real app, we would save emergency contacts here using supabase client
-      // For now we just redirect
-      setTimeout(() => router.push("/passenger/dashboard"), 1000);
+      
+      try {
+        const supabase = getSupabaseClient();
+        const { error: authError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password
+        });
+        
+        if (authError) throw new Error(authError.message);
+        router.push("/passenger/dashboard");
+      } catch (err: any) {
+        setError("Inscription réussie, mais erreur de connexion. Veuillez vous connecter manuellement.");
+        setLoading(false);
+      }
       return;
     }
 
@@ -671,8 +687,19 @@ function DriverRegisterForm() {
       setStep(step + 1);
     } else {
       setLoading(true);
-      // Final step: update driver record with real info in production
-      setTimeout(() => router.push("/driver/dashboard"), 1500);
+      try {
+        const supabase = getSupabaseClient();
+        const { error: authError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password
+        });
+        
+        if (authError) throw new Error(authError.message);
+        router.push("/driver/dashboard");
+      } catch (err: any) {
+        setError("Inscription réussie, mais erreur de connexion. Veuillez vous connecter manuellement.");
+        setLoading(false);
+      }
     }
   };
 
