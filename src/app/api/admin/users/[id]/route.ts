@@ -11,20 +11,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     const { data: adminProfile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
     if ((adminProfile as any)?.role !== "admin") return NextResponse.json({ error: "Accès refusé" }, { status: 403 });
     
-    const { action } = await req.json();
-    const statusMap: Record<string, string> = {
-      approve: "approved",
-      reject: "rejected",
-      suspend: "suspended",
-      reactivate: "approved",
-    };
+    const { status } = await req.json();
+    if (!["active", "suspended"].includes(status)) {
+      return NextResponse.json({ error: "Statut invalide" }, { status: 400 });
+    }
     
-    const newStatus = statusMap[action];
-    if (!newStatus) return NextResponse.json({ error: "Action invalide" }, { status: 400 });
-    
-    const { data, error } = await supabase.from("drivers").update({ approval_status: newStatus }).eq("id", id).select().single();
+    const { data, error } = await supabase.from("profiles").update({ status }).eq("id", id).select().single();
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json({ driver: data, action, new_status: newStatus });
+    return NextResponse.json({ user: data, new_status: status });
   } catch {
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }

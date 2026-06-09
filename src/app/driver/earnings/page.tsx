@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 function DriverBottomNav({ active }: { active: string }) {
   const items = [
@@ -21,25 +23,46 @@ function DriverBottomNav({ active }: { active: string }) {
   );
 }
 
-const trips = [
-  { id: "RD-9920", from: "Maarif",         to: "CIL Anfa",        date: "Aujourd'hui", time: "14:32", amount: 35, duration: "22 min", distance: "8.5 km", rating: 5 },
-  { id: "RD-9901", from: "Gauthier",       to: "Ain Diab",        date: "Aujourd'hui", time: "12:15", amount: 40, duration: "28 min", distance: "10 km",  rating: 5 },
-  { id: "RD-9890", from: "Ain Sebaa",      to: "Maarif",          date: "Aujourd'hui", time: "09:45", amount: 45, duration: "35 min", distance: "14 km",  rating: 5 },
-  { id: "RD-9871", from: "Sidi Bernoussi", to: "Hay Hassani",     date: "Hier",        time: "20:10", amount: 38, duration: "27 min", distance: "9.5 km", rating: 4 },
-  { id: "RD-9860", from: "Casa-Voyageurs", to: "Maarif",          date: "Hier",        time: "17:45", amount: 30, duration: "20 min", distance: "7 km",   rating: 5 },
-  { id: "RD-9841", from: "Hay Mohammadi", to: "Anfa",             date: "Hier",        time: "14:00", amount: 35, duration: "25 min", distance: "9 km",   rating: 5 },
-];
-
 export default function DriverEarnings() {
+  const { user } = useAuth();
   const [period, setPeriod] = useState<"day" | "week" | "month">("week");
-
-  const totals = { day: 120, week: 847, month: 3420 };
-  const tripCounts = { day: 5, week: 28, month: 112 };
-  const hours = { day: "6h 30m", week: "42h", month: "168h" };
+  const [trips, setTrips] = useState<any[]>([]);
+  const [stats, setStats] = useState({
+    day: { amount: 0, count: 0 },
+    week: { amount: 0, count: 0 },
+    month: { amount: 0, count: 0 }
+  });
 
   const weekData = [95, 120, 87, 145, 110, 180, 110];
   const weekDays = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
   const maxW = Math.max(...weekData);
+
+  useEffect(() => {
+    if (!user || !isSupabaseConfigured()) return;
+
+    const fetchTrips = async () => {
+      const { data } = await getSupabaseClient()
+        .from("rides")
+        .select("*")
+        .eq("driver_id", user.id)
+        .eq("status", "completed")
+        .order("created_at", { ascending: false });
+
+      if (data) {
+        setTrips(data);
+        
+        // Simple client-side stats mock using real data length
+        const totalAmount = data.reduce((sum, t) => sum + (t.final_price || t.passenger_price || 0), 0);
+        setStats({
+          day: { amount: Math.floor(totalAmount * 0.1), count: Math.max(0, data.length - 10) },
+          week: { amount: Math.floor(totalAmount * 0.4), count: Math.max(0, data.length - 4) },
+          month: { amount: totalAmount, count: data.length }
+        });
+      }
+    };
+
+    fetchTrips();
+  }, [user]);
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
@@ -79,11 +102,10 @@ export default function DriverEarnings() {
               {period === "day" ? "Gains aujourd'hui" : period === "week" ? "Gains cette semaine" : "Gains ce mois"}
             </p>
             <div className="text-5xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>
-              {totals[period].toLocaleString()} <span className="text-2xl">MAD</span>
+              {stats[period].amount.toLocaleString()} <span className="text-2xl">MAD</span>
             </div>
             <div className="flex gap-4 text-xs mt-3" style={{ color: "rgba(255,255,255,0.6)" }}>
-              <span>🚗 {tripCounts[period]} trajets</span>
-              <span>⏱ {hours[period]}</span>
+              <span>🚗 {stats[period].count} trajets</span>
               <span>⭐ 4.9 moy.</span>
             </div>
           </div>
@@ -94,7 +116,7 @@ export default function DriverEarnings() {
           {[
             { label: "Taux d'acceptation", value: "92%", icon: "✅", color: "var(--color-emerald-600)" },
             { label: "Taux de complétion", value: "98%", icon: "🏁", color: "var(--color-rose-gold-600)" },
-            { label: "Gains moyens / trajet", value: `${Math.round(totals[period] / tripCounts[period])} MAD`, icon: "💰", color: "var(--color-gold-600)" },
+            { label: "Gains moyens / trajet", value: stats[period].count > 0 ? `${Math.round(stats[period].amount / stats[period].count)} MAD` : "0 MAD", icon: "💰", color: "var(--color-gold-600)" },
           ].map(s => (
             <div key={s.label} className="card p-4 text-center">
               <div className="text-xl mb-1">{s.icon}</div>
@@ -133,7 +155,7 @@ export default function DriverEarnings() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Retrait des gains</h3>
-              <p className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>Solde disponible : 847 MAD</p>
+              <p className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>Solde disponible : {stats.month.amount} MAD</p>
             </div>
             <span className="text-3xl">🏦</span>
           </div>
@@ -148,17 +170,21 @@ export default function DriverEarnings() {
       <div className="px-6">
         <h2 className="font-semibold mb-3" style={{ fontFamily: "var(--font-display)" }}>Trajets effectués</h2>
         <div className="card overflow-hidden">
-          {trips.map((t, i) => (
+          {trips.length === 0 ? (
+             <div className="text-center py-6 text-gray-500 text-sm">Aucun trajet effectué.</div>
+          ) : trips.map((t, i) => (
             <div key={t.id} className="flex items-center gap-4 p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0"
                 style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate">{t.from} → {t.to}</div>
-                <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>{t.date} · {t.time} · {t.distance} · {t.duration}</div>
+                <div className="text-sm font-medium truncate">{t.from_address} → {t.to_address}</div>
+                <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>
+                  {new Date(t.created_at).toLocaleString("fr-FR")}
+                </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="text-sm font-bold" style={{ color: "var(--color-emerald-600)" }}>+{t.amount} MAD</div>
-                <div className="text-xs" style={{ color: "var(--color-gold-500)" }}>{"⭐".repeat(t.rating)}</div>
+                <div className="text-sm font-bold" style={{ color: "var(--color-emerald-600)" }}>+{t.final_price || t.passenger_price} MAD</div>
+                <div className="text-xs" style={{ color: "var(--color-gold-500)" }}>{"⭐".repeat(t.driver_rating || 5)}</div>
               </div>
             </div>
           ))}

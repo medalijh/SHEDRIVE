@@ -1,35 +1,62 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createAdminClient } from "@/lib/supabase/server";
 
-// POST /api/auth/register
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { phone, email, full_name, role, password } = body;
-
-    if (!phone || !full_name || !role) {
-      return NextResponse.json({ error: "Téléphone, nom et rôle sont requis" }, { status: 400 });
+    const { email, password, phone, full_name, role } = await req.json();
+    // Validate required fields
+    if (!email || !password || !full_name || !role) {
+      return NextResponse.json({ error: "Champs requis manquants" }, { status: 400 });
     }
-    if (!["passenger", "driver"].includes(role)) {
+    if (role !== "passenger" && role !== "driver") {
       return NextResponse.json({ error: "Rôle invalide" }, { status: 400 });
     }
-    // Phone format validation (Moroccan)
-    const phoneRegex = /^(\+212|0)(5|6|7)[0-9]{8}$/;
-    if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
-      return NextResponse.json({ error: "Format de téléphone invalide" }, { status: 400 });
+    const supabase = await createAdminClient();
+    // Create auth user
+    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+      email,
+      password,
+      phone: phone || undefined,
+      email_confirm: true,
+      user_metadata: { full_name, role },
+    });
+    if (authError) {
+      return NextResponse.json({ error: authError.message }, { status: 400 });
     }
-
-    // In production: create Supabase user, send OTP
-    return NextResponse.json({
-      data: {
-        user_id: `USR-${Date.now()}`,
-        phone,
-        role,
-        status: "pending_verification",
-        otp_sent: true,
-      },
-      message: "Code de vérification envoyé par SMS"
-    }, { status: 201 });
-  } catch {
+    // Create profile
+    const { error: profileError } = await supabase.from("profiles").insert({
+      id: authData.user.id,
+      full_name,
+      phone: phone || "",
+      email,
+      role,
+      status: "active",
+    });
+    if (profileError) {
+      console.error("Profile creation error:", profileError);
+    }
+    // For drivers, create driver record
+    if (role === "driver") {
+      await supabase.from("drivers").insert({
+        user_id: authData.user.id,
+        vehicle_make: "",
+        vehicle_model: "",
+        vehicle_year: new Date().getFullYear(),
+        vehicle_color: "",
+        vehicle_plate: "",
+        vehicle_type: "economy",
+        license_number: "",
+        license_expiry: new Date().toISOString(),
+        insurance_expiry: new Date().toISOString(),
+        inspection_expiry: new Date().toISOString(),
+        approval_status: "pending",
+      });
+    }
+    // Create wallet
+    await supabase.from("wallets").insert({ user_id: authData.user.id, balance: 0 });
+    return NextResponse.json({ user_id: authData.user.id, success: true }, { status: 201 });
+  } catch (err) {
+    console.error("Registration error:", err);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

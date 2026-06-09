@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function AdminSidebar({ active }: { active: string }) {
   const nav = [
@@ -43,29 +44,54 @@ function AdminSidebar({ active }: { active: string }) {
   );
 }
 
-const users = [
-  { id: "USR-4821", name: "Fatima Z. Bennani", phone: "+212 6XX XXX 01", city: "Casablanca", joined: "2025-03-12", rides: 24, rating: 5.0, status: "active",    verified: true },
-  { id: "USR-4820", name: "Asmaa Rachidi",     phone: "+212 6XX XXX 02", city: "Rabat",      joined: "2025-04-01", rides: 11, rating: 4.8, status: "active",    verified: true },
-  { id: "USR-4819", name: "Nadia El Khoury",   phone: "+212 6XX XXX 03", city: "Marrakech",  joined: "2025-05-15", rides: 3,  rating: 5.0, status: "active",    verified: false },
-  { id: "USR-4818", name: "Houda Benali",      phone: "+212 6XX XXX 04", city: "Fès",        joined: "2025-05-28", rides: 0,  rating: 0,   status: "pending",   verified: false },
-  { id: "USR-4817", name: "Layla Tahiri",      phone: "+212 6XX XXX 05", city: "Casablanca", joined: "2025-02-10", rides: 47, rating: 4.7, status: "suspended", verified: true },
-];
-
 export default function AdminUsers() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | "active" | "pending" | "suspended">("all");
-  const [data, setData] = useState(users);
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/users");
+      if (res.ok) {
+        const json = await res.json();
+        setData(json.users);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const filtered = data.filter(u => {
     const m = filter === "all" || u.status === filter;
-    const s = u.name.toLowerCase().includes(search.toLowerCase()) || u.phone.includes(search);
+    const s = u.full_name?.toLowerCase().includes(search.toLowerCase()) || u.phone?.includes(search) || u.email?.toLowerCase().includes(search.toLowerCase());
     return m && s;
   });
 
   const statusBadge = { active: "badge-success", pending: "badge-warning", suspended: "badge-danger" };
   const statusLabel = { active: "Active", pending: "En attente", suspended: "Suspendue" };
 
-  const suspend = (id: string) => setData(d => d.map(u => u.id === id ? { ...u, status: u.status === "suspended" ? "active" : "suspended" } : u));
+  const suspend = async (id: string, currentStatus: string) => {
+    const newStatus = currentStatus === "suspended" ? "active" : "suspended";
+    try {
+      const res = await fetch(`/api/admin/users/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.ok) {
+        setData(d => d.map(u => u.id === id ? { ...u, status: newStatus } : u));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="flex min-h-screen" style={{ background: "var(--color-sand-50)" }}>
@@ -113,36 +139,39 @@ export default function AdminUsers() {
             <table className="w-full text-sm">
               <thead>
                 <tr style={{ background: "var(--color-sand-50)" }}>
-                  {["ID","Nom","Téléphone","Ville","Inscription","Trajets","Note","Vérifié","Statut","Actions"].map(h => (
+                  {["ID","Nom","Email/Téléphone","Inscription","Statut","Actions"].map(h => (
                     <th key={h} className="px-4 py-3 text-left text-xs font-semibold" style={{ color: "var(--color-muted)", textTransform: "uppercase" }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {filtered.map(u => (
+                {loading ? (
+                  <tr><td colSpan={6} className="text-center py-8 text-gray-500">Chargement...</td></tr>
+                ) : filtered.length === 0 ? (
+                  <tr><td colSpan={6} className="text-center py-8 text-gray-500">Aucun utilisateur trouvé.</td></tr>
+                ) : filtered.map(u => (
                   <tr key={u.id} className="border-t transition-colors hover:bg-sand-50" style={{ borderColor: "var(--color-border)" }}>
-                    <td className="px-4 py-3 font-mono text-xs" style={{ color: "var(--color-muted)" }}>{u.id}</td>
+                    <td className="px-4 py-3 font-mono text-xs" style={{ color: "var(--color-muted)" }}>{u.id.slice(0, 8)}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
-                        <span className="font-medium">{u.name}</span>
+                        <span className="font-medium">{u.full_name || "Anonyme"}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-xs" style={{ color: "var(--color-muted)" }}>{u.phone}</td>
-                    <td className="px-4 py-3 text-xs">{u.city}</td>
-                    <td className="px-4 py-3 text-xs" style={{ color: "var(--color-muted)" }}>{u.joined}</td>
-                    <td className="px-4 py-3 font-medium text-center">{u.rides}</td>
-                    <td className="px-4 py-3 text-xs">{u.rating ? `⭐ ${u.rating}` : "—"}</td>
-                    <td className="px-4 py-3 text-center">
-                      {u.verified ? <span style={{ color: "var(--color-emerald-500)" }}>✓</span> : <span style={{ color: "var(--color-sand-300)" }}>—</span>}
+                    <td className="px-4 py-3 text-xs" style={{ color: "var(--color-muted)" }}>
+                      <div>{u.email}</div>
+                      <div>{u.phone}</div>
+                    </td>
+                    <td className="px-4 py-3 text-xs" style={{ color: "var(--color-muted)" }}>
+                      {new Date(u.created_at).toLocaleDateString("fr-FR")}
                     </td>
                     <td className="px-4 py-3">
-                      <span className={`badge ${statusBadge[u.status as keyof typeof statusBadge]}`} style={{ fontSize: 10 }}>
-                        {statusLabel[u.status as keyof typeof statusLabel]}
+                      <span className={`badge ${statusBadge[u.status as keyof typeof statusBadge] || 'badge-neutral'}`} style={{ fontSize: 10 }}>
+                        {statusLabel[u.status as keyof typeof statusLabel] || u.status}
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <button onClick={() => suspend(u.id)} className="btn btn-sm btn-outline" style={{ fontSize: 11 }}>
+                      <button onClick={() => suspend(u.id, u.status)} className="btn btn-sm btn-outline" style={{ fontSize: 11 }}>
                         {u.status === "suspended" ? "Réactiver" : "Suspendre"}
                       </button>
                     </td>

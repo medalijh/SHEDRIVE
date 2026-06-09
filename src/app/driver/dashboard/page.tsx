@@ -2,13 +2,28 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { useAuth } from "@/hooks/useAuth";
+import { useDriverLocationBroadcast, useDriverRideRequests } from "@/hooks/useRealtimeTracking";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { MapMarker } from "@/components/Map";
+
+const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
 function SOSButton() {
   const [pressed, setPressed] = useState(false);
   const [countdown, setCountdown] = useState(3);
   useEffect(() => {
     if (!pressed) return;
-    if (countdown === 0) { alert("🆘 SOS Envoyé!"); setPressed(false); setCountdown(3); return; }
+    if (countdown === 0) {
+      if (isSupabaseConfigured()) {
+        getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
+      }
+      alert("🆘 SOS Envoyé!");
+      setPressed(false);
+      setCountdown(3);
+      return;
+    }
     const t = setTimeout(() => setCountdown(c => c - 1), 1000);
     return () => clearTimeout(t);
   }, [pressed, countdown]);
@@ -48,7 +63,7 @@ function DriverBottomNav({ active }: { active: string }) {
 }
 
 // Incoming Ride Request Card
-function RideRequestCard({ onAccept, onDecline }: { onAccept: () => void; onDecline: () => void }) {
+function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: () => void; onDecline: () => void }) {
   const [timer, setTimer] = useState(30);
   useEffect(() => {
     if (timer === 0) { onDecline(); return; }
@@ -83,45 +98,29 @@ function RideRequestCard({ onAccept, onDecline }: { onAccept: () => void; onDecl
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
               <div>
-                <div className="text-sm font-semibold">Passagère anonyme</div>
-                <div className="text-xs" style={{ color: "var(--color-muted)" }}>⭐ 4.8 · 47 trajets</div>
+                <div className="text-sm font-semibold">Passagère</div>
+                <div className="text-xs" style={{ color: "var(--color-muted)" }}>⭐ 4.8</div>
               </div>
               <div className="ml-auto text-right">
-                <div className="text-2xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>35 MAD</div>
+                <div className="text-2xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{ride.passenger_price} MAD</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>Offre passagère</div>
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
               {[
-                { dot: "var(--color-emerald-500)", label: "CIL Anfa, Casablanca", icon: "📍" },
-                { dot: "var(--color-rose-gold-500)", label: "Hay Hassani, Casablanca", icon: "🏁" },
+                { dot: "var(--color-emerald-500)", label: ride.from_address, icon: "📍" },
+                { dot: "var(--color-rose-gold-500)", label: ride.to_address, icon: "🏁" },
               ].map((row, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: row.dot }}/>
-                  <span className="text-sm">{row.label}</span>
+                  <span className="text-sm line-clamp-1">{row.label}</span>
                 </div>
               ))}
             </div>
 
             <div className="flex gap-4 mt-3 text-xs" style={{ color: "var(--color-muted)" }}>
-              <span>📏 8.5 km</span>
-              <span>⏱ ~22 min</span>
-              <span>💵 Espèces</span>
-              <span>📍 ~3 min de vous</span>
-            </div>
-          </div>
-
-          {/* Bid */}
-          <div className="mb-5">
-            <p className="text-xs font-medium mb-2" style={{ color: "var(--color-sand-700)" }}>Votre contre-offre (optionnel)</p>
-            <div className="flex gap-3">
-              {[30, 35, 40].map(bid => (
-                <button key={bid} className="flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all"
-                  style={{ background: bid === 35 ? "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" : "var(--color-sand-100)", color: bid === 35 ? "white" : "var(--color-muted)" }}>
-                  {bid} MAD
-                </button>
-              ))}
+              <span>💵 {ride.payment_method === "cash" ? "Espèces" : "Wallet"}</span>
             </div>
           </div>
 
@@ -135,69 +134,87 @@ function RideRequestCard({ onAccept, onDecline }: { onAccept: () => void; onDecl
   );
 }
 
-// Live Map for Driver
-function DriverMap({ isOnline }: { isOnline: boolean }) {
-  return (
-    <div className="relative w-full h-64 overflow-hidden" style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #c8dfc4 100%)" }}>
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 260">
-        {Array.from({ length: 7 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i*38} x2="400" y2={i*38} stroke="#4a7c59" strokeWidth="0.4" opacity="0.25"/>)}
-        {Array.from({ length: 12 }).map((_, i) => <line key={`v${i}`} x1={i*36} y1="0" x2={i*36} y2="260" stroke="#4a7c59" strokeWidth="0.4" opacity="0.25"/>)}
-        <path d="M20 200 Q100 170 200 130 Q280 100 380 60" stroke="white" strokeWidth="8" fill="none" opacity="0.7"/>
-        <path d="M0 130 Q80 120 160 130 T320 125" stroke="white" strokeWidth="5" fill="none" opacity="0.5"/>
-        {isOnline ? (
-          <>
-            <circle cx="200" cy="130" r="16" fill="var(--color-emerald-500)" opacity="0.95"/>
-            <circle cx="200" cy="130" r="8" fill="white"/>
-            <circle cx="200" cy="130" r="30" fill="var(--color-emerald-500)" opacity="0.15"/>
-            <text x="200" y="162" textAnchor="middle" fill="var(--color-emerald-700)" fontSize="9" fontWeight="600">Vous êtes en ligne</text>
-          </>
-        ) : (
-          <>
-            <circle cx="200" cy="130" r="16" fill="var(--color-sand-400)" opacity="0.8"/>
-            <circle cx="200" cy="130" r="8" fill="white"/>
-            <text x="200" y="162" textAnchor="middle" fill="var(--color-sand-600)" fontSize="9">Hors ligne</text>
-          </>
-        )}
-        {/* Nearby requests */}
-        {isOnline && (
-          <>
-            <circle cx="120" cy="90" r="8" fill="var(--color-rose-gold-500)" opacity="0.7"/>
-            <circle cx="300" cy="180" r="6" fill="var(--color-rose-gold-400)" opacity="0.5"/>
-            <circle cx="340" cy="80" r="7" fill="var(--color-rose-gold-500)" opacity="0.6"/>
-          </>
-        )}
-      </svg>
-      <div className="absolute bottom-0 left-0 right-0 h-16" style={{ background: "linear-gradient(to top, rgba(253,248,245,1) 0%, transparent 100%)" }}/>
-      {isOnline && (
-        <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-medium" style={{ background: "white", boxShadow: "var(--shadow-sm)" }}>
-          🔴 {Math.floor(Math.random() * 5) + 2} demandes proches
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ============================================================
 // DRIVER DASHBOARD
 // ============================================================
 export default function DriverDashboard() {
+  const { profile } = useAuth();
   const [isOnline, setIsOnline] = useState(false);
-  const [showRequest, setShowRequest] = useState(false);
-  const [rideAccepted, setRideAccepted] = useState(false);
+  
+  // Realtime hooks
+  const { broadcasting } = useDriverLocationBroadcast(profile?.id || null, isOnline);
+  const { pendingRequests, dismissRequest } = useDriverRideRequests(profile?.id || null, isOnline);
+  
+  const [activeRide, setActiveRide] = useState<any>(null);
+  const [recentTrips, setRecentTrips] = useState<any[]>([]);
+  const [stats, setStats] = useState({ trips: 0, earnings: 0, hours: "0h", rating: 4.9, acceptance: 92 });
 
   useEffect(() => {
-    if (!isOnline) return;
-    const timer = setTimeout(() => setShowRequest(true), 4000);
-    return () => clearTimeout(timer);
-  }, [isOnline]);
+    if (!profile?.id || !isSupabaseConfigured()) return;
+    
+    // Fetch stats and recent trips
+    const fetchDashboardData = async () => {
+      const supabase = getSupabaseClient();
+      
+      const { data: rides } = await supabase
+        .from("rides")
+        .select("*")
+        .eq("driver_id", profile.id)
+        .order("created_at", { ascending: false })
+        .limit(10);
+        
+      if (rides) {
+        const completed = rides.filter(r => r.status === "completed");
+        setRecentTrips(completed.slice(0, 3));
+        
+        // Simple mock stats from real data
+        const todayEarn = completed.reduce((sum, r) => sum + (r.final_price || r.passenger_price), 0);
+        setStats(prev => ({
+          ...prev,
+          trips: completed.length,
+          earnings: todayEarn,
+        }));
+        
+        // Check for active ride
+        const active = rides.find(r => ["accepted", "driver_arrived", "in_progress"].includes(r.status));
+        if (active) setActiveRide(active);
+      }
+    };
+    
+    fetchDashboardData();
+  }, [profile?.id]);
 
-  const todayStats = {
-    trips: 5,
-    earnings: 187,
-    hours: "6h 30min",
-    rating: 4.9,
-    acceptance: 92,
+  const handleOnlineToggle = async () => {
+    const nextState = !isOnline;
+    setIsOnline(nextState);
+    if (profile?.id && isSupabaseConfigured()) {
+      await getSupabaseClient().from("drivers").update({ is_online: nextState }).eq("user_id", profile.id);
+    }
   };
+
+  const handleAcceptRide = async (ride: any) => {
+    if (!profile?.id || !isSupabaseConfigured()) return;
+    const { data, error } = await getSupabaseClient()
+      .from("rides")
+      .update({ status: "accepted", driver_id: profile.id })
+      .eq("id", ride.id)
+      .select()
+      .single();
+      
+    if (!error && data) {
+      setActiveRide(data);
+      dismissRequest(ride.id);
+    }
+  };
+
+  const currentRequest = pendingRequests.length > 0 ? pendingRequests[0] : null;
+
+  // Map Markers
+  const markers: MapMarker[] = [];
+  if (isOnline) {
+    // If online, we'd normally get driver's own location, but for visual we just use center.
+    markers.push({ id: "me", position: [33.5731, -7.5898], type: "driver-active" });
+  }
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
@@ -205,21 +222,17 @@ export default function DriverDashboard() {
       <div className="px-6 pt-12 pb-4 flex items-center justify-between">
         <div>
           <p className="text-sm" style={{ color: "var(--color-muted)" }}>Bonjour 👋</p>
-          <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Khadija M.</h1>
+          <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>{profile?.full_name || "Conductrice"}</h1>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full"
-            style={{ background: isOnline ? "rgba(13,122,74,0.1)" : "var(--color-sand-100)", border: `1px solid ${isOnline ? "rgba(13,122,74,0.3)" : "var(--color-border)"}` }}>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full" style={{ background: isOnline ? "rgba(13,122,74,0.1)" : "var(--color-sand-100)", border: `1px solid ${isOnline ? "rgba(13,122,74,0.3)" : "var(--color-border)"}` }}>
             <div className="w-2 h-2 rounded-full" style={{ background: isOnline ? "var(--color-emerald-500)" : "var(--color-sand-400)" }}/>
             <span className="text-xs font-semibold" style={{ color: isOnline ? "var(--color-emerald-700)" : "var(--color-muted)" }}>
               {isOnline ? "En ligne" : "Hors ligne"}
             </span>
           </div>
           <Link href="/driver/settings">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
-              style={{ background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" }}>
-              👩
-            </div>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl" style={{ background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" }}>👩</div>
           </Link>
         </div>
       </div>
@@ -227,44 +240,51 @@ export default function DriverDashboard() {
       {/* Online Toggle */}
       <div className="px-6 mb-4">
         <button
-          onClick={() => { setIsOnline(!isOnline); if (isOnline) setShowRequest(false); setRideAccepted(false); }}
-          className="w-full py-4 rounded-2xl font-semibold text-base transition-all duration-300"
+          onClick={handleOnlineToggle}
+          className="w-full py-4 rounded-2xl font-semibold text-base transition-all duration-300 relative overflow-hidden"
           style={{
-            background: isOnline
-              ? "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))"
-              : "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))",
+            background: isOnline ? "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" : "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))",
             color: "white",
             boxShadow: isOnline ? "var(--shadow-emerald)" : "var(--shadow-rose)",
           }}>
           {isOnline ? "🟢 En ligne — Touchez pour passer hors ligne" : "🔴 Hors ligne — Touchez pour commencer"}
+          {broadcasting && <div className="absolute inset-0 bg-white/10 animate-pulse pointer-events-none" />}
         </button>
       </div>
 
       {/* Map */}
-      <DriverMap isOnline={isOnline}/>
+      <div className="px-6 mb-5">
+        <div className="relative w-full h-64 rounded-3xl overflow-hidden shadow-sm">
+          <LiveMap center={[33.5731, -7.5898]} zoom={13} markers={markers} height="100%" borderRadius="1.5rem" />
+          {isOnline && pendingRequests.length > 0 && (
+            <div className="absolute top-4 right-4 z-[400] px-3 py-1.5 rounded-full text-xs font-medium bg-white shadow-md text-red-600 animate-bounce">
+              🔴 {pendingRequests.length} demandes proches
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Today Stats */}
       <div className="px-6 mt-5 mb-5">
         <h2 className="font-semibold mb-3" style={{ fontFamily: "var(--font-display)" }}>Aujourd'hui</h2>
         <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-3xl p-5 relative overflow-hidden"
-            style={{ background: "linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-800))", boxShadow: "var(--shadow-emerald)", gridColumn: "span 2" }}>
+          <div className="rounded-3xl p-5 relative overflow-hidden" style={{ background: "linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-800))", boxShadow: "var(--shadow-emerald)", gridColumn: "span 2" }}>
             <div className="zellige-pattern absolute inset-0 opacity-10"/>
             <div className="relative z-10 flex items-center justify-between">
               <div>
                 <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>Gains du jour</p>
                 <div className="text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-                  {todayStats.earnings} <span className="text-lg">MAD</span>
+                  {stats.earnings} <span className="text-lg">MAD</span>
                 </div>
-                <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{todayStats.trips} trajets · {todayStats.hours}</p>
+                <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stats.trips} trajets terminés</p>
               </div>
               <div className="text-5xl">💰</div>
             </div>
           </div>
 
           {[
-            { label: "Note", value: `⭐ ${todayStats.rating}`, sub: "Excellent", color: "var(--color-gold-600)" },
-            { label: "Acceptation", value: `${todayStats.acceptance}%`, sub: "Taux", color: "var(--color-emerald-600)" },
+            { label: "Note", value: `⭐ ${stats.rating}`, sub: "Excellent", color: "var(--color-gold-600)" },
+            { label: "Acceptation", value: `${stats.acceptance}%`, sub: "Taux", color: "var(--color-emerald-600)" },
           ].map(stat => (
             <div key={stat.label} className="card p-4 text-center">
               <div className="text-2xl font-bold mb-1" style={{ color: stat.color, fontFamily: "var(--font-display)" }}>{stat.value}</div>
@@ -276,30 +296,36 @@ export default function DriverDashboard() {
       </div>
 
       {/* Active Ride Display */}
-      {rideAccepted && (
+      {activeRide && (
         <div className="px-6 mb-5">
           <div className="card-luxury p-5">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-emerald-500)" }}/>
-              <span className="text-sm font-semibold" style={{ color: "var(--color-emerald-600)" }}>Trajet en cours</span>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-emerald-500)" }}/>
+                <span className="text-sm font-semibold" style={{ color: "var(--color-emerald-600)" }}>Trajet en cours</span>
+              </div>
+              <span className="text-xs font-medium text-gray-500">{activeRide.status}</span>
             </div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm">Passagère</div>
-                <div className="text-xs" style={{ color: "var(--color-muted)" }}>CIL Anfa → Hay Hassani</div>
+                <div className="text-xs line-clamp-1" style={{ color: "var(--color-muted)" }}>{activeRide.from_address} → {activeRide.to_address}</div>
               </div>
-              <div className="ml-auto text-right">
-                <div className="text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>35 MAD</div>
+              <div className="ml-auto text-right flex-shrink-0">
+                <div className="text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{activeRide.passenger_price} MAD</div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <button className="btn btn-sm" style={{ background: "rgba(13,122,74,0.08)", color: "var(--color-emerald-700)", border: "1px solid rgba(13,122,74,0.2)" }}>
                 💬 Chat
               </button>
-              <Link href="/passenger/tracking" className="btn btn-sm" style={{ background: "rgba(200,149,108,0.08)", color: "var(--color-rose-gold-700)", border: "1px solid rgba(200,149,108,0.2)" }}>
-                🗺️ Navigation
-              </Link>
+              <button onClick={() => {
+                // In real app, we'd open navigation. For now, mark as completed to test flow
+                getSupabaseClient().from("rides").update({ status: "completed" }).eq("id", activeRide.id).then(() => setActiveRide(null));
+              }} className="btn btn-sm" style={{ background: "rgba(200,149,108,0.08)", color: "var(--color-rose-gold-700)", border: "1px solid rgba(200,149,108,0.2)" }}>
+                ✅ Terminer
+              </button>
             </div>
           </div>
         </div>
@@ -312,46 +338,27 @@ export default function DriverDashboard() {
           <Link href="/driver/earnings" className="text-xs font-medium" style={{ color: "var(--color-rose-gold-600)" }}>Voir tout →</Link>
         </div>
         <div className="card">
-          {[
-            { from: "Maarif", to: "CIL Anfa", time: "14:32", amount: 35, duration: "22 min" },
-            { from: "Gauthier", to: "Ain Diab", time: "12:15", amount: 40, duration: "28 min" },
-            { from: "Ain Sebaa", to: "Maarif", time: "09:45", amount: 45, duration: "35 min" },
-          ].map((trip, i) => (
+          {recentTrips.length === 0 ? (
+             <div className="text-center text-sm text-gray-500 py-4">Aucun trajet récent</div>
+          ) : recentTrips.map((trip, i) => (
             <div key={i} className="flex items-center gap-4 p-4 border-b last:border-0" style={{ borderColor: "var(--color-border)" }}>
-              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg" style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
+              <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0" style={{ background: "rgba(13,122,74,0.08)" }}>✅</div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate">{trip.from} → {trip.to}</div>
-                <div className="text-xs" style={{ color: "var(--color-muted)" }}>{trip.time} · {trip.duration}</div>
+                <div className="text-sm font-medium line-clamp-1">{trip.from_address} → {trip.to_address}</div>
+                <div className="text-xs" style={{ color: "var(--color-muted)" }}>{new Date(trip.created_at).toLocaleDateString("fr-FR")}</div>
               </div>
-              <div className="text-sm font-bold" style={{ color: "var(--color-emerald-600)" }}>+{trip.amount} MAD</div>
+              <div className="text-sm font-bold flex-shrink-0" style={{ color: "var(--color-emerald-600)" }}>+{trip.final_price || trip.passenger_price} MAD</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="px-6 mb-4">
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { icon: "📊", label: "Gains", href: "/driver/earnings" },
-            { icon: "⭐", label: "Avis", href: "/driver/reviews" },
-            { icon: "🎓", label: "Formation", href: "/driver/training" },
-          ].map(a => (
-            <Link key={a.label} href={a.href}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl text-center"
-              style={{ background: "white", border: "1px solid var(--color-border)" }}>
-              <span className="text-2xl">{a.icon}</span>
-              <span className="text-xs font-medium" style={{ color: "var(--color-muted)" }}>{a.label}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
-
       {/* Incoming Request */}
-      {showRequest && !rideAccepted && (
+      {currentRequest && !activeRide && (
         <RideRequestCard
-          onAccept={() => { setShowRequest(false); setRideAccepted(true); }}
-          onDecline={() => setShowRequest(false)}
+          ride={currentRequest}
+          onAccept={() => handleAcceptRide(currentRequest)}
+          onDecline={() => dismissRequest(currentRequest.id)}
         />
       )}
 

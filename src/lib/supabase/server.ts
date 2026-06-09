@@ -9,7 +9,7 @@ const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "placehold
 export async function createClient() {
   const cookieStore = await cookies();
 
-  return createServerClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  return createServerClient<any>(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
@@ -31,7 +31,7 @@ export async function createClient() {
 export async function createAdminClient() {
   const cookieStore = await cookies();
 
-  return createServerClient<Database>(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
+  return createServerClient<any>(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
     cookies: {
       getAll() {
         return cookieStore.getAll();

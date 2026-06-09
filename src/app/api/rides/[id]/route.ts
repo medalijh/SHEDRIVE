@@ -1,108 +1,76 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
-// In-memory mock store (replace with Supabase in production)
-const ridesStore: Record<string, {
-  id: string; status: string; passengerId: string; driverId?: string;
-  from: string; to: string; price: number; createdAt: string;
-}> = {};
-
-// GET /api/rides/[id] — get specific ride
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-
-  // In production: query from Supabase
-  const ride = ridesStore[id];
-  if (!ride) {
-    // Return mock data for demo
-    return NextResponse.json({
-      data: {
-        id,
-        status: "in_progress",
-        from: "Maarif, Casablanca",
-        to: "CIL Anfa, Casablanca",
-        price: 35,
-        driver: {
-          name: "Khadija M.",
-          rating: 4.9,
-          car: "Dacia Logan Gris",
-          plate: "34521-A",
-        },
-        eta_minutes: 8,
-        started_at: new Date().toISOString(),
-      },
-    });
-  }
-
-  return NextResponse.json({ data: ride });
-}
-
-// PATCH /api/rides/[id] — update ride status
-export async function PATCH(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const body = await req.json();
-    const { status, driver_id, final_price } = body;
-
-    const validStatuses = [
-      "searching",
-      "accepted",
-      "driver_arrived",
-      "in_progress",
-      "completed",
-      "cancelled",
-    ];
-
-    if (status && !validStatuses.includes(status)) {
-      return NextResponse.json({ error: "Statut invalide" }, { status: 400 });
-    }
-
-    // In production: update Supabase rides table
-    if (ridesStore[id]) {
-      ridesStore[id] = { ...ridesStore[id], status: status || ridesStore[id].status };
-    }
-
-    return NextResponse.json({
-      data: {
-        id,
-        status: status || "in_progress",
-        driver_id,
-        final_price,
-        updated_at: new Date().toISOString(),
-      },
-      message: "Trajet mis à jour",
-    });
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+    
+    const { data, error } = await supabase.from("rides").select("*, driver:drivers(user_id, vehicle_model, vehicle_plate, profiles(full_name, phone))").eq("id", id).single();
+    if (error || !data) return NextResponse.json({ error: "Trajet non trouvé" }, { status: 404 });
+    return NextResponse.json({ ride: data });
   } catch {
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
 
-// DELETE /api/rides/[id] — cancel ride
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-  const { searchParams } = new URL(req.url);
-  const reason = searchParams.get("reason") || "user_request";
-
-  // In production: update Supabase rides table status = 'cancelled'
-  if (ridesStore[id]) {
-    ridesStore[id].status = "cancelled";
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+    
+    const body = await req.json();
+    const allowedStatuses = ["searching", "accepted", "driver_arrived", "in_progress", "completed", "cancelled"];
+    
+    const updateData: Record<string, unknown> = {};
+    if (body.status) {
+      if (!allowedStatuses.includes(body.status)) {
+        return NextResponse.json({ error: "Statut invalide" }, { status: 400 });
+      }
+      updateData.status = body.status;
+      if (body.status === "accepted") updateData.driver_id = body.driver_id || user.id;
+      if (body.status === "in_progress") updateData.started_at = new Date().toISOString();
+      if (body.status === "completed") updateData.completed_at = new Date().toISOString();
+      if (body.status === "cancelled") {
+        updateData.cancelled_by = body.cancelled_by || "system";
+        updateData.cancellation_reason = body.reason || null;
+      }
+    }
+    if (body.final_price) updateData.final_price = body.final_price;
+    if (body.passenger_rating) updateData.passenger_rating = body.passenger_rating;
+    if (body.driver_rating) updateData.driver_rating = body.driver_rating;
+    
+    const { data, error } = await supabase.from("rides").update(updateData).eq("id", id).select().single();
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ride: data });
+  } catch {
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
+}
 
-  return NextResponse.json({
-    data: {
-      id,
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+    
+    const url = new URL(req.url);
+    const reason = url.searchParams.get("reason") || "Annulé par l'utilisateur";
+    
+    const { data, error } = await supabase.from("rides").update({
       status: "cancelled",
-      reason,
-      cancelled_at: new Date().toISOString(),
-    },
-    message: "Trajet annulé",
-  });
+      cancelled_by: "passenger",
+      cancellation_reason: reason,
+    }).eq("id", id).select().single();
+    
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ride: data });
+  } catch {
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+  }
 }

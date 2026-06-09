@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import PWAManager from "@/components/PWAManager";
+import { AuthProvider } from "@/components/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -182,10 +183,10 @@ export default function RootLayout({
       </head>
 
       <body className="antialiased" style={{ WebkitTapHighlightColor: "transparent" }}>
-        {children}
-
-        {/* PWA Manager: service worker registration + install prompt */}
-        <PWAManager />
+        <AuthProvider>
+          <PWAManager />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

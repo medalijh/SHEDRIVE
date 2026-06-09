@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 function BottomNav({ active }: { active: string }) {
   const items = [
@@ -23,20 +24,54 @@ function BottomNav({ active }: { active: string }) {
   );
 }
 
-const transactions = [
-  { type: "debit", desc: "Trajet · Maarif → CIL Anfa", amount: -35, date: "Aujourd'hui 14:45", ref: "TXN-8823", icon: "🚗" },
-  { type: "credit", desc: "Recharge Wallet", amount: +100, date: "Hier 09:12", ref: "TXN-8801", icon: "💳" },
-  { type: "debit", desc: "Trajet · Ain Diab → Hay Hassani", amount: -28, date: "Dim 01 Juin", ref: "TXN-8754", icon: "🚗" },
-  { type: "credit", desc: "Coupon BIENVENUE (-20%)", amount: +7, date: "Dim 01 Juin", ref: "TXN-8753", icon: "🎁" },
-  { type: "debit", desc: "Trajet · Sidi Bernoussi → Maarif", amount: -45, date: "Sam 31 Mai", ref: "TXN-8721", icon: "🚗" },
-  { type: "credit", desc: "Remboursement trajet #8699", amount: +45, date: "Sam 31 Mai", ref: "TXN-8722", icon: "↩️" },
-];
-
 export default function WalletPage() {
   const [addOpen, setAddOpen] = useState(false);
   const [amount, setAmount] = useState(100);
   const [method, setMethod] = useState("card");
   const quickAmounts = [50, 100, 200, 500];
+
+  const [balance, setBalance] = useState(0);
+  const [transactions, setTransactions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchWallet();
+  }, []);
+
+  const fetchWallet = async () => {
+    try {
+      const res = await fetch("/api/wallet");
+      if (res.ok) {
+        const data = await res.json();
+        setBalance(data.wallet.balance);
+        setTransactions(data.transactions);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleTopUp = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/wallet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount, payment_method: method })
+      });
+      if (res.ok) {
+        alert(`✅ ${amount} MAD ajoutés à votre wallet!`);
+        setAddOpen(false);
+        fetchWallet();
+      } else {
+        const err = await res.json();
+        alert("Erreur: " + err.error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
@@ -63,7 +98,7 @@ export default function WalletPage() {
               <div>
                 <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>Solde disponible</p>
                 <div className="text-5xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-                  150<span className="text-2xl ml-1">.00</span>
+                  {Math.floor(balance)}<span className="text-2xl ml-1">.{(balance % 1).toFixed(2).substring(2)}</span>
                 </div>
                 <div className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.6)" }}>Dirhams marocains (MAD)</div>
               </div>
@@ -124,20 +159,24 @@ export default function WalletPage() {
         </div>
 
         <div className="card overflow-hidden">
-          {transactions.map((tx, i) => (
+          {transactions.length === 0 ? (
+            <div className="text-center text-sm text-gray-500 py-6">Aucune transaction récente.</div>
+          ) : transactions.map((tx, i) => (
             <div key={i} className="flex items-center gap-4 p-4 border-b last:border-0 hover:bg-sand-50 transition-colors"
               style={{ borderColor: "var(--color-border)" }}>
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg flex-shrink-0"
                 style={{ background: tx.type === "credit" ? "rgba(13,122,74,0.1)" : "rgba(200,149,108,0.1)" }}>
-                {tx.icon}
+                {tx.type === "credit" ? "💳" : "🚗"}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate">{tx.desc}</div>
-                <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>{tx.date} · {tx.ref}</div>
+                <div className="text-sm font-medium truncate">{tx.description}</div>
+                <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>
+                  {new Date(tx.created_at).toLocaleString("fr-FR")} · {tx.reference_type}
+                </div>
               </div>
-              <div className={`text-sm font-bold flex-shrink-0 ${tx.type === "credit" ? "" : ""}`}
+              <div className={`text-sm font-bold flex-shrink-0`}
                 style={{ color: tx.type === "credit" ? "var(--color-emerald-600)" : "var(--color-rose-gold-700)" }}>
-                {tx.type === "credit" ? "+" : ""}{tx.amount} MAD
+                {tx.type === "credit" ? "+" : "-"}{tx.amount} MAD
               </div>
             </div>
           ))}
@@ -191,9 +230,9 @@ export default function WalletPage() {
               </div>
             </div>
 
-            <button onClick={() => { setAddOpen(false); alert(`✅ ${amount} MAD ajoutés à votre wallet!`); }}
+            <button onClick={handleTopUp} disabled={loading}
               className="btn btn-primary btn-lg w-full">
-              Recharger {amount} MAD →
+              {loading ? "Recharge en cours..." : `Recharger ${amount} MAD →`}
             </button>
           </div>
         </div>

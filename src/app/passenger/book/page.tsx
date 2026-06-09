@@ -1,16 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import { useGeolocation } from "@/hooks/useGeolocation";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
-// SOS Button
+const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
+
 function SOSButton() {
   const [pressed, setPressed] = useState(false);
   const [countdown, setCountdown] = useState(3);
-  React.useEffect(() => {
+  useEffect(() => {
     if (!pressed) return;
     if (countdown === 0) {
+      if (isSupabaseConfigured()) {
+        getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
+      }
       alert("🆘 ALERTE SOS ENVOYÉE!\nVotre position a été partagée avec vos contacts d'urgence.");
       setPressed(false); setCountdown(3); return;
     }
@@ -36,7 +43,6 @@ function SOSButton() {
   );
 }
 
-// Bottom Nav
 function BottomNav({ active }: { active: string }) {
   const items = [
     { href: "/passenger/dashboard", icon: "🏠", label: "Accueil", id: "home" },
@@ -60,43 +66,30 @@ function BottomNav({ active }: { active: string }) {
 type BookStep = "location" | "price" | "drivers" | "confirm";
 
 // Step 1: Location
-function LocationStep({ onNext }: { onNext: (data: { from: string; to: string }) => void }) {
+function LocationStep({ onNext }: { onNext: (data: { from: string; to: string; lat: number, lng: number }) => void }) {
+  const { latitude, longitude } = useGeolocation();
   const [from, setFrom] = useState("Ma position actuelle");
   const [to, setTo] = useState("");
   const recent = ["CIL Anfa", "Ain Diab", "Hay Hassani", "Maarif", "Gauthier", "Casa-Voyageurs"];
+  
+  const mapCenter: [number, number] = (latitude && longitude) ? [latitude, longitude] : [33.5731, -7.5898];
+  
   return (
     <div className="flex flex-col gap-5">
-      {/* Map preview */}
-      <div className="relative h-52 rounded-3xl overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #e8f5e8 0%, #c8dfc4 100%)" }}>
-        <svg className="absolute inset-0 w-full h-full opacity-25" viewBox="0 0 400 200">
-          {Array.from({ length: 6 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i*35} x2="400" y2={i*35} stroke="#4a7c59" strokeWidth="0.5"/>)}
-          {Array.from({ length: 12 }).map((_, i) => <line key={`v${i}`} x1={i*36} y1="0" x2={i*36} y2="200" stroke="#4a7c59" strokeWidth="0.5"/>)}
-          <path d="M0 100 Q100 90 200 100 T400 95" stroke="white" strokeWidth="6" fill="none" opacity="0.7"/>
-          <path d="M150 0 Q160 50 170 100 T175 200" stroke="white" strokeWidth="5" fill="none" opacity="0.6"/>
-          <circle cx="170" cy="100" r="10" fill="var(--color-rose-gold-500)" opacity="0.9"/>
-          <circle cx="170" cy="100" r="5" fill="white"/>
-          <circle cx="300" cy="60" r="10" fill="var(--color-emerald-500)" opacity="0.9"/>
-          <circle cx="300" cy="60" r="5" fill="white"/>
-        </svg>
-        <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full text-xs font-medium" style={{ background: "white", boxShadow: "var(--shadow-sm)" }}>
-          📍 Casablanca · Maarif
-        </div>
+      <div className="relative h-52 rounded-3xl overflow-hidden shadow-sm">
+        <LiveMap center={mapCenter} zoom={15} markers={latitude && longitude ? [{ id: "user", position: [latitude, longitude], type: "passenger" }] : []} height="100%" borderRadius="1.5rem" />
       </div>
 
       <div className="card-luxury p-5">
         <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Définir votre trajet</h3>
-        {/* From */}
         <div className="flex items-center gap-3 p-3 rounded-xl mb-2" style={{ background: "rgba(13,122,74,0.06)", border: "1px solid rgba(13,122,74,0.15)" }}>
           <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-emerald-500)" }}/>
           <input value={from} onChange={e => setFrom(e.target.value)} className="flex-1 bg-transparent outline-none text-sm" placeholder="Point de départ"/>
           <button className="text-lg">📍</button>
         </div>
-        {/* Connector dots */}
         <div className="ml-[22px] flex flex-col gap-1 my-1">
           {[1,2,3].map(i => <div key={i} className="w-0.5 h-1 rounded-full" style={{ background: "var(--color-sand-300)", marginLeft: 3 }}/>)}
         </div>
-        {/* To */}
         <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(200,149,108,0.06)", border: "1px solid rgba(200,149,108,0.15)" }}>
           <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-rose-gold-500)" }}/>
           <input value={to} onChange={e => setTo(e.target.value)} className="flex-1 bg-transparent outline-none text-sm" placeholder="Où voulez-vous aller ?"/>
@@ -104,7 +97,6 @@ function LocationStep({ onNext }: { onNext: (data: { from: string; to: string })
         </div>
       </div>
 
-      {/* Recent */}
       <div>
         <p className="text-xs font-semibold mb-3" style={{ color: "var(--color-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Destinations récentes</p>
         <div className="grid grid-cols-2 gap-2">
@@ -121,7 +113,7 @@ function LocationStep({ onNext }: { onNext: (data: { from: string; to: string })
         </div>
       </div>
 
-      <button onClick={() => { if (to) onNext({ from, to }); }}
+      <button onClick={() => { if (to) onNext({ from, to, lat: latitude || 0, lng: longitude || 0 }); }}
         className="btn btn-primary btn-lg w-full" disabled={!to}>
         Continuer →
       </button>
@@ -130,7 +122,7 @@ function LocationStep({ onNext }: { onNext: (data: { from: string; to: string })
 }
 
 // Step 2: Price Offer
-function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (price: number) => void }) {
+function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (data: {price: number, method: string}) => void }) {
   const [price, setPrice] = useState(35);
   const suggested = [25, 30, 35, 40, 45];
   const [method, setMethod] = useState<"cash" | "wallet" | "card">("cash");
@@ -149,7 +141,6 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (pr
 
         <h3 className="font-semibold mb-6 mt-4" style={{ fontFamily: "var(--font-display)" }}>Proposez votre prix</h3>
 
-        {/* Price Adjuster */}
         <div className="flex items-center justify-center gap-4 mb-6">
           <button onClick={() => setPrice(p => Math.max(10, p - 5))}
             className="w-14 h-14 rounded-full text-xl font-bold shadow-md transition-all hover:scale-110"
@@ -163,7 +154,6 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (pr
             style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))", color: "white", boxShadow: "var(--shadow-rose)" }}>+</button>
         </div>
 
-        {/* Quick amounts */}
         <div className="flex gap-2 justify-center mb-6">
           {suggested.map(s => (
             <button key={s} onClick={() => setPrice(s)}
@@ -183,13 +173,12 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (pr
         </div>
       </div>
 
-      {/* Payment Method */}
       <div className="card p-5">
         <h4 className="font-semibold mb-4 text-sm">Mode de paiement</h4>
         <div className="grid grid-cols-3 gap-3">
           {[
             { id: "cash" as const, icon: "💵", label: "Espèces" },
-            { id: "wallet" as const, icon: "💳", label: "Wallet (150 MAD)" },
+            { id: "wallet" as const, icon: "💳", label: "Wallet" },
             { id: "card" as const, icon: "🏦", label: "Carte" },
           ].map(m => (
             <button key={m.id} onClick={() => setMethod(m.id)}
@@ -205,7 +194,7 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (pr
         </div>
       </div>
 
-      <button onClick={() => onNext(price)} className="btn btn-primary btn-lg w-full">
+      <button onClick={() => onNext({price, method})} className="btn btn-primary btn-lg w-full">
         🌹 Chercher des conductrices
       </button>
     </div>
@@ -213,14 +202,36 @@ function PriceStep({ from, to, onNext }: { from: string; to: string; onNext: (pr
 }
 
 // Step 3: Driver Selection
-function DriversStep({ price, onNext }: { price: number; onNext: (driver: { name: string; rating: number; bid: number; eta: number }) => void }) {
+function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) => void }) {
   const [selected, setSelected] = useState<number | null>(null);
-  const drivers = [
-    { name: "Khadija M.", rating: 4.9, trips: 847, car: "Dacia Logan · Gris", plate: "34521 · A", eta: 4, bid: price - 5, badge: "⭐ Top conductrice" },
-    { name: "Amina B.", rating: 4.8, trips: 623, car: "Renault Sandero · Blanc", plate: "28734 · B", eta: 7, bid: price, badge: null },
-    { name: "Fatima Z.", rating: 5.0, trips: 1204, car: "Peugeot 208 · Noir", plate: "71023 · C", eta: 11, bid: price + 5, badge: "💎 Elite" },
-    { name: "Sara H.", rating: 4.7, trips: 412, car: "Dacia Duster · Blanc", plate: "55821 · D", eta: 6, bid: price - 5, badge: null },
-  ];
+  const [drivers, setDrivers] = useState<any[]>([]);
+  
+  useEffect(() => {
+    if (!isSupabaseConfigured()) return;
+    // Fetch online drivers
+    getSupabaseClient().from("drivers").select("*, profiles!user_id(full_name, rating)").eq("is_online", true).then(({ data }) => {
+      if (data && data.length > 0) {
+        setDrivers(data.map(d => ({
+          id: d.id,
+          user_id: d.user_id,
+          name: d.profiles?.full_name || "Conductrice",
+          rating: d.profiles?.rating || 4.9,
+          trips: 150, // mock
+          car: `${d.vehicle_make} ${d.vehicle_model} · ${d.vehicle_color}`,
+          plate: d.vehicle_plate,
+          eta: Math.floor(Math.random() * 10) + 2,
+          bid: price,
+          badge: null
+        })));
+      } else {
+        // Fallback mock
+        setDrivers([
+          { id: 1, name: "Khadija M.", rating: 4.9, trips: 847, car: "Dacia Logan · Gris", plate: "34521 · A", eta: 4, bid: price - 5, badge: "⭐ Top conductrice" },
+          { id: 2, name: "Amina B.", rating: 4.8, trips: 623, car: "Renault Sandero · Blanc", plate: "28734 · B", eta: 7, bid: price, badge: null },
+        ]);
+      }
+    });
+  }, [price]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -245,10 +256,10 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: { name
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-semibold">{driver.name}</span>
-                {driver.badge && <span className="badge badge-warning" style={{ fontSize: 10 }}>{driver.badge}</span>}
+                <span className="font-semibold truncate">{driver.name}</span>
+                {driver.badge && <span className="badge badge-warning flex-shrink-0" style={{ fontSize: 10 }}>{driver.badge}</span>}
               </div>
-              <div className="text-xs mb-2" style={{ color: "var(--color-muted)" }}>
+              <div className="text-xs mb-2 truncate" style={{ color: "var(--color-muted)" }}>
                 ⭐ {driver.rating} · {driver.trips} trajets · 🚗 {driver.car}
               </div>
               <div className="text-xs" style={{ color: "var(--color-muted)" }}>🔢 {driver.plate}</div>
@@ -279,17 +290,45 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: { name
 }
 
 // Step 4: Confirm
-function ConfirmStep({ driver, from, to, price }: { driver: { name: string; rating: number; bid: number; eta: number }; from: string; to: string; price: number }) {
+function ConfirmStep({ driver, data }: { driver: any; data: any }) {
   const [loading, setLoading] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [rideId, setRideId] = useState<string | null>(null);
   const router = useRouter();
 
   const handleConfirm = async () => {
     setLoading(true);
-    await new Promise(r => setTimeout(r, 2000));
-    setConfirmed(true);
-    await new Promise(r => setTimeout(r, 1500));
-    router.push("/passenger/tracking");
+    try {
+      const res = await fetch("/api/rides", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from_address: data.from,
+          from_lat: data.lat,
+          from_lng: data.lng,
+          to_address: data.to,
+          to_lat: data.lat + 0.01, // mock dest for now
+          to_lng: data.lng + 0.01,
+          passenger_price: driver.bid,
+          payment_method: data.method,
+        })
+      });
+      
+      const result = await res.json();
+      if (res.ok) {
+        setRideId(result.ride.id);
+        setConfirmed(true);
+        setTimeout(() => {
+          router.push(`/passenger/tracking?id=${result.ride.id}`);
+        }, 1500);
+      } else {
+        alert("Erreur: " + result.error);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+    }
   };
 
   if (confirmed) {
@@ -302,7 +341,7 @@ function ConfirmStep({ driver, from, to, price }: { driver: { name: string; rati
         <h2 className="text-display-sm text-white mb-3" style={{ color: "var(--color-emerald-700)" }}>
           Trajet confirmé !
         </h2>
-        <p style={{ color: "var(--color-muted)" }}>Votre conductrice est en route...</p>
+        <p style={{ color: "var(--color-muted)" }}>Demande envoyée...</p>
         <div className="mt-4 flex items-center gap-2 text-sm" style={{ color: "var(--color-emerald-600)" }}>
           <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "currentColor" }}/>
           <span>Redirection vers le suivi...</span>
@@ -318,11 +357,10 @@ function ConfirmStep({ driver, from, to, price }: { driver: { name: string; rati
           Récapitulatif du trajet
         </h3>
 
-        {/* Route Summary */}
         <div className="flex flex-col gap-3 mb-6">
           {[
-            { dot: "var(--color-emerald-500)", label: "Départ", value: from },
-            { dot: "var(--color-rose-gold-500)", label: "Arrivée", value: to },
+            { dot: "var(--color-emerald-500)", label: "Départ", value: data.from },
+            { dot: "var(--color-rose-gold-500)", label: "Arrivée", value: data.to },
           ].map(row => (
             <div key={row.label} className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: row.dot }}/>
@@ -336,7 +374,6 @@ function ConfirmStep({ driver, from, to, price }: { driver: { name: string; rati
 
         <div className="divider mb-5"/>
 
-        {/* Driver */}
         <div className="flex items-center gap-3 mb-5">
           <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
             style={{ background: "rgba(200,149,108,0.1)" }}>👩</div>
@@ -348,7 +385,6 @@ function ConfirmStep({ driver, from, to, price }: { driver: { name: string; rati
 
         <div className="divider mb-5"/>
 
-        {/* Price */}
         <div className="flex items-center justify-between">
           <span className="text-sm" style={{ color: "var(--color-muted)" }}>Prix convenu</span>
           <span className="text-2xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>
@@ -357,37 +393,30 @@ function ConfirmStep({ driver, from, to, price }: { driver: { name: string; rati
         </div>
       </div>
 
-      {/* Safety reminder */}
       <div className="p-4 rounded-2xl" style={{ background: "rgba(197,48,48,0.06)", border: "1px solid rgba(197,48,48,0.15)" }}>
         <p className="text-xs text-red-700 font-medium mb-1">🛡️ Rappel sécurité</p>
         <p className="text-xs" style={{ color: "var(--color-muted)" }}>
           Vérifiez toujours la plaque d'immatriculation et le nom de la conductrice avant de monter.
-          Le bouton SOS est disponible à tout moment.
         </p>
       </div>
 
       <button onClick={handleConfirm} className="btn btn-primary btn-lg w-full" disabled={loading}>
         {loading ? (
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-2 justify-center">
             <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/>
-            Confirmation en cours...
+            Envoi en cours...
           </span>
         ) : "🌹 Confirmer le trajet"}
       </button>
 
-      <Link href="/passenger/dashboard" className="btn btn-ghost w-full text-center">
-        Annuler
-      </Link>
+      <Link href="/passenger/dashboard" className="btn btn-ghost w-full text-center">Annuler</Link>
     </div>
   );
 }
 
-// ============================================================
-// BOOKING PAGE
-// ============================================================
 export default function BookingPage() {
   const [step, setStep] = useState<BookStep>("location");
-  const [data, setData] = useState({ from: "", to: "", price: 35, driver: { name: "", rating: 5, bid: 35, eta: 5 } });
+  const [data, setData] = useState({ from: "", to: "", lat: 0, lng: 0, price: 35, method: "cash", driver: null });
 
   const stepLabels: { [key in BookStep]: string } = {
     location: "Destination",
@@ -400,13 +429,11 @@ export default function BookingPage() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
-      {/* Header */}
       <div className="sticky top-0 z-40 px-6 py-4" style={{ background: "rgba(253,248,245,0.95)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--color-border)" }}>
         <div className="flex items-center gap-4 mb-3">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
           <h1 className="text-lg font-semibold" style={{ fontFamily: "var(--font-display)" }}>Réserver un trajet</h1>
         </div>
-        {/* Progress Bar */}
         <div className="flex gap-1">
           {stepOrder.map((s, i) => (
             <div key={s} className="flex-1">
@@ -421,18 +448,10 @@ export default function BookingPage() {
       </div>
 
       <div className="px-6 pt-5">
-        {step === "location" && (
-          <LocationStep onNext={({ from, to }) => { setData(d => ({ ...d, from, to })); setStep("price"); }}/>
-        )}
-        {step === "price" && (
-          <PriceStep from={data.from} to={data.to} onNext={price => { setData(d => ({ ...d, price })); setStep("drivers"); }}/>
-        )}
-        {step === "drivers" && (
-          <DriversStep price={data.price} onNext={driver => { setData(d => ({ ...d, driver })); setStep("confirm"); }}/>
-        )}
-        {step === "confirm" && (
-          <ConfirmStep driver={data.driver} from={data.from} to={data.to} price={data.price}/>
-        )}
+        {step === "location" && <LocationStep onNext={(d) => { setData(prev => ({ ...prev, ...d })); setStep("price"); }}/>}
+        {step === "price" && <PriceStep from={data.from} to={data.to} onNext={(d) => { setData(prev => ({ ...prev, ...d })); setStep("drivers"); }}/>}
+        {step === "drivers" && <DriversStep price={data.price} onNext={driver => { setData(prev => ({ ...prev, driver })); setStep("confirm"); }}/>}
+        {step === "confirm" && <ConfirmStep driver={data.driver} data={data}/>}
       </div>
 
       <SOSButton />

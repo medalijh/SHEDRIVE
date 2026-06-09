@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 function BottomNav({ active }: { active: string }) {
   const items = [
@@ -48,6 +50,9 @@ const SettingRow = ({ icon, label, value, onClick, isToggle, toggled }: {
 );
 
 export default function SettingsPage() {
+  const { user, profile } = useAuth();
+  const router = useRouter();
+
   const [tab, setTab] = useState<Tab>("account");
   const [pushNotifs, setPushNotifs] = useState(true);
   const [smsNotifs, setSmsNotifs] = useState(true);
@@ -61,6 +66,13 @@ export default function SettingsPage() {
     { id: "notifications", icon: "🔔", label: "Notifs" },
     { id: "language", icon: "🌍", label: "Langue" },
   ];
+
+  const handleLogout = async () => {
+    if (confirm("Déconnecter ?")) {
+      await fetch("/api/auth/logout", { method: "POST" });
+      router.push("/auth/login");
+    }
+  };
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-sand-50)", minHeight: "100vh" }}>
@@ -82,9 +94,11 @@ export default function SettingsPage() {
               ✏️
             </button>
           </div>
-          <div>
-            <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-display)" }}>Fatima Zahra Bennani</h2>
-            <p className="text-sm" style={{ color: "var(--color-muted)" }}>+212 6XX XXX XXX</p>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-xl font-semibold truncate" style={{ fontFamily: "var(--font-display)" }}>
+              {profile?.full_name || "Passagère"}
+            </h2>
+            <p className="text-sm truncate" style={{ color: "var(--color-muted)" }}>{profile?.phone || user?.email}</p>
             <div className="flex items-center gap-2 mt-2">
               <span className="badge badge-success" style={{ fontSize: 10 }}>✓ Vérifié</span>
               <span className="badge badge-primary" style={{ fontSize: 10 }}>⭐ 5.0</span>
@@ -114,13 +128,13 @@ export default function SettingsPage() {
         {/* Account Tab */}
         {tab === "account" && (
           <div className="card p-5">
-            <SettingRow icon="👤" label="Nom complet" value="Fatima Zahra Bennani"/>
-            <SettingRow icon="📱" label="Téléphone" value="+212 6XX XXX XXX"/>
-            <SettingRow icon="📧" label="Email" value="fatima@email.ma"/>
-            <SettingRow icon="🎂" label="Date de naissance" value="15/06/1995"/>
+            <SettingRow icon="👤" label="Nom complet" value={profile?.full_name}/>
+            <SettingRow icon="📱" label="Téléphone" value={profile?.phone || "Non renseigné"}/>
+            <SettingRow icon="📧" label="Email" value={user?.email}/>
+            <SettingRow icon="🎂" label="Date de naissance" value="Non renseignée"/>
             <SettingRow icon="🏙️" label="Ville préférée" value="Casablanca"/>
             <SettingRow icon="🖼️" label="Photo de profil"/>
-            <SettingRow icon="🎁" label="Mon code de parrainage" value="FATIMA2025"/>
+            <SettingRow icon="🎁" label="Mon code de parrainage" value="SHEDRIVE2026"/>
             <SettingRow icon="🗑️" label="Supprimer mon compte"/>
           </div>
         )}
@@ -219,7 +233,7 @@ export default function SettingsPage() {
         {/* Logout */}
         <div className="mt-6 mb-4">
           <button className="btn btn-outline w-full" style={{ borderColor: "rgba(197,48,48,0.3)", color: "#C53030" }}
-            onClick={() => { if (confirm("Déconnecter ?")) window.location.href = "/auth/login"; }}>
+            onClick={handleLogout}>
             🚪 Se déconnecter
           </button>
         </div>
