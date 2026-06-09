@@ -59,8 +59,32 @@ function TrackingContent() {
     { from: "driver", text: "Je suis en route, j'arrive bientôt 🌸", time: new Date().toLocaleTimeString("fr-MA", { hour: "2-digit", minute: "2-digit" }) },
   ]);
   const [newMsg, setNewMsg] = useState("");
+  const [routePoints, setRoutePoints] = useState<[number, number][]>([]);
 
   useEffect(() => {
+    if (ride) {
+      const currentStatus = rideStatus || ride.status || "searching";
+      const isAccepted = currentStatus === "accepted";
+      const isInProgress = currentStatus === "in_progress";
+      
+      const destLat = isAccepted ? ride.from_lat : (isInProgress ? ride.to_lat : ride.to_lat);
+      const destLng = isAccepted ? ride.from_lng : (isInProgress ? ride.to_lng : ride.to_lng);
+      
+      const startLat = (isAccepted || isInProgress) && driverLocation ? driverLocation.lat : ride.from_lat;
+      const startLng = (isAccepted || isInProgress) && driverLocation ? driverLocation.lng : ride.from_lng;
+
+      if (startLat && startLng && destLat && destLng) {
+        import("@/lib/mapUtils").then(({ getRoute }) => {
+          getRoute(startLat, startLng, destLat, destLng).then(res => {
+            if (res) {
+              setRoutePoints(res.geometry.coordinates.map((c: any) => [c[1], c[0]]));
+            }
+          });
+        });
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rideStatus, ride?.id]);
     if (!rideId || !isSupabaseConfigured()) return;
     getSupabaseClient()
       .from("rides")
@@ -105,7 +129,7 @@ function TrackingContent() {
 
       {/* Map */}
       <div className="relative w-full h-72">
-        <LiveMap center={mapCenter} zoom={15} markers={markers} height="100%" borderRadius="0" />
+        <LiveMap center={mapCenter} zoom={15} markers={markers} routePoints={routePoints} height="100%" borderRadius="0" />
       </div>
 
       {/* Status Banner */}

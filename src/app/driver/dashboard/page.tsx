@@ -142,7 +142,7 @@ function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: (
 // ============================================================
 export default function DriverDashboard() {
   const { profile } = useAuth();
-  const { latitude, longitude } = useGeolocation();
+  const { latitude, longitude } = useGeolocation({ watch: true });
   const [isOnline, setIsOnline] = useState(false);
   
   // Realtime hooks
@@ -155,16 +155,26 @@ export default function DriverDashboard() {
   const [routePoints, setRoutePoints] = useState<[number, number][]>([]);
 
   useEffect(() => {
-    if (activeRide && activeRide.from_lat && activeRide.from_lng && activeRide.to_lat && activeRide.to_lng) {
-      getRoute(activeRide.from_lat, activeRide.from_lng, activeRide.to_lat, activeRide.to_lng).then(res => {
-        if (res) {
-          setRoutePoints(res.geometry.coordinates.map((c: any) => [c[1], c[0]]));
-        }
-      });
+    if (activeRide) {
+      const isAccepted = activeRide.status === "accepted";
+      const destLat = isAccepted ? activeRide.from_lat : activeRide.to_lat;
+      const destLng = isAccepted ? activeRide.from_lng : activeRide.to_lng;
+      
+      const startLat = latitude || activeRide.from_lat;
+      const startLng = longitude || activeRide.from_lng;
+
+      if (startLat && startLng && destLat && destLng) {
+        getRoute(startLat, startLng, destLat, destLng).then(res => {
+          if (res) {
+            setRoutePoints(res.geometry.coordinates.map((c: any) => [c[1], c[0]]));
+          }
+        });
+      }
     } else {
       setRoutePoints([]);
     }
-  }, [activeRide]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeRide?.status, activeRide?.id]); // Recompute when status changes
 
   useEffect(() => {
     if (!profile?.id || !isSupabaseConfigured()) return;
