@@ -128,6 +128,7 @@ export default function LiveMap({
   routePoints,
   className = "",
   borderRadius = "1.5rem",
+  showUserLocation,
   onMapClick,
 }: LiveMapProps) {
   const [mounted, setMounted] = useState(false);

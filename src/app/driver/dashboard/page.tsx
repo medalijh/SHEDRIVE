@@ -4,8 +4,10 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useAuth } from "@/hooks/useAuth";
+import { useGeolocation } from "@/hooks/useGeolocation";
 import { useDriverLocationBroadcast, useDriverRideRequests } from "@/hooks/useRealtimeTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { getRoute } from "@/lib/mapUtils";
 import { MapMarker } from "@/components/Map";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -139,6 +141,7 @@ function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: (
 // ============================================================
 export default function DriverDashboard() {
   const { profile } = useAuth();
+  const { latitude, longitude } = useGeolocation();
   const [isOnline, setIsOnline] = useState(false);
   
   // Realtime hooks
@@ -148,6 +151,19 @@ export default function DriverDashboard() {
   const [activeRide, setActiveRide] = useState<any>(null);
   const [recentTrips, setRecentTrips] = useState<any[]>([]);
   const [stats, setStats] = useState({ trips: 0, earnings: 0, hours: "0h", rating: 4.9, acceptance: 92 });
+  const [routePoints, setRoutePoints] = useState<[number, number][]>([]);
+
+  useEffect(() => {
+    if (activeRide && activeRide.from_lat && activeRide.from_lng && activeRide.to_lat && activeRide.to_lng) {
+      getRoute(activeRide.from_lat, activeRide.from_lng, activeRide.to_lat, activeRide.to_lng).then(res => {
+        if (res) {
+          setRoutePoints(res.geometry.coordinates.map((c: any) => [c[1], c[0]]));
+        }
+      });
+    } else {
+      setRoutePoints([]);
+    }
+  }, [activeRide]);
 
   useEffect(() => {
     if (!profile?.id || !isSupabaseConfigured()) return;
@@ -211,9 +227,19 @@ export default function DriverDashboard() {
 
   // Map Markers
   const markers: MapMarker[] = [];
+  const mapCenter: [number, number] = latitude && longitude ? [latitude, longitude] : [33.5731, -7.5898];
+  
   if (isOnline) {
-    // If online, we'd normally get driver's own location, but for visual we just use center.
-    markers.push({ id: "me", position: [33.5731, -7.5898], type: "driver-active" });
+    markers.push({ id: "me", position: mapCenter, type: "driver-active" });
+  }
+
+  if (activeRide) {
+    if (activeRide.from_lat && activeRide.from_lng) {
+      markers.push({ id: "pickup", position: [activeRide.from_lat, activeRide.from_lng], type: "pickup" });
+    }
+    if (activeRide.to_lat && activeRide.to_lng) {
+      markers.push({ id: "dropoff", position: [activeRide.to_lat, activeRide.to_lng], type: "dropoff" });
+    }
   }
 
   return (
@@ -255,7 +281,7 @@ export default function DriverDashboard() {
       {/* Map */}
       <div className="px-6 mb-5">
         <div className="relative w-full h-64 rounded-3xl overflow-hidden shadow-sm">
-          <LiveMap center={[33.5731, -7.5898]} zoom={13} markers={markers} height="100%" borderRadius="1.5rem" />
+          <LiveMap center={mapCenter} zoom={13} markers={markers} routePoints={routePoints} showUserLocation={true} height="100%" borderRadius="1.5rem" />
           {isOnline && pendingRequests.length > 0 && (
             <div className="absolute top-4 right-4 z-[400] px-3 py-1.5 rounded-full text-xs font-medium bg-white shadow-md text-red-600 animate-bounce">
               🔴 {pendingRequests.length} demandes proches
