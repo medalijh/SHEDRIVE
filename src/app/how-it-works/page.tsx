@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { UserCircle, MapPin, Coins, CarFront, ShieldCheck, ClipboardEdit, FileCheck2, SearchCheck, GraduationCap, Power, Banknote } from "lucide-react";
 
 function Navbar() {
   return (
@@ -23,21 +24,21 @@ function Navbar() {
 
 export default function HowItWorksPage() {
   const passengerSteps = [
-    { num: "01", icon: "📱", title: "Créez votre compte", desc: "Inscrivez-vous en quelques minutes. Vérification du téléphone, identité et contact d'urgence." },
-    { num: "02", icon: "📍", title: "Entrez votre destination", desc: "Indiquez votre point de départ et votre destination sur la carte interactive." },
-    { num: "03", icon: "💰", title: "Proposez votre prix", desc: "Définissez le montant que vous souhaitez payer. Les conductrices voient votre offre." },
-    { num: "04", icon: "🌸", title: "Choisissez votre conductrice", desc: "Consultez les profils, notes, et contre-offres des conductrices disponibles proches de vous." },
-    { num: "05", icon: "🚗", title: "Voyagez en sécurité", desc: "Suivez le trajet en temps réel. Partagez votre position. Le bouton SOS est toujours disponible." },
-    { num: "06", icon: "⭐", title: "Évaluez votre expérience", desc: "Notez la conductrice et laissez un commentaire pour améliorer la communauté." },
+    { num: "01", icon: <UserCircle size={24} />, title: "Créez votre compte", desc: "Téléchargez l'application et inscrivez-vous en 2 minutes avec votre numéro de téléphone." },
+    { num: "02", icon: <MapPin size={24} />, title: "Entrez votre destination", desc: "Saisissez votre point de départ et d'arrivée. Consultez le prix estimé pour votre trajet." },
+    { num: "03", icon: <Coins size={24} />, title: "Proposez votre prix", desc: "Vous avez la liberté de proposer le prix qui vous convient ou d'accepter le tarif recommandé." },
+    { num: "04", icon: <CarFront size={24} />, title: "Choisissez votre conductrice", desc: "Recevez des offres. Consultez le profil, la photo et la note de la conductrice avant d'accepter." },
+    { num: "05", icon: <ShieldCheck size={24} />, title: "Voyagez en sécurité", desc: "Suivez votre trajet en temps réel, partagez-le avec un proche, et utilisez le bouton SOS si besoin." },
+    { num: "06", icon: <Star size={24} />, title: "Évaluez votre expérience", desc: "Notez la conductrice et laissez un commentaire pour améliorer la communauté." },
   ];
 
   const driverSteps = [
-    { num: "01", icon: "📝", title: "Inscrivez-vous conductrice", desc: "Remplissez le formulaire d'inscription avec vos informations personnelles." },
-    { num: "02", icon: "🪪", title: "Vérification d'identité", desc: "Soumettez votre CIN, selfie de vérification, permis de conduire et informations du véhicule." },
-    { num: "03", icon: "⏳", title: "Examen du dossier", desc: "Notre équipe examine votre dossier sous 24 à 48 heures et vous notifie par SMS." },
-    { num: "04", icon: "✅", title: "Approbation et formation", desc: "Une fois approuvée, accédez à notre formation en ligne sur la sécurité et les bonnes pratiques." },
-    { num: "05", icon: "🟢", title: "Passez en ligne", desc: "Activez le mode en ligne pour recevoir les demandes de trajet des passagères proches." },
-    { num: "06", icon: "💰", title: "Gagnez en liberté", desc: "Acceptez les demandes qui vous conviennent. Retirez vos gains quand vous le souhaitez." },
+    { num: "01", icon: <ClipboardEdit size={24} />, title: "Inscription gratuite", desc: "Remplissez le formulaire d'inscription en fournissant vos informations de base et coordonnées." },
+    { num: "02", icon: <FileCheck2 size={24} />, title: "Vérification d'identité", desc: "Soumettez votre CIN, selfie de vérification, permis de conduire et informations du véhicule." },
+    { num: "03", icon: <SearchCheck size={24} />, title: "Examen du dossier", desc: "Notre équipe examine votre dossier sous 24 à 48 heures et vous notifie par SMS." },
+    { num: "04", icon: <GraduationCap size={24} />, title: "Approbation et formation", desc: "Une fois approuvée, accédez à notre formation en ligne sur la sécurité et les bonnes pratiques." },
+    { num: "05", icon: <Power size={24} />, title: "Passez en ligne", desc: "Activez le mode en ligne pour recevoir les demandes de trajet des passagères proches." },
+    { num: "06", icon: <Banknote size={24} />, title: "Gagnez en liberté", desc: "Acceptez les demandes qui vous conviennent. Retirez vos gains quand vous le souhaitez." },
   ];
 
   const faqs = [
@@ -75,7 +76,7 @@ export default function HowItWorksPage() {
               <div key={s.num} className="card-luxury p-6 relative">
                 <div className="absolute top-4 right-4 text-4xl font-bold opacity-5" style={{ fontFamily: "var(--font-display)", color: "var(--color-rose-gold-500)" }}>{s.num}</div>
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
-                  style={{ background: i % 2 === 0 ? "rgba(200,149,108,0.1)" : "rgba(13,122,74,0.08)" }}>{s.icon}</div>
+                  style={{ background: i % 2 === 0 ? "rgba(200,149,108,0.1)" : "rgba(13,122,74,0.08)", color: "var(--color-rose-gold-600)" }}>{s.icon}</div>
                 <div className="text-xs font-semibold mb-2" style={{ color: "var(--color-rose-gold-500)", letterSpacing: "0.08em" }}>ÉTAPE {s.num}</div>
                 <h3 className="font-semibold mb-2" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{s.desc}</p>
@@ -83,7 +84,9 @@ export default function HowItWorksPage() {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg">🌹 Créer mon compte passagère</Link>
+            <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg flex items-center justify-center gap-2 max-w-sm mx-auto">
+              <UserCircle size={20} /> Créer mon compte passagère
+            </Link>
           </div>
         </div>
       </section>
@@ -101,7 +104,7 @@ export default function HowItWorksPage() {
               <div key={s.num} className="p-6 rounded-2xl relative"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(13,122,74,0.2)" }}>
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
-                  style={{ background: "rgba(13,122,74,0.15)" }}>{s.icon}</div>
+                  style={{ background: "rgba(13,122,74,0.15)", color: "#4DBF8A" }}>{s.icon}</div>
                 <div className="text-xs font-semibold mb-2" style={{ color: "var(--color-emerald-400)", letterSpacing: "0.08em" }}>ÉTAPE {s.num}</div>
                 <h3 className="font-semibold mb-2 text-white" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</p>
@@ -109,7 +112,9 @@ export default function HowItWorksPage() {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/auth/register?role=driver" className="btn btn-emerald btn-lg">🌸 Devenir conductrice SheDrive</Link>
+            <Link href="/auth/register?role=driver" className="btn btn-emerald btn-lg flex items-center justify-center gap-2 max-w-sm mx-auto">
+              <CarFront size={20} /> Devenir conductrice SheDrive
+            </Link>
           </div>
         </div>
       </section>
@@ -138,10 +143,10 @@ export default function HowItWorksPage() {
       <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
             <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
-          <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés. 🇲🇦</p>
+          <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
         </div>
       </footer>
     </div>

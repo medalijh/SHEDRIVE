@@ -550,10 +550,7 @@ function Navbar() {
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>
-            <Flower2 size={20} color="white" />
-          </div>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
           <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
             SheDrive
             <span className="text-sm font-normal ml-1" style={{ color: "var(--color-rose-gold-400)" }}>Morocco</span>
@@ -640,10 +637,7 @@ function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-                style={{ background: "linear-gradient(135deg, var(--color-rose-gold-500), var(--color-rose-gold-700))" }}>
-                <Flower2 size={20} color="white" />
-              </div>
+              <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
               <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
             </div>
             <p className="text-sm leading-relaxed mb-4">

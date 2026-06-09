@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { MessageCircle, Phone, Mail, MessageSquare, MapPin, TriangleAlert, CheckCircle2, Send } from "lucide-react";
 
 function Navbar() {
   return (
@@ -39,7 +40,7 @@ export default function ContactPage() {
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto relative z-10">
           <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(200,149,108,0.15)", color: "var(--color-rose-gold-400)", border: "1px solid rgba(200,149,108,0.3)" }}>CONTACT</span>
-          <h1 className="text-display-xl text-white mb-4">Parlons-nous <span className="gradient-text">✨</span></h1>
+          <h1 className="text-display-xl text-white mb-4">Parlons-nous <span className="gradient-text"><MessageCircle className="inline-block ml-2 mb-2" size={40} /></span></h1>
           <p style={{ color: "rgba(255,255,255,0.6)" }}>Notre équipe est disponible 24h/24 pour vous aider</p>
         </div>
       </section>
@@ -52,13 +53,13 @@ export default function ContactPage() {
               <h2 className="text-display-sm mb-8">Nous <span className="gradient-text">contacter</span></h2>
               <div className="flex flex-col gap-5">
                 {[
-                  { icon: "📞", label: "Téléphone", value: "+212 5XX-XXX-XXX", sub: "Lun-Ven, 9h-18h" },
-                  { icon: "📧", label: "Email", value: "contact@shedrive.ma", sub: "Réponse sous 24h" },
-                  { icon: "💬", label: "WhatsApp", value: "+212 6XX-XXX-XXX", sub: "Support rapide" },
-                  { icon: "📍", label: "Siège", value: "Maarif, Casablanca 20100", sub: "Maroc 🇲🇦" },
+                  { icon: <Phone size={24} />, label: "Téléphone", value: "+212 5XX-XXX-XXX", sub: "Lun-Ven, 9h-18h" },
+                  { icon: <Mail size={24} />, label: "Email", value: "contact@shedrive.ma", sub: "Réponse sous 24h" },
+                  { icon: <MessageSquare size={24} />, label: "WhatsApp", value: "+212 6XX-XXX-XXX", sub: "Support rapide" },
+                  { icon: <MapPin size={24} />, label: "Siège", value: "Maarif, Casablanca 20100", sub: "Maroc" },
                 ].map(c => (
                   <div key={c.label} className="flex items-start gap-4 p-5 card-luxury">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-rose-gold-600 flex-shrink-0"
                       style={{ background: "rgba(200,149,108,0.08)" }}>{c.icon}</div>
                     <div>
                       <div className="text-xs font-semibold mb-1" style={{ color: "var(--color-rose-gold-600)", textTransform: "uppercase", letterSpacing: "0.06em" }}>{c.label}</div>
@@ -72,7 +73,7 @@ export default function ContactPage() {
               <div className="mt-8 p-5 rounded-2xl"
                 style={{ background: "rgba(197,48,48,0.06)", border: "1px solid rgba(197,48,48,0.2)" }}>
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xl">🆘</span>
+                  <span className="text-red-600"><TriangleAlert size={24} /></span>
                   <span className="font-semibold text-red-700">Urgence</span>
                 </div>
                 <p className="text-sm" style={{ color: "var(--color-muted)" }}>
@@ -85,7 +86,7 @@ export default function ContactPage() {
             <div className="card-luxury p-8">
               {sent ? (
                 <div className="text-center py-8">
-                  <div className="text-6xl mb-4">🌹</div>
+                  <div className="text-emerald-500 flex justify-center mb-4"><CheckCircle2 size={64} /></div>
                   <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: "var(--font-display)" }}>Message envoyé !</h3>
                   <p style={{ color: "var(--color-muted)" }}>Nous vous répondrons sous 24h.</p>
                   <button onClick={() => setSent(false)} className="btn btn-outline mt-6">Envoyer un autre message</button>
@@ -127,7 +128,7 @@ export default function ContactPage() {
                     <textarea className="input-field" rows={5} required placeholder="Décrivez votre demande en détail..." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}/>
                   </div>
 
-                  <button type="submit" className="btn btn-primary btn-lg w-full">Envoyer le message →</button>
+                  <button type="submit" className="btn btn-primary btn-lg w-full flex items-center justify-center gap-2">Envoyer le message <Send size={20} /></button>
                 </form>
               )}
             </div>
@@ -138,10 +139,10 @@ export default function ContactPage() {
       <footer style={{ background: "#0D0A07", color: "rgba(255,255,255,0.5)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg,var(--color-rose-gold-500),var(--color-rose-gold-700))" }}>🌹</div>
+            <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
             <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
-          <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés. 🇲🇦</p>
+          <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
         </div>
       </footer>
     </div>

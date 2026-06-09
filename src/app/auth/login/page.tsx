@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Suspense, useState, useRef } from "react";
+import { Eye, EyeOff, ShieldCheck, Flower2, Map, UserCircle, CarFront } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
@@ -131,7 +132,7 @@ function LoginForm() {
             className="absolute right-4 top-1/2 -translate-y-1/2 text-lg"
             style={{ color: "var(--color-muted)" }}
           >
-            {showPass ? "🙈" : "👁️"}
+            {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
         </div>
       </div>
@@ -710,9 +711,13 @@ function AuthContent() {
         </div>
 
         <div className="relative z-10 grid grid-cols-3 gap-4">
-          {[{ emoji: "🛡️", label: "100% Sécurisé" }, { emoji: "🌹", label: "100% Féminin" }, { emoji: "🇲🇦", label: "100% Marocain" }].map((f) => (
-            <div key={f.label} className="text-center p-4 rounded-2xl" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
-              <div className="text-2xl mb-2">{f.emoji}</div>
+          {[
+            { icon: <ShieldCheck size={28} />, label: "100% Sécurisé" },
+            { icon: <Flower2 size={28} />, label: "100% Féminin" },
+            { icon: <Map size={28} />, label: "100% Marocain" }
+          ].map((f) => (
+            <div key={f.label} className="text-center p-4 rounded-2xl flex flex-col items-center justify-center" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(200,149,108,0.2)" }}>
+              <div className="mb-2 text-rose-gold-400">{f.icon}</div>
               <div className="text-xs text-white font-medium">{f.label}</div>
             </div>
           ))}
@@ -745,7 +750,7 @@ function AuthContent() {
           {tab === "login" ? (
             <>
               <div className="mb-6">
-                <h1 className="text-display-sm mb-1">Bon retour 👋</h1>
+                <h1 className="text-display-sm mb-1">Bon retour</h1>
                 <p style={{ color: "var(--color-muted)", fontSize: "0.875rem" }}>Connectez-vous à votre compte SheDrive</p>
               </div>
               <LoginForm />
@@ -753,23 +758,23 @@ function AuthContent() {
           ) : (
             <>
               <div className="mb-6">
-                <h1 className="text-display-sm mb-4">Créer un compte 🌹</h1>
+                <h1 className="text-display-sm mb-4">Créer un compte</h1>
                 <p className="text-sm mb-4" style={{ color: "var(--color-muted)" }}>Je souhaite m'inscrire en tant que :</p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { id: "passenger" as Role, emoji: "🚗", label: "Passagère", sub: "راكبة" },
-                    { id: "driver" as Role, emoji: "🌸", label: "Conductrice", sub: "سائقة" },
+                    { id: "passenger" as Role, icon: <UserCircle size={28} />, label: "Passagère", sub: "راكبة" },
+                    { id: "driver" as Role, icon: <CarFront size={28} />, label: "Conductrice", sub: "سائقة" },
                   ].map((r) => (
                     <button
                       key={r.id}
                       onClick={() => setRole(r.id)}
-                      className="p-4 rounded-2xl border-2 text-center transition-all duration-200"
+                      className="p-4 rounded-2xl border-2 text-center transition-all duration-200 flex flex-col items-center"
                       style={{
                         borderColor: role === r.id ? "var(--color-rose-gold-400)" : "var(--color-border)",
                         background: role === r.id ? "rgba(200,149,108,0.06)" : "transparent",
                       }}
                     >
-                      <div className="text-2xl mb-1">{r.emoji}</div>
+                      <div className="mb-2 text-rose-gold-500">{r.icon}</div>
                       <div className="text-sm font-semibold">{r.label}</div>
                       <div className="text-xs" style={{ color: "var(--color-muted)", fontFamily: "var(--font-arabic)" }}>{r.sub}</div>
                     </button>
