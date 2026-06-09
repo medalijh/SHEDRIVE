@@ -85,6 +85,8 @@ function TrackingContent() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rideStatus, ride?.id]);
+
+  useEffect(() => {
     if (!rideId || !isSupabaseConfigured()) return;
     getSupabaseClient()
       .from("rides")

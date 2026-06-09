@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { Home, Map as MapIcon, Coins, Settings, CheckCircle, Flag, Landmark, Star, Car, ArrowLeft } from "lucide-react";
 
