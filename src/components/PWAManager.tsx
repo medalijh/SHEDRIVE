@@ -89,34 +89,31 @@ export default function PWAManager() {
       <div
         className="rounded-2xl p-4 pointer-events-auto"
         style={{
-          background: "rgba(26,21,15,0.96)",
+          background: "rgba(255,255,255,0.96)",
           backdropFilter: "blur(24px)",
-          border: "1px solid rgba(200,149,108,0.3)",
-          boxShadow: "0 -4px 40px rgba(200,149,108,0.2)",
+          border: "1px solid rgba(225,29,72,0.3)",
+          boxShadow: "0 -4px 40px rgba(225,29,72,0.1)",
         }}
       >
         <div className="flex items-start gap-4">
-          <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-            style={{ background: "linear-gradient(135deg,#C8956C,#8E5E3C)" }}
-          >
-            🌹
+          <div className="flex-shrink-0">
+            <img src="/logo.png" alt="SheDrive Logo" className="w-12 h-12 object-cover rounded-2xl border border-rose-200 shadow-sm" />
           </div>
           <div className="flex-1 min-w-0">
             <h3
-              className="text-white font-semibold text-sm mb-0.5"
-              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}
+              className="text-black font-semibold text-sm mb-0.5"
+              style={{ fontFamily: "var(--font-display)", fontSize: "1rem" }}
             >
               Installer SheDrive
             </h3>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.55)", lineHeight: "1.5" }}>
-              Ajoutez l'app à votre écran d'accueil pour un accès rapide et une expérience native 📱
+            <p className="text-xs" style={{ color: "rgba(0,0,0,0.55)", lineHeight: "1.5" }}>
+              Ajoutez l'app à votre écran d'accueil pour un accès rapide et une expérience native
             </p>
           </div>
           <button
             onClick={() => setShowBanner(false)}
             className="text-xl flex-shrink-0"
-            style={{ color: "rgba(255,255,255,0.3)", paddingTop: "2px" }}
+            style={{ color: "rgba(0,0,0,0.3)", paddingTop: "2px" }}
             aria-label="Fermer"
           >
             ✕
@@ -128,9 +125,9 @@ export default function PWAManager() {
             onClick={() => setShowBanner(false)}
             className="flex-1 py-2.5 rounded-full text-xs font-semibold"
             style={{
-              background: "rgba(255,255,255,0.08)",
-              color: "rgba(255,255,255,0.5)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(0,0,0,0.05)",
+              color: "rgba(0,0,0,0.6)",
+              border: "1px solid rgba(0,0,0,0.1)",
             }}
           >
             Plus tard
@@ -139,11 +136,11 @@ export default function PWAManager() {
             onClick={handleInstall}
             className="flex-1 py-2.5 rounded-full text-xs font-semibold text-white"
             style={{
-              background: "linear-gradient(135deg,#C8956C,#8E5E3C)",
-              boxShadow: "0 2px 12px rgba(200,149,108,0.4)",
+              background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))",
+              boxShadow: "0 2px 12px rgba(225,29,72,0.3)",
             }}
           >
-            📲 Installer
+            Installer
           </button>
         </div>
       </div>

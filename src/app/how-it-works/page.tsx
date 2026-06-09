@@ -6,15 +6,14 @@ import { UserCircle, MapPin, Coins, CarFront, ShieldCheck, ClipboardEdit, FileCh
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
+      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-9 h-9 object-cover rounded-full border border-rose-200" />
+          <span className="text-lg font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
+          <Link href="/auth/login" className="btn btn-sm btn-ghost text-black">Connexion</Link>
           <Link href="/auth/register" className="btn btn-sm btn-primary">S'inscrire</Link>
         </div>
       </div>
@@ -59,8 +58,8 @@ export default function HowItWorksPage() {
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto relative z-10">
           <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(225,29,72,0.15)", color: "var(--color-rose-400)", border: "1px solid rgba(225,29,72,0.3)" }}>COMMENT ÇA MARCHE</span>
-          <h1 className="text-display-xl text-white mb-4">Simple, Rapide,<br/><span className="gradient-text">Sécurisé</span></h1>
-          <p style={{ color: "rgba(255,255,255,0.6)" }}>Tout ce que vous devez savoir pour utiliser SheDrive Morocco</p>
+          <h1 className="text-display-xl text-black mb-4">Simple, Rapide,<br/><span className="gradient-text">Sécurisé</span></h1>
+          <p style={{ color: "rgba(0,0,0,0.6)" }}>Tout ce que vous devez savoir pour utiliser SheDrive Morocco</p>
         </div>
       </section>
 
@@ -92,22 +91,22 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Driver Steps */}
-      <section className="py-20 px-6 relative" style={{ background: "linear-gradient(135deg, #0A1F15 0%, #0D2A1A 100%)" }}>
+      <section className="py-20 px-6 relative" style={{ background: "linear-gradient(135deg, var(--color-silver-50) 0%, var(--color-silver-100) 100%)" }}>
         <div className="zellige-pattern absolute inset-0 opacity-8"/>
         <div className="container-app mx-auto relative z-10">
           <div className="text-center mb-14">
             <span className="badge mb-4 text-xs" style={{ background: "rgba(147,51,234,0.2)", color: "#4DBF8A", border: "1px solid rgba(147,51,234,0.3)" }}>POUR LES CONDUCTRICES</span>
-            <h2 className="text-display-lg text-white">Commencez à <span className="gradient-text-emerald">conduire</span></h2>
+            <h2 className="text-display-lg text-black">Commencez à <span className="gradient-text-emerald">conduire</span></h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {driverSteps.map((s, i) => (
               <div key={s.num} className="p-6 rounded-2xl relative"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(147,51,234,0.2)" }}>
+                style={{ background: "rgba(255,255,255,0.92)", border: "1px solid rgba(147,51,234,0.2)" }}>
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
                   style={{ background: "rgba(147,51,234,0.15)", color: "#4DBF8A" }}>{s.icon}</div>
                 <div className="text-xs font-semibold mb-2" style={{ color: "var(--color-purple-400)", letterSpacing: "0.08em" }}>ÉTAPE {s.num}</div>
-                <h3 className="font-semibold mb-2 text-white" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{s.desc}</p>
+                <h3 className="font-semibold mb-2 text-black" style={{ fontFamily: "var(--font-display)" }}>{s.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -140,11 +139,11 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: "#F3F4F6", color: "rgba(0,0,0,0.6)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
-            <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+            <span className="font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
           <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
         </div>

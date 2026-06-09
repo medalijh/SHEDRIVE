@@ -307,16 +307,16 @@ function SafetySection() {
               style={{ background: "rgba(147,51,234,0.2)", color: "#4DBF8A", border: "1px solid rgba(147,51,234,0.3)" }}>
               VOTRE SÉCURITÉ D'ABORD
             </span>
-            <h2 className="text-display-xl text-white mb-6">
+            <h2 className="text-display-xl text-black mb-6">
               Sécurité de{" "}
               <span className="gradient-text-emerald">Niveau</span>
               {" "}Entreprise
             </h2>
-            <p className="mb-8" style={{ color: "rgba(255,255,255,0.6)", lineHeight: "1.8" }}>
+            <p className="mb-8" style={{ color: "rgba(0,0,0,0.6)", lineHeight: "1.8" }}>
               SheDrive Morocco intègre les technologies de sécurité les plus avancées.
               Chaque trajet est surveillé en temps réel par notre équipe dédiée.
             </p>
-            <p className="text-sm mb-10" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
+            <p className="text-sm mb-10" style={{ color: "rgba(0,0,0,0.6)", fontFamily: "var(--font-arabic)", direction: "rtl" }}>
               كل رحلة خاضعة للمراقبة الفورية لضمان سلامتك في كل لحظة
             </p>
             <Link href="/safety" className="btn btn-emerald btn-lg">
@@ -328,12 +328,12 @@ function SafetySection() {
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {features.map((f) => (
               <div key={f.label} className="p-4 sm:p-5 rounded-2xl text-center transition-all duration-300 hover:scale-105 cursor-default flex flex-col justify-center items-center"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(219,39,119,0.3)" }}>
+                style={{ background: "rgba(255,255,255,0.92)", border: "1px solid rgba(219,39,119,0.3)" }}>
                 <div className="text-gold-400 mb-2 flex justify-center text-rose-gold-200">
                   {f.icon}
                 </div>
-                <div className="text-[11px] sm:text-xs font-semibold text-white mb-1 leading-tight">{f.label}</div>
-                <div className="text-[10px] sm:text-xs" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-arabic)" }}>{f.sub}</div>
+                <div className="text-[11px] sm:text-xs font-semibold text-black mb-1 leading-tight">{f.label}</div>
+                <div className="text-[10px] sm:text-xs" style={{ color: "rgba(0,0,0,0.6)", fontFamily: "var(--font-arabic)" }}>{f.sub}</div>
               </div>
             ))}
           </div>
@@ -493,14 +493,14 @@ function CTASection() {
       style={{ background: "linear-gradient(135deg, var(--color-rose-600) 0%, var(--color-rose-800) 50%, #2C1F12 100%)" }}>
       <div className="zellige-pattern absolute inset-0 opacity-15" />
       <div className="container-app mx-auto relative z-10 text-center">
-        <h2 className="text-display-xl text-white mb-6">
+        <h2 className="text-display-xl text-black mb-6">
           Prête à Voyager{" "}
           <span style={{ color: "var(--color-purple-300)" }}>Autrement</span> ?
         </h2>
-        <p className="text-base mb-4" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(255,255,255,0.7)" }}>
+        <p className="text-base mb-4" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(0,0,0,0.6)" }}>
           انضمي إلى آلاف النساء اللواتي يتنقلن بأمان وأناقة مع شي درايف
         </p>
-        <p className="mb-10 max-w-md mx-auto" style={{ color: "rgba(255,255,255,0.6)" }}>
+        <p className="mb-10 max-w-md mx-auto" style={{ color: "rgba(0,0,0,0.6)" }}>
           Rejoignez des milliers de femmes qui voyagent en toute sécurité avec SheDrive Morocco.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -510,7 +510,7 @@ function CTASection() {
             Je suis passagère
           </Link>
           <Link href="/auth/register?role=driver" className="btn btn-xl gap-3"
-            style={{ background: "rgba(255,255,255,0.15)", color: "white", border: "1.5px solid rgba(255,255,255,0.3)", backdropFilter: "blur(10px)" }}>
+            style={{ background: "rgba(255,255,255,0.92)", color: "white", border: "1.5px solid rgba(0,0,0,0.6)", backdropFilter: "blur(10px)" }}>
             <Sparkles size={20} />
             Je suis conductrice
           </Link>
@@ -536,7 +536,7 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
+        background: scrolled ? "rgba(0,0,0,0.6)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(225,29,72,0.2)" : "none",
       }}>
@@ -588,7 +588,7 @@ function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden px-6 pb-6 animate-slide-down shadow-lg"
-          style={{ background: "rgba(255,255,255,0.98)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
+          style={{ background: "rgba(255,255,255,0.92)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
           <div className="flex flex-col gap-4 pt-4">
             {[
               { href: "/about", label: "À propos" },

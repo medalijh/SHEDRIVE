@@ -50,7 +50,7 @@ export default function OfflinePage() {
         </div>
 
         <h1
-          className="text-4xl font-bold text-white mb-2"
+          className="text-4xl font-bold text-black mb-2"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           SheDrive Morocco
@@ -59,13 +59,13 @@ export default function OfflinePage() {
         <div className="text-6xl my-8">📡</div>
 
         <h2
-          className="text-2xl font-semibold text-white mb-3"
+          className="text-2xl font-semibold text-black mb-3"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           Vous êtes hors ligne
         </h2>
 
-        <p className="text-base mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
+        <p className="text-base mb-2" style={{ color: "rgba(0,0,0,0.6)" }}>
           Vérifiez votre connexion internet
         </p>
 
@@ -75,7 +75,7 @@ export default function OfflinePage() {
           style={{
             fontFamily: "'Noto Sans Arabic', Arial, sans-serif",
             direction: "rtl",
-            color: "rgba(255,255,255,0.4)",
+            color: "rgba(0,0,0,0.6)",
           }}
         >
           تحقق من اتصالك بالإنترنت
@@ -85,7 +85,7 @@ export default function OfflinePage() {
         <div
           className="flex items-center gap-3 px-5 py-3 rounded-full mb-8"
           style={{
-            background: "rgba(255,255,255,0.06)",
+            background: "rgba(255,255,255,0.92)",
             border: "1px solid rgba(225,29,72,0.2)",
           }}
         >
@@ -97,14 +97,14 @@ export default function OfflinePage() {
               animation: "pulse 2s infinite",
             }}
           />
-          <span className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>
+          <span className="text-sm font-medium" style={{ color: "rgba(0,0,0,0.6)" }}>
             {isOnline ? "Connexion rétablie — rechargement..." : "Hors ligne"}
           </span>
         </div>
 
         <button
           onClick={() => window.location.reload()}
-          className="px-8 py-4 rounded-full font-semibold text-white mb-4"
+          className="px-8 py-4 rounded-full font-semibold text-black mb-4"
           style={{
             background: "linear-gradient(135deg,#E11D48,#8E5E3C)",
             boxShadow: "0 4px 24px rgba(225,29,72,0.4)",
@@ -130,7 +130,7 @@ export default function OfflinePage() {
             border: "1px solid rgba(225,29,72,0.15)",
           }}
         >
-          <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)", lineHeight: "1.6" }}>
+          <p className="text-xs" style={{ color: "rgba(0,0,0,0.6)", lineHeight: "1.6" }}>
             💡 SheDrive fonctionne en mode hors ligne partiel. Vos trajets précédents sont disponibles dans l'historique même sans connexion.
           </p>
         </div>

@@ -165,14 +165,14 @@ function WalletCard() {
       <div className="zellige-pattern absolute inset-0 opacity-10" />
       <div className="relative z-10 flex items-start justify-between mb-6">
         <div>
-          <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>Solde Wallet</p>
-          <div className="text-3xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{balance.toFixed(2)} <span className="text-lg">MAD</span></div>
+          <p className="text-xs mb-1" style={{ color: "rgba(0,0,0,0.6)" }}>Solde Wallet</p>
+          <div className="text-3xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>{balance.toFixed(2)} <span className="text-lg">MAD</span></div>
         </div>
-        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(255,255,255,0.15)" }}>💳</div>
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ background: "rgba(255,255,255,0.92)" }}>💳</div>
       </div>
       <div className="relative z-10 flex gap-3">
-        <Link href="/passenger/wallet" className="btn btn-sm flex-1" style={{ background: "rgba(255,255,255,0.2)", color: "white", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.3)" }}>Recharger</Link>
-        <Link href="/passenger/history" className="btn btn-sm flex-1" style={{ background: "rgba(255,255,255,0.1)", color: "white", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)" }}>Historique</Link>
+        <Link href="/passenger/wallet" className="btn btn-sm flex-1" style={{ background: "rgba(255,255,255,0.92)", color: "white", backdropFilter: "blur(8px)", border: "1px solid rgba(0,0,0,0.6)" }}>Recharger</Link>
+        <Link href="/passenger/history" className="btn btn-sm flex-1" style={{ background: "rgba(255,255,255,0.92)", color: "white", backdropFilter: "blur(8px)", border: "1px solid rgba(0,0,0,0.6)" }}>Historique</Link>
       </div>
     </div>
   );

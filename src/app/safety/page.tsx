@@ -6,15 +6,14 @@ import { ShieldCheck, UserCheck, Eye, EyeOff, Navigation, BrainCircuit, Lock, Se
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
+      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-9 h-9 object-cover rounded-full border border-rose-200" />
+          <span className="text-lg font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
+          <Link href="/auth/login" className="btn btn-sm btn-ghost text-black">Connexion</Link>
           <Link href="/auth/register" className="btn btn-sm btn-primary">S'inscrire</Link>
         </div>
       </div>
@@ -47,20 +46,20 @@ export default function SafetyPage() {
 
       {/* Hero */}
       <section className="pt-28 pb-20 px-6 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0A1F15 0%, #0D2A1A 50%, #121A10 100%)" }}>
+        style={{ background: "linear-gradient(135deg, var(--color-rose-50) 0%, var(--color-purple-50) 100%)" }}>
         <div className="zellige-pattern absolute inset-0 opacity-10"/>
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2"
           style={{ background: "radial-gradient(circle,rgba(147,51,234,0.2) 0%,transparent 70%)" }}/>
         <div className="container-app mx-auto text-center relative z-10">
           <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(147,51,234,0.2)", color: "#4DBF8A", border: "1px solid rgba(147,51,234,0.3)" }}>VOTRE SÉCURITÉ</span>
-          <h1 className="text-display-xl text-white mb-6">
+          <h1 className="text-display-xl text-black mb-6">
             Sécurité de Niveau<br/>
             <span className="gradient-text-emerald">Entreprise</span>
           </h1>
-          <p className="text-base max-w-xl mx-auto mb-8" style={{ color: "rgba(255,255,255,0.6)", lineHeight: "1.8" }}>
+          <p className="text-base max-w-xl mx-auto mb-8" style={{ color: "rgba(0,0,0,0.6)", lineHeight: "1.8" }}>
             SheDrive Morocco intègre les technologies de sécurité les plus avancées du secteur. Chaque trajet est protégé par plusieurs couches de sécurité simultanées.
           </p>
-          <p className="text-sm" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(255,255,255,0.4)" }}>
+          <p className="text-sm" style={{ fontFamily: "var(--font-arabic)", direction: "rtl", color: "rgba(0,0,0,0.6)" }}>
             أمانك هو أولويتنا القصوى في كل رحلة
           </p>
         </div>
@@ -118,20 +117,20 @@ export default function SafetyPage() {
 
       {/* SOS Section */}
       <section className="py-20 px-6 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #7B1919 0%, #5C0F0F 100%)" }}>
+        style={{ background: "linear-gradient(135deg, var(--color-rose-100) 0%, var(--color-rose-200) 100%)" }}>
         <div className="zellige-pattern absolute inset-0 opacity-10"/>
         <div className="container-app mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="text-6xl mb-6 animate-float flex"><TriangleAlert size={64} className="text-red-400" /></div>
-              <h2 className="text-display-lg text-white mb-4">Le Bouton SOS<br/><span style={{ color: "rgba(255,150,150,0.9)" }}>Toujours à portée</span></h2>
-              <p className="mb-6" style={{ color: "rgba(255,255,255,0.7)", lineHeight: "1.8" }}>
+              <h2 className="text-display-lg text-black mb-4">Le Bouton SOS<br/><span style={{ color: "rgba(255,150,150,0.9)" }}>Toujours à portée</span></h2>
+              <p className="mb-6" style={{ color: "rgba(0,0,0,0.6)", lineHeight: "1.8" }}>
                 Le bouton SOS rouge est visible en permanence sur votre écran pendant tout trajet. En cas de danger, maintenez-le 3 secondes pour déclencher une alerte complète.
               </p>
               <ul className="flex flex-col gap-3">
                 {["Alerte immédiate à vos contacts de confiance", "Notification en temps réel à notre équipe de sécurité", "Partage automatique de votre position GPS", "Enregistrement de la session pour les autorités"].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.8)" }}>
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 text-white" style={{ background: "rgba(255,255,255,0.2)" }}><CheckCircle2 size={12} /></span>
+                  <li key={item} className="flex items-center gap-3 text-sm" style={{ color: "rgba(0,0,0,0.6)" }}>
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 text-black" style={{ background: "rgba(255,255,255,0.92)" }}><CheckCircle2 size={12} /></span>
                     {item}
                   </li>
                 ))}
@@ -140,8 +139,8 @@ export default function SafetyPage() {
             <div className="flex justify-center">
               <div className="w-40 h-40 rounded-full flex flex-col items-center justify-center cursor-pointer"
                 style={{ background: "linear-gradient(135deg,#E53E3E,#9B2C2C)", boxShadow: "0 0 60px rgba(229,62,62,0.5), 0 0 0 20px rgba(229,62,62,0.1)", animation: "sos-pulse 2s infinite" }}>
-                <span className="text-white text-4xl font-bold mb-1">SOS</span>
-                <span className="text-white opacity-80"><BellRing size={28} /></span>
+                <span className="text-black text-4xl font-bold mb-1">SOS</span>
+                <span className="text-black opacity-80"><BellRing size={28} /></span>
               </div>
             </div>
           </div>
@@ -157,11 +156,11 @@ export default function SafetyPage() {
         </div>
       </section>
 
-      <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: "#F3F4F6", color: "rgba(0,0,0,0.6)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
-            <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+            <span className="font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
           <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
         </div>

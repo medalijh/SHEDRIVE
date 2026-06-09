@@ -19,10 +19,9 @@ function AdminSidebar({ active }: { active: string }) {
       style={{ background: "#F3F4F6", borderRight: "1px solid rgba(225,29,72,0.15)" }}>
       <div className="p-6 border-b" style={{ borderColor: "rgba(225,29,72,0.15)" }}>
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-9 h-9 object-cover rounded-full border border-rose-200" />
           <div>
-            <div className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
+            <div className="text-black font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
             <div className="text-xs" style={{ color: "rgba(225,29,72,0.7)" }}>Admin Panel</div>
           </div>
         </div>
@@ -33,7 +32,7 @@ function AdminSidebar({ active }: { active: string }) {
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all"
             style={{
               background: active === item.id ? "rgba(225,29,72,0.15)" : "transparent",
-              color: active === item.id ? "#E11D48" : "rgba(255,255,255,0.5)",
+              color: active === item.id ? "#E11D48" : "rgba(0,0,0,0.6)",
               borderLeft: active === item.id ? "3px solid var(--color-rose-500)" : "3px solid transparent",
             }}>
             <span>{item.icon}</span><span>{item.label}</span>
@@ -172,7 +171,7 @@ export default function AdminDrivers() {
                       <td className="px-4 py-3 font-mono text-xs" style={{ color: "var(--color-muted)" }}>{d.id.slice(0, 8)}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-base" style={{ background: "rgba(225,29,72,0.1)" }}>👩</div>
+                          <img src="/logo.png" alt="SheDrive Logo" className="w-8 h-8 object-cover rounded-full border border-rose-200" />
                           <span className="font-medium">{d.profiles?.full_name}</span>
                         </div>
                       </td>

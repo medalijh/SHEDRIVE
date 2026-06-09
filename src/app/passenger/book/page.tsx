@@ -334,7 +334,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
           style={{ background: "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))", boxShadow: "var(--shadow-emerald)" }}>
           ✓
         </div>
-        <h2 className="text-display-sm text-white mb-3" style={{ color: "var(--color-purple-700)" }}>
+        <h2 className="text-display-sm text-black mb-3" style={{ color: "var(--color-purple-700)" }}>
           Trajet confirmé !
         </h2>
         <p style={{ color: "var(--color-muted)" }}>Demande envoyée...</p>

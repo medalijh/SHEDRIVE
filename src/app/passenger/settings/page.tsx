@@ -218,7 +218,7 @@ export default function SettingsPage() {
                     <div className="text-sm font-medium">{l.label}</div>
                     <div className="text-xs" style={{ color: "var(--color-muted)", fontFamily: l.id === "ar" ? "var(--font-arabic)" : undefined }}>{l.native}</div>
                   </div>
-                  {lang === l.id && <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-purple-500)" }}>✓</div>}
+                  {lang === l.id && <div className="w-5 h-5 rounded-full flex items-center justify-center text-black text-xs" style={{ background: "var(--color-purple-500)" }}>✓</div>}
                 </button>
               ))}
             </div>

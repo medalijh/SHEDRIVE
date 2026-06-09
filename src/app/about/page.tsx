@@ -6,15 +6,14 @@ import { Users, ShieldCheck, Gem, Scale, MapPin, SearchCheck, UserCheck, Star, H
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
+      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-9 h-9 object-cover rounded-full border border-rose-200" />
+          <span className="text-lg font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
+          <Link href="/auth/login" className="btn btn-sm btn-ghost text-black">Connexion</Link>
           <Link href="/auth/register" className="btn btn-sm btn-primary">S'inscrire</Link>
         </div>
       </div>
@@ -24,12 +23,11 @@ function Navbar() {
 
 function Footer() {
   return (
-    <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
+    <footer style={{ background: "#F3F4F6", color: "rgba(0,0,0,0.6)" }}>
       <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-base"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
-          <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-8 h-8 object-cover rounded-full border border-rose-200" />
+          <span className="font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
         </div>
         <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
       </div>
@@ -63,11 +61,11 @@ export default function AboutPage() {
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto text-center relative z-10">
           <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(225,29,72,0.15)", color: "var(--color-rose-400)", border: "1px solid rgba(225,29,72,0.3)" }}>À PROPOS</span>
-          <h1 className="text-display-xl text-white mb-6">
+          <h1 className="text-display-xl text-black mb-6">
             Plus qu'un service de transport,<br/>
             <span className="gradient-text">un mouvement féminin</span>
           </h1>
-          <p className="text-base max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.6)", lineHeight: "1.8" }}>
+          <p className="text-base max-w-xl mx-auto" style={{ color: "rgba(0,0,0,0.6)", lineHeight: "1.8" }}>
             SheDrive Morocco est née d'une conviction simple : les femmes marocaines méritent de se déplacer en toute sécurité, avec élégance, et dans un espace exclusivement féminin.
           </p>
         </div>
@@ -153,12 +151,12 @@ export default function AboutPage() {
       <section className="py-20 px-6 text-center relative overflow-hidden bg-white">
         <div className="zellige-pattern absolute inset-0 opacity-15"/>
         <div className="relative z-10">
-          <h2 className="text-display-lg text-white mb-6">Rejoignez notre <span className="gradient-text">communauté</span></h2>
+          <h2 className="text-display-lg text-black mb-6">Rejoignez notre <span className="gradient-text">communauté</span></h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/auth/register?role=passenger" className="btn btn-primary btn-lg flex items-center gap-2">
               <Users size={20} /> Je suis passagère
             </Link>
-            <Link href="/auth/register?role=driver" className="btn btn-lg flex items-center gap-2" style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1.5px solid rgba(225,29,72,0.4)" }}>
+            <Link href="/auth/register?role=driver" className="btn btn-lg flex items-center gap-2" style={{ background: "rgba(255,255,255,0.92)", color: "white", border: "1.5px solid rgba(225,29,72,0.4)" }}>
               <CarFront size={20} /> Je suis conductrice
             </Link>
           </div>

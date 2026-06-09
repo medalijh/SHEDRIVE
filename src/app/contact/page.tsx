@@ -7,15 +7,14 @@ import { MessageCircle, Phone, Mail, MessageSquare, MapPin, TriangleAlert, Check
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "rgba(26,21,15,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
+      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(225,29,72,0.2)" }}>
       <div className="container-app mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,var(--color-rose-500),var(--color-rose-700))" }}>🌹</div>
-          <span className="text-lg font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
+          <img src="/logo.png" alt="SheDrive Logo" className="w-9 h-9 object-cover rounded-full border border-rose-200" />
+          <span className="text-lg font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive <span className="text-sm font-normal" style={{ color: "var(--color-rose-400)" }}>Morocco</span></span>
         </Link>
         <div className="flex items-center gap-3">
-          <Link href="/auth/login" className="btn btn-sm btn-ghost text-white">Connexion</Link>
+          <Link href="/auth/login" className="btn btn-sm btn-ghost text-black">Connexion</Link>
           <Link href="/auth/register" className="btn btn-sm btn-primary">S'inscrire</Link>
         </div>
       </div>
@@ -40,8 +39,8 @@ export default function ContactPage() {
         <div className="zellige-pattern absolute inset-0 opacity-20"/>
         <div className="container-app mx-auto relative z-10">
           <span className="badge mb-6 text-xs tracking-widest" style={{ background: "rgba(225,29,72,0.15)", color: "var(--color-rose-400)", border: "1px solid rgba(225,29,72,0.3)" }}>CONTACT</span>
-          <h1 className="text-display-xl text-white mb-4">Parlons-nous <span className="gradient-text"><MessageCircle className="inline-block ml-2 mb-2" size={40} /></span></h1>
-          <p style={{ color: "rgba(255,255,255,0.6)" }}>Notre équipe est disponible 24h/24 pour vous aider</p>
+          <h1 className="text-display-xl text-black mb-4">Parlons-nous <span className="gradient-text"><MessageCircle className="inline-block ml-2 mb-2" size={40} /></span></h1>
+          <p style={{ color: "rgba(0,0,0,0.6)" }}>Notre équipe est disponible 24h/24 pour vous aider</p>
         </div>
       </section>
 
@@ -136,11 +135,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <footer style={{ background: "#F3F4F6", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: "#F3F4F6", color: "rgba(0,0,0,0.6)" }}>
         <div className="container-app mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="SheDrive Logo" className="w-10 h-10 object-cover rounded-full border border-rose-gold-200" />
-            <span className="font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
+            <span className="font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>SheDrive Morocco</span>
           </div>
           <p className="text-xs">© 2025 SheDrive Morocco. Tous droits réservés.</p>
         </div>

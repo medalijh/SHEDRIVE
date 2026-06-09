@@ -26,7 +26,7 @@ function AdminSidebar({ active }: { active: string }) {
             🌹
           </div>
           <div>
-            <div className="text-white font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
+            <div className="text-black font-bold text-sm" style={{ fontFamily: "var(--font-display)" }}>SheDrive</div>
             <div className="text-xs" style={{ color: "rgba(225,29,72,0.7)" }}>Admin Panel</div>
           </div>
         </div>
@@ -37,7 +37,7 @@ function AdminSidebar({ active }: { active: string }) {
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
             style={{
               background: active === item.id ? "rgba(225,29,72,0.15)" : "transparent",
-              color: active === item.id ? "#E11D48" : "rgba(255,255,255,0.5)",
+              color: active === item.id ? "#E11D48" : "rgba(0,0,0,0.6)",
               borderLeft: active === item.id ? "3px solid var(--color-rose-500)" : "3px solid transparent",
             }}>
             <span className="text-base">{item.icon}</span>
@@ -50,12 +50,12 @@ function AdminSidebar({ active }: { active: string }) {
           <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
             style={{ background: "rgba(225,29,72,0.15)" }}>👩‍💼</div>
           <div>
-            <div className="text-xs text-white font-medium">Admin Principal</div>
-            <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>admin@shedrive.ma</div>
+            <div className="text-xs text-black font-medium">Admin Principal</div>
+            <div className="text-xs" style={{ color: "rgba(0,0,0,0.6)" }}>admin@shedrive.ma</div>
           </div>
         </div>
         <button className="flex items-center gap-2 px-4 py-2 w-full text-xs rounded-lg mt-1 transition-colors hover:bg-white/5"
-          style={{ color: "rgba(255,255,255,0.3)" }}
+          style={{ color: "rgba(0,0,0,0.6)" }}
           onClick={async () => { 
             if (confirm("Déconnecter ?")) {
               await fetch("/api/auth/logout", { method: "POST" });

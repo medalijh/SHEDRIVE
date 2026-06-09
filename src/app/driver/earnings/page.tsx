@@ -96,15 +96,15 @@ export default function DriverEarnings() {
             boxShadow: "var(--shadow-emerald)",
           }}>
           <div className="zellige-pattern absolute inset-0 opacity-10"/>
-          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full" style={{ background: "rgba(255,255,255,0.05)" }}/>
+          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full" style={{ background: "rgba(255,255,255,0.92)" }}/>
           <div className="relative z-10">
-            <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <p className="text-xs mb-1" style={{ color: "rgba(0,0,0,0.6)" }}>
               {period === "day" ? "Gains aujourd'hui" : period === "week" ? "Gains cette semaine" : "Gains ce mois"}
             </p>
-            <div className="text-5xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>
+            <div className="text-5xl font-bold text-black mb-1" style={{ fontFamily: "var(--font-display)" }}>
               {stats[period].amount.toLocaleString()} <span className="text-2xl">MAD</span>
             </div>
-            <div className="flex gap-4 text-xs mt-3" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <div className="flex gap-4 text-xs mt-3" style={{ color: "rgba(0,0,0,0.6)" }}>
               <span>🚗 {stats[period].count} trajets</span>
               <span>⭐ 4.9 moy.</span>
             </div>

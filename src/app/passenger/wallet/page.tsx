@@ -90,31 +90,31 @@ export default function WalletPage() {
           }}>
           <div className="zellige-pattern absolute inset-0 opacity-10"/>
           {/* Decorative circles */}
-          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}/>
-          <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full" style={{ background: "rgba(255,255,255,0.04)" }}/>
+          <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full" style={{ background: "rgba(255,255,255,0.92)" }}/>
+          <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full" style={{ background: "rgba(255,255,255,0.92)" }}/>
 
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-6">
               <div>
-                <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>Solde disponible</p>
-                <div className="text-5xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+                <p className="text-xs mb-1" style={{ color: "rgba(0,0,0,0.6)" }}>Solde disponible</p>
+                <div className="text-5xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>
                   {Math.floor(balance)}<span className="text-2xl ml-1">.{(balance % 1).toFixed(2).substring(2)}</span>
                 </div>
-                <div className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.6)" }}>Dirhams marocains (MAD)</div>
+                <div className="text-sm mt-1" style={{ color: "rgba(0,0,0,0.6)" }}>Dirhams marocains (MAD)</div>
               </div>
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
-                style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}>
+                style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(8px)" }}>
                 💳
               </div>
             </div>
 
             <div className="flex gap-3">
               <button onClick={() => setAddOpen(true)} className="btn btn-sm flex-1"
-                style={{ background: "rgba(255,255,255,0.2)", color: "white", border: "1px solid rgba(255,255,255,0.3)" }}>
+                style={{ background: "rgba(255,255,255,0.92)", color: "white", border: "1px solid rgba(0,0,0,0.6)" }}>
                 + Recharger
               </button>
               <button className="btn btn-sm flex-1"
-                style={{ background: "rgba(255,255,255,0.1)", color: "white", border: "1px solid rgba(255,255,255,0.2)" }}>
+                style={{ background: "rgba(255,255,255,0.92)", color: "white", border: "1px solid rgba(0,0,0,0.6)" }}>
                 📤 Envoyer
               </button>
             </div>

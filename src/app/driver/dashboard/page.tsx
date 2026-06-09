@@ -272,11 +272,11 @@ export default function DriverDashboard() {
             <div className="zellige-pattern absolute inset-0 opacity-10"/>
             <div className="relative z-10 flex items-center justify-between">
               <div>
-                <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.6)" }}>Gains du jour</p>
-                <div className="text-4xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
+                <p className="text-xs mb-1" style={{ color: "rgba(0,0,0,0.6)" }}>Gains du jour</p>
+                <div className="text-4xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>
                   {stats.earnings} <span className="text-lg">MAD</span>
                 </div>
-                <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stats.trips} trajets terminés</p>
+                <p className="text-xs mt-1" style={{ color: "rgba(0,0,0,0.6)" }}>{stats.trips} trajets terminés</p>
               </div>
               <div className="text-5xl">💰</div>
             </div>
