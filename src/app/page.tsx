@@ -32,21 +32,14 @@ function HeroSection() {
         }}
       />
 
-      {/* Decorative Arcs */}
+      {/* Decorative Flowers */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-        <svg className="absolute -top-20 -right-20 w-96 h-96 opacity-10" viewBox="0 0 400 400" fill="none">
-          <circle cx="200" cy="200" r="180" stroke="#E11D48" strokeWidth="1" strokeDasharray="8 4"/>
-          <circle cx="200" cy="200" r="140" stroke="#9333EA" strokeWidth="0.5" strokeDasharray="4 8"/>
-          <circle cx="200" cy="200" r="100" stroke="#E11D48" strokeWidth="1"/>
-          {/* Moroccan star pattern */}
-          <path d="M200 60 L215 140 L290 100 L230 160 L290 220 L215 180 L200 260 L185 180 L110 220 L170 160 L110 100 L185 140 Z" stroke="#9333EA" strokeWidth="0.8" fill="none"/>
-        </svg>
-
-        <svg className="absolute -bottom-20 -left-20 w-80 h-80 opacity-10" viewBox="0 0 320 320" fill="none">
-          <circle cx="160" cy="160" r="140" stroke="#9CA3AF" strokeWidth="1" strokeDasharray="6 4"/>
-          <circle cx="160" cy="160" r="100" stroke="#E11D48" strokeWidth="0.6"/>
-          <path d="M160 40 L173 120 L240 80 L190 140 L240 200 L173 160 L160 240 L147 160 L80 200 L130 140 L80 80 L147 120 Z" stroke="#E11D48" strokeWidth="0.7" fill="none"/>
-        </svg>
+        <div className="absolute -top-20 -right-20 w-[400px] h-[400px] opacity-30 mix-blend-multiply rotate-12">
+          <Image src="/tulips.png" alt="Tulipes décoratives" fill className="object-cover" />
+        </div>
+        <div className="absolute -bottom-20 -left-20 w-[350px] h-[350px] opacity-20 mix-blend-multiply -rotate-45">
+          <Image src="/tulips.png" alt="Tulipes décoratives" fill className="object-cover" />
+        </div>
       </div>
 
       {/* Content */}

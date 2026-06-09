@@ -3,6 +3,7 @@
 import React, { Suspense, useState, useRef } from "react";
 import { Eye, EyeOff, ShieldCheck, Flower2, Map, UserCircle, CarFront, Smartphone, ArrowRight, Check, TriangleAlert, ArrowLeft, Camera, IdCard, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -722,8 +723,12 @@ function AuthContent() {
       {/* Left Panel (Desktop) */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col justify-between p-12 bg-white">
         <div className="zellige-pattern absolute inset-0 opacity-20" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "radial-gradient(circle, rgba(225,29,72,0.2) 0%, transparent 70%)" }} />
-        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full translate-y-1/2 -translate-x-1/2" style={{ background: "radial-gradient(circle, rgba(147,51,234,0.15) 0%, transparent 70%)" }} />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] opacity-20 mix-blend-multiply rotate-12 -translate-y-1/4 translate-x-1/4">
+          <Image src="/tulips.png" alt="" fill className="object-cover" />
+        </div>
+        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] opacity-20 mix-blend-multiply -rotate-45 translate-y-1/4 -translate-x-1/4">
+          <Image src="/tulips.png" alt="" fill className="object-cover" />
+        </div>
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
