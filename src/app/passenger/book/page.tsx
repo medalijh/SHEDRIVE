@@ -224,11 +224,7 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
           badge: null
         })));
       } else {
-        // Fallback mock
-        setDrivers([
-          { id: 1, name: "Khadija M.", rating: 4.9, trips: 847, car: "Dacia Logan · Gris", plate: "34521 · A", eta: 4, bid: price - 5, badge: "⭐ Top conductrice" },
-          { id: 2, name: "Amina B.", rating: 4.8, trips: 623, car: "Renault Sandero · Blanc", plate: "28734 · B", eta: 7, bid: price, badge: null },
-        ]);
+        setDrivers([]);
       }
     });
   }, [price]);
