@@ -53,10 +53,11 @@ export async function updateSession(request: NextRequest) {
   const isProtectedAdmin     = pathname.startsWith("/admin");
   const isAuthPage           = pathname === "/auth/login" || pathname.startsWith("/auth/register") || pathname === "/auth/callback";
 
+  // Allow unauthenticated users to browse dashboard pages (static demo mode)
+  // Real data protection is handled by Supabase RLS on actual queries
   if ((isProtectedPassenger || isProtectedDriver || isProtectedAdmin) && !user) {
-    const loginUrl = new URL("/auth/login", request.url);
-    loginUrl.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(loginUrl);
+    // Let them through — pages will show empty/demo data gracefully
+    return supabaseResponse;
   }
 
   // Role-based route protection
