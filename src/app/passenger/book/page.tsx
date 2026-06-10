@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { useToastStore } from "@/store/useToastStore";
 import { searchAddress, getRoute, GeocodingResult } from "@/lib/mapUtils";
 import { ShieldAlert, Home, Car, Clock, CreditCard, Settings, Banknote, Landmark, User, Star, Hash, Timer, MapPin, Lightbulb, ShieldCheck, Check } from "lucide-react";
 
@@ -20,7 +21,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      alert("🆘 ALERTE SOS ENVOYÉE!\nVotre position a été partagée avec vos contacts d'urgence.");
+      useToastStore.getState().addToast("🆘 ALERTE SOS ENVOYÉE!\nVotre position a été partagée avec vos contacts d'urgence.", "warning");
       setPressed(false); setCountdown(3); return;
     }
     const t = setTimeout(() => setCountdown(c => c - 1), 1000);
@@ -399,7 +400,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
           router.push(`/passenger/tracking?id=${result.ride.id}`);
         }, 1500);
       } else {
-        alert("Erreur: " + result.error);
+        useToastStore.getState().addToast("Erreur: " + result.error, "error");
         setLoading(false);
       }
     } catch (err) {

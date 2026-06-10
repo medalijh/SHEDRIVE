@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { useToastStore } from "@/store/useToastStore";
 
 type AuthTab = "login" | "register";
 type Role = "passenger" | "driver";
@@ -178,7 +179,7 @@ function LoginForm() {
         <div className="flex-1 divider" />
       </div>
 
-      <button type="button" className="btn btn-outline btn-lg w-full flex items-center justify-center gap-3" onClick={() => alert("Non implémenté")}>
+      <button type="button" className="btn btn-outline btn-lg w-full flex items-center justify-center gap-3" onClick={() => useToastStore.getState().addToast("Bientôt disponible", "info")}>
         <Smartphone size={20} />
         <span>Connexion par SMS</span>
       </button>

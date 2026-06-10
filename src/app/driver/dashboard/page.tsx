@@ -9,6 +9,7 @@ import { useDriverLocationBroadcast, useDriverRideRequests } from "@/hooks/useRe
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { getRoute } from "@/lib/mapUtils";
 import { MapMarker } from "@/components/Map";
+import { useToastStore } from "@/store/useToastStore";
 import { ShieldAlert, Home, Map as MapIcon, Coins, Settings, User, Star, MapPin, Flag, Banknote, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -22,7 +23,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      alert("🆘 SOS Envoyé!");
+      useToastStore.getState().addToast("🆘 SOS Envoyé avec succès à vos contacts !", "warning");
       setPressed(false);
       setCountdown(3);
       return;

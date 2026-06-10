@@ -127,6 +127,8 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-visual",
 };
 
+import ToastProvider from "@/components/ToastProvider";
+
 // --- Root Layout --------------------------------------------------------------
 export default function RootLayout({
   children,
@@ -189,6 +191,7 @@ export default function RootLayout({
 
       <body className="antialiased" style={{ WebkitTapHighlightColor: "transparent" }}>
         <AuthProvider>
+          <ToastProvider />
           <PWAManager />
           {children}
         </AuthProvider>

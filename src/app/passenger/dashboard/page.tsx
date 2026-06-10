@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { MapMarker } from "@/components/Map";
+import { useToastStore } from "@/store/useToastStore";
 import { ShieldAlert, Home, Car, Clock, CreditCard, Settings, MapPin, Search, Bell, User, MessageCircle, Gift, Star, ShieldCheck, CheckCircle } from "lucide-react";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -22,7 +23,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      alert("🆘 ALERTE SOS ENVOYÉE!\n\nVotre position a été partagée avec:\n• Votre contact d'urgence\n• L'équipe SheDrive\n\nSoyez forte, l'aide est en route. 💪");
+      useToastStore.getState().addToast("🆘 ALERTE SOS ENVOYÉE!\n\nVotre position a été partagée avec:\n• Votre contact d'urgence\n• L'équipe SheDrive", "warning");
       setPressed(false);
       setCountdown(3);
       return;

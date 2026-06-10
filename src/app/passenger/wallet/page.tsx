@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { useToastStore } from "@/store/useToastStore";
 import { Home, Car, Clock, CreditCard, Settings, Send, BarChart2, Coins, Gift, Ticket, Landmark, Smartphone, Banknote } from "lucide-react";
 
 function BottomNav({ active }: { active: string }) {
@@ -61,12 +62,12 @@ export default function WalletPage() {
         body: JSON.stringify({ amount, payment_method: method })
       });
       if (res.ok) {
-        alert(`✅ ${amount} MAD ajoutés à votre wallet!`);
+        useToastStore.getState().addToast(`✅ ${amount} MAD ajoutés à votre wallet !`, "success");
         setAddOpen(false);
         fetchWallet();
       } else {
         const err = await res.json();
-        alert("Erreur: " + err.error);
+        useToastStore.getState().addToast("Erreur: " + err.error, "error");
       }
     } catch (error) {
       console.error(error);

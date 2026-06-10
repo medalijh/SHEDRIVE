@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useRealtimeTracking } from "@/hooks/useRealtimeTracking";
+import { useAuth } from "@/hooks/useAuth";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { MapMarker } from "@/components/Map";
+import { useToastStore } from "@/store/useToastStore";
 import { ShieldAlert, Search, Car, MapPin, CheckCircle, XCircle, User, Star, Hash, MessageCircle, Phone, Link as LinkIcon, Smartphone, Mail, Mic, Send, HeartHandshake } from "lucide-react";
 
 const LiveMap = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -20,7 +22,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      alert("🆘 SOS Envoyé!");
+      useToastStore.getState().addToast("🆘 SOS Envoyé avec succès !", "warning");
       setPressed(false);
       setCountdown(3);
       return;
@@ -207,7 +209,7 @@ function TrackingContent() {
 
       {/* Share Modal */}
       {shareOpen && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShareOpen(false)}>
+        <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(6px)" }} onClick={() => setShareOpen(false)}>
           <div className="w-full max-w-md bg-white rounded-t-3xl p-6" onClick={e => e.stopPropagation()}>
             <div className="w-10 h-1 rounded-full mx-auto mb-5" style={{ background: "var(--color-silver-300)" }}/>
             <h3 className="font-semibold text-lg mb-2" style={{ fontFamily: "var(--font-display)" }}>Partager ma position</h3>
