@@ -298,10 +298,10 @@ export default function DriverDashboard() {
 
       {/* Map */}
       <div className="px-6 mb-5">
-        <div className="relative w-full h-64 rounded-3xl overflow-hidden shadow-sm">
-          <LiveMap center={mapCenter} zoom={13} markers={markers} routePoints={routePoints} showUserLocation={true} height="100%" borderRadius="1.5rem" />
+        <div className="relative">
+          <LiveMap center={mapCenter} zoom={13} markers={markers} routePoints={routePoints} showUserLocation={true} height="256px" borderRadius="1.5rem" />
           {isOnline && pendingRequests.length > 0 && (
-            <div className="absolute top-4 right-4 z-[400] px-3 py-1.5 rounded-full text-xs font-medium bg-white shadow-md text-red-600 animate-bounce flex items-center gap-1">
+            <div className="absolute top-4 right-4 z-[1001] px-3 py-1.5 rounded-full text-xs font-medium bg-white shadow-md text-red-600 animate-bounce flex items-center gap-1">
               <div className="w-2 h-2 rounded-full bg-red-600"/> {pendingRequests.length} demandes proches
             </div>
           )}

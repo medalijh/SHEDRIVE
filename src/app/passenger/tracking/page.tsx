@@ -137,9 +137,7 @@ function TrackingContent() {
       </div>
 
       {/* Map */}
-      <div className="relative w-full h-72">
-        <LiveMap center={mapCenter} zoom={15} markers={markers} routePoints={routePoints} height="100%" borderRadius="0" />
-      </div>
+      <LiveMap center={mapCenter} zoom={15} markers={markers} routePoints={routePoints} height="288px" borderRadius="0" />
 
       {/* Status Banner */}
       <div className="px-6 -mt-4 relative z-10">

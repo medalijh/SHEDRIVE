@@ -146,8 +146,7 @@ function LocationStepContent({ onNext }: { onNext: (data: { from: string; to: st
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="relative rounded-3xl overflow-hidden shadow-sm" style={{ height: "280px" }}>
-        <LiveMap center={mapCenter} zoom={14} markers={markers} routePoints={routePoints} height="280px" borderRadius="1.5rem" showUserLocation={true} onMapClick={(lat, lng) => {
+      <LiveMap center={mapCenter} zoom={14} markers={markers} routePoints={routePoints} height="300px" borderRadius="1.5rem" showUserLocation={true} onMapClick={(lat, lng) => {
           if (!fromCoords) {
             setFromCoords([lat, lng]);
             setFrom("Position sélectionnée");
@@ -155,12 +154,10 @@ function LocationStepContent({ onNext }: { onNext: (data: { from: string; to: st
             setToCoords([lat, lng]);
             setTo("Destination sélectionnée");
           } else {
-            // Both already set — update destination
             setToCoords([lat, lng]);
             setTo("Destination sélectionnée");
           }
         }} />
-      </div>
 
       <div className="card-luxury p-5 relative" style={{ zIndex: 10 }}>
         <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Définir votre trajet</h3>
