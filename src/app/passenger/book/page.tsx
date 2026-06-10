@@ -86,6 +86,21 @@ function LocationStepContent({ onNext }: { onNext: (data: { from: string; to: st
   const [routePoints, setRoutePoints] = useState<[number, number][]>([]);
   const [routeData, setRouteData] = useState<any>(null);
 
+  // Auto-resolve initial destination if passed from dashboard
+  useEffect(() => {
+    if (initialTo && !toCoords) {
+      searchAddress(initialTo).then(results => {
+        if (results && results.length > 0) {
+          const res = results[0];
+          // We don't overwrite `to` name immediately so user sees what they typed, 
+          // or we can overwrite it with full display_name
+          setTo(res.display_name.split(',')[0]); 
+          setToCoords([Number(res.lat), Number(res.lon)]);
+        }
+      });
+    }
+  }, [initialTo]); // run once when initialTo is read
+
   useEffect(() => {
     if (latitude && longitude && !fromCoords && from === "Ma position actuelle") {
       setFromCoords([latitude, longitude]);

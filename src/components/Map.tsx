@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import React, { useEffect, useRef, useState } from "react";
+import { useToastStore } from "@/store/useToastStore";
 
 // Dynamically import Leaflet components to avoid SSR issues
 const MapContainerDynamic = dynamic(
@@ -120,7 +121,8 @@ export default function LiveMap({
   const [leafletReady, setLeafletReady] = useState(false);
   const iconsRef = useRef<Record<string, unknown>>({});
 
-  const mapCenter = center || DEFAULT_CENTER;
+  const [localCenter, setLocalCenter] = useState<[number, number] | null>(null);
+  const mapCenter = localCenter || center || DEFAULT_CENTER;
 
   useEffect(() => {
     setMounted(true);
@@ -245,9 +247,10 @@ export default function LiveMap({
               if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                   (pos) => {
+                    setLocalCenter([pos.coords.latitude, pos.coords.longitude]);
                     if (onMapClick) onMapClick(pos.coords.latitude, pos.coords.longitude);
                   },
-                  () => alert("Veuillez autoriser l'accès à votre position.")
+                  () => useToastStore.getState().addToast("Veuillez autoriser l'accès à votre position dans les paramètres de votre navigateur.", "error")
                 );
               }
             }}
