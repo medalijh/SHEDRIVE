@@ -99,7 +99,7 @@ export default function WalletPage() {
         useToastStore.getState().addToast("Erreur: " + txError.message, "error");
       } else {
         await supabase.from("wallets").update({ balance: wallet.balance + amount }).eq("id", wallet.id);
-        useToastStore.getState().addToast(`✅ ${amount} MAD ajoutés à votre wallet !`, "success");
+        useToastStore.getState().addToast(`${amount} MAD ajoutés à votre wallet !`, "success");
         setAddOpen(false);
         fetchWallet();
       }

@@ -24,7 +24,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      useToastStore.getState().addToast("🆘 ALERTE SOS ENVOYÉE!\n\nVotre position a été partagée avec:\n• Votre contact d'urgence\n• L'équipe SheDrive", "warning");
+      useToastStore.getState().addToast("ALERTE SOS ENVOYEE!\n\nVotre position a été partagée avec:\n- Votre contact d'urgence\n- L'équipe SheDrive", "warning");
       setPressed(false);
       setCountdown(3);
       return;

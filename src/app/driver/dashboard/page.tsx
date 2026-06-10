@@ -24,7 +24,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      useToastStore.getState().addToast("🆘 SOS Envoyé avec succès à vos contacts !", "warning");
+      useToastStore.getState().addToast("ALERTE SOS envoyée avec succès à vos contacts !", "warning");
       setPressed(false);
       setCountdown(3);
       return;

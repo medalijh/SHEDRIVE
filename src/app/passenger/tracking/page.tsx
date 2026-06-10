@@ -23,7 +23,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      useToastStore.getState().addToast("🆘 SOS Envoyé avec succès !", "warning");
+      useToastStore.getState().addToast("ALERTE SOS envoyée avec succès !", "warning");
       setPressed(false);
       setCountdown(3);
       return;
@@ -59,7 +59,7 @@ function TrackingContent() {
   const [shareOpen, setShareOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { from: "driver", text: "Je suis en route, j'arrive bientôt 🌸", time: new Date().toLocaleTimeString("fr-MA", { hour: "2-digit", minute: "2-digit" }) },
+    { from: "driver", text: "Je suis en route, j'arrive bientôt.", time: new Date().toLocaleTimeString("fr-MA", { hour: "2-digit", minute: "2-digit" }) },
   ]);
   const [newMsg, setNewMsg] = useState("");
   const [routePoints, setRoutePoints] = useState<[number, number][]>([]);

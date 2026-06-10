@@ -348,6 +348,16 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-gold {
+  background: linear-gradient(135deg, #D97706, #B45309);
+  color: white;
+  box-shadow: var(--shadow-gold);
+}
+.btn-gold:hover {
+  box-shadow: 0 6px 30px rgba(217, 119, 6, 0.4);
+  transform: translateY(-1px);
+}
+
 .btn-outline {
   background: transparent;
   color: var(--color-rose-600);

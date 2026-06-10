@@ -22,7 +22,7 @@ function SOSButton() {
       if (isSupabaseConfigured()) {
         getSupabaseClient().from("sos_alerts").insert({ status: "active" }).then();
       }
-      useToastStore.getState().addToast("🆘 ALERTE SOS ENVOYÉE!\nVotre position a été partagée avec vos contacts d'urgence.", "warning");
+      useToastStore.getState().addToast("ALERTE SOS ENVOYEE!\nVotre position a été partagée avec vos contacts d'urgence.", "warning");
       setPressed(false); setCountdown(3); return;
     }
     const t = setTimeout(() => setCountdown(c => c - 1), 1000);
