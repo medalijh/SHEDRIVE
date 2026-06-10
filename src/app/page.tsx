@@ -32,6 +32,16 @@ function HeroSection() {
         }}
       />
 
+      {/* Decorative Flowers */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div className="absolute -top-20 -right-20 w-[400px] h-[400px] opacity-30 mix-blend-multiply rotate-12">
+          <Image src="/tulips.png" alt="Tulipes décoratives" fill className="object-cover" />
+        </div>
+        <div className="absolute -bottom-20 -left-20 w-[350px] h-[350px] opacity-20 mix-blend-multiply -rotate-45">
+          <Image src="/tulips.png" alt="Tulipes décoratives" fill className="object-cover" />
+        </div>
+      </div>
+
       {/* Content */}
       <div className="relative z-10 container-app px-4 sm:px-6 py-12 md:py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
