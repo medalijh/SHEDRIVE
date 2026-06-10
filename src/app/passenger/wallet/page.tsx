@@ -42,12 +42,19 @@ export default function WalletPage() {
 
   const fetchWallet = async () => {
     try {
-      const res = await fetch("/api/wallet");
-      if (res.ok) {
-        const data = await res.json();
-        setBalance(data.wallet.balance);
-        setTransactions(data.transactions);
-      }
+      const supabase = getSupabaseClient();
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData?.user) return;
+
+      const { data: wallet } = await supabase.from("wallets").select("*").eq("user_id", userData.user.id).single();
+      const { data: tx } = await supabase.from("wallet_transactions")
+        .select("*")
+        .eq("wallet_id", wallet?.id || "")
+        .order("created_at", { ascending: false })
+        .limit(50);
+
+      setBalance(wallet?.balance || 0);
+      setTransactions(tx || []);
     } catch (err) {
       console.error(err);
     }
@@ -56,21 +63,48 @@ export default function WalletPage() {
   const handleTopUp = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/wallet", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, payment_method: method })
+      const supabase = getSupabaseClient();
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData?.user) {
+        useToastStore.getState().addToast("Erreur: Non authentifié", "error");
+        setLoading(false);
+        return;
+      }
+
+      if (!amount || amount < 10 || amount > 5000) {
+        useToastStore.getState().addToast("Montant entre 10 et 5000 MAD", "error");
+        setLoading(false);
+        return;
+      }
+
+      const { data: wallet } = await supabase.from("wallets").select("*").eq("user_id", userData.user.id).single();
+      if (!wallet) {
+        useToastStore.getState().addToast("Wallet non trouvé", "error");
+        setLoading(false);
+        return;
+      }
+
+      // Create transaction
+      const { error: txError } = await supabase.from("wallet_transactions").insert({
+        wallet_id: wallet.id,
+        type: "credit",
+        amount,
+        description: `Recharge ${amount} MAD`,
+        reference_type: "topup",
+        payment_method: method || "card",
       });
-      if (res.ok) {
+
+      if (txError) {
+        useToastStore.getState().addToast("Erreur: " + txError.message, "error");
+      } else {
+        await supabase.from("wallets").update({ balance: wallet.balance + amount }).eq("id", wallet.id);
         useToastStore.getState().addToast(`✅ ${amount} MAD ajoutés à votre wallet !`, "success");
         setAddOpen(false);
         fetchWallet();
-      } else {
-        const err = await res.json();
-        useToastStore.getState().addToast("Erreur: " + err.error, "error");
       }
     } catch (error) {
       console.error(error);
+      useToastStore.getState().addToast("Erreur serveur", "error");
     }
     setLoading(false);
   };

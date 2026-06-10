@@ -302,7 +302,7 @@ function PriceStep({ from, to, routeData, onNext }: { from: string; to: string; 
 }
 
 // Step 3: Driver Selection
-function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) => void }) {
+function DriversStep({ price, onNext }: { price: number; onNext: (data: { driver: any }) => void }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [drivers, setDrivers] = useState<any[]>([]);
   
@@ -340,13 +340,16 @@ function DriversStep({ price, onNext }: { price: number; onNext: (driver: any) =
       </div>
 
       {drivers.map((driver, i) => (
-        <div key={i}
-          className="card-luxury p-5 cursor-pointer transition-all duration-200"
-          style={{ outline: selected === i ? "2px solid var(--color-rose-400)" : "none", outlineOffset: "2px" }}
-          onClick={() => setSelected(i)}>
-          <div className="flex items-start gap-4">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-rose-600 flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, rgba(225,29,72,0.15), rgba(225,29,72,0.08))" }}>
+        <div key={driver.id} 
+          onClick={() => setSelected(i)}
+          className={`card-luxury p-4 transition-all cursor-pointer ${selected === i ? "scale-[1.02]" : "hover:scale-[1.01]"}`}
+          style={{ 
+            borderColor: selected === i ? "var(--color-rose-400)" : "var(--color-border)",
+            background: selected === i ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.6)"
+          }}>
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full flex items-center justify-center text-white flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, var(--color-purple-500), var(--color-purple-700))" }}>
               <User size={24} />
             </div>
             <div className="flex-1 min-w-0">
@@ -393,33 +396,40 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
   const handleConfirm = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/rides", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          from_address: data.from,
-          from_lat: data.fromLat,
-          from_lng: data.fromLng,
-          to_address: data.to,
-          to_lat: data.toLat,
-          to_lng: data.toLng,
-          passenger_price: driver.bid,
-          payment_method: data.method,
-        })
-      });
+      const supabase = getSupabaseClient();
+      const { data: userData, error: authError } = await supabase.auth.getUser();
       
-      const result = await res.json();
-      if (res.ok) {
+      if (authError || !userData?.user) {
+        useToastStore.getState().addToast("Erreur: Non authentifié", "error");
+        setLoading(false);
+        return;
+      }
+
+      const { data: resultData, error } = await supabase.from("rides").insert({
+        passenger_id: userData.user.id,
+        from_address: data.from,
+        from_lat: data.fromLat || 0,
+        from_lng: data.fromLng || 0,
+        to_address: data.to,
+        to_lat: data.toLat || 0,
+        to_lng: data.toLng || 0,
+        passenger_price: driver.bid,
+        payment_method: data.method || "cash",
+        status: "searching"
+      }).select().single();
+      
+      if (!error && resultData) {
         setConfirmed(true);
         setTimeout(() => {
-          router.push(`/passenger/tracking?id=${result.ride.id}`);
+          router.push(`/passenger/tracking?id=${resultData.id}`);
         }, 1500);
       } else {
-        useToastStore.getState().addToast("Erreur: " + result.error, "error");
+        useToastStore.getState().addToast("Erreur: " + (error?.message || "Erreur serveur"), "error");
         setLoading(false);
       }
     } catch (err) {
       console.error(err);
+      useToastStore.getState().addToast("Erreur de connexion", "error");
       setLoading(false);
     }
   };
@@ -443,10 +453,14 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
     );
   }
 
+  if (!driver) {
+    return <div className="text-center p-4">Erreur: Conductrice non sélectionnée</div>;
+  }
+
   return (
-    <div className="flex flex-col gap-5">
-      <div className="card-luxury p-6">
-        <h3 className="font-semibold mb-5 text-center" style={{ fontFamily: "var(--font-display)" }}>
+    <div className="flex flex-col gap-6">
+      <div className="card-luxury p-5 relative overflow-hidden">
+        <h3 className="font-semibold mb-4 text-center" style={{ fontFamily: "var(--font-display)" }}>
           Récapitulatif du trajet
         </h3>
 
@@ -511,7 +525,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
 
 export default function BookingPage() {
   const [step, setStep] = useState<BookStep>("location");
-  const [data, setData] = useState({ from: "", to: "", fromLat: 0, fromLng: 0, toLat: 0, toLng: 0, routeData: null, price: 35, method: "cash", driver: null });
+  const [data, setData] = useState<any>({ from: "", to: "", fromLat: 0, fromLng: 0, toLat: 0, toLng: 0, routeData: null, price: 35, method: "cash", driver: null });
 
   const stepLabels: { [key in BookStep]: string } = {
     location: "Destination",
@@ -543,9 +557,9 @@ export default function BookingPage() {
       </div>
 
       <div className="px-6 pt-5">
-        {step === "location" && <LocationStep onNext={(d: any) => { setData(prev => ({ ...prev, ...d })); setStep("price"); }}/>}
-        {step === "price" && <PriceStep from={data.from} to={data.to} routeData={data.routeData} onNext={(d: any) => { setData(prev => ({ ...prev, ...d })); setStep("drivers"); }}/>}
-        {step === "drivers" && <DriversStep price={data.price} onNext={driver => { setData(prev => ({ ...prev, driver })); setStep("confirm"); }}/>}
+        {step === "location" && <LocationStep onNext={(d: any) => { setData((prev: any) => ({ ...prev, ...d })); setStep("price"); }}/>}
+        {step === "price" && <PriceStep from={data.from} to={data.to} routeData={data.routeData} onNext={(d: any) => { setData((prev: any) => ({ ...prev, ...d })); setStep("drivers"); }}/>}
+        {step === "drivers" && <DriversStep price={data.price} onNext={driver => { setData((prev: any) => ({ ...prev, driver })); setStep("confirm"); }}/>}
         {step === "confirm" && <ConfirmStep driver={data.driver} data={data}/>}
       </div>
 
