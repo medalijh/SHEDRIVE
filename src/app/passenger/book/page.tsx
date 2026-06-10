@@ -146,28 +146,32 @@ function LocationStepContent({ onNext }: { onNext: (data: { from: string; to: st
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="relative h-64 rounded-3xl overflow-hidden shadow-sm z-0">
-        <LiveMap center={mapCenter} zoom={15} markers={markers} routePoints={routePoints} height="100%" borderRadius="1.5rem" showUserLocation={true} onMapClick={(lat, lng) => {
+      <div className="relative rounded-3xl overflow-hidden shadow-sm" style={{ height: "280px" }}>
+        <LiveMap center={mapCenter} zoom={14} markers={markers} routePoints={routePoints} height="280px" borderRadius="1.5rem" showUserLocation={true} onMapClick={(lat, lng) => {
           if (!fromCoords) {
             setFromCoords([lat, lng]);
             setFrom("Position sélectionnée");
+          } else if (!toCoords) {
+            setToCoords([lat, lng]);
+            setTo("Destination sélectionnée");
           } else {
+            // Both already set — update destination
             setToCoords([lat, lng]);
             setTo("Destination sélectionnée");
           }
         }} />
       </div>
 
-      <div className="card-luxury p-5 z-10 relative">
+      <div className="card-luxury p-5 relative" style={{ zIndex: 10 }}>
         <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>Définir votre trajet</h3>
         
         <div className="relative">
           <div className="flex items-center gap-3 p-3 rounded-xl mb-2" style={{ background: "rgba(147,51,234,0.06)", border: "1px solid rgba(147,51,234,0.15)" }}>
             <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-purple-500)" }}/>
-            <input value={from} onChange={e => { setFrom(e.target.value); setFromCoords(null); }} className="flex-1 bg-transparent outline-none text-sm" placeholder="Point de départ"/>
+            <input value={from} onChange={e => { setFrom(e.target.value); setFromCoords(null); }} className="flex-1 bg-transparent outline-none text-sm" placeholder="Point de départ" style={{ color: "var(--color-text)" }}/>
           </div>
           {fromResults.length > 0 && (
-            <div className="absolute z-50 left-0 right-0 bg-white shadow-lg rounded-xl mt-1 max-h-40 overflow-y-auto border border-gray-100">
+            <div className="absolute left-0 right-0 bg-white shadow-lg rounded-xl mt-1 max-h-48 overflow-y-auto border border-gray-100" style={{ zIndex: 100 }}>
               {fromResults.map((r, i) => (
                 <button key={i} className="w-full text-left p-3 text-sm border-b last:border-0 hover:bg-gray-50" onClick={() => { setFrom(r.display_name.split(",")[0]); setFromCoords([r.lat, r.lon]); setFromResults([]); }}>
                   {r.display_name}
@@ -184,10 +188,10 @@ function LocationStepContent({ onNext }: { onNext: (data: { from: string; to: st
         <div className="relative">
           <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "rgba(225,29,72,0.06)", border: "1px solid rgba(225,29,72,0.15)" }}>
             <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: "var(--color-rose-500)" }}/>
-            <input value={to} onChange={e => { setTo(e.target.value); setToCoords(null); }} className="flex-1 bg-transparent outline-none text-sm" placeholder="Où voulez-vous aller ?"/>
+            <input value={to} onChange={e => { setTo(e.target.value); setToCoords(null); }} className="flex-1 bg-transparent outline-none text-sm" placeholder="Où voulez-vous aller ?" style={{ color: "var(--color-text)" }}/>
           </div>
           {toResults.length > 0 && (
-            <div className="absolute z-50 left-0 right-0 bg-white shadow-lg rounded-xl mt-1 max-h-40 overflow-y-auto border border-gray-100">
+            <div className="absolute left-0 right-0 bg-white shadow-lg rounded-xl mt-1 max-h-48 overflow-y-auto border border-gray-100" style={{ zIndex: 100 }}>
               {toResults.map((r, i) => (
                 <button key={i} className="w-full text-left p-3 text-sm border-b last:border-0 hover:bg-gray-50" onClick={() => { setTo(r.display_name.split(",")[0]); setToCoords([r.lat, r.lon]); setToResults([]); }}>
                   {r.display_name}
@@ -198,8 +202,16 @@ function LocationStepContent({ onNext }: { onNext: (data: { from: string; to: st
         </div>
       </div>
 
+      {/* Route info when available */}
+      {routeData && (
+        <div className="card p-4 flex items-center justify-between text-sm" style={{ background: "rgba(147,51,234,0.05)" }}>
+          <span style={{ color: "var(--color-muted)" }}>Distance: <strong style={{ color: "var(--color-text)" }}>{(routeData.distance / 1000).toFixed(1)} km</strong></span>
+          <span style={{ color: "var(--color-muted)" }}>Durée: <strong style={{ color: "var(--color-text)" }}>{Math.round(routeData.duration / 60)} min</strong></span>
+        </div>
+      )}
+
       <button onClick={handleNext} className="btn btn-primary btn-lg w-full" disabled={!toCoords || !fromCoords || !routeData}>
-        {routeData ? "Continuer →" : "Saisissez un trajet..."}
+        {!fromCoords ? "Sélectionnez un départ..." : !toCoords ? "Sélectionnez une destination..." : !routeData ? "Calcul de l'itinéraire..." : "Continuer"}
       </button>
     </div>
   );
