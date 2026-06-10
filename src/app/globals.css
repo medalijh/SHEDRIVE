@@ -79,6 +79,8 @@
   --shadow-rose: 0 4px 24px rgba(225, 29, 72, 0.25);
   --shadow-purple: 0 4px 24px rgba(147, 51, 234, 0.25);
   --shadow-silver: 0 4px 24px rgba(156, 163, 175, 0.30);
+  --shadow-emerald: 0 4px 24px rgba(5, 150, 105, 0.25);
+  --shadow-gold: 0 4px 24px rgba(212, 160, 23, 0.30);
 
   /* Border Radius */
   --radius-xs: 4px;
@@ -323,6 +325,26 @@ body {
 }
 .btn-silver:hover {
   box-shadow: 0 6px 30px rgba(156, 163, 175, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-emerald {
+  background: linear-gradient(135deg, #059669, #047857);
+  color: white;
+  box-shadow: 0 4px 24px rgba(5, 150, 105, 0.25);
+}
+.btn-emerald:hover {
+  box-shadow: 0 6px 30px rgba(5, 150, 105, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-error {
+  background: linear-gradient(135deg, #DC2626, #B91C1C);
+  color: white;
+  box-shadow: 0 4px 24px rgba(220, 38, 38, 0.25);
+}
+.btn-error:hover {
+  box-shadow: 0 6px 30px rgba(220, 38, 38, 0.4);
   transform: translateY(-1px);
 }
 

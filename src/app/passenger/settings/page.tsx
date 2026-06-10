@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { Home, Car, Clock, CreditCard, Settings, User, ShieldCheck, Bell, Globe, Pencil, Cake, MapPin, Image as ImageIcon, Gift, Trash2, Star, Lock, Key, List, ShieldAlert, Smartphone, MessageSquare, Mail, LogOut, Check } from "lucide-react";
@@ -77,7 +78,11 @@ export default function SettingsPage() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
-      <div className="px-6 pt-12 pb-4">
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <NextImage src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
+      <div className="px-6 pt-12 pb-4 relative z-10">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Paramètres</h1>
@@ -125,7 +130,7 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="px-6">
+      <div className="px-6 relative z-10">
         {/* Account Tab */}
         {tab === "account" && (
           <div className="card p-5">

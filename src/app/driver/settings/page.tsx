@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
@@ -70,6 +71,11 @@ export default function DriverSettings() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
+
       <div className="px-6 pt-12 pb-4">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/driver/dashboard" className="btn btn-icon-sm btn-ghost text-purple-600"><ArrowLeft size={24} /></Link>

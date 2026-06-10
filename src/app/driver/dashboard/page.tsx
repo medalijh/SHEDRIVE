@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useAuth } from "@/hooks/useAuth";
 import { useGeolocation } from "@/hooks/useGeolocation";
@@ -256,6 +257,11 @@ export default function DriverDashboard() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
+
       {/* Header */}
       <div className="px-6 pt-12 pb-4 flex items-center justify-between">
         <div>

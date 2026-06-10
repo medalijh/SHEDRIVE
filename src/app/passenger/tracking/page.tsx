@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useRealtimeTracking } from "@/hooks/useRealtimeTracking";
@@ -126,6 +127,10 @@ function TrackingContent() {
 
   return (
     <div className="container-app mx-auto" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
       {/* Back */}
       <div className="absolute top-4 left-4 z-30">
         <Link href="/passenger/dashboard" className="btn btn-icon glass shadow-sm text-xl">←</Link>

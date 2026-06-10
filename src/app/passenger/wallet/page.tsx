@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { useToastStore } from "@/store/useToastStore";
 import { Home, Car, Clock, CreditCard, Settings, Send, BarChart2, Coins, Gift, Ticket, Landmark, Smartphone, Banknote } from "lucide-react";
@@ -111,8 +112,12 @@ export default function WalletPage() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
       {/* Header */}
-      <div className="px-6 pt-12 pb-6">
+      <div className="px-6 pt-12 pb-6 relative z-10">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Mon Wallet</h1>
@@ -188,7 +193,7 @@ export default function WalletPage() {
       </div>
 
       {/* Transaction History */}
-      <div className="px-6">
+      <div className="px-6 relative z-10">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Historique des transactions</h2>
           <button className="text-xs font-medium" style={{ color: "var(--color-rose-600)" }}>Filtrer ▾</button>

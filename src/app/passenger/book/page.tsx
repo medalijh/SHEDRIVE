@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useGeolocation } from "@/hooks/useGeolocation";
@@ -538,6 +539,10 @@ export default function BookingPage() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
       <div className="sticky top-0 z-40 px-6 py-4" style={{ background: "rgba(253,248,245,0.95)", backdropFilter: "blur(16px)", borderBottom: "1px solid var(--color-border)" }}>
         <div className="flex items-center gap-4 mb-3">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
@@ -556,7 +561,7 @@ export default function BookingPage() {
         </div>
       </div>
 
-      <div className="px-6 pt-5">
+      <div className="px-6 pt-5 relative z-10">
         {step === "location" && <LocationStep onNext={(d: any) => { setData((prev: any) => ({ ...prev, ...d })); setStep("price"); }}/>}
         {step === "price" && <PriceStep from={data.from} to={data.to} routeData={data.routeData} onNext={(d: any) => { setData((prev: any) => ({ ...prev, ...d })); setStep("drivers"); }}/>}
         {step === "drivers" && <DriversStep price={data.price} onNext={driver => { setData((prev: any) => ({ ...prev, driver })); setStep("confirm"); }}/>}

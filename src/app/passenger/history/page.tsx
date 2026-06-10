@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 import { Home, Car, Clock, CreditCard, Settings, CheckCircle, XCircle, Star, Calendar, User, RefreshCw, CircleDot, MapPin } from "lucide-react";
 
@@ -60,7 +61,11 @@ export default function HistoryPage() {
 
   return (
     <div className="container-app mx-auto pb-28" style={{ background: "var(--color-silver-50)", minHeight: "100vh" }}>
-      <div className="px-6 pt-12 pb-4">
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
+      <div className="px-6 pt-12 pb-4 relative z-10">
         <div className="flex items-center gap-4 mb-6">
           <Link href="/passenger/dashboard" className="btn btn-icon-sm btn-ghost text-xl">←</Link>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Historique des Trajets</h1>
@@ -97,7 +102,7 @@ export default function HistoryPage() {
         </div>
       </div>
 
-      <div className="px-6 flex flex-col gap-4">
+      <div className="px-6 flex flex-col gap-4 relative z-10">
         {loading ? (
           <div className="text-center py-10 text-gray-500 text-sm">Chargement...</div>
         ) : filtered.length === 0 ? (

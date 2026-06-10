@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useAuth } from "@/hooks/useAuth";
@@ -218,8 +219,12 @@ export default function PassengerDashboard() {
 
   return (
     <div className="container-app mx-auto pb-24">
+      {/* Tulips Background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Image src="/tulips.png" alt="" fill className="object-cover opacity-[0.03]" />
+      </div>
       {/* Header */}
-      <div className="p-6 pt-12">
+      <div className="p-6 pt-12 relative z-10">
         <div className="flex items-center justify-between mb-2">
           <div>
             <p className="text-sm" style={{ color: "var(--color-muted)" }}>{greeting}</p>
@@ -240,7 +245,7 @@ export default function PassengerDashboard() {
       </div>
 
       {/* Map */}
-      <div className="px-6 mb-6">
+      <div className="px-6 mb-6 relative z-10">
         <LiveMap 
           center={mapCenter} 
           zoom={14} 
