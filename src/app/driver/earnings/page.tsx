@@ -34,10 +34,10 @@ export default function DriverEarnings() {
     week: { amount: 0, count: 0 },
     month: { amount: 0, count: 0 }
   });
+  const [weekData, setWeekData] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
 
-  const weekData = [95, 120, 87, 145, 110, 180, 110];
   const weekDays = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
-  const maxW = Math.max(...weekData);
+  const maxW = Math.max(...weekData, 1);
 
   useEffect(() => {
     if (!user || !isSupabaseConfigured()) return;
@@ -52,14 +52,34 @@ export default function DriverEarnings() {
 
       if (data) {
         setTrips(data);
-        
-        // Simple client-side stats mock using real data length
-        const totalAmount = data.reduce((sum, t) => sum + (t.final_price || t.passenger_price || 0), 0);
+
+        const now = new Date();
+        const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+        const startOfWeek = new Date(now);
+        startOfWeek.setDate(now.getDate() - now.getDay() + 1); // Monday
+        startOfWeek.setHours(0, 0, 0, 0);
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+
+        const dayTrips = data.filter(t => t.created_at >= startOfDay);
+        const weekTrips = data.filter(t => t.created_at >= startOfWeek.toISOString());
+        const monthTrips = data.filter(t => t.created_at >= startOfMonth);
+
+        const sumPrice = (arr: any[]) => arr.reduce((sum, t) => sum + (t.final_price || t.passenger_offered_price || 0), 0);
+
         setStats({
-          day: { amount: Math.floor(totalAmount * 0.1), count: Math.max(0, data.length - 10) },
-          week: { amount: Math.floor(totalAmount * 0.4), count: Math.max(0, data.length - 4) },
-          month: { amount: totalAmount, count: data.length }
+          day: { amount: sumPrice(dayTrips), count: dayTrips.length },
+          week: { amount: sumPrice(weekTrips), count: weekTrips.length },
+          month: { amount: sumPrice(monthTrips), count: monthTrips.length }
         });
+
+        // Compute per-day earnings for the current week
+        const dailyEarnings = [0, 0, 0, 0, 0, 0, 0];
+        weekTrips.forEach(t => {
+          const d = new Date(t.created_at);
+          const dayIdx = (d.getDay() + 6) % 7; // Mon=0 ... Sun=6
+          dailyEarnings[dayIdx] += (t.final_price || t.passenger_offered_price || 0);
+        });
+        setWeekData(dailyEarnings);
       }
     };
 
@@ -190,7 +210,7 @@ export default function DriverEarnings() {
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="text-sm font-bold" style={{ color: "var(--color-purple-600)" }}>+{t.final_price || t.passenger_price} MAD</div>
+                <div className="text-sm font-bold" style={{ color: "var(--color-purple-600)" }}>+{t.final_price || t.passenger_offered_price} MAD</div>
                 <div className="text-xs flex gap-0.5 justify-end mt-1 text-yellow-500">
                   {Array.from({ length: t.driver_rating || 5 }).map((_, idx) => (
                     <Star key={idx} size={10} className="fill-current" />

@@ -110,7 +110,7 @@ export default function DriverTrips() {
               </div>
               <div className="text-right flex-shrink-0">
                 <div className="text-base font-bold" style={{ color: "var(--color-purple-700)", fontFamily: "var(--font-display)" }}>
-                  +{ride.final_price || ride.passenger_price} MAD
+                  +{ride.final_price || ride.passenger_offered_price} MAD
                 </div>
                 <div className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>#{ride.id.slice(0, 8)}</div>
               </div>

@@ -107,7 +107,7 @@ function RideRequestCard({ ride, onAccept, onDecline }: { ride: any, onAccept: (
                 <div className="text-xs flex items-center gap-1" style={{ color: "var(--color-muted)" }}><Star size={12} className="text-yellow-500 fill-current"/> 4.8</div>
               </div>
               <div className="ml-auto text-right">
-                <div className="text-2xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{ride.passenger_price} MAD</div>
+                <div className="text-2xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{ride.passenger_offered_price} MAD</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>Offre passagère</div>
               </div>
             </div>
@@ -197,7 +197,7 @@ export default function DriverDashboard() {
         setRecentTrips(completed.slice(0, 3));
         
         // Simple mock stats from real data
-        const todayEarn = completed.reduce((sum, r) => sum + (r.final_price || r.passenger_price), 0);
+        const todayEarn = completed.reduce((sum, r) => sum + (r.final_price || r.passenger_offered_price), 0);
         setStats(prev => ({
           ...prev,
           trips: completed.length,
@@ -357,7 +357,7 @@ export default function DriverDashboard() {
                 <div className="text-xs line-clamp-1" style={{ color: "var(--color-muted)" }}>{activeRide.from_address} → {activeRide.to_address}</div>
               </div>
               <div className="ml-auto text-right flex-shrink-0">
-                <div className="text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{activeRide.passenger_price} MAD</div>
+                <div className="text-xl font-bold gradient-text" style={{ fontFamily: "var(--font-display)" }}>{activeRide.passenger_offered_price} MAD</div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -391,7 +391,7 @@ export default function DriverDashboard() {
                 <div className="text-sm font-medium line-clamp-1">{trip.from_address} → {trip.to_address}</div>
                 <div className="text-xs" style={{ color: "var(--color-muted)" }}>{new Date(trip.created_at).toLocaleDateString("fr-FR")}</div>
               </div>
-              <div className="text-sm font-bold flex-shrink-0" style={{ color: "var(--color-purple-600)" }}>+{trip.final_price || trip.passenger_price} MAD</div>
+              <div className="text-sm font-bold flex-shrink-0" style={{ color: "var(--color-purple-600)" }}>+{trip.final_price || trip.passenger_offered_price} MAD</div>
             </div>
           ))}
         </div>

@@ -1,16 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
+import { z } from "zod";
+
+const registerSchema = z.object({
+  email: z.string().email("Email invalide"),
+  password: z.string().min(6, "Mot de passe minimum 6 caractères"),
+  phone: z.string().optional(),
+  full_name: z.string().min(1, "Nom complet requis"),
+  role: z.enum(["passenger", "driver"], { message: "Rôle invalide" }),
+});
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password, phone, full_name, role } = await req.json();
-    // Validate required fields
-    if (!email || !password || !full_name || !role) {
-      return NextResponse.json({ error: "Champs requis manquants" }, { status: 400 });
+    const body = await req.json();
+    const parsed = registerSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.issues[0]?.message || "Données invalides" }, { status: 400 });
     }
-    if (role !== "passenger" && role !== "driver") {
-      return NextResponse.json({ error: "Rôle invalide" }, { status: 400 });
-    }
+
+    const { email, password, full_name, role, phone } = parsed.data;
 
     // Format phone to E.164 (+212)
     let formattedPhone = phone;
@@ -23,6 +31,7 @@ export async function POST(req: NextRequest) {
     }
 
     const supabase = await createAdminClient();
+
     // Create auth user
     const { data: authData, error: authError } = await supabase.auth.admin.createUser({
       email,
@@ -31,9 +40,11 @@ export async function POST(req: NextRequest) {
       email_confirm: true,
       user_metadata: { full_name, role },
     });
+
     if (authError) {
       return NextResponse.json({ error: authError.message }, { status: 400 });
     }
+
     // Create profile
     const { error: profileError } = await supabase.from("profiles").insert({
       id: authData.user.id,
@@ -43,28 +54,25 @@ export async function POST(req: NextRequest) {
       role,
       status: "active",
     });
+
     if (profileError) {
       console.error("Profile creation error:", profileError);
+      // Non-fatal if a DB trigger already created it
     }
+
     // For drivers, create driver record
     if (role === "driver") {
-      await supabase.from("drivers").insert({
+      const { error: driverError } = await supabase.from("drivers").insert({
         user_id: authData.user.id,
-        vehicle_make: "",
-        vehicle_model: "",
-        vehicle_year: new Date().getFullYear(),
-        vehicle_color: "",
-        vehicle_plate: "",
-        vehicle_type: "economy",
-        license_number: "",
-        license_expiry: new Date().toISOString(),
-        insurance_expiry: new Date().toISOString(),
-        inspection_expiry: new Date().toISOString(),
-        approval_status: "pending",
+        status: "pending",
+        is_online: false,
       });
+      if (driverError) {
+        console.error("Driver record creation error:", driverError);
+      }
     }
-    // Create wallet
-    await supabase.from("wallets").insert({ user_id: authData.user.id, balance: 0 });
+
+    // Wallet is created by a DB trigger — do NOT insert manually
 
     // Log the user in immediately
     const userClient = await createClient();

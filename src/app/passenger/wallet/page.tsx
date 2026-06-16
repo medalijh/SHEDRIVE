@@ -31,6 +31,7 @@ export default function WalletPage() {
   const [addOpen, setAddOpen] = useState(false);
   const [amount, setAmount] = useState(100);
   const [method, setMethod] = useState("card");
+  const [walletStats, setWalletStats] = useState({ thisMonth: 0, totalRecharged: 0, saved: 0 });
   const quickAmounts = [50, 100, 200, 500];
 
   const [balance, setBalance] = useState(0);
@@ -48,14 +49,26 @@ export default function WalletPage() {
       if (!userData?.user) return;
 
       const { data: wallet } = await supabase.from("wallets").select("*").eq("user_id", userData.user.id).single();
-      const { data: tx } = await supabase.from("wallet_transactions")
+      const { data: tx } = await supabase.from("transactions")
         .select("*")
         .eq("wallet_id", wallet?.id || "")
         .order("created_at", { ascending: false })
         .limit(50);
 
       setBalance(wallet?.balance || 0);
-      setTransactions(tx || []);
+      const txList = tx || [];
+      setTransactions(txList);
+
+      // Compute stats from real transactions
+      const now = new Date();
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+      const thisMonthSpent = txList
+        .filter((t: any) => t.type === "debit" && t.created_at >= startOfMonth)
+        .reduce((sum: number, t: any) => sum + (t.amount || 0), 0);
+      const totalRecharged = txList
+        .filter((t: any) => t.type === "credit")
+        .reduce((sum: number, t: any) => sum + (t.amount || 0), 0);
+      setWalletStats({ thisMonth: thisMonthSpent, totalRecharged, saved: 0 });
     } catch (err) {
       console.error(err);
     }
@@ -86,13 +99,15 @@ export default function WalletPage() {
       }
 
       // Create transaction
-      const { error: txError } = await supabase.from("wallet_transactions").insert({
+      const { error: txError } = await supabase.from("transactions").insert({
         wallet_id: wallet.id,
         type: "credit",
         amount,
+        balance_before: wallet.balance,
+        balance_after: wallet.balance + amount,
         description: `Recharge ${amount} MAD`,
-        reference_type: "topup",
-        payment_method: method || "card",
+        reference: `topup_${Date.now()}`,
+        status: "completed",
       });
 
       if (txError) {
@@ -165,9 +180,9 @@ export default function WalletPage() {
         {/* Quick Stats */}
         <div className="grid grid-cols-3 gap-3">
           {[
-            { label: "Ce mois", value: "108 MAD", icon: <BarChart2 size={24} />, color: "var(--color-rose-600)" },
-            { label: "Total rechargé", value: "400 MAD", icon: <Coins size={24} />, color: "var(--color-purple-600)" },
-            { label: "Économisé", value: "52 MAD", icon: <Gift size={24} />, color: "var(--color-purple-600)" },
+            { label: "Ce mois", value: `${walletStats.thisMonth} MAD`, icon: <BarChart2 size={24} />, color: "var(--color-rose-600)" },
+            { label: "Total rechargé", value: `${walletStats.totalRecharged} MAD`, icon: <Coins size={24} />, color: "var(--color-purple-600)" },
+            { label: "Économisé", value: `${walletStats.saved} MAD`, icon: <Gift size={24} />, color: "var(--color-purple-600)" },
           ].map(s => (
             <div key={s.label} className="p-4 rounded-2xl text-center"
               style={{ background: "white", border: "1px solid var(--color-border)" }}>
@@ -212,7 +227,7 @@ export default function WalletPage() {
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium truncate">{tx.description}</div>
                 <div className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>
-                  {new Date(tx.created_at).toLocaleString("fr-FR")} · {tx.reference_type}
+                  {new Date(tx.created_at).toLocaleString("fr-FR")} · {tx.reference}
                 </div>
               </div>
               <div className={`text-sm font-bold flex-shrink-0`}

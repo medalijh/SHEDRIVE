@@ -5,7 +5,9 @@ import Link from "next/link";
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { Home, Car, Clock, CreditCard, Settings, User, ShieldCheck, Bell, Globe, Pencil, Cake, MapPin, Image as ImageIcon, Gift, Trash2, Star, Lock, Key, List, ShieldAlert, Smartphone, MessageSquare, Mail, LogOut, Check } from "lucide-react";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { useToastStore } from "@/store/useToastStore";
+import { Home, Car, Clock, CreditCard, Settings, User, ShieldCheck, Bell, Globe, Pencil, Cake, MapPin, Image as ImageIcon, Gift, Trash2, Star, Lock, Key, List, ShieldAlert, Smartphone, MessageSquare, Mail, LogOut, Check, Save } from "lucide-react";
 
 function BottomNav({ active }: { active: string }) {
   const items = [
@@ -52,7 +54,7 @@ const SettingRow = ({ icon, label, value, onClick, isToggle, toggled }: {
 );
 
 export default function SettingsPage() {
-  const { user, profile } = useAuth();
+  const { user, profile, signOut, refreshProfile } = useAuth();
   const router = useRouter();
 
   const [tab, setTab] = useState<Tab>("account");
@@ -61,6 +63,35 @@ export default function SettingsPage() {
   const [emailNotifs, setEmailNotifs] = useState(false);
   const [shareLocation, setShareLocation] = useState(true);
   const [lang, setLang] = useState<"fr" | "ar" | "en">("fr");
+  const [editField, setEditField] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  const handleEditField = (field: string, currentValue: string) => {
+    setEditField(field);
+    setEditValue(currentValue || "");
+  };
+
+  const handleSaveField = async () => {
+    if (!profile?.id || !isSupabaseConfigured() || !editField) return;
+    setSaving(true);
+    try {
+      const supabase = getSupabaseClient();
+      const updateData: Record<string, string> = {};
+      updateData[editField] = editValue;
+      const { error } = await supabase.from("profiles").update(updateData).eq("id", profile.id);
+      if (error) {
+        useToastStore.getState().addToast("Erreur: " + error.message, "error");
+      } else {
+        useToastStore.getState().addToast("Profil mis à jour", "success");
+        await refreshProfile();
+        setEditField(null);
+      }
+    } catch {
+      useToastStore.getState().addToast("Erreur serveur", "error");
+    }
+    setSaving(false);
+  };
 
   const tabs: { id: Tab; icon: React.ReactNode; label: string }[] = [
     { id: "account", icon: <User size={24} />, label: "Compte" },
@@ -70,9 +101,8 @@ export default function SettingsPage() {
   ];
 
   const handleLogout = async () => {
-    if (confirm("Déconnecter ?")) {
-      await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/auth/login");
+    if (confirm("Voulez-vous vous deconnecter ?")) {
+      await signOut();
     }
   };
 
@@ -107,7 +137,7 @@ export default function SettingsPage() {
             <p className="text-sm truncate" style={{ color: "var(--color-muted)" }}>{profile?.phone || user?.email}</p>
             <div className="flex items-center gap-2 mt-2">
               <span className="badge badge-success flex items-center gap-1" style={{ fontSize: 10 }}><Check size={10}/> Vérifié</span>
-              <span className="badge badge-primary flex items-center gap-1" style={{ fontSize: 10 }}><Star size={10} className="fill-current"/> 5.0</span>
+              <span className="badge badge-primary flex items-center gap-1" style={{ fontSize: 10 }}><Star size={10} className="fill-current"/> {profile?.rating?.toFixed(1) || "N/A"}</span>
             </div>
           </div>
         </div>
@@ -134,11 +164,11 @@ export default function SettingsPage() {
         {/* Account Tab */}
         {tab === "account" && (
           <div className="card p-5">
-            <SettingRow icon={<User size={20} />} label="Nom complet" value={profile?.full_name}/>
-            <SettingRow icon={<Smartphone size={20} />} label="Téléphone" value={profile?.phone || "Non renseigné"}/>
+            <SettingRow icon={<User size={20} />} label="Nom complet" value={profile?.full_name} onClick={() => handleEditField("full_name", profile?.full_name || "")}/>
+            <SettingRow icon={<Smartphone size={20} />} label="Telephone" value={profile?.phone || "Non renseigné"} onClick={() => handleEditField("phone", profile?.phone || "")}/>
             <SettingRow icon={<Mail size={20} />} label="Email" value={user?.email}/>
-            <SettingRow icon={<Cake size={20} />} label="Date de naissance" value="Non renseignée"/>
-            <SettingRow icon={<MapPin size={20} />} label="Ville préférée" value="Casablanca"/>
+            <SettingRow icon={<Cake size={20} />} label="Date de naissance" value="Non renseignee"/>
+            <SettingRow icon={<MapPin size={20} />} label="Ville préférée" value={profile?.city || "Non renseignee"}/>
             <SettingRow icon={<ImageIcon size={20} />} label="Photo de profil"/>
             <SettingRow icon={<Gift size={20} />} label="Mon code de parrainage" value="SHEDRIVE2026"/>
             <SettingRow icon={<Trash2 size={20} />} label="Supprimer mon compte"/>
@@ -245,6 +275,32 @@ export default function SettingsPage() {
         </div>
         <p className="text-center text-xs mb-6" style={{ color: "var(--color-silver-300)" }}>SheDrive Morocco v1.0.0</p>
       </div>
+
+      {/* Edit Field Modal */}
+      {editField && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }} onClick={() => setEditField(null)}>
+          <div className="w-full max-w-md bg-white rounded-t-3xl p-6 pb-10" onClick={e => e.stopPropagation()}>
+            <div className="w-10 h-1 rounded-full mx-auto mb-6" style={{ background: "var(--color-silver-300)" }}/>
+            <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-display)" }}>
+              Modifier {editField === "full_name" ? "le nom" : editField === "phone" ? "le telephone" : editField}
+            </h3>
+            <input
+              type="text"
+              value={editValue}
+              onChange={e => setEditValue(e.target.value)}
+              className="input-field w-full mb-4"
+              placeholder={editField === "full_name" ? "Votre nom complet" : "Votre numero de telephone"}
+            />
+            <button onClick={handleSaveField} disabled={saving} className="btn btn-primary w-full flex items-center justify-center gap-2">
+              {saving ? (
+                <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/>Enregistrement...</span>
+              ) : (
+                <><Save size={18}/> Enregistrer</>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
 
       <BottomNav active="profile"/>
     </div>

@@ -48,7 +48,7 @@ export default function HistoryPage() {
       if (data) {
         setRides(data);
         const completed = data.filter(r => r.status === "completed");
-        const spent = completed.reduce((sum, r) => sum + (r.final_price || r.passenger_price || 0), 0);
+        const spent = completed.reduce((sum, r) => sum + (r.final_price || r.passenger_offered_price || 0), 0);
         setStats({ total: data.length, spent });
       }
       setLoading(false);
@@ -135,7 +135,7 @@ export default function HistoryPage() {
               </div>
               <div className="text-right flex-shrink-0">
                 <div className="text-base font-bold" style={{ color: "var(--color-rose-700)", fontFamily: "var(--font-display)" }}>
-                  {ride.final_price || ride.passenger_price} MAD
+                  {ride.final_price || ride.passenger_offered_price} MAD
                 </div>
                 <div className="text-xs mt-1" style={{ color: "var(--color-muted)" }}>#{ride.id.slice(0, 8)}</div>
               </div>
@@ -159,7 +159,7 @@ export default function HistoryPage() {
                 { icon: <MapPin size={18} className="text-rose-500" />, label: "Arrivée", value: selectedRide.to_address },
                 { icon: <Calendar size={18} />, label: "Date", value: new Date(selectedRide.created_at).toLocaleString("fr-FR") },
                 { icon: <User size={18} />, label: "Conductrice", value: selectedRide.driver?.full_name || "Conductrice" },
-                { icon: <CreditCard size={18} />, label: "Prix payé", value: `${selectedRide.final_price || selectedRide.passenger_price} MAD` },
+                { icon: <CreditCard size={18} />, label: "Prix payé", value: `${selectedRide.final_price || selectedRide.passenger_offered_price} MAD` },
               ].map(row => (
                 <div key={row.label} className="flex items-center gap-3">
                   <span className="text-base">{row.icon}</span>

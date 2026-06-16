@@ -304,8 +304,8 @@ function PriceStep({ from, to, routeData, onNext }: { from: string; to: string; 
         </div>
       </div>
 
-      <button onClick={() => onNext({price, method})} className="btn btn-primary btn-lg w-full">
-        🌹 Chercher des conductrices
+      <button onClick={() => onNext({price, method})} className="btn btn-primary btn-lg w-full flex items-center justify-center gap-2">
+        <Car size={20}/> Chercher des conductrices
       </button>
     </div>
   );
@@ -376,7 +376,7 @@ function DriversStep({ price, onNext }: { price: number; onNext: (data: { driver
               <div className="text-xl font-bold" style={{ color: "var(--color-rose-700)", fontFamily: "var(--font-display)" }}>
                 {driver.bid} MAD
               </div>
-              <div className="text-xs mt-1" style={{ color: "var(--color-purple-600)" }}>⏱ {driver.eta} min</div>
+              <div className="text-xs mt-1 flex items-center gap-1" style={{ color: "var(--color-purple-600)" }}><Timer size={12}/> {driver.eta} min</div>
               {selected === i && (
                 <div className="mt-2">
                   <span className="badge badge-primary flex items-center gap-1" style={{ fontSize: 10 }}><Check size={10}/> Sélectionnée</span>
@@ -423,7 +423,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
         to_address: data.to,
         to_lat: data.toLat || 0,
         to_lng: data.toLng || 0,
-        passenger_price: driver.bid,
+        passenger_offered_price: driver.bid,
         payment_method: data.method || "cash",
         status: "searching"
       }).select().single();
@@ -525,7 +525,7 @@ function ConfirmStep({ driver, data }: { driver: any; data: any }) {
             <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"/>
             Envoi en cours...
           </span>
-        ) : "🌹 Confirmer le trajet"}
+        ) : <span className="flex items-center gap-2"><Check size={20}/> Confirmer le trajet</span>}
       </button>
 
       <Link href="/passenger/dashboard" className="btn btn-ghost w-full text-center">Annuler</Link>

@@ -554,8 +554,8 @@ function Footer() {
             {
               title: "Application",
               links: [
-                { href: "/passenger/dashboard", label: "Espace Passagère" },
-                { href: "/driver/dashboard", label: "Espace Conductrice" },
+                { href: "/auth/login?role=passenger", label: "Espace Passagère" },
+                { href: "/auth/login?role=driver", label: "Espace Conductrice" },
                 { href: "/how-it-works", label: "Comment ça marche" },
                 { href: "/auth/register", label: "S'inscrire" },
               ],
@@ -596,7 +596,7 @@ function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs" style={{ color: "rgba(0,0,0,0.4)" }}>
-            © 2025 SheDrive Morocco. Projet PIE OFPPT. Tous droits réservés.
+            © 2026 SheDrive Morocco. Tous droits réservés.
           </p>
           
           {/* Social Links */}

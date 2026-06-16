@@ -142,7 +142,7 @@ function RecentRides() {
               </div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="text-sm font-semibold" style={{ color: "var(--color-rose-700)" }}>{ride.final_price || ride.passenger_price} MAD</div>
+              <div className="text-sm font-semibold" style={{ color: "var(--color-rose-700)" }}>{ride.final_price || ride.passenger_offered_price} MAD</div>
               {ride.status === "completed" && <div className="flex justify-end mt-1"><CheckCircle size={14} className="text-emerald-500" /></div>}
             </div>
           </div>
